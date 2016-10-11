@@ -1,0 +1,747 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8A49D86E1DACCB4600A1D650 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A49D86D1DACCB4600A1D650 /* main.m */; };
+		8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A49D8701DACCB4600A1D650 /* AppDelegate.m */; };
+		8A49D8791DACCB4600A1D650 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D8781DACCB4600A1D650 /* Assets.xcassets */; };
+		8A49D87C1DACCB4600A1D650 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D87A1DACCB4600A1D650 /* LaunchScreen.storyboard */; };
+		8AD96E281DACCC640080CC8C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8AD96E271DACCC640080CC8C /* Podfile */; };
+		8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E2C1DACCD490080CC8C /* UIViewExt.m */; };
+		8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E321DACCF090080CC8C /* MainTabBarController.m */; };
+		8AD96E361DACCF220080CC8C /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E351DACCF220080CC8C /* MainNavigationController.m */; };
+		8AD96E391DACCF3E0080CC8C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E381DACCF3E0080CC8C /* HomeViewController.m */; };
+		8AD96E3C1DACCF790080CC8C /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E3B1DACCF790080CC8C /* OrderViewController.m */; };
+		8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E3E1DACCF860080CC8C /* AccountViewController.m */; };
+		8AD96E421DACCF900080CC8C /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E411DACCF900080CC8C /* CardViewController.m */; };
+		8AD96E451DACD17F0080CC8C /* tm.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AD96E441DACD17F0080CC8C /* tm.png */; };
+		8AD96E481DACD7A50080CC8C /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E471DACD7A50080CC8C /* MessageViewController.m */; };
+		8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E561DACD95A0080CC8C /* PersonalHomeViewController.m */; };
+		8AD96E591DACD95A0080CC8C /* PersonalHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AD96E571DACD95A0080CC8C /* PersonalHomeViewController.xib */; };
+		8AD96E5F1DACDA400080CC8C /* TopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E5E1DACDA400080CC8C /* TopBarView.m */; };
+		8AD96E661DACEA570080CC8C /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E641DACEA570080CC8C /* HomeCell.m */; };
+		8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E6C1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m */; };
+		8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E6F1DAD09C90080CC8C /* OpenWhiteCardViewController.m */; };
+		8AD96E731DAD09F10080CC8C /* TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E721DAD09F10080CC8C /* TransferViewController.m */; };
+		8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E751DAD0A0B0080CC8C /* RepairCardViewController.m */; };
+		8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E781DAD0A1E0080CC8C /* TopUpViewController.m */; };
+		8AD96E7C1DAD0C7F0080CC8C /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E7B1DAD0C7F0080CC8C /* DropDownView.m */; };
+		EE79FCC9EBCAAA8F6CEA2ECA /* libPods-PhoneWorld.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC23F93AE94DD6F67AAD0F2 /* libPods-PhoneWorld.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4DC23F93AE94DD6F67AAD0F2 /* libPods-PhoneWorld.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PhoneWorld.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A49D8691DACCB4600A1D650 /* PhoneWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhoneWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A49D86D1DACCB4600A1D650 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8A49D86F1DACCB4600A1D650 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
+		8A49D8701DACCB4600A1D650 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../AppDelegate.m; sourceTree = "<group>"; };
+		8A49D8781DACCB4600A1D650 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8A49D87B1DACCB4600A1D650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8A49D87D1DACCB4600A1D650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AD96E271DACCC640080CC8C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8AD96E291DACCCF50080CC8C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		8AD96E2B1DACCD490080CC8C /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
+		8AD96E2C1DACCD490080CC8C /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExt.m; sourceTree = "<group>"; };
+		8AD96E311DACCF090080CC8C /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		8AD96E321DACCF090080CC8C /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		8AD96E341DACCF220080CC8C /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
+		8AD96E351DACCF220080CC8C /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
+		8AD96E371DACCF3E0080CC8C /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		8AD96E381DACCF3E0080CC8C /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		8AD96E3A1DACCF790080CC8C /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
+		8AD96E3B1DACCF790080CC8C /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
+		8AD96E3D1DACCF860080CC8C /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		8AD96E3E1DACCF860080CC8C /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		8AD96E401DACCF900080CC8C /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
+		8AD96E411DACCF900080CC8C /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
+		8AD96E441DACD17F0080CC8C /* tm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tm.png; sourceTree = "<group>"; };
+		8AD96E461DACD7A50080CC8C /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		8AD96E471DACD7A50080CC8C /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		8AD96E551DACD95A0080CC8C /* PersonalHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalHomeViewController.h; sourceTree = "<group>"; };
+		8AD96E561DACD95A0080CC8C /* PersonalHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalHomeViewController.m; sourceTree = "<group>"; };
+		8AD96E571DACD95A0080CC8C /* PersonalHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalHomeViewController.xib; sourceTree = "<group>"; };
+		8AD96E5D1DACDA400080CC8C /* TopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopBarView.h; sourceTree = "<group>"; };
+		8AD96E5E1DACDA400080CC8C /* TopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopBarView.m; sourceTree = "<group>"; };
+		8AD96E631DACEA570080CC8C /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
+		8AD96E641DACEA570080CC8C /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
+		8AD96E6B1DAD09BD0080CC8C /* OpenAccomplishCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenAccomplishCardViewController.h; sourceTree = "<group>"; };
+		8AD96E6C1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenAccomplishCardViewController.m; sourceTree = "<group>"; };
+		8AD96E6E1DAD09C90080CC8C /* OpenWhiteCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenWhiteCardViewController.h; sourceTree = "<group>"; };
+		8AD96E6F1DAD09C90080CC8C /* OpenWhiteCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenWhiteCardViewController.m; sourceTree = "<group>"; };
+		8AD96E711DAD09F10080CC8C /* TransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferViewController.h; sourceTree = "<group>"; };
+		8AD96E721DAD09F10080CC8C /* TransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferViewController.m; sourceTree = "<group>"; };
+		8AD96E741DAD0A0B0080CC8C /* RepairCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairCardViewController.h; sourceTree = "<group>"; };
+		8AD96E751DAD0A0B0080CC8C /* RepairCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairCardViewController.m; sourceTree = "<group>"; };
+		8AD96E771DAD0A1E0080CC8C /* TopUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopUpViewController.h; sourceTree = "<group>"; };
+		8AD96E781DAD0A1E0080CC8C /* TopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopUpViewController.m; sourceTree = "<group>"; };
+		8AD96E7A1DAD0C7F0080CC8C /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
+		8AD96E7B1DAD0C7F0080CC8C /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
+		A8BD6A81DD23512D9C216ADE /* Pods-PhoneWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneWorld.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhoneWorld/Pods-PhoneWorld.debug.xcconfig"; sourceTree = "<group>"; };
+		D3185A9261F048735B2A06F2 /* Pods-PhoneWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneWorld.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhoneWorld/Pods-PhoneWorld.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8A49D8661DACCB4600A1D650 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE79FCC9EBCAAA8F6CEA2ECA /* libPods-PhoneWorld.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D42AA2EC1EB5B988D093F83 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A8BD6A81DD23512D9C216ADE /* Pods-PhoneWorld.debug.xcconfig */,
+				D3185A9261F048735B2A06F2 /* Pods-PhoneWorld.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8A49D8601DACCB4600A1D650 = {
+			isa = PBXGroup;
+			children = (
+				8AD96E271DACCC640080CC8C /* Podfile */,
+				8A49D86B1DACCB4600A1D650 /* PhoneWorld */,
+				8A49D86A1DACCB4600A1D650 /* Products */,
+				1D42AA2EC1EB5B988D093F83 /* Pods */,
+				DA80E4F2E2E91AB3F7C1426A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8A49D86A1DACCB4600A1D650 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8A49D8691DACCB4600A1D650 /* PhoneWorld.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8A49D86B1DACCB4600A1D650 /* PhoneWorld */ = {
+			isa = PBXGroup;
+			children = (
+				8A49D8831DACCB9900A1D650 /* Classes */,
+				8A49D86C1DACCB4600A1D650 /* Supporting Files */,
+			);
+			path = PhoneWorld;
+			sourceTree = "<group>";
+		};
+		8A49D86C1DACCB4600A1D650 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E431DACD17A0080CC8C /* images */,
+				8AD96E2A1DACCD450080CC8C /* parties */,
+				8A49D8781DACCB4600A1D650 /* Assets.xcassets */,
+				8A49D87A1DACCB4600A1D650 /* LaunchScreen.storyboard */,
+				8A49D87D1DACCB4600A1D650 /* Info.plist */,
+				8A49D86D1DACCB4600A1D650 /* main.m */,
+				8AD96E291DACCCF50080CC8C /* PrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8A49D8831DACCB9900A1D650 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8A49D8901DACCB9900A1D650 /* Main */,
+				8A49D88C1DACCB9900A1D650 /* Home */,
+				8A49D8941DACCB9900A1D650 /* OrderInquiry */,
+				8A49D8841DACCB9900A1D650 /* AccountManagement */,
+				8A49D8881DACCB9900A1D650 /* CardManagement */,
+				8AD96E511DACD9380080CC8C /* PersonalHome */,
+				8AD96E4D1DACD9340080CC8C /* LoginAndReg */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8A49D8841DACCB9900A1D650 /* AccountManagement */ = {
+			isa = PBXGroup;
+			children = (
+				8A49D8851DACCB9900A1D650 /* Controller */,
+				8A49D8861DACCB9900A1D650 /* Model */,
+				8A49D8871DACCB9900A1D650 /* View */,
+			);
+			path = AccountManagement;
+			sourceTree = "<group>";
+		};
+		8A49D8851DACCB9900A1D650 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E3D1DACCF860080CC8C /* AccountViewController.h */,
+				8AD96E3E1DACCF860080CC8C /* AccountViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A49D8861DACCB9900A1D650 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8A49D8871DACCB9900A1D650 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8A49D8881DACCB9900A1D650 /* CardManagement */ = {
+			isa = PBXGroup;
+			children = (
+				8A49D8891DACCB9900A1D650 /* Controller */,
+				8A49D88A1DACCB9900A1D650 /* Model */,
+				8A49D88B1DACCB9900A1D650 /* View */,
+			);
+			path = CardManagement;
+			sourceTree = "<group>";
+		};
+		8A49D8891DACCB9900A1D650 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E401DACCF900080CC8C /* CardViewController.h */,
+				8AD96E411DACCF900080CC8C /* CardViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A49D88A1DACCB9900A1D650 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8A49D88B1DACCB9900A1D650 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8A49D88C1DACCB9900A1D650 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8A49D88D1DACCB9900A1D650 /* Controller */,
+				8A49D88E1DACCB9900A1D650 /* Model */,
+				8A49D88F1DACCB9900A1D650 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8A49D88D1DACCB9900A1D650 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E371DACCF3E0080CC8C /* HomeViewController.h */,
+				8AD96E381DACCF3E0080CC8C /* HomeViewController.m */,
+				8AD96E461DACD7A50080CC8C /* MessageViewController.h */,
+				8AD96E471DACD7A50080CC8C /* MessageViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A49D88E1DACCB9900A1D650 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8A49D88F1DACCB9900A1D650 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E631DACEA570080CC8C /* HomeCell.h */,
+				8AD96E641DACEA570080CC8C /* HomeCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8A49D8901DACCB9900A1D650 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8A49D86F1DACCB4600A1D650 /* AppDelegate.h */,
+				8A49D8701DACCB4600A1D650 /* AppDelegate.m */,
+				8A49D8911DACCB9900A1D650 /* Controller */,
+				8A49D8921DACCB9900A1D650 /* Model */,
+				8A49D8931DACCB9900A1D650 /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8A49D8911DACCB9900A1D650 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E311DACCF090080CC8C /* MainTabBarController.h */,
+				8AD96E321DACCF090080CC8C /* MainTabBarController.m */,
+				8AD96E341DACCF220080CC8C /* MainNavigationController.h */,
+				8AD96E351DACCF220080CC8C /* MainNavigationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A49D8921DACCB9900A1D650 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8A49D8931DACCB9900A1D650 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E5D1DACDA400080CC8C /* TopBarView.h */,
+				8AD96E5E1DACDA400080CC8C /* TopBarView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8A49D8941DACCB9900A1D650 /* OrderInquiry */ = {
+			isa = PBXGroup;
+			children = (
+				8A49D8951DACCB9900A1D650 /* Controller */,
+				8A49D8961DACCB9900A1D650 /* Model */,
+				8A49D8971DACCB9900A1D650 /* View */,
+			);
+			path = OrderInquiry;
+			sourceTree = "<group>";
+		};
+		8A49D8951DACCB9900A1D650 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E3A1DACCF790080CC8C /* OrderViewController.h */,
+				8AD96E3B1DACCF790080CC8C /* OrderViewController.m */,
+				8AD96E6B1DAD09BD0080CC8C /* OpenAccomplishCardViewController.h */,
+				8AD96E6C1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m */,
+				8AD96E6E1DAD09C90080CC8C /* OpenWhiteCardViewController.h */,
+				8AD96E6F1DAD09C90080CC8C /* OpenWhiteCardViewController.m */,
+				8AD96E711DAD09F10080CC8C /* TransferViewController.h */,
+				8AD96E721DAD09F10080CC8C /* TransferViewController.m */,
+				8AD96E741DAD0A0B0080CC8C /* RepairCardViewController.h */,
+				8AD96E751DAD0A0B0080CC8C /* RepairCardViewController.m */,
+				8AD96E771DAD0A1E0080CC8C /* TopUpViewController.h */,
+				8AD96E781DAD0A1E0080CC8C /* TopUpViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A49D8961DACCB9900A1D650 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8A49D8971DACCB9900A1D650 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E7A1DAD0C7F0080CC8C /* DropDownView.h */,
+				8AD96E7B1DAD0C7F0080CC8C /* DropDownView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8AD96E2A1DACCD450080CC8C /* parties */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E2B1DACCD490080CC8C /* UIViewExt.h */,
+				8AD96E2C1DACCD490080CC8C /* UIViewExt.m */,
+			);
+			path = parties;
+			sourceTree = "<group>";
+		};
+		8AD96E431DACD17A0080CC8C /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E441DACD17F0080CC8C /* tm.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		8AD96E4D1DACD9340080CC8C /* LoginAndReg */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E4E1DACD9340080CC8C /* Controller */,
+				8AD96E4F1DACD9340080CC8C /* Model */,
+				8AD96E501DACD9340080CC8C /* View */,
+			);
+			path = LoginAndReg;
+			sourceTree = "<group>";
+		};
+		8AD96E4E1DACD9340080CC8C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8AD96E4F1DACD9340080CC8C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8AD96E501DACD9340080CC8C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8AD96E511DACD9380080CC8C /* PersonalHome */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E521DACD9380080CC8C /* Controller */,
+				8AD96E531DACD9380080CC8C /* Model */,
+				8AD96E541DACD9380080CC8C /* View */,
+			);
+			path = PersonalHome;
+			sourceTree = "<group>";
+		};
+		8AD96E521DACD9380080CC8C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AD96E551DACD95A0080CC8C /* PersonalHomeViewController.h */,
+				8AD96E561DACD95A0080CC8C /* PersonalHomeViewController.m */,
+				8AD96E571DACD95A0080CC8C /* PersonalHomeViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8AD96E531DACD9380080CC8C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8AD96E541DACD9380080CC8C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DA80E4F2E2E91AB3F7C1426A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4DC23F93AE94DD6F67AAD0F2 /* libPods-PhoneWorld.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8A49D8681DACCB4600A1D650 /* PhoneWorld */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A49D8801DACCB4600A1D650 /* Build configuration list for PBXNativeTarget "PhoneWorld" */;
+			buildPhases = (
+				6ACCA0B10E19395BD2133540 /* [CP] Check Pods Manifest.lock */,
+				8A49D8651DACCB4600A1D650 /* Sources */,
+				8A49D8661DACCB4600A1D650 /* Frameworks */,
+				8A49D8671DACCB4600A1D650 /* Resources */,
+				36B7886627E542D7262986A8 /* [CP] Embed Pods Frameworks */,
+				B84F54251592155F61AA75D8 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PhoneWorld;
+			productName = PhoneWorld;
+			productReference = 8A49D8691DACCB4600A1D650 /* PhoneWorld.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8A49D8611DACCB4600A1D650 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = xiyoukeji;
+				TargetAttributes = {
+					8A49D8681DACCB4600A1D650 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 59G3XF5WX4;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8A49D8641DACCB4600A1D650 /* Build configuration list for PBXProject "PhoneWorld" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8A49D8601DACCB4600A1D650;
+			productRefGroup = 8A49D86A1DACCB4600A1D650 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8A49D8681DACCB4600A1D650 /* PhoneWorld */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8A49D8671DACCB4600A1D650 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AD96E281DACCC640080CC8C /* Podfile in Resources */,
+				8AD96E591DACD95A0080CC8C /* PersonalHomeViewController.xib in Resources */,
+				8A49D87C1DACCB4600A1D650 /* LaunchScreen.storyboard in Resources */,
+				8AD96E451DACD17F0080CC8C /* tm.png in Resources */,
+				8A49D8791DACCB4600A1D650 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		36B7886627E542D7262986A8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhoneWorld/Pods-PhoneWorld-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ACCA0B10E19395BD2133540 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B84F54251592155F61AA75D8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhoneWorld/Pods-PhoneWorld-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8A49D8651DACCB4600A1D650 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */,
+				8AD96E421DACCF900080CC8C /* CardViewController.m in Sources */,
+				8AD96E481DACD7A50080CC8C /* MessageViewController.m in Sources */,
+				8AD96E7C1DAD0C7F0080CC8C /* DropDownView.m in Sources */,
+				8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */,
+				8AD96E5F1DACDA400080CC8C /* TopBarView.m in Sources */,
+				8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */,
+				8AD96E661DACEA570080CC8C /* HomeCell.m in Sources */,
+				8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */,
+				8AD96E731DAD09F10080CC8C /* TransferViewController.m in Sources */,
+				8AD96E361DACCF220080CC8C /* MainNavigationController.m in Sources */,
+				8AD96E3C1DACCF790080CC8C /* OrderViewController.m in Sources */,
+				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
+				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
+				8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */,
+				8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */,
+				8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */,
+				8AD96E391DACCF3E0080CC8C /* HomeViewController.m in Sources */,
+				8A49D86E1DACCB4600A1D650 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8A49D87A1DACCB4600A1D650 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A49D87B1DACCB4600A1D650 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8A49D87E1DACCB4600A1D650 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8A49D87F1DACCB4600A1D650 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8A49D8811DACCB4600A1D650 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8BD6A81DD23512D9C216ADE /* Pods-PhoneWorld.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 59G3XF5WX4;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PhoneWorld/PrefixHeader.pch";
+				INFOPLIST_FILE = PhoneWorld/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcy.ZhihuDaily;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8A49D8821DACCB4600A1D650 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3185A9261F048735B2A06F2 /* Pods-PhoneWorld.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 59G3XF5WX4;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PhoneWorld/PrefixHeader.pch";
+				INFOPLIST_FILE = PhoneWorld/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcy.ZhihuDaily;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8A49D8641DACCB4600A1D650 /* Build configuration list for PBXProject "PhoneWorld" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A49D87E1DACCB4600A1D650 /* Debug */,
+				8A49D87F1DACCB4600A1D650 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A49D8801DACCB4600A1D650 /* Build configuration list for PBXNativeTarget "PhoneWorld" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A49D8811DACCB4600A1D650 /* Debug */,
+				8A49D8821DACCB4600A1D650 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8A49D8611DACCB4600A1D650 /* Project object */;
+}
