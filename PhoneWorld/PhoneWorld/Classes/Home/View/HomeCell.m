@@ -18,10 +18,10 @@
         [self addSubview:_imageV];
         CGFloat width = self.width - 40;
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(bottomY);
-            make.left.equalTo(20);
-            make.right.equalTo(-20);
-            make.height.equalTo(width);
+            make.top.mas_equalTo(bottomY);
+            make.left.mas_equalTo(20);
+            make.right.mas_equalTo(-20);
+            make.height.mas_equalTo(width);
         }];
     }
     return _imageV;
@@ -33,11 +33,11 @@
         [self addSubview:_titleLb];
         _titleLb.textAlignment = NSTextAlignmentCenter;
         _titleLb.font = [UIFont systemFontOfSize:14];
-        _titleLb.textColor = TextColor;
+        _titleLb.textColor = [Utils colorRGB:@"#333333"];
         [_titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.left.mas_equalTo(0);
+            make.right.left.equalTo(self);
             make.height.mas_equalTo(16);
-            make.bottom.equalTo(-bottomY);
+            make.bottom.mas_equalTo(-bottomY);
         }];
     }
     return _titleLb;

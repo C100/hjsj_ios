@@ -10,10 +10,23 @@
 
 @interface DropDownView : UIView
 
+//时间
 @property (nonatomic) UILabel *timeLB;
 @property (nonatomic) UITextField *beginTime;
 @property (nonatomic) UIView *v;
 @property (nonatomic) UITextField *endTime;
-@property (nonatomic) UIImageView *rightImageView;
+
+//状态
+@property (nonatomic) UILabel *stateLB;
+@property (nonatomic) UITextField *stateTF;
+
+//手机号
+@property (nonatomic) UILabel *phoneLB;
+@property (nonatomic) UITextField *phoneTF;
+
+//查询
+@property (nonatomic) UIButton *findBtn;
+//重置
+@property (nonatomic) UIButton *resetBtn;
 
 @end

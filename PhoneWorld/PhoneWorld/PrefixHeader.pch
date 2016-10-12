@@ -24,12 +24,11 @@
 #define COLOR_RED [UIColor colorWithRed:252.0/255.0 green:40.0/255.0 blue:65.0/255.0 alpha:1]
 #define COLOR_DARK_GREY [UIColor colorWithRed:92.0/255.0 green:93.0/255.0 blue:93.0/255.0 alpha:1]
 #define COLOR_LIGHT_GREY [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1]
-#define TextColor kRGBA(51, 51, 51, 1)
 
 //236 108 0
 #define MainColor [UIColor colorWithRed:236/255.0 green:108/255.0 blue:0/255.0 alpha:1]
 
-#define MAS_SHORTHAND_GLOBALS
+//#define MAS_SHORTHAND_GLOBALS
 #import <Masonry.h>
 #import <UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
@@ -37,5 +36,6 @@
 #import <SDImageCache.h>
 #import <SDCycleScrollView.h>
 #import "UIViewExt.h"
+#import "Utils.h"
 
 #endif /* PrefixHeader_pch */

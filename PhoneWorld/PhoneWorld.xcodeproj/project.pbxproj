@@ -11,6 +11,13 @@
 		8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A49D8701DACCB4600A1D650 /* AppDelegate.m */; };
 		8A49D8791DACCB4600A1D650 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D8781DACCB4600A1D650 /* Assets.xcassets */; };
 		8A49D87C1DACCB4600A1D650 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D87A1DACCB4600A1D650 /* LaunchScreen.storyboard */; };
+		8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8821DADC6A80088DD82 /* HomeView.m */; };
+		8AABF8861DADFB750088DD82 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8851DADFB750088DD82 /* Utils.m */; };
+		8AABF8891DAE11060088DD82 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8881DAE11060088DD82 /* TopView.m */; };
+		8AABF88C1DAE34BA0088DD82 /* AccountTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF88B1DAE34BA0088DD82 /* AccountTVCell.m */; };
+		8AABF8941DAE395D0088DD82 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8931DAE395D0088DD82 /* CardView.m */; };
+		8AABF8971DAE51460088DD82 /* PhoneCashCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8961DAE51460088DD82 /* PhoneCashCheckViewController.m */; };
+		8AABF89A1DAE517E0088DD82 /* OrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8991DAE517E0088DD82 /* OrderView.m */; };
 		8AD96E281DACCC640080CC8C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8AD96E271DACCC640080CC8C /* Podfile */; };
 		8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E2C1DACCD490080CC8C /* UIViewExt.m */; };
 		8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E321DACCF090080CC8C /* MainTabBarController.m */; };
@@ -23,7 +30,6 @@
 		8AD96E481DACD7A50080CC8C /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E471DACD7A50080CC8C /* MessageViewController.m */; };
 		8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E561DACD95A0080CC8C /* PersonalHomeViewController.m */; };
 		8AD96E591DACD95A0080CC8C /* PersonalHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AD96E571DACD95A0080CC8C /* PersonalHomeViewController.xib */; };
-		8AD96E5F1DACDA400080CC8C /* TopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E5E1DACDA400080CC8C /* TopBarView.m */; };
 		8AD96E661DACEA570080CC8C /* HomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E641DACEA570080CC8C /* HomeCell.m */; };
 		8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E6C1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m */; };
 		8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E6F1DAD09C90080CC8C /* OpenWhiteCardViewController.m */; };
@@ -43,6 +49,20 @@
 		8A49D8781DACCB4600A1D650 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A49D87B1DACCB4600A1D650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A49D87D1DACCB4600A1D650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AABF8811DADC6A80088DD82 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
+		8AABF8821DADC6A80088DD82 /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
+		8AABF8841DADFB750088DD82 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		8AABF8851DADFB750088DD82 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		8AABF8871DAE11060088DD82 /* TopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopView.h; path = ../../Home/View/TopView.h; sourceTree = "<group>"; };
+		8AABF8881DAE11060088DD82 /* TopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TopView.m; path = ../../Home/View/TopView.m; sourceTree = "<group>"; };
+		8AABF88A1DAE34BA0088DD82 /* AccountTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountTVCell.h; sourceTree = "<group>"; };
+		8AABF88B1DAE34BA0088DD82 /* AccountTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountTVCell.m; sourceTree = "<group>"; };
+		8AABF8921DAE395D0088DD82 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		8AABF8931DAE395D0088DD82 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		8AABF8951DAE51460088DD82 /* PhoneCashCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneCashCheckViewController.h; sourceTree = "<group>"; };
+		8AABF8961DAE51460088DD82 /* PhoneCashCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneCashCheckViewController.m; sourceTree = "<group>"; };
+		8AABF8981DAE517E0088DD82 /* OrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderView.h; sourceTree = "<group>"; };
+		8AABF8991DAE517E0088DD82 /* OrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderView.m; sourceTree = "<group>"; };
 		8AD96E271DACCC640080CC8C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8AD96E291DACCCF50080CC8C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8AD96E2B1DACCD490080CC8C /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
@@ -65,8 +85,6 @@
 		8AD96E551DACD95A0080CC8C /* PersonalHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalHomeViewController.h; sourceTree = "<group>"; };
 		8AD96E561DACD95A0080CC8C /* PersonalHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalHomeViewController.m; sourceTree = "<group>"; };
 		8AD96E571DACD95A0080CC8C /* PersonalHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalHomeViewController.xib; sourceTree = "<group>"; };
-		8AD96E5D1DACDA400080CC8C /* TopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopBarView.h; sourceTree = "<group>"; };
-		8AD96E5E1DACDA400080CC8C /* TopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopBarView.m; sourceTree = "<group>"; };
 		8AD96E631DACEA570080CC8C /* HomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCell.h; sourceTree = "<group>"; };
 		8AD96E641DACEA570080CC8C /* HomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCell.m; sourceTree = "<group>"; };
 		8AD96E6B1DAD09BD0080CC8C /* OpenAccomplishCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenAccomplishCardViewController.h; sourceTree = "<group>"; };
@@ -177,6 +195,8 @@
 			children = (
 				8AD96E3D1DACCF860080CC8C /* AccountViewController.h */,
 				8AD96E3E1DACCF860080CC8C /* AccountViewController.m */,
+				8AABF8951DAE51460088DD82 /* PhoneCashCheckViewController.h */,
+				8AABF8961DAE51460088DD82 /* PhoneCashCheckViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -191,6 +211,10 @@
 		8A49D8871DACCB9900A1D650 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8AABF88A1DAE34BA0088DD82 /* AccountTVCell.h */,
+				8AABF88B1DAE34BA0088DD82 /* AccountTVCell.m */,
+				8AABF8981DAE517E0088DD82 /* OrderView.h */,
+				8AABF8991DAE517E0088DD82 /* OrderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +248,8 @@
 		8A49D88B1DACCB9900A1D650 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8AABF8921DAE395D0088DD82 /* CardView.h */,
+				8AABF8931DAE395D0088DD82 /* CardView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,6 +287,8 @@
 			children = (
 				8AD96E631DACEA570080CC8C /* HomeCell.h */,
 				8AD96E641DACEA570080CC8C /* HomeCell.m */,
+				8AABF8811DADC6A80088DD82 /* HomeView.h */,
+				8AABF8821DADC6A80088DD82 /* HomeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -270,6 +298,8 @@
 			children = (
 				8A49D86F1DACCB4600A1D650 /* AppDelegate.h */,
 				8A49D8701DACCB4600A1D650 /* AppDelegate.m */,
+				8AABF8841DADFB750088DD82 /* Utils.h */,
+				8AABF8851DADFB750088DD82 /* Utils.m */,
 				8A49D8911DACCB9900A1D650 /* Controller */,
 				8A49D8921DACCB9900A1D650 /* Model */,
 				8A49D8931DACCB9900A1D650 /* View */,
@@ -298,8 +328,6 @@
 		8A49D8931DACCB9900A1D650 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8AD96E5D1DACDA400080CC8C /* TopBarView.h */,
-				8AD96E5E1DACDA400080CC8C /* TopBarView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -345,6 +373,8 @@
 			children = (
 				8AD96E7A1DAD0C7F0080CC8C /* DropDownView.h */,
 				8AD96E7B1DAD0C7F0080CC8C /* DropDownView.m */,
+				8AABF8871DAE11060088DD82 /* TopView.h */,
+				8AABF8881DAE11060088DD82 /* TopView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -564,12 +594,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AABF8891DAE11060088DD82 /* TopView.m in Sources */,
 				8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */,
+				8AABF8971DAE51460088DD82 /* PhoneCashCheckViewController.m in Sources */,
 				8AD96E421DACCF900080CC8C /* CardViewController.m in Sources */,
+				8AABF89A1DAE517E0088DD82 /* OrderView.m in Sources */,
+				8AABF88C1DAE34BA0088DD82 /* AccountTVCell.m in Sources */,
 				8AD96E481DACD7A50080CC8C /* MessageViewController.m in Sources */,
+				8AABF8861DADFB750088DD82 /* Utils.m in Sources */,
 				8AD96E7C1DAD0C7F0080CC8C /* DropDownView.m in Sources */,
 				8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */,
-				8AD96E5F1DACDA400080CC8C /* TopBarView.m in Sources */,
 				8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */,
 				8AD96E661DACEA570080CC8C /* HomeCell.m in Sources */,
 				8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */,
@@ -579,8 +613,10 @@
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
 				8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */,
+				8AABF8941DAE395D0088DD82 /* CardView.m in Sources */,
 				8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */,
 				8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */,
+				8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */,
 				8AD96E391DACCF3E0080CC8C /* HomeViewController.m in Sources */,
 				8A49D86E1DACCB4600A1D650 /* main.m in Sources */,
 			);

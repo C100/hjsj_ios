@@ -26,20 +26,20 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"个人中心"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
-    self.topViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"消息"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
+    self.topViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
+    self.topViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
 }
 
 - (void)gotoMessagesVC{
     MessageViewController *messageVC = [MessageViewController new];
     messageVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:messageVC animated:YES];
+    [self pushViewController:messageVC animated:YES];
 }
 
 - (void)gotoPersonalHomeVC{
     PersonalHomeViewController *vc = [PersonalHomeViewController new];
     vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self pushViewController:vc animated:YES];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
