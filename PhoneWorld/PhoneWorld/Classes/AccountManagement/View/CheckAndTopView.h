@@ -12,10 +12,10 @@
 
 @property (nonatomic) void(^checkAndTopCallBack)(NSInteger tag);
 
-@property (nonatomic) UILabel *currentLeftMoney;
+@property (nonatomic) UILabel *currentLeftMoney;//余额
 @property (nonatomic) UILabel *topMoney;
 @property (nonatomic) UILabel *payType;
-@property (nonatomic) UITextField *moneyNum;
+@property (nonatomic) UITextField *moneyNum;//充值金额
 @property (nonatomic) UIButton *aliPay;
 @property (nonatomic) UIButton *weixinPay;
 

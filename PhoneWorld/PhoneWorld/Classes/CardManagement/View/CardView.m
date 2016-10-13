@@ -27,8 +27,6 @@
             NSInteger line = i/2;
             NSInteger queue = i%2;
             
-            NSLog(@"%ld   %ld",(long)line,(long)queue);
-            
             UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(50 + (buttonWidth + 35)*queue, 50 + (buttonWidth + 35)*line, buttonWidth, buttonWidth)];
             [btn setBackgroundImage:[UIImage imageNamed:self.imageNames[i]] forState:UIControlStateNormal];
             btn.tag = 300+i;
@@ -49,13 +47,5 @@
     }
     return _imageNames;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

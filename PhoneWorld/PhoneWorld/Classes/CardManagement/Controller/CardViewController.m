@@ -8,6 +8,9 @@
 
 #import "CardViewController.h"
 #import "CardView.h"
+#import "FinishCardViewController.h"
+#import "TransferCardViewController.h"
+#import "CardRepairViewController.h"
 
 @interface CardViewController ()
 @property (nonatomic) CardView *cardView;
@@ -25,8 +28,41 @@
         make.left.right.mas_equalTo(0);
         make.bottom.mas_equalTo(self.view.mas_bottom).mas_equalTo(-44);
     }];
+    __block __weak CardViewController *weakself = self;
     [self.cardView setMyCallBack:^(NSInteger tag) {
-        
+        switch (tag) {
+            case 300:
+            {
+                FinishCardViewController *vc = [FinishCardViewController new];
+                vc.hidesBottomBarWhenPushed = YES;
+                [weakself.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 301:
+            {
+                
+            }
+                break;
+            case 302:
+            {
+                TransferCardViewController *vc = [TransferCardViewController new];
+                vc.hidesBottomBarWhenPushed = YES;
+                [weakself.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 303:
+            {
+                CardRepairViewController *vc = [CardRepairViewController new];
+                vc.hidesBottomBarWhenPushed = YES;
+                [weakself.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 304:
+            {
+                
+            }
+                break;
+        }
     }];
 }
 

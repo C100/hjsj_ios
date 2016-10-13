@@ -9,6 +9,8 @@
 #import "HomeViewController.h"
 #import "HomeCell.h"
 #import "HomeView.h"
+#import "TopCallMoneyViewController.h"  //话费充值
+#import "CheckAndTopViewController.h"  //余额查询与充值
 
 #define homeCellWH 125/152.0
 
@@ -75,6 +77,47 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     return 1;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    switch (indexPath.row) {
+        case 0:
+        {
+            TopCallMoneyViewController *vc = [TopCallMoneyViewController new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:
+        {
+            CheckAndTopViewController *vc = [CheckAndTopViewController new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 2:
+        {
+            CheckAndTopViewController *vc = [CheckAndTopViewController new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 3:
+        {
+            
+        }
+            break;
+        case 4:
+        {
+            
+        }
+            break;
+        case 5:
+        {
+            
+        }
+            break;
+    }
 }
 
 #pragma mark - LazyLoading

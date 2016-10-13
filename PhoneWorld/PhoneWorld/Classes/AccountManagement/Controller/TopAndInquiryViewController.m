@@ -1,42 +1,36 @@
 //
-//  OrderViewController.m
+//  TopAndInquiryViewController.m
 //  PhoneWorld
 //
-//  Created by 刘岑颖 on 16/10/11.
+//  Created by 刘岑颖 on 16/10/13.
 //  Copyright © 2016年 xiyoukeji. All rights reserved.
 //
 
-#import "OrderViewController.h"
+#import "TopAndInquiryViewController.h"
+#import "TopAndInquiryTableView.h"
 #import "DropDownView.h"
 #import "TopView.h"
-#import "ContentView.h"
 
-#define selectV 220/375.0
-
-@interface OrderViewController ()<UIScrollViewDelegate>
-
-@property (nonatomic) DropDownView *selectView;//筛选
-@property (nonatomic) TopView *topView;//标题栏
+@interface TopAndInquiryViewController ()
+@property (nonatomic) DropDownView *selectView;//  筛选栏
+@property (nonatomic) TopView *topView;// 头部栏
 @property (nonatomic) UIView *grayView;//灰色
 @property (nonatomic) UITapGestureRecognizer *tapGrayGR;
-
-@property (nonatomic) ContentView *contentScrollView;
-
+@property (nonatomic) TopAndInquiryTableView *topAndInquiryTV;
+@property (nonatomic) UIView *lineView;
 @end
 
-@implementation OrderViewController
-#pragma mark - LifeCircle
+@implementation TopAndInquiryViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"充值查询";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets = YES;
-    /*---内容--*/
-    self.contentScrollView = [[ContentView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, screenHeight - 108 - 80)];
-    [self.view addSubview:self.contentScrollView];
-    self.contentScrollView.delegate = self;
+    self.topAndInquiryTV = [[TopAndInquiryTableView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, screenHeight - 64 - 80) style:UITableViewStyleGrouped];
+    [self.view addSubview:self.topAndInquiryTV];
     
     /*---页头---*/
-    self.topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 80) andTitles:@[@"成卡开户",@"白卡开户",@"过户",@"补卡",@"充值"]];
+    self.topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 80) andTitles:@[@"全部",@"话费充值",@"余额充值"]];
     [self.view addSubview:self.topView];
     
     self.selectView = [[DropDownView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 220)];
@@ -44,12 +38,8 @@
     [self.view addSubview:self.selectView];
     self.selectView.hidden = YES;
     
-    [self grayView];
-    
-    __block __weak OrderViewController *weakself = self;
+    __block __weak TopAndInquiryViewController *weakself = self;
     [self.topView setCallback:^(NSInteger tag) {
-        /*---按钮点击事件---*/
-        
         switch (tag) {
             case 101:{//出现筛选框按钮
                 [UIView animateWithDuration:0.3 animations:^{
@@ -63,24 +53,18 @@
                 }];
             }
                 break;
-                
-            default:{
-                //10 11 12 13 14
-                [weakself.contentScrollView setContentOffset:CGPointMake(screenWidth*(tag - 10), 0)];
+            default:
+            {
+                [UIView animateWithDuration:0.5 animations:^{
+                    CGRect frame = weakself.lineView.frame;
+                    frame = CGRectMake((tag - 10)*(screenWidth/3.0), 39, screenWidth/3.0, 1);
+                    weakself.lineView.frame = frame;
+                }];
             }
                 break;
         }
-        
     }];
-}
-#pragma mark - UIScrollView Delegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSInteger page = scrollView.contentOffset.x/screenWidth;
-    for (UIButton *b in self.topView.titlesButton) {
-        b.selected = NO;
-    }
-    UIButton *btn = self.topView.titlesButton[page];
-    btn.selected = YES;
+    [self lineView];
 }
 
 #pragma mark - LazyLoading
@@ -108,10 +92,19 @@
     return _tapGrayGR;
 }
 
+- (UIView *)lineView{
+    if (_lineView == nil) {
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 39, screenWidth/3, 1)];
+        [self.view addSubview:_lineView];
+        _lineView.backgroundColor = MainColor;
+    }
+    return _lineView;
+}
+
 #pragma mark - Method
 - (void)tapAction{
     [self.view endEditing:YES];
-    __block __weak OrderViewController *weakself = self;
+    __block __weak TopAndInquiryViewController *weakself = self;
     [UIView animateWithDuration:0.3 animations:^{
         if (weakself.selectView.hidden == NO) {
             weakself.selectView.hidden = YES;

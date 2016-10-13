@@ -11,12 +11,20 @@
 #define dateTFWidth (screenWidth - 90 - 80 - 14)/2
 #define buttonWidth (screenWidth - 170)/2
 
+@interface DropDownView ()
+
+@property (nonatomic) UITextField *currentTF;
+@property (nonatomic) NSArray *states;
+
+@end
+
 @implementation DropDownView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.states = @[@"全部",@"已激活",@"锁定",@"开户中",@"已使用",@"失效"];
         [self timeLB];
         [self endTime];
         [self v];
@@ -30,6 +38,8 @@
         
         [self findBtn];
         [self resetBtn];
+        
+        [self stateTableView];
     }
     return self;
 }
@@ -89,6 +99,8 @@
             make.height.mas_equalTo(13);
         }];
         [btnBegin setImage:[UIImage imageNamed:@"calendar"] forState:UIControlStateNormal];
+        btnBegin.tag = 150;;
+        [btnBegin addTarget:self action:@selector(chooseCalendarAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _beginTime;
 }
@@ -145,7 +157,8 @@
             make.height.mas_equalTo(13);
         }];
         [btn setImage:[UIImage imageNamed:@"calendar"] forState:UIControlStateNormal];
-        
+        btn.tag = 151;
+        [btn addTarget:self action:@selector(chooseCalendarAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _endTime;
 }
@@ -198,8 +211,32 @@
             make.height.mas_equalTo(6);
         }];
         [btn setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+        btn.tag = 52;
+        [btn addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _stateTF;
+}
+
+- (UITableView *)stateTableView{
+    if (_stateTableView == nil) {
+        _stateTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+        [self addSubview:_stateTableView];
+        [_stateTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.stateTF.mas_bottom).mas_equalTo(0);
+            make.left.mas_equalTo(self.phoneLB.mas_right).mas_equalTo(0);
+            make.height.mas_equalTo(3*28);
+            make.right.mas_equalTo(-50);
+        }];
+        _stateTableView.delegate = self;
+        _stateTableView.dataSource = self;
+        _stateTableView.layer.cornerRadius = 6;
+        _stateTableView.layer.masksToBounds = YES;
+        _stateTableView.layer.borderColor = COLOR_BACKGROUND.CGColor;
+        _stateTableView.layer.borderWidth = 1;
+        _stateTableView.bounces = NO;
+        _stateTableView.hidden = YES;
+    }
+    return _stateTableView;
 }
 
 /*---------手机号-----------------*/
@@ -228,7 +265,7 @@
         _phoneTF.layer.borderColor = kRGBA(204, 204, 204, 1).CGColor;
         _phoneTF.layer.cornerRadius = 6;
         _phoneTF.layer.borderWidth = 1;
-        _phoneTF.enabled = NO;
+        _phoneTF.placeholder = @"请输入手机号码";
         
         [_phoneTF setFont:[UIFont systemFontOfSize:12]];
         [_phoneTF setTextColor:[Utils colorRGB:@"#666666"]];
@@ -240,16 +277,6 @@
             make.height.mas_equalTo(28);
             make.left.mas_equalTo(self.phoneLB.mas_right).mas_equalTo(0);
         }];
-        
-        UIButton *btn = [[UIButton alloc] init];
-        [self addSubview:btn];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(_phoneTF.mas_right).mas_equalTo(-6);
-            make.top.mas_equalTo(_phoneTF.mas_top).mas_equalTo(12);
-            make.width.mas_equalTo(12);
-            make.height.mas_equalTo(6);
-        }];
-        [btn setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
     }
     return _phoneTF;
 }
@@ -265,7 +292,7 @@
         [_findBtn setTitle:@"查询" forState:UIControlStateNormal];
         [_findBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _findBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        
+        _findBtn.tag = 50;
         [self addSubview:_findBtn];
         [_findBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left).mas_equalTo(80);
@@ -273,6 +300,8 @@
             make.width.mas_equalTo(buttonWidth);
             make.height.mas_equalTo(30);
         }];
+        
+        [_findBtn addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _findBtn;
 }
@@ -288,7 +317,7 @@
         [_resetBtn setTitle:@"重置" forState:UIControlStateNormal];
         [_resetBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _resetBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        
+        _resetBtn.tag = 51;
         [self addSubview:_resetBtn];
         [_resetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.mas_right).mas_equalTo(-80);
@@ -296,8 +325,92 @@
             make.width.mas_equalTo(self.findBtn.mas_width);
             make.height.mas_equalTo(30);
         }];
+        [_resetBtn addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _resetBtn;
+}
+
+- (CJCalendarViewController *)calendarViewController{
+    if (_calendarViewController == nil) {
+        _calendarViewController = [[CJCalendarViewController alloc] init];
+        _calendarViewController.view.frame = CGRectMake(0, 0, screenWidth, screenHeight - 64);
+        _calendarViewController.delegate = self;
+        _calendarViewController.headerBackgroundColor = MainColor;
+        _calendarViewController.contentBackgroundColor = MainColor;
+    }
+    return _calendarViewController;
+}
+
+#pragma mark - CJCalendarViewController Delegate
+
+-(void)CalendarViewController:(CJCalendarViewController *)controller didSelectActionYear:(NSString *)year month:(NSString *)month day:(NSString *)day{
+    
+    self.currentTF.text = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
+}
+
+#pragma mark - UITableView Delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.states.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.font = [UIFont systemFontOfSize:12];
+    cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
+    cell.textLabel.text = self.states[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *state = self.states[indexPath.row];
+    self.stateTF.text = state;
+    self.stateTableView.hidden = YES;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 28;
+}
+
+#pragma mark - Method
+//点击重置(51)和查询(50)按钮  选择状态（52）
+- (void)buttonClickedAction:(UIButton *)button{
+    if (button.tag == 52) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.stateTableView.hidden = self.stateTableView.hidden==YES ? NO : YES;
+        }];
+    }
+    if (button.tag == 51) {
+        NSDate *date = [[NSDate alloc] init];
+        NSString *dateStr = [NSString stringWithFormat:@"%@",date];
+        self.beginTime.text = [dateStr componentsSeparatedByString:@" "].firstObject;
+        self.endTime.text = [dateStr componentsSeparatedByString:@" "].firstObject;
+        self.stateTF.text = @"";
+        self.phoneTF.text = @"";
+    }
+    if (button.tag == 50) {
+        //查询操作
+        
+    }
+}
+
+//日历begin(150)  end(151)
+- (void)chooseCalendarAction:(UIButton *)button{
+    NSArray *arr = [NSArray array];
+    if (button.tag == 150) {
+        arr = [self.beginTime.text componentsSeparatedByString:@"-"];
+        self.currentTF = self.beginTime;
+    }else if(button.tag == 151){
+        self.currentTF = self.endTime;
+        arr = [self.endTime.text componentsSeparatedByString:@"-"];
+    }
+    
+    if (arr.count > 1) {
+        [self.calendarViewController setYear:arr[0] month:arr[1] day:arr[2]];
+    }
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:self.calendarViewController animated:YES completion:nil];
 }
 
 @end

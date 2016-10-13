@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DropDownView : UIView
+@interface DropDownView : UIView <CalendarViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 //时间
 @property (nonatomic) UILabel *timeLB;
@@ -19,6 +19,7 @@
 //状态
 @property (nonatomic) UILabel *stateLB;
 @property (nonatomic) UITextField *stateTF;
+@property (nonatomic) UITableView *stateTableView;
 
 //手机号
 @property (nonatomic) UILabel *phoneLB;
@@ -28,5 +29,8 @@
 @property (nonatomic) UIButton *findBtn;
 //重置
 @property (nonatomic) UIButton *resetBtn;
+
+//日历
+@property (nonatomic) CJCalendarViewController *calendarViewController;
 
 @end

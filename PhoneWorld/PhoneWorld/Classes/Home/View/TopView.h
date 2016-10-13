@@ -10,11 +10,17 @@
 
 @interface TopView : UIView
 
+@property (nonatomic) NSArray *titles;
+
 @property (nonatomic) UIView *titlesView;
 @property (nonatomic) UIView *siftView;
+
+@property (nonatomic) UIView *lineView;
 
 @property (nonatomic) NSMutableArray *titlesButton;
 
 @property (nonatomic) void(^callback)(NSInteger tag);
+
+- (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles;
 
 @end

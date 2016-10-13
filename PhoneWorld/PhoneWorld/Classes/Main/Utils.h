@@ -16,4 +16,6 @@
 + (BOOL)isNumber:(NSString *)number;
 
 +(void)toastview:(NSString *)title;
+
++ (CGSize)sizeWithFont:(UIFont *)font andMaxSize:(CGSize)maxSize andStr:(NSString *)str;
 @end

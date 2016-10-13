@@ -11,6 +11,7 @@
 #import "PhoneCashCheckViewController.h"
 #import "CheckAndTopViewController.h"
 #import "TopCallMoneyViewController.h"
+#import "TopAndInquiryViewController.h"
 
 @interface AccountViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) UITableView *myTableView;
@@ -66,7 +67,11 @@
         }
             break;
         case 3:
-            
+        {
+            TopAndInquiryViewController *vc = [TopAndInquiryViewController new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
     }
 }

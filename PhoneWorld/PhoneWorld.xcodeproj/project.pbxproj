@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A3D7D6A1DAF29DB00824B7D /* TopAndInquiryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D691DAF29DB00824B7D /* TopAndInquiryViewController.m */; };
+		8A3D7D6D1DAF2A9700824B7D /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D6C1DAF2A9700824B7D /* ContentView.m */; };
+		8A3D7D701DAF2F4600824B7D /* TopAndInquiryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D6F1DAF2F4600824B7D /* TopAndInquiryTableView.m */; };
+		8A3D7D8B1DAF3BBF00824B7D /* CJCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D791DAF3BBF00824B7D /* CJCalendarViewController.m */; };
+		8A3D7D8C1DAF3BBF00824B7D /* CJMonthDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D7B1DAF3BBF00824B7D /* CJMonthDayViewController.m */; };
+		8A3D7D8D1DAF3BBF00824B7D /* CJYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D7D1DAF3BBF00824B7D /* CJYearViewController.m */; };
+		8A3D7D8E1DAF3BBF00824B7D /* CJUseTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D801DAF3BBF00824B7D /* CJUseTime.m */; };
+		8A3D7D8F1DAF3BBF00824B7D /* CJDecisionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D831DAF3BBF00824B7D /* CJDecisionView.m */; };
+		8A3D7D901DAF3BBF00824B7D /* CJMonthDayCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D851DAF3BBF00824B7D /* CJMonthDayCollectionCell.m */; };
+		8A3D7D911DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A3D7D861DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib */; };
+		8A3D7D921DAF3BBF00824B7D /* CJSelectTimeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D881DAF3BBF00824B7D /* CJSelectTimeScrollView.m */; };
+		8A3D7D931DAF3BBF00824B7D /* CJShowTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D8A1DAF3BBF00824B7D /* CJShowTimeView.m */; };
 		8A49D86E1DACCB4600A1D650 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A49D86D1DACCB4600A1D650 /* main.m */; };
 		8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A49D8701DACCB4600A1D650 /* AppDelegate.m */; };
 		8A49D8791DACCB4600A1D650 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D8781DACCB4600A1D650 /* Assets.xcassets */; };
@@ -42,11 +54,41 @@
 		8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E751DAD0A0B0080CC8C /* RepairCardViewController.m */; };
 		8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E781DAD0A1E0080CC8C /* TopUpViewController.m */; };
 		8AD96E7C1DAD0C7F0080CC8C /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E7B1DAD0C7F0080CC8C /* DropDownView.m */; };
+		8AEEF9871DAF5E9900D3D6AD /* InputPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF9861DAF5E9900D3D6AD /* InputPasswordView.m */; };
+		8AEEF98A1DAF60D200D3D6AD /* FinishCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF9891DAF60D200D3D6AD /* FinishCardViewController.m */; };
+		8AEEF98D1DAF60E100D3D6AD /* FinishCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF98C1DAF60E100D3D6AD /* FinishCardView.m */; };
+		8AEEF9901DAF66CF00D3D6AD /* TransferCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF98F1DAF66CF00D3D6AD /* TransferCardViewController.m */; };
+		8AEEF9931DAF66E300D3D6AD /* TransferCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF9921DAF66E300D3D6AD /* TransferCardView.m */; };
+		8AEEF99C1DAF802A00D3D6AD /* RepairCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF99B1DAF802A00D3D6AD /* RepairCardView.m */; };
+		8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF9A31DAF839700D3D6AD /* CardRepairViewController.m */; };
 		EE79FCC9EBCAAA8F6CEA2ECA /* libPods-PhoneWorld.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC23F93AE94DD6F67AAD0F2 /* libPods-PhoneWorld.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4DC23F93AE94DD6F67AAD0F2 /* libPods-PhoneWorld.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PhoneWorld.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A3D7D681DAF29DB00824B7D /* TopAndInquiryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopAndInquiryViewController.h; sourceTree = "<group>"; };
+		8A3D7D691DAF29DB00824B7D /* TopAndInquiryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopAndInquiryViewController.m; sourceTree = "<group>"; };
+		8A3D7D6B1DAF2A9700824B7D /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
+		8A3D7D6C1DAF2A9700824B7D /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
+		8A3D7D6E1DAF2F4600824B7D /* TopAndInquiryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopAndInquiryTableView.h; sourceTree = "<group>"; };
+		8A3D7D6F1DAF2F4600824B7D /* TopAndInquiryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopAndInquiryTableView.m; sourceTree = "<group>"; };
+		8A3D7D781DAF3BBF00824B7D /* CJCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJCalendarViewController.h; sourceTree = "<group>"; };
+		8A3D7D791DAF3BBF00824B7D /* CJCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCalendarViewController.m; sourceTree = "<group>"; };
+		8A3D7D7A1DAF3BBF00824B7D /* CJMonthDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMonthDayViewController.h; sourceTree = "<group>"; };
+		8A3D7D7B1DAF3BBF00824B7D /* CJMonthDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMonthDayViewController.m; sourceTree = "<group>"; };
+		8A3D7D7C1DAF3BBF00824B7D /* CJYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJYearViewController.h; sourceTree = "<group>"; };
+		8A3D7D7D1DAF3BBF00824B7D /* CJYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJYearViewController.m; sourceTree = "<group>"; };
+		8A3D7D7F1DAF3BBF00824B7D /* CJUseTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUseTime.h; sourceTree = "<group>"; };
+		8A3D7D801DAF3BBF00824B7D /* CJUseTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUseTime.m; sourceTree = "<group>"; };
+		8A3D7D821DAF3BBF00824B7D /* CJDecisionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJDecisionView.h; sourceTree = "<group>"; };
+		8A3D7D831DAF3BBF00824B7D /* CJDecisionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJDecisionView.m; sourceTree = "<group>"; };
+		8A3D7D841DAF3BBF00824B7D /* CJMonthDayCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMonthDayCollectionCell.h; sourceTree = "<group>"; };
+		8A3D7D851DAF3BBF00824B7D /* CJMonthDayCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMonthDayCollectionCell.m; sourceTree = "<group>"; };
+		8A3D7D861DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CJMonthDayCollectionCell.xib; sourceTree = "<group>"; };
+		8A3D7D871DAF3BBF00824B7D /* CJSelectTimeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSelectTimeScrollView.h; sourceTree = "<group>"; };
+		8A3D7D881DAF3BBF00824B7D /* CJSelectTimeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSelectTimeScrollView.m; sourceTree = "<group>"; };
+		8A3D7D891DAF3BBF00824B7D /* CJShowTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJShowTimeView.h; sourceTree = "<group>"; };
+		8A3D7D8A1DAF3BBF00824B7D /* CJShowTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJShowTimeView.m; sourceTree = "<group>"; };
 		8A49D8691DACCB4600A1D650 /* PhoneWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhoneWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A49D86D1DACCB4600A1D650 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8A49D86F1DACCB4600A1D650 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +156,21 @@
 		8AD96E781DAD0A1E0080CC8C /* TopUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopUpViewController.m; sourceTree = "<group>"; };
 		8AD96E7A1DAD0C7F0080CC8C /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
 		8AD96E7B1DAD0C7F0080CC8C /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
+		8AEEF9851DAF5E9900D3D6AD /* InputPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputPasswordView.h; sourceTree = "<group>"; };
+		8AEEF9861DAF5E9900D3D6AD /* InputPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputPasswordView.m; sourceTree = "<group>"; };
+		8AEEF9881DAF60D200D3D6AD /* FinishCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishCardViewController.h; sourceTree = "<group>"; };
+		8AEEF9891DAF60D200D3D6AD /* FinishCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishCardViewController.m; sourceTree = "<group>"; };
+		8AEEF98B1DAF60E100D3D6AD /* FinishCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishCardView.h; sourceTree = "<group>"; };
+		8AEEF98C1DAF60E100D3D6AD /* FinishCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishCardView.m; sourceTree = "<group>"; };
+		8AEEF98E1DAF66CF00D3D6AD /* TransferCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferCardViewController.h; sourceTree = "<group>"; };
+		8AEEF98F1DAF66CF00D3D6AD /* TransferCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferCardViewController.m; sourceTree = "<group>"; };
+		8AEEF9911DAF66E300D3D6AD /* TransferCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferCardView.h; sourceTree = "<group>"; };
+		8AEEF9921DAF66E300D3D6AD /* TransferCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferCardView.m; sourceTree = "<group>"; };
+		8AEEF99A1DAF802A00D3D6AD /* RepairCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairCardView.h; sourceTree = "<group>"; };
+		8AEEF99B1DAF802A00D3D6AD /* RepairCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairCardView.m; sourceTree = "<group>"; };
+		8AEEF99D1DAF828600D3D6AD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8AEEF9A21DAF839700D3D6AD /* CardRepairViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardRepairViewController.h; sourceTree = "<group>"; };
+		8AEEF9A31DAF839700D3D6AD /* CardRepairViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardRepairViewController.m; sourceTree = "<group>"; };
 		A8BD6A81DD23512D9C216ADE /* Pods-PhoneWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneWorld.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhoneWorld/Pods-PhoneWorld.debug.xcconfig"; sourceTree = "<group>"; };
 		D3185A9261F048735B2A06F2 /* Pods-PhoneWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneWorld.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhoneWorld/Pods-PhoneWorld.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +194,54 @@
 				D3185A9261F048735B2A06F2 /* Pods-PhoneWorld.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8A3D7D761DAF3BBF00824B7D /* calendar */ = {
+			isa = PBXGroup;
+			children = (
+				8A3D7D771DAF3BBF00824B7D /* controller */,
+				8A3D7D7E1DAF3BBF00824B7D /* service */,
+				8A3D7D811DAF3BBF00824B7D /* view */,
+			);
+			path = calendar;
+			sourceTree = "<group>";
+		};
+		8A3D7D771DAF3BBF00824B7D /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				8A3D7D781DAF3BBF00824B7D /* CJCalendarViewController.h */,
+				8A3D7D791DAF3BBF00824B7D /* CJCalendarViewController.m */,
+				8A3D7D7A1DAF3BBF00824B7D /* CJMonthDayViewController.h */,
+				8A3D7D7B1DAF3BBF00824B7D /* CJMonthDayViewController.m */,
+				8A3D7D7C1DAF3BBF00824B7D /* CJYearViewController.h */,
+				8A3D7D7D1DAF3BBF00824B7D /* CJYearViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		8A3D7D7E1DAF3BBF00824B7D /* service */ = {
+			isa = PBXGroup;
+			children = (
+				8A3D7D7F1DAF3BBF00824B7D /* CJUseTime.h */,
+				8A3D7D801DAF3BBF00824B7D /* CJUseTime.m */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		8A3D7D811DAF3BBF00824B7D /* view */ = {
+			isa = PBXGroup;
+			children = (
+				8A3D7D821DAF3BBF00824B7D /* CJDecisionView.h */,
+				8A3D7D831DAF3BBF00824B7D /* CJDecisionView.m */,
+				8A3D7D841DAF3BBF00824B7D /* CJMonthDayCollectionCell.h */,
+				8A3D7D851DAF3BBF00824B7D /* CJMonthDayCollectionCell.m */,
+				8A3D7D861DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib */,
+				8A3D7D871DAF3BBF00824B7D /* CJSelectTimeScrollView.h */,
+				8A3D7D881DAF3BBF00824B7D /* CJSelectTimeScrollView.m */,
+				8A3D7D891DAF3BBF00824B7D /* CJShowTimeView.h */,
+				8A3D7D8A1DAF3BBF00824B7D /* CJShowTimeView.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		8A49D8601DACCB4600A1D650 = {
@@ -185,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				8A49D8901DACCB9900A1D650 /* Main */,
+				8A3D7D761DAF3BBF00824B7D /* calendar */,
 				8A49D88C1DACCB9900A1D650 /* Home */,
 				8A49D8941DACCB9900A1D650 /* OrderInquiry */,
 				8A49D8841DACCB9900A1D650 /* AccountManagement */,
@@ -216,6 +322,8 @@
 				8AABF89C1DAE5AF20088DD82 /* CheckAndTopViewController.m */,
 				8AABF8A41DAE6BE00088DD82 /* TopCallMoneyViewController.h */,
 				8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */,
+				8A3D7D681DAF29DB00824B7D /* TopAndInquiryViewController.h */,
+				8A3D7D691DAF29DB00824B7D /* TopAndInquiryViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -238,6 +346,10 @@
 				8AABF89F1DAE5BB90088DD82 /* CheckAndTopView.m */,
 				8AABF8A71DAE6C310088DD82 /* TopCallMoneyView.h */,
 				8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */,
+				8A3D7D6E1DAF2F4600824B7D /* TopAndInquiryTableView.h */,
+				8A3D7D6F1DAF2F4600824B7D /* TopAndInquiryTableView.m */,
+				8AEEF9851DAF5E9900D3D6AD /* InputPasswordView.h */,
+				8AEEF9861DAF5E9900D3D6AD /* InputPasswordView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -257,6 +369,12 @@
 			children = (
 				8AD96E401DACCF900080CC8C /* CardViewController.h */,
 				8AD96E411DACCF900080CC8C /* CardViewController.m */,
+				8AEEF9881DAF60D200D3D6AD /* FinishCardViewController.h */,
+				8AEEF9891DAF60D200D3D6AD /* FinishCardViewController.m */,
+				8AEEF98E1DAF66CF00D3D6AD /* TransferCardViewController.h */,
+				8AEEF98F1DAF66CF00D3D6AD /* TransferCardViewController.m */,
+				8AEEF9A21DAF839700D3D6AD /* CardRepairViewController.h */,
+				8AEEF9A31DAF839700D3D6AD /* CardRepairViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -273,6 +391,12 @@
 			children = (
 				8AABF8921DAE395D0088DD82 /* CardView.h */,
 				8AABF8931DAE395D0088DD82 /* CardView.m */,
+				8AEEF98B1DAF60E100D3D6AD /* FinishCardView.h */,
+				8AEEF98C1DAF60E100D3D6AD /* FinishCardView.m */,
+				8AEEF9911DAF66E300D3D6AD /* TransferCardView.h */,
+				8AEEF9921DAF66E300D3D6AD /* TransferCardView.m */,
+				8AEEF99A1DAF802A00D3D6AD /* RepairCardView.h */,
+				8AEEF99B1DAF802A00D3D6AD /* RepairCardView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -400,6 +524,8 @@
 				8AD96E7B1DAD0C7F0080CC8C /* DropDownView.m */,
 				8AABF8871DAE11060088DD82 /* TopView.h */,
 				8AABF8881DAE11060088DD82 /* TopView.m */,
+				8A3D7D6B1DAF2A9700824B7D /* ContentView.h */,
+				8A3D7D6C1DAF2A9700824B7D /* ContentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -489,6 +615,7 @@
 		DA80E4F2E2E91AB3F7C1426A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AEEF99D1DAF828600D3D6AD /* Security.framework */,
 				4DC23F93AE94DD6F67AAD0F2 /* libPods-PhoneWorld.a */,
 			);
 			name = Frameworks;
@@ -560,6 +687,7 @@
 				8AD96E591DACD95A0080CC8C /* PersonalHomeViewController.xib in Resources */,
 				8A49D87C1DACCB4600A1D650 /* LaunchScreen.storyboard in Resources */,
 				8AD96E451DACD17F0080CC8C /* tm.png in Resources */,
+				8A3D7D911DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib in Resources */,
 				8A49D8791DACCB4600A1D650 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,8 +747,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AEEF9901DAF66CF00D3D6AD /* TransferCardViewController.m in Sources */,
+				8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */,
+				8A3D7D8E1DAF3BBF00824B7D /* CJUseTime.m in Sources */,
 				8AABF8891DAE11060088DD82 /* TopView.m in Sources */,
+				8AEEF99C1DAF802A00D3D6AD /* RepairCardView.m in Sources */,
 				8AABF8A01DAE5BB90088DD82 /* CheckAndTopView.m in Sources */,
+				8A3D7D8D1DAF3BBF00824B7D /* CJYearViewController.m in Sources */,
+				8AEEF9871DAF5E9900D3D6AD /* InputPasswordView.m in Sources */,
 				8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */,
 				8AABF8971DAE51460088DD82 /* PhoneCashCheckViewController.m in Sources */,
 				8AABF8A31DAE68980088DD82 /* UIView+Toast.m in Sources */,
@@ -629,25 +763,37 @@
 				8AABF88C1DAE34BA0088DD82 /* AccountTVCell.m in Sources */,
 				8AD96E481DACD7A50080CC8C /* MessageViewController.m in Sources */,
 				8AABF8861DADFB750088DD82 /* Utils.m in Sources */,
+				8A3D7D6A1DAF29DB00824B7D /* TopAndInquiryViewController.m in Sources */,
 				8AD96E7C1DAD0C7F0080CC8C /* DropDownView.m in Sources */,
 				8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */,
 				8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */,
 				8AD96E661DACEA570080CC8C /* HomeCell.m in Sources */,
 				8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */,
 				8AABF8A91DAE6C310088DD82 /* TopCallMoneyView.m in Sources */,
+				8A3D7D901DAF3BBF00824B7D /* CJMonthDayCollectionCell.m in Sources */,
 				8AD96E731DAD09F10080CC8C /* TransferViewController.m in Sources */,
 				8AD96E361DACCF220080CC8C /* MainNavigationController.m in Sources */,
+				8A3D7D701DAF2F4600824B7D /* TopAndInquiryTableView.m in Sources */,
 				8AABF89D1DAE5AF20088DD82 /* CheckAndTopViewController.m in Sources */,
+				8AEEF98D1DAF60E100D3D6AD /* FinishCardView.m in Sources */,
 				8AD96E3C1DACCF790080CC8C /* OrderViewController.m in Sources */,
+				8A3D7D921DAF3BBF00824B7D /* CJSelectTimeScrollView.m in Sources */,
+				8A3D7D8C1DAF3BBF00824B7D /* CJMonthDayViewController.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
+				8AEEF98A1DAF60D200D3D6AD /* FinishCardViewController.m in Sources */,
 				8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */,
+				8A3D7D8B1DAF3BBF00824B7D /* CJCalendarViewController.m in Sources */,
+				8A3D7D8F1DAF3BBF00824B7D /* CJDecisionView.m in Sources */,
 				8AABF8941DAE395D0088DD82 /* CardView.m in Sources */,
+				8AEEF9931DAF66E300D3D6AD /* TransferCardView.m in Sources */,
+				8A3D7D931DAF3BBF00824B7D /* CJShowTimeView.m in Sources */,
 				8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */,
 				8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */,
 				8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */,
 				8AABF8A61DAE6BE00088DD82 /* TopCallMoneyViewController.m in Sources */,
 				8AD96E391DACCF3E0080CC8C /* HomeViewController.m in Sources */,
+				8A3D7D6D1DAF2A9700824B7D /* ContentView.m in Sources */,
 				8A49D86E1DACCB4600A1D650 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -709,6 +855,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -750,6 +897,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
