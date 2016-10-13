@@ -9,6 +9,8 @@
 #import "AccountViewController.h"
 #import "AccountTVCell.h"
 #import "PhoneCashCheckViewController.h"
+#import "CheckAndTopViewController.h"
+#import "TopCallMoneyViewController.h"
 
 @interface AccountViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) UITableView *myTableView;
@@ -51,11 +53,17 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case 1:
-            
+        case 1:{
+            CheckAndTopViewController *vc = [CheckAndTopViewController new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
-        case 2:
-            
+        case 2:{
+            TopCallMoneyViewController *vc = [TopCallMoneyViewController new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
         case 3:
             

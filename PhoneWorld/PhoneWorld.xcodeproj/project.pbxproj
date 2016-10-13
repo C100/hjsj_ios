@@ -17,7 +17,12 @@
 		8AABF88C1DAE34BA0088DD82 /* AccountTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF88B1DAE34BA0088DD82 /* AccountTVCell.m */; };
 		8AABF8941DAE395D0088DD82 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8931DAE395D0088DD82 /* CardView.m */; };
 		8AABF8971DAE51460088DD82 /* PhoneCashCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8961DAE51460088DD82 /* PhoneCashCheckViewController.m */; };
-		8AABF89A1DAE517E0088DD82 /* OrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8991DAE517E0088DD82 /* OrderView.m */; };
+		8AABF89A1DAE517E0088DD82 /* PhoneCashCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8991DAE517E0088DD82 /* PhoneCashCheckView.m */; };
+		8AABF89D1DAE5AF20088DD82 /* CheckAndTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF89C1DAE5AF20088DD82 /* CheckAndTopViewController.m */; };
+		8AABF8A01DAE5BB90088DD82 /* CheckAndTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF89F1DAE5BB90088DD82 /* CheckAndTopView.m */; };
+		8AABF8A31DAE68980088DD82 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A21DAE68980088DD82 /* UIView+Toast.m */; };
+		8AABF8A61DAE6BE00088DD82 /* TopCallMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */; };
+		8AABF8A91DAE6C310088DD82 /* TopCallMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */; };
 		8AD96E281DACCC640080CC8C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8AD96E271DACCC640080CC8C /* Podfile */; };
 		8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E2C1DACCD490080CC8C /* UIViewExt.m */; };
 		8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E321DACCF090080CC8C /* MainTabBarController.m */; };
@@ -61,8 +66,18 @@
 		8AABF8931DAE395D0088DD82 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
 		8AABF8951DAE51460088DD82 /* PhoneCashCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneCashCheckViewController.h; sourceTree = "<group>"; };
 		8AABF8961DAE51460088DD82 /* PhoneCashCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneCashCheckViewController.m; sourceTree = "<group>"; };
-		8AABF8981DAE517E0088DD82 /* OrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderView.h; sourceTree = "<group>"; };
-		8AABF8991DAE517E0088DD82 /* OrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderView.m; sourceTree = "<group>"; };
+		8AABF8981DAE517E0088DD82 /* PhoneCashCheckView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneCashCheckView.h; sourceTree = "<group>"; };
+		8AABF8991DAE517E0088DD82 /* PhoneCashCheckView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneCashCheckView.m; sourceTree = "<group>"; };
+		8AABF89B1DAE5AF20088DD82 /* CheckAndTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckAndTopViewController.h; sourceTree = "<group>"; };
+		8AABF89C1DAE5AF20088DD82 /* CheckAndTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckAndTopViewController.m; sourceTree = "<group>"; };
+		8AABF89E1DAE5BB90088DD82 /* CheckAndTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckAndTopView.h; sourceTree = "<group>"; };
+		8AABF89F1DAE5BB90088DD82 /* CheckAndTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckAndTopView.m; sourceTree = "<group>"; };
+		8AABF8A11DAE68980088DD82 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		8AABF8A21DAE68980088DD82 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		8AABF8A41DAE6BE00088DD82 /* TopCallMoneyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCallMoneyViewController.h; sourceTree = "<group>"; };
+		8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCallMoneyViewController.m; sourceTree = "<group>"; };
+		8AABF8A71DAE6C310088DD82 /* TopCallMoneyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCallMoneyView.h; sourceTree = "<group>"; };
+		8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCallMoneyView.m; sourceTree = "<group>"; };
 		8AD96E271DACCC640080CC8C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8AD96E291DACCCF50080CC8C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8AD96E2B1DACCD490080CC8C /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
@@ -197,6 +212,10 @@
 				8AD96E3E1DACCF860080CC8C /* AccountViewController.m */,
 				8AABF8951DAE51460088DD82 /* PhoneCashCheckViewController.h */,
 				8AABF8961DAE51460088DD82 /* PhoneCashCheckViewController.m */,
+				8AABF89B1DAE5AF20088DD82 /* CheckAndTopViewController.h */,
+				8AABF89C1DAE5AF20088DD82 /* CheckAndTopViewController.m */,
+				8AABF8A41DAE6BE00088DD82 /* TopCallMoneyViewController.h */,
+				8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -213,8 +232,12 @@
 			children = (
 				8AABF88A1DAE34BA0088DD82 /* AccountTVCell.h */,
 				8AABF88B1DAE34BA0088DD82 /* AccountTVCell.m */,
-				8AABF8981DAE517E0088DD82 /* OrderView.h */,
-				8AABF8991DAE517E0088DD82 /* OrderView.m */,
+				8AABF8981DAE517E0088DD82 /* PhoneCashCheckView.h */,
+				8AABF8991DAE517E0088DD82 /* PhoneCashCheckView.m */,
+				8AABF89E1DAE5BB90088DD82 /* CheckAndTopView.h */,
+				8AABF89F1DAE5BB90088DD82 /* CheckAndTopView.m */,
+				8AABF8A71DAE6C310088DD82 /* TopCallMoneyView.h */,
+				8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +323,8 @@
 				8A49D8701DACCB4600A1D650 /* AppDelegate.m */,
 				8AABF8841DADFB750088DD82 /* Utils.h */,
 				8AABF8851DADFB750088DD82 /* Utils.m */,
+				8AABF8A11DAE68980088DD82 /* UIView+Toast.h */,
+				8AABF8A21DAE68980088DD82 /* UIView+Toast.m */,
 				8A49D8911DACCB9900A1D650 /* Controller */,
 				8A49D8921DACCB9900A1D650 /* Model */,
 				8A49D8931DACCB9900A1D650 /* View */,
@@ -595,10 +620,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AABF8891DAE11060088DD82 /* TopView.m in Sources */,
+				8AABF8A01DAE5BB90088DD82 /* CheckAndTopView.m in Sources */,
 				8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */,
 				8AABF8971DAE51460088DD82 /* PhoneCashCheckViewController.m in Sources */,
+				8AABF8A31DAE68980088DD82 /* UIView+Toast.m in Sources */,
 				8AD96E421DACCF900080CC8C /* CardViewController.m in Sources */,
-				8AABF89A1DAE517E0088DD82 /* OrderView.m in Sources */,
+				8AABF89A1DAE517E0088DD82 /* PhoneCashCheckView.m in Sources */,
 				8AABF88C1DAE34BA0088DD82 /* AccountTVCell.m in Sources */,
 				8AD96E481DACD7A50080CC8C /* MessageViewController.m in Sources */,
 				8AABF8861DADFB750088DD82 /* Utils.m in Sources */,
@@ -607,8 +634,10 @@
 				8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */,
 				8AD96E661DACEA570080CC8C /* HomeCell.m in Sources */,
 				8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */,
+				8AABF8A91DAE6C310088DD82 /* TopCallMoneyView.m in Sources */,
 				8AD96E731DAD09F10080CC8C /* TransferViewController.m in Sources */,
 				8AD96E361DACCF220080CC8C /* MainNavigationController.m in Sources */,
+				8AABF89D1DAE5AF20088DD82 /* CheckAndTopViewController.m in Sources */,
 				8AD96E3C1DACCF790080CC8C /* OrderViewController.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
@@ -617,6 +646,7 @@
 				8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */,
 				8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */,
 				8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */,
+				8AABF8A61DAE6BE00088DD82 /* TopCallMoneyViewController.m in Sources */,
 				8AD96E391DACCF3E0080CC8C /* HomeViewController.m in Sources */,
 				8A49D86E1DACCB4600A1D650 /* main.m in Sources */,
 			);

@@ -37,5 +37,6 @@
 #import <SDCycleScrollView.h>
 #import "UIViewExt.h"
 #import "Utils.h"
+#import "UIView+Toast.h"
 
 #endif /* PrefixHeader_pch */

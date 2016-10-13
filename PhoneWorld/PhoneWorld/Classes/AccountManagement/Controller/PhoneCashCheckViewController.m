@@ -7,23 +7,38 @@
 //
 
 #import "PhoneCashCheckViewController.h"
-#import "OrderView.h"
+#import "PhoneCashCheckView.h"
 
 @interface PhoneCashCheckViewController ()
-@property (nonatomic) OrderView *orderView;
+@property (nonatomic) PhoneCashCheckView *phoneCashCheckView;
 @end
 
 @implementation PhoneCashCheckViewController
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.orderView = [[OrderView alloc] init];
-    [self.view addSubview:self.orderView];
-    [self.orderView mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.phoneCashCheckView = [[PhoneCashCheckView alloc] init];
+    [self.view addSubview:self.phoneCashCheckView];
+    [self.phoneCashCheckView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(0);
         make.left.right.mas_equalTo(0);
     }];
+    __block __weak PhoneCashCheckViewController *weakself = self;
+    [self.phoneCashCheckView setOrderCallBack:^(NSInteger tag) {
+        //查询操作
+        NSString *phoneNum = weakself.phoneCashCheckView.phoneTF.text;
+        if([Utils isMobile:phoneNum]){
+            
+        }else{
+            [Utils toastview:@"手机号格式不正确，请重新输入"];
+        }
+    }];
+    
 }
 
 @end

@@ -26,7 +26,7 @@
         make.bottom.mas_equalTo(self.view.mas_bottom).mas_equalTo(-44);
     }];
     [self.cardView setMyCallBack:^(NSInteger tag) {
-        NSLog(@"----=====%d",tag);
+        
     }];
 }
 

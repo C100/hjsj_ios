@@ -10,4 +10,10 @@
 
 @interface Utils : NSObject
 + (UIColor *)colorRGB:(NSString *)color;
+
++ (BOOL)isMobile:(NSString *)mobileNumbel;
+
++ (BOOL)isNumber:(NSString *)number;
+
++(void)toastview:(NSString *)title;
 @end

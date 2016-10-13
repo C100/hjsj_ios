@@ -6,9 +6,9 @@
 //  Copyright © 2016年 xiyoukeji. All rights reserved.
 //
 
-#import "OrderView.h"
+#import "PhoneCashCheckView.h"
 
-@implementation OrderView
+@implementation PhoneCashCheckView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -18,6 +18,7 @@
         [self findButton];
         [self phoneTF];
         [self lineView];
+        [self accountCash];
     }
     return self;
 }
@@ -55,8 +56,14 @@
         [_findButton setTitle:@"查询" forState:UIControlStateNormal];
         [_findButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _findButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        _findButton.tag = 400;
+        [_findButton addTarget:self action:@selector(findAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _findButton;
+}
+
+- (void)findAction:(UIButton *)button{
+    _orderCallBack(button.tag);
 }
 
 - (UITextField *)phoneTF{
@@ -86,6 +93,21 @@
         _lineView.backgroundColor = [Utils colorRGB:@"#efefef"];
     }
     return _lineView;
+}
+
+- (UILabel *)accountCash{
+    if (_accountCash == nil) {
+        _accountCash = [[UILabel alloc] init];
+        [self addSubview:_accountCash];
+        [_accountCash mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(10);
+            make.top.mas_equalTo(self.lineView.mas_bottom).mas_equalTo(10);
+        }];
+        _accountCash.textColor = [Utils colorRGB:@"#333333"];
+        _accountCash.font = [UIFont systemFontOfSize:14];
+        _accountCash.text = @"账户余额：";
+    }
+    return _accountCash;
 }
 
 @end
