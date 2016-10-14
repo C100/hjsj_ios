@@ -143,7 +143,7 @@
         _IDCardTF = [[UITextField alloc] init];
         [self addSubview:_IDCardTF];
         [_IDCardTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.nameTF.mas_bottom).mas_equalTo(22);;
+            make.top.mas_equalTo(self.nameTF.mas_bottom).mas_equalTo(22);
             make.left.mas_equalTo(self.IDCardLB.mas_right).mas_equalTo(0);
             make.width.mas_equalTo(screenWidth - 110);
             make.height.mas_equalTo(30);
@@ -177,7 +177,7 @@
         _phoneTF = [[UITextField alloc] init];
         [self addSubview:_phoneTF];
         [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.IDCardTF.mas_bottom).mas_equalTo(22);;
+            make.top.mas_equalTo(self.IDCardTF.mas_bottom).mas_equalTo(22);
             make.left.mas_equalTo(self.phoneLB.mas_right).mas_equalTo(0);
             make.width.mas_equalTo(screenWidth - 110);
             make.height.mas_equalTo(30);
@@ -212,7 +212,7 @@
         _addressTV.bounces = NO;
         [self addSubview:_addressTV];
         [_addressTV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.phoneTF.mas_bottom).mas_equalTo(22);;
+            make.top.mas_equalTo(self.phoneTF.mas_bottom).mas_equalTo(22);
             make.left.mas_equalTo(self.addressLB.mas_right).mas_equalTo(0);
             make.width.mas_equalTo(screenWidth - 110);
             make.height.mas_equalTo(70);
@@ -247,7 +247,7 @@
         _receiveUserTF = [[UITextField alloc] init];
         [self addSubview:_receiveUserTF];
         [_receiveUserTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.addressTV.mas_bottom).mas_equalTo(22);;
+            make.top.mas_equalTo(self.addressTV.mas_bottom).mas_equalTo(22);
             make.left.mas_equalTo(self.receiveUserLB.mas_right).mas_equalTo(0);
             make.width.mas_equalTo(screenWidth - 110);
             make.height.mas_equalTo(30);
@@ -281,7 +281,7 @@
         _receivePhoneTF = [[UITextField alloc] init];
         [self addSubview:_receivePhoneTF];
         [_receivePhoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.receiveUserTF.mas_bottom).mas_equalTo(22);;
+            make.top.mas_equalTo(self.receiveUserTF.mas_bottom).mas_equalTo(22);
             make.left.mas_equalTo(self.receivePhoneLB.mas_right).mas_equalTo(0);
             make.width.mas_equalTo(screenWidth - 110);
             make.height.mas_equalTo(30);

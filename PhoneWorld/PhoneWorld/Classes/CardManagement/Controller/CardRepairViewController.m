@@ -11,12 +11,13 @@
 
 @interface CardRepairViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic) RepairCardView *repairCardView;
+@property (nonatomic) UIButton *currentButton;
 @end
 
 @implementation CardRepairViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"补卡";
     self.view.backgroundColor = [UIColor whiteColor];
     self.repairCardView = [[RepairCardView alloc] init];
     [self.view addSubview:self.repairCardView];
@@ -28,20 +29,23 @@
     [self.repairCardView setRepairCardCallBack:^(NSInteger tag) {
         //1000 1001  身份证前后
         if (tag == 1000 || tag == 1001) {
+            
             UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
             UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
                 imagePicker.delegate = weakself;
-                imagePicker.editing = YES;
+                imagePicker.allowsEditing = YES;
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 [weakself presentViewController:imagePicker animated:YES completion:nil];
             }];
             UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-                imagePicker.delegate = weakself;
-                imagePicker.editing = YES;
-                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                [weakself presentViewController:imagePicker animated:YES completion:nil];
+                UIImagePickerController *imagePicker2 = [[UIImagePickerController alloc] init];
+                imagePicker2.delegate = weakself;
+                imagePicker2.allowsEditing = YES;
+                imagePicker2.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//                [weakself.navigationController pushViewController:imagePicker2 animated:YES];
+                
+                [weakself presentViewController:imagePicker2 animated:YES completion:nil];
             }];
             UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 
@@ -58,9 +62,18 @@
     }];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"hah");
+    
+    
+}
+
 #pragma mark - UIImagePicker Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     NSLog(@"-=-=-=-=-=-=-=-=-=-=-%@",info);
-//    UIImage *image = [];
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+//    self.repairCardView.
 }
 @end

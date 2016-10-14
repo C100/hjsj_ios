@@ -13,7 +13,9 @@
 @property (nonatomic) NSArray *titles;
 
 @property (nonatomic) UIView *titlesView;
-@property (nonatomic) UIView *siftView;
+@property (nonatomic) UIView *siftView;//筛选栏
+
+@property (nonatomic) UIButton *showButton;//保存用
 
 @property (nonatomic) UIView *lineView;
 
@@ -22,5 +24,10 @@
 @property (nonatomic) void(^callback)(NSInteger tag);
 
 - (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles;
+
+/*--------查询的筛选信息---height 72---*/
+@property (nonatomic) UILabel *orderTimeLB;
+@property (nonatomic) UILabel *orderStateLB;
+@property (nonatomic) UILabel *orderPhoneLB;
 
 @end

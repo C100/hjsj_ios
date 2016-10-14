@@ -26,7 +26,7 @@
     homeVC.tabBarItem.image = [UIImage imageNamed:@"home"];
     homeVC.tabBarItem.title = @"首页";
     
-    OrderViewController *orderVC = [OrderViewController new];
+    OrderViewController *orderVC = [OrderViewController shareOrderViewController];
     orderVC.title = @"订单查询";
     orderVC.tabBarItem.image = [UIImage imageNamed:@"order"];
     orderVC.tabBarItem.title = @"订单查询";

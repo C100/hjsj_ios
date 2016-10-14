@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
+#import "LoginViewController.h"
+#import "MainNavigationController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,9 +22,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
-    MainTabBarController *vc = [[MainTabBarController alloc] init];
-    self.window.rootViewController = vc;
+    
+    LoginViewController *vc = [[LoginViewController alloc] init];
+    self.window.rootViewController = [[MainNavigationController alloc] initWithRootViewController:vc];
     return YES;
+}
+
+- (void)gotoHomeVC{
+    MainTabBarController *vc = [MainTabBarController new];
+    self.window.rootViewController = vc;
 }
 
 

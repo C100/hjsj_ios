@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderViewController : UIViewController
-
++ (OrderViewController *)shareOrderViewController;
 @end

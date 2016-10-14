@@ -10,6 +10,11 @@
 
 @interface DropDownView : UIView <CalendarViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic) void(^DropDownCallBack)(NSInteger tag);
+
+//不同title不同状态
+@property (nonatomic) NSArray *states;
+
 //时间
 @property (nonatomic) UILabel *timeLB;
 @property (nonatomic) UITextField *beginTime;
@@ -24,6 +29,8 @@
 //手机号
 @property (nonatomic) UILabel *phoneLB;
 @property (nonatomic) UITextField *phoneTF;
+@property (nonatomic) UIButton *phoneShowBtn;
+@property (nonatomic) UITableView *topStateTableView;//充值类型表格
 
 //查询
 @property (nonatomic) UIButton *findBtn;

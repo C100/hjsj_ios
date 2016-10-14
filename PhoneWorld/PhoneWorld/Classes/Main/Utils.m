@@ -77,4 +77,12 @@
     return [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
 }
 
++ (BOOL)checkPassword:(NSString*) password
+{
+    NSString*pattern=@"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{6,18}";
+    NSPredicate *pred=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",pattern];
+    BOOL isMatch=[pred evaluateWithObject:password];
+    return isMatch;
+}
+
 @end

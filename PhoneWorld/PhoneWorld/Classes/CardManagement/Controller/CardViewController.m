@@ -12,6 +12,9 @@
 #import "TransferCardViewController.h"
 #import "CardRepairViewController.h"
 
+#import "MessageViewController.h"
+#import "PersonalHomeViewController.h"
+
 @interface CardViewController ()
 @property (nonatomic) CardView *cardView;
 @end
@@ -21,6 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
+
+    
     self.cardView = [[CardView alloc] init];
     [self.view addSubview:self.cardView];
     [self.cardView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,6 +72,19 @@
                 break;
         }
     }];
+}
+
+#pragma mark - Method
+- (void)gotoMessagesVC{
+    MessageViewController *messageVC = [MessageViewController new];
+    messageVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:messageVC animated:YES];
+}
+
+- (void)gotoPersonalHomeVC{
+    PersonalHomeViewController *vc = [PersonalHomeViewController new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

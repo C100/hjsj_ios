@@ -7,31 +7,28 @@
 //
 
 #import "OpenWhiteCardViewController.h"
+#import "OrderView.h"
+#import "NormalOrderDetailViewController.h"
+#import "OrderViewController.h"
 
 @interface OpenWhiteCardViewController ()
-
+@property (nonatomic) OrderView *orderView;
 @end
 
 @implementation OpenWhiteCardViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor orangeColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80)];
+    [self.view addSubview:self.orderView];
+//    __block __weak OpenWhiteCardViewController *weakself = self;
+    [self.orderView setOrderViewCallBack:^(NSInteger section) {
+        //成卡开户  跳转  订单信息
+        NormalOrderDetailViewController *vc = [NormalOrderDetailViewController new];
+        vc.hidesBottomBarWhenPushed = YES;
+        [[OrderViewController shareOrderViewController].navigationController pushViewController:vc animated:YES];
+    }];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

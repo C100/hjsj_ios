@@ -12,6 +12,8 @@
 #import "CheckAndTopViewController.h"
 #import "TopCallMoneyViewController.h"
 #import "TopAndInquiryViewController.h"
+#import "MessageViewController.h"
+#import "PersonalHomeViewController.h"
 
 @interface AccountViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) UITableView *myTableView;
@@ -23,11 +25,29 @@
 #pragma mark - LifeCircle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
+    
     [self imageNames];
     [self titles];
     [self myTableView];
     self.myTableView.tableFooterView = [UIView new];
 }
+
+#pragma mark - Method
+- (void)gotoMessagesVC{
+    MessageViewController *messageVC = [MessageViewController new];
+    messageVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:messageVC animated:YES];
+}
+
+- (void)gotoPersonalHomeVC{
+    PersonalHomeViewController *vc = [PersonalHomeViewController new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - UITableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.titles.count;

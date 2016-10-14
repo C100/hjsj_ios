@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"成卡开户";
     self.view.backgroundColor = [UIColor whiteColor];
     self.finishCardView = [[FinishCardView alloc] init];
     [self.view addSubview:self.finishCardView];

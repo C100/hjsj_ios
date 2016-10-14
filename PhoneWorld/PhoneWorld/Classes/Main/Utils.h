@@ -18,4 +18,7 @@
 +(void)toastview:(NSString *)title;
 
 + (CGSize)sizeWithFont:(UIFont *)font andMaxSize:(CGSize)maxSize andStr:(NSString *)str;
+
++ (BOOL)checkPassword:(NSString*) password;
+
 @end

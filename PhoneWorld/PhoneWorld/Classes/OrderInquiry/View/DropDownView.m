@@ -14,7 +14,7 @@
 @interface DropDownView ()
 
 @property (nonatomic) UITextField *currentTF;
-@property (nonatomic) NSArray *states;
+@property (nonatomic) NSArray *topStates;
 
 @end
 
@@ -24,7 +24,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.states = @[@"全部",@"已激活",@"锁定",@"开户中",@"已使用",@"失效"];
+        self.states = [NSArray array];
+        self.topStates = @[@"全部",@"余额充值",@"话费充值"];
         [self timeLB];
         [self endTime];
         [self v];
@@ -75,7 +76,7 @@
         [_beginTime setTextColor:[Utils colorRGB:@"#666666"]];
         
         NSDate *date = [[NSDate alloc] init];
-        NSString *dateStr = [NSString stringWithFormat:@"%@",date];
+        NSString *dateStr = [[NSString stringWithFormat:@"%@",date] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
         
         _beginTime.text = [dateStr componentsSeparatedByString:@" "].firstObject;
         
@@ -133,7 +134,7 @@
         [_endTime setTextColor:[Utils colorRGB:@"#666666"]];
         
         NSDate *date = [[NSDate alloc] init];
-        NSString *dateStr = [NSString stringWithFormat:@"%@",date];
+        NSString *dateStr = [[NSString stringWithFormat:@"%@",date] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
         
         _endTime.text = [dateStr componentsSeparatedByString:@" "].firstObject;
         
@@ -205,12 +206,13 @@
         UIButton *btn = [[UIButton alloc] init];
         [self addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(_stateTF.mas_right).mas_equalTo(-6);
-            make.top.mas_equalTo(_stateTF.mas_top).mas_equalTo(12);
-            make.width.mas_equalTo(12);
-            make.height.mas_equalTo(6);
+            make.right.mas_equalTo(_stateTF.mas_right).mas_equalTo(0);
+            make.top.mas_equalTo(_stateTF.mas_top).mas_equalTo(0);
+            make.width.mas_equalTo(24);
+            make.height.mas_equalTo(30);
         }];
         [btn setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(12, 6, 12, 6)];
         btn.tag = 52;
         [btn addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -227,6 +229,7 @@
             make.height.mas_equalTo(3*28);
             make.right.mas_equalTo(-50);
         }];
+        _stateTableView.tag = 32;
         _stateTableView.delegate = self;
         _stateTableView.dataSource = self;
         _stateTableView.layer.cornerRadius = 6;
@@ -277,8 +280,47 @@
             make.height.mas_equalTo(28);
             make.left.mas_equalTo(self.phoneLB.mas_right).mas_equalTo(0);
         }];
+        
+        UIButton *btn = [[UIButton alloc] init];
+        [self addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(_phoneTF.mas_right).mas_equalTo(0);
+            make.top.mas_equalTo(_phoneTF.mas_top).mas_equalTo(0);
+            make.width.mas_equalTo(24);
+            make.height.mas_equalTo(30);
+        }];
+        [btn setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(12, 6, 12, 6)];
+        
+        btn.tag = 55;
+        [btn addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
+        btn.hidden = YES;
+        self.phoneShowBtn = btn;
     }
     return _phoneTF;
+}
+
+- (UITableView *)topStateTableView{
+    if (_topStateTableView == nil) {
+        _topStateTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+        [self addSubview:_topStateTableView];
+        [_topStateTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.phoneTF.mas_bottom).mas_equalTo(0);
+            make.left.mas_equalTo(self.phoneLB.mas_right).mas_equalTo(0);
+            make.height.mas_equalTo(3*28);
+            make.right.mas_equalTo(-50);
+        }];
+        _topStateTableView.tag = 31;
+        _topStateTableView.delegate = self;
+        _topStateTableView.dataSource = self;
+        _topStateTableView.layer.cornerRadius = 6;
+        _topStateTableView.layer.masksToBounds = YES;
+        _topStateTableView.layer.borderColor = COLOR_BACKGROUND.CGColor;
+        _topStateTableView.layer.borderWidth = 1;
+        _topStateTableView.bounces = NO;
+        _topStateTableView.hidden = YES;
+    }
+    return _topStateTableView;
 }
 
 /*----查询按钮--------*/
@@ -345,11 +387,14 @@
 
 -(void)CalendarViewController:(CJCalendarViewController *)controller didSelectActionYear:(NSString *)year month:(NSString *)month day:(NSString *)day{
     
-    self.currentTF.text = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
+    self.currentTF.text = [NSString stringWithFormat:@"%@.%@.%@", year, month, day];
 }
 
 #pragma mark - UITableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (tableView.tag == 31) {
+        return self.topStates.count;
+    }
     return self.states.count;
 }
 
@@ -361,13 +406,21 @@
     cell.textLabel.font = [UIFont systemFontOfSize:12];
     cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
     cell.textLabel.text = self.states[indexPath.row];
+    if (tableView.tag == 31) {
+        cell.textLabel.text = self.topStates[indexPath.row];
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *state = self.states[indexPath.row];
-    self.stateTF.text = state;
-    self.stateTableView.hidden = YES;
+    if (tableView.tag == 32) {
+        NSString *state = self.states[indexPath.row];
+        self.stateTF.text = state;
+        self.stateTableView.hidden = YES;
+    }else if(tableView.tag == 31){
+        self.phoneTF.text = self.topStates[indexPath.row];
+        self.topStateTableView.hidden = YES;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -375,7 +428,7 @@
 }
 
 #pragma mark - Method
-//点击重置(51)和查询(50)按钮  选择状态（52）
+//点击重置(51)和查询(50)按钮  选择状态（52）  充值类型（55）
 - (void)buttonClickedAction:(UIButton *)button{
     if (button.tag == 52) {
         [UIView animateWithDuration:0.5 animations:^{
@@ -384,7 +437,7 @@
     }
     if (button.tag == 51) {
         NSDate *date = [[NSDate alloc] init];
-        NSString *dateStr = [NSString stringWithFormat:@"%@",date];
+        NSString *dateStr = [[NSString stringWithFormat:@"%@",date] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
         self.beginTime.text = [dateStr componentsSeparatedByString:@" "].firstObject;
         self.endTime.text = [dateStr componentsSeparatedByString:@" "].firstObject;
         self.stateTF.text = @"";
@@ -392,7 +445,13 @@
     }
     if (button.tag == 50) {
         //查询操作
-        
+        _DropDownCallBack(button.tag);
+    }
+    if (button.tag == 55) {
+        //充值
+        [UIView animateWithDuration:0.5 animations:^{
+            self.topStateTableView.hidden = self.topStateTableView.hidden==YES ? NO : YES;
+        }];
     }
 }
 
@@ -400,11 +459,11 @@
 - (void)chooseCalendarAction:(UIButton *)button{
     NSArray *arr = [NSArray array];
     if (button.tag == 150) {
-        arr = [self.beginTime.text componentsSeparatedByString:@"-"];
+        arr = [self.beginTime.text componentsSeparatedByString:@"."];
         self.currentTF = self.beginTime;
     }else if(button.tag == 151){
         self.currentTF = self.endTime;
-        arr = [self.endTime.text componentsSeparatedByString:@"-"];
+        arr = [self.endTime.text componentsSeparatedByString:@"."];
     }
     
     if (arr.count > 1) {

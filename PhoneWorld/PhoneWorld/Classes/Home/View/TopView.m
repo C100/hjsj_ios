@@ -36,6 +36,11 @@
         [self titlesView];
         [self siftView];
         [self lineView];
+        
+        /*----筛选条件-----*/
+        [self orderTimeLB];
+        [self orderStateLB];
+        [self orderPhoneLB];
     }
     return self;
 }
@@ -121,17 +126,69 @@
         [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_siftView addSubview:btn];
         btn.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+        self.showButton = btn;
     }
     return _siftView;
+}
+
+/*---筛选条件----*/
+- (UILabel *)orderTimeLB{
+    if (_orderTimeLB == nil) {
+        _orderTimeLB = [[UILabel alloc] init];
+        [self addSubview:_orderTimeLB];
+        [_orderTimeLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(20);
+            make.top.mas_equalTo(self.siftView.mas_bottom).mas_equalTo(8);
+            make.height.mas_equalTo(15);
+        }];
+        _orderTimeLB.textColor = [Utils colorRGB:@"#666666"];
+        _orderTimeLB.font = [UIFont systemFontOfSize:12];
+        _orderTimeLB.text = @"订单时间：";
+    }
+    return _orderTimeLB;
+}
+
+- (UILabel *)orderStateLB{
+    if (_orderStateLB == nil) {
+        _orderStateLB = [[UILabel alloc] init];
+        [self addSubview:_orderStateLB];
+        [_orderStateLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(20);
+            make.top.mas_equalTo(self.orderTimeLB.mas_bottom).mas_equalTo(10);
+        }];
+        _orderStateLB.textColor = [Utils colorRGB:@"#666666"];
+        _orderStateLB.font = [UIFont systemFontOfSize:12];
+        _orderStateLB.text = @"订单状态：";
+    }
+    return _orderStateLB;
+}
+
+- (UILabel *)orderPhoneLB{
+    if (_orderPhoneLB == nil) {
+        _orderPhoneLB = [[UILabel alloc] init];
+        [self addSubview:_orderPhoneLB];
+        [_orderPhoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(20);
+            make.top.mas_equalTo(self.orderStateLB.mas_bottom).mas_equalTo(10);
+        }];
+        _orderPhoneLB.textColor = [Utils colorRGB:@"#666666"];
+        _orderPhoneLB.font = [UIFont systemFontOfSize:12];
+        _orderPhoneLB.text = @"手机号码：";
+    }
+    return _orderPhoneLB;
 }
 
 #pragma mark - Method
 
 - (void)btnClicked:(UIButton *)button{
-    for (UIButton *btn in self.titlesButton) {
-        btn.selected = NO;
+    if (button.tag == 101) {
+        
+    }else{
+        for (UIButton *btn in self.titlesButton) {
+            btn.selected = NO;
+        }
+        button.selected = YES;
     }
-    button.selected = YES;
     _callback(button.tag);
 }
 

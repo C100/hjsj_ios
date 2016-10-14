@@ -12,6 +12,9 @@
 #import "TopCallMoneyViewController.h"  //话费充值
 #import "CheckAndTopViewController.h"  //余额查询与充值
 
+#import "MessageViewController.h"
+#import "PersonalHomeViewController.h"
+
 #define homeCellWH 125/152.0
 
 @interface HomeViewController ()<SDCycleScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -30,6 +33,10 @@
     self.view.backgroundColor = COLOR_BACKGROUND;
     self.automaticallyAdjustsScrollViewInsets = NO;
 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
+
+    
     [self imageNames];
     [self titleNames];
     _homeView = [[HomeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 44)];
@@ -37,6 +44,19 @@
     _homeView.fastCollectionView.dataSource = self;
     _homeView.imageScrollView.delegate = self;
     [self.view addSubview:self.homeView];
+}
+
+#pragma mark - Method
+- (void)gotoMessagesVC{
+    MessageViewController *messageVC = [MessageViewController new];
+    messageVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:messageVC animated:YES];
+}
+
+- (void)gotoPersonalHomeVC{
+    PersonalHomeViewController *vc = [PersonalHomeViewController new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - SDCycleScrollView Delegate
@@ -135,13 +155,5 @@
     }
     return _titleNames;
 }
-
-//- (HomeView *)homeView{
-//    if (_homeView == nil) {
-//        _homeView = [[HomeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 44)];
-//        
-//    }
-//    return _homeView;
-//}
 
 @end

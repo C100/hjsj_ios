@@ -1,0 +1,117 @@
+//
+//  ForgetPasswordView.m
+//  PhoneWorld
+//
+//  Created by 刘岑颖 on 16/10/14.
+//  Copyright © 2016年 xiyoukeji. All rights reserved.
+//
+
+#import "ForgetPasswordView.h"
+
+@implementation ForgetPasswordView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self phoneNumTF];
+        [self identifyingCodeTF];
+        [self nextButton];
+    }
+    return self;
+}
+
+- (UITextField *)phoneNumTF{
+    if (_phoneNumTF == nil) {
+        _phoneNumTF = [[UITextField alloc] init];
+        [self addSubview:_phoneNumTF];
+        [_phoneNumTF mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(10);
+            make.left.mas_equalTo(10);
+            make.right.mas_equalTo(-10);
+            make.height.mas_equalTo(40);
+        }];
+        _phoneNumTF.placeholder = @"请输入手机号";
+        _phoneNumTF.textColor = [Utils colorRGB:@"#333333"];
+        _phoneNumTF.font = [UIFont systemFontOfSize:14];
+        _phoneNumTF.borderStyle = UITextBorderStyleNone;
+        _phoneNumTF.backgroundColor = [UIColor whiteColor];
+        
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 20)];
+        imageV.contentMode = UIViewContentModeScaleAspectFit;
+        imageV.image = [UIImage imageNamed:@"phone"];
+        _phoneNumTF.leftView = imageV;
+        _phoneNumTF.leftViewMode = UITextFieldViewModeAlways;
+    }
+    return _phoneNumTF;
+}
+
+- (UITextField *)identifyingCodeTF{
+    if (_identifyingCodeTF == nil) {
+        _identifyingCodeTF = [[UITextField alloc] init];
+        [self addSubview:_identifyingCodeTF];
+        [_identifyingCodeTF mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.phoneNumTF.mas_bottom).mas_equalTo(0);
+            make.left.mas_equalTo(10);
+            make.right.mas_equalTo(-10);
+            make.height.mas_equalTo(40);
+        }];
+        _identifyingCodeTF.placeholder = @"请输入验证码";
+        _identifyingCodeTF.textColor = [Utils colorRGB:@"#333333"];
+        _identifyingCodeTF.font = [UIFont systemFontOfSize:14];
+        _identifyingCodeTF.borderStyle = UITextBorderStyleNone;
+        _identifyingCodeTF.backgroundColor = [UIColor whiteColor];
+        
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 20)];
+        imageV.contentMode = UIViewContentModeScaleAspectFit;
+        imageV.image = [UIImage imageNamed:@"lock"];
+        _identifyingCodeTF.leftView = imageV;
+        _identifyingCodeTF.leftViewMode = UITextFieldViewModeAlways;
+        
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 24)];
+        
+        UIButton *identifyingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 24)];
+        [identifyingButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [identifyingButton setTitleColor:[Utils colorRGB:@"#666666"] forState:UIControlStateNormal];
+        identifyingButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        identifyingButton.backgroundColor = COLOR_BACKGROUND;
+        identifyingButton.layer.cornerRadius = 6;
+        identifyingButton.layer.masksToBounds = YES;
+        identifyingButton.tag = 1104;
+        [identifyingButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [v addSubview:identifyingButton];
+        _identifyingCodeTF.rightView = v;
+        _identifyingCodeTF.rightViewMode = UITextFieldViewModeAlways;
+    }
+    return _identifyingCodeTF;
+}
+
+- (UIButton *)nextButton{
+    if (_nextButton == nil) {
+        _nextButton = [[UIButton alloc] init];
+        [self addSubview:_nextButton];
+        [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(10);
+            make.right.mas_equalTo(-10);
+            make.height.mas_equalTo(40);
+            make.top.mas_equalTo(self.identifyingCodeTF.mas_bottom).mas_equalTo(20);
+        }];
+        _nextButton.backgroundColor = [Utils colorRGB:@"#008bd5"];
+        [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
+        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _nextButton.layer.cornerRadius = 6;
+        _nextButton.layer.masksToBounds = YES;
+        _nextButton.tag = 1103;
+        [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _nextButton;
+}
+
+- (void)buttonClickAction:(UIButton *)button{
+    _ForgetCallBack(button.tag);
+}
+
+
+@end
