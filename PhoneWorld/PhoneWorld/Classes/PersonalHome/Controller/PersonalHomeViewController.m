@@ -12,8 +12,8 @@
 #import "PasswordManageViewController.h"
 #import "SettingViewController.h"
 #import "LoginViewController.h"
-#import "MainNavigationController.h"
 #import "MessageViewController.h"
+#import "NaviViewController.h"
 
 @interface PersonalHomeViewController ()
 @property (nonatomic) PersonalHomeView *personalHomeView;
@@ -59,7 +59,7 @@
             }
                 break;
             case 111:{//登出
-                MainNavigationController *vc = [[MainNavigationController alloc] initWithRootViewController:[LoginViewController new]];
+                NaviViewController *vc = [[NaviViewController alloc] initWithRootViewController:[LoginViewController new]];
                 [weakself presentViewController:vc animated:YES completion:nil];
             }
                 break;

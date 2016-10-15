@@ -18,8 +18,6 @@
     if (self) {
         [self usernameTF];
         [self passwordTF];
-        [self textLB];
-        [self registerBtn];
         [self forgetPassword];
         [self submitButton];
     }
@@ -77,41 +75,6 @@
     return _passwordTF;
 }
 
-- (UILabel *)textLB{
-    if (_textLB == nil) {
-        _textLB = [[UILabel alloc] init];
-        [self addSubview:_textLB];
-        [_textLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.passwordTF.mas_bottom).mas_equalTo(6);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(75);
-        }];
-        _textLB.text = @"还没有账号？";
-        _textLB.textColor = [Utils colorRGB:@"#666666"];
-        _textLB.font = [UIFont systemFontOfSize:12];
-    }
-    return _textLB;
-}
-
-- (UIButton *)registerBtn{
-    if (_registerBtn == nil) {
-        _registerBtn = [[UIButton alloc] init];
-        [self addSubview:_registerBtn];
-        [_registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.passwordTF.mas_bottom).mas_equalTo(6);
-            make.left.mas_equalTo(self.textLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(50);
-            make.height.mas_equalTo(14);
-        }];
-        [_registerBtn setTitle:@"立即注册" forState:UIControlStateNormal];
-        _registerBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_registerBtn setTitleColor:[Utils colorRGB:@"#008bd5"] forState:UIControlStateNormal];
-        _registerBtn.tag = 1100;
-        [_registerBtn addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _registerBtn;
-}
-
 - (UIButton *)forgetPassword{
     if (_forgetPassword == nil) {
         _forgetPassword = [[UIButton alloc] init];
@@ -119,12 +82,12 @@
         [_forgetPassword mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.passwordTF.mas_bottom).mas_equalTo(6);
             make.right.mas_equalTo(-10);
-            make.width.mas_equalTo(50);
+            make.width.mas_equalTo(70);
             make.height.mas_equalTo(14);
         }];
-        [_forgetPassword setTitle:@"忘记密码" forState:UIControlStateNormal];
+        [_forgetPassword setTitle:@"忘记密码？" forState:UIControlStateNormal];
         _forgetPassword.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_forgetPassword setTitleColor:[Utils colorRGB:@"#008bd5"] forState:UIControlStateNormal];
+        [_forgetPassword setTitleColor:MainColor forState:UIControlStateNormal];
         _forgetPassword.tag = 1101;
         [_forgetPassword addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -140,7 +103,7 @@
             make.right.mas_equalTo(-leftDistance);
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(170);
-            make.top.mas_equalTo(self.textLB.mas_bottom).mas_equalTo(20);
+            make.top.mas_equalTo(self.forgetPassword.mas_bottom).mas_equalTo(20);
         }];
         [_submitButton setTitle:@"提交" forState:UIControlStateNormal];
         _submitButton.titleLabel.font = [UIFont systemFontOfSize:14];
