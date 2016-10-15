@@ -14,12 +14,19 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.orderTwoTableView = [[UITableView alloc] initWithFrame:CGRectMake(10, 0, screenWidth - 20, screenHeight - 108 - 80) style:UITableViewStyleGrouped];
+        self.orderTwoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80) style:UITableViewStyleGrouped];
         self.orderTwoTableView.delegate = self;
         self.orderTwoTableView.dataSource = self;
         [self addSubview:self.orderTwoTableView];
+        [self.orderTwoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            make.width.mas_equalTo(screenWidth);
+            make.bottom.mas_equalTo(0);
+        }];
         self.orderTwoTableView.bounces = NO;
-        self.orderTwoTableView.backgroundColor = [UIColor whiteColor];
+        self.orderTwoTableView.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
+        self.orderTwoTableView.separatorStyle = UITextBorderStyleNone;
         [self.orderTwoTableView registerClass:[OrderTwoTableViewCell class] forCellReuseIdentifier:@"cell"];
         self.orderTwoTableView.tableHeaderView = self.resultNumLB;
     }
@@ -31,8 +38,9 @@
     if (_resultNumLB == nil) {
         _resultNumLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth - 20, 26)];
         _resultNumLB.text = @"共10条";
-        _resultNumLB.textColor = [Utils colorRGB:@"#666666"];
-        _resultNumLB.font = [UIFont systemFontOfSize:10];
+        _resultNumLB.textColor = [Utils colorRGB:@"#999999"];
+        _resultNumLB.font = [UIFont systemFontOfSize:8];
+        _resultNumLB.textAlignment = NSTextAlignmentCenter;
     }
     return _resultNumLB;
 }
@@ -49,6 +57,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     [cell numberLB];
     [cell dateLB];
@@ -57,12 +66,6 @@
     [cell phoneLB];
     [cell stateLB];
     
-    cell.contentView.layer.borderWidth = 1;
-    if(indexPath.section%2 == 1){
-        cell.contentView.layer.borderColor = [Utils colorRGB:@"#fff0aa"].CGColor;
-    }else{
-        cell.contentView.layer.borderColor = [Utils colorRGB:@"#ddfe98"].CGColor;
-    }
     return cell;
 }
 
@@ -75,7 +78,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 13;
+    return 10;
 }
 
 @end

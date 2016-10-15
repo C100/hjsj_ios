@@ -8,6 +8,8 @@
 
 #import "LoginView.h"
 
+#define leftDistance (screenWidth - 170)/2
+
 @implementation LoginView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -29,9 +31,9 @@
         _usernameTF = [[UITextField alloc] init];
         [self addSubview:_usernameTF];
         [_usernameTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(10);
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.top.mas_equalTo(0);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
         }];
         _usernameTF.placeholder = @"请输入用户名／手机号码";
@@ -40,7 +42,7 @@
         _usernameTF.borderStyle = UITextBorderStyleNone;
         _usernameTF.backgroundColor = [UIColor whiteColor];
         
-        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 20)];
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
         imageV.contentMode = UIViewContentModeScaleAspectFit;
         imageV.image = [UIImage imageNamed:@"user"];
         _usernameTF.leftView = imageV;
@@ -54,9 +56,9 @@
         _passwordTF = [[UITextField alloc] init];
         [self addSubview:_passwordTF];
         [_passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.usernameTF.mas_bottom).mas_equalTo(0);
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.top.mas_equalTo(self.usernameTF.mas_bottom).mas_equalTo(1);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
         }];
         _passwordTF.placeholder = @"请输入密码";
@@ -66,7 +68,7 @@
         _passwordTF.borderStyle = UITextBorderStyleNone;
         _passwordTF.backgroundColor = [UIColor whiteColor];
         
-        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 40, 20)];
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
         imageV.contentMode = UIViewContentModeScaleAspectFit;
         imageV.image = [UIImage imageNamed:@"lock"];
         _passwordTF.leftView = imageV;
@@ -134,17 +136,19 @@
         _submitButton = [[UIButton alloc] init];
         [self addSubview:_submitButton];
         [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.left.mas_equalTo(leftDistance);
+            make.right.mas_equalTo(-leftDistance);
             make.height.mas_equalTo(40);
+            make.width.mas_equalTo(170);
             make.top.mas_equalTo(self.textLB.mas_bottom).mas_equalTo(20);
         }];
-        _submitButton.backgroundColor = [Utils colorRGB:@"#008bd5"];
         [_submitButton setTitle:@"提交" forState:UIControlStateNormal];
         _submitButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _submitButton.layer.cornerRadius = 6;
+        [_submitButton setTitleColor:MainColor forState:UIControlStateNormal];
+        _submitButton.layer.cornerRadius = 20;
         _submitButton.layer.masksToBounds = YES;
+        _submitButton.layer.borderColor = MainColor.CGColor;
+        _submitButton.layer.borderWidth = 1;
         _submitButton.tag = 1102;
         [_submitButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }

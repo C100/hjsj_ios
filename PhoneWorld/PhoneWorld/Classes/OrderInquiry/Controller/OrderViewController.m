@@ -12,6 +12,7 @@
 #import "ContentView.h"
 #import "MessageViewController.h"
 #import "PersonalHomeViewController.h"
+#import "FilterView.h"
 
 #define selectV 220/375.0
 
@@ -19,7 +20,9 @@ static OrderViewController *_orderViewController;
 
 @interface OrderViewController ()<UIScrollViewDelegate>
 
-@property (nonatomic) DropDownView *selectView;//筛选
+//@property (nonatomic) DropDownView *selectView;//筛选old
+@property (nonatomic) FilterView *selectView;//筛选new
+
 @property (nonatomic) TopView *topView;//标题栏
 @property (nonatomic) UIView *grayView;//灰色
 @property (nonatomic) UITapGestureRecognizer *tapGrayGR;
@@ -43,8 +46,8 @@ static OrderViewController *_orderViewController;
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
     
     /*----top栏-----*/
     self.topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 80) andTitles:@[@"成卡开户",@"白卡开户",@"过户",@"补卡",@"充值"]];
@@ -62,13 +65,23 @@ static OrderViewController *_orderViewController;
     
     [self grayView];
 
-    /*---筛选框---*/
+    /*---筛选框old---*/
+    /*
     self.selectView = [[DropDownView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 220)];
     self.selectView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.selectView];
     self.selectView.hidden = YES;
     self.selectView.states = @[@"全部",@"已激活",@"锁定",@"开户中",@"已使用",@"失效"];
     [self.selectView.stateTableView reloadData];
+    */
+    
+    /*-----筛选框new--------*/
+    self.selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 81, screenWidth, 240)];
+    self.selectView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.selectView];
+    self.selectView.hidden = YES;
+    self.selectView.orderStates = @[@"全部",@"已激活",@"锁定",@"开户中",@"已使用",@"失效"];
+
     
     __block __weak OrderViewController *weakself = self;
     [self.topView setCallback:^(NSInteger tag) {
@@ -98,6 +111,7 @@ static OrderViewController *_orderViewController;
     }];
     
     /*---------筛选框--------------*/
+    /*
     [self.selectView setDropDownCallBack:^(NSInteger tag) {
         if (tag == 50) {
             //查询操作            
@@ -121,6 +135,7 @@ static OrderViewController *_orderViewController;
             }];
         }
     }];
+     */
 }
 
 #pragma mark - Method
@@ -144,6 +159,26 @@ static OrderViewController *_orderViewController;
     }
     UIButton *btn = self.topView.titlesButton[page];
     btn.selected = YES;
+    self.selectView.titles = @[@"起始时间",@"截止时间",@"订单状态",@"手机号码"];
+    self.selectView.details = @[@"请选择",@"请选择",@"请选择",@"请输入手机号码"];
+    //筛选new
+    if (page == 0 || page == 1) {
+        self.selectView.orderStates = @[@"全部",@"已激活",@"锁定",@"开户中",@"已使用",@"失效"];
+    }
+    
+    if (page == 2 || page == 3) {
+        self.selectView.orderStates = @[@"全部",@"待审核",@"审核通过",@"审核不通过"];
+    }
+    
+    if (page == 4) {//充值
+        self.selectView.orderStates = @[@"全部",@"成功",@"失败",@"待定",@"出错"];
+        self.selectView.titles = @[@"起始时间",@"截止时间",@"订单状态",@"充值类型"];
+        self.selectView.details = @[@"请选择",@"请选择",@"请选择",@"请选择"];
+    }
+    [self.selectView.filterTableView reloadData];
+
+    
+    /*筛选old
     self.selectView.phoneLB.text = @"手机号码：";
     self.selectView.phoneTF.placeholder = @"请输入手机号码";
     self.selectView.phoneTF.enabled = YES;
@@ -166,6 +201,7 @@ static OrderViewController *_orderViewController;
         self.selectView.states = @[@"全部",@"成功",@"失败",@"待定",@"出错"];
         [self.selectView.stateTableView reloadData];
     }
+     */
 }
 
 #pragma mark - LazyLoading

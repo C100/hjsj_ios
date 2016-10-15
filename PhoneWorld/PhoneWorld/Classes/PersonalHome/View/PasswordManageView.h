@@ -10,6 +10,8 @@
 
 @interface PasswordManageView : UIView <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic) void(^PasswordManagerCallBack)(NSInteger row);
+
 @property (nonatomic) UITableView *passwordManageTableView;
 
 @end

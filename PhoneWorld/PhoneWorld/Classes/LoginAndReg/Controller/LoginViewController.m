@@ -11,6 +11,7 @@
 #import "ForgetPasswordViewController.h"
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
+#import "RegisterViewController.h"
 
 @interface LoginViewController ()
 @property (nonatomic) LoginView *loginView;
@@ -25,7 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"话机世界";
-    self.view.backgroundColor = COLOR_BACKGROUND;
+    self.view.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStylePlain target:self action:@selector(RegisterAction)];
     self.loginView = [[LoginView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.loginView];
     
@@ -46,15 +48,18 @@
                 break;
             case 1102:
             {
-                //登录提交
-//                AppDelegate *del = [UIApplication sharedApplication].delegate;
-//                [del gotoHomeVC];
                 MainTabBarController *vc = [MainTabBarController new];
-                [weakself presentViewController:vc animated:YES completion:nil];
+                [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+                [weakself.view endEditing:YES];
             }
                 break;
         }
     }];
+}
+
+- (void)RegisterAction{
+    RegisterViewController *vc = [RegisterViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)dealloc{

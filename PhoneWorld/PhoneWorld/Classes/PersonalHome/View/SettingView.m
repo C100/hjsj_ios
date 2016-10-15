@@ -52,7 +52,9 @@
 //            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.3fMB",totalSize/1024.0/1024.0];
 //        }];
 //    }
-    
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.layoutMargins = UIEdgeInsetsZero;
+    cell.preservesSuperviewLayoutMargins = NO;
     return cell;
 }
 

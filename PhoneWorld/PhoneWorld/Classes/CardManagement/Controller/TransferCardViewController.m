@@ -24,8 +24,4 @@
     self.transferCardView.delegate = self;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.view endEditing:YES];
-}
-
 @end

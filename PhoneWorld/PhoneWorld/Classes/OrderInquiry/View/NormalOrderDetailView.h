@@ -14,4 +14,6 @@
 @property (nonatomic) UIView *moveView;//黄色下标
 @property (nonatomic) UIView *lineView;
 
+@property (nonatomic) NSMutableArray *titleButtons;
+
 @end

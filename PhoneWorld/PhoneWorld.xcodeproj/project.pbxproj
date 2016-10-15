@@ -37,7 +37,6 @@
 		8A6CBF421DB0B0D4002625E8 /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF411DB0B0D4002625E8 /* PersonalInfoViewController.m */; };
 		8A6CBF451DB0B12C002625E8 /* PasswordManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF441DB0B12C002625E8 /* PasswordManageViewController.m */; };
 		8A6CBF481DB0B13A002625E8 /* PasswordManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF471DB0B13A002625E8 /* PasswordManageView.m */; };
-		8A6CBF4B1DB0B43E002625E8 /* NewsCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF4A1DB0B43E002625E8 /* NewsCenterViewController.m */; };
 		8A6CBF4E1DB0B462002625E8 /* NewsCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF4D1DB0B462002625E8 /* NewsCenterView.m */; };
 		8A6CBF511DB0B479002625E8 /* NewsCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF501DB0B479002625E8 /* NewsCenterTableViewCell.m */; };
 		8A6CBF541DB0B4F9002625E8 /* CommisionCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF531DB0B4F9002625E8 /* CommisionCountViewController.m */; };
@@ -61,6 +60,16 @@
 		8AABF8A31DAE68980088DD82 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A21DAE68980088DD82 /* UIView+Toast.m */; };
 		8AABF8A61DAE6BE00088DD82 /* TopCallMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */; };
 		8AABF8A91DAE6C310088DD82 /* TopCallMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */; };
+		8AB87EA81DB1C37B0045CB90 /* PersonalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EA71DB1C37B0045CB90 /* PersonalInfoView.m */; };
+		8AB87EAE1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EAD1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m */; };
+		8AB87EB11DB1DCDC0045CB90 /* AlterLoginPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EB01DB1DCDC0045CB90 /* AlterLoginPasswordView.m */; };
+		8AB87EB41DB1DF650045CB90 /* CreatePayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EB31DB1DF650045CB90 /* CreatePayPasswordViewController.m */; };
+		8AB87EB71DB1DF810045CB90 /* CreatePayPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EB61DB1DF810045CB90 /* CreatePayPasswordView.m */; };
+		8AB87EBA1DB1E32E0045CB90 /* AlterPayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EB91DB1E32E0045CB90 /* AlterPayPasswordViewController.m */; };
+		8AB87EBD1DB1F7350045CB90 /* SetMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EBC1DB1F7350045CB90 /* SetMenuViewController.m */; };
+		8AB87EC01DB1F7490045CB90 /* SetMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EBF1DB1F7490045CB90 /* SetMenuView.m */; };
+		8AB87EC31DB203AF0045CB90 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EC21DB203AF0045CB90 /* FilterView.m */; };
+		8AB87EE91DB226DB0045CB90 /* NaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EE81DB226DB0045CB90 /* NaviViewController.m */; };
 		8AD96E281DACCC640080CC8C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8AD96E271DACCC640080CC8C /* Podfile */; };
 		8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E2C1DACCD490080CC8C /* UIViewExt.m */; };
 		8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E321DACCF090080CC8C /* MainTabBarController.m */; };
@@ -148,8 +157,6 @@
 		8A6CBF441DB0B12C002625E8 /* PasswordManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordManageViewController.m; sourceTree = "<group>"; };
 		8A6CBF461DB0B13A002625E8 /* PasswordManageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordManageView.h; sourceTree = "<group>"; };
 		8A6CBF471DB0B13A002625E8 /* PasswordManageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordManageView.m; sourceTree = "<group>"; };
-		8A6CBF491DB0B43E002625E8 /* NewsCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCenterViewController.h; sourceTree = "<group>"; };
-		8A6CBF4A1DB0B43E002625E8 /* NewsCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCenterViewController.m; sourceTree = "<group>"; };
 		8A6CBF4C1DB0B462002625E8 /* NewsCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCenterView.h; sourceTree = "<group>"; };
 		8A6CBF4D1DB0B462002625E8 /* NewsCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCenterView.m; sourceTree = "<group>"; };
 		8A6CBF4F1DB0B479002625E8 /* NewsCenterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCenterTableViewCell.h; sourceTree = "<group>"; };
@@ -196,6 +203,26 @@
 		8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCallMoneyViewController.m; sourceTree = "<group>"; };
 		8AABF8A71DAE6C310088DD82 /* TopCallMoneyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCallMoneyView.h; sourceTree = "<group>"; };
 		8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCallMoneyView.m; sourceTree = "<group>"; };
+		8AB87EA61DB1C37B0045CB90 /* PersonalInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoView.h; sourceTree = "<group>"; };
+		8AB87EA71DB1C37B0045CB90 /* PersonalInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoView.m; sourceTree = "<group>"; };
+		8AB87EAC1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterLoginPasswordViewController.h; sourceTree = "<group>"; };
+		8AB87EAD1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterLoginPasswordViewController.m; sourceTree = "<group>"; };
+		8AB87EAF1DB1DCDC0045CB90 /* AlterLoginPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterLoginPasswordView.h; sourceTree = "<group>"; };
+		8AB87EB01DB1DCDC0045CB90 /* AlterLoginPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterLoginPasswordView.m; sourceTree = "<group>"; };
+		8AB87EB21DB1DF650045CB90 /* CreatePayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatePayPasswordViewController.h; sourceTree = "<group>"; };
+		8AB87EB31DB1DF650045CB90 /* CreatePayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatePayPasswordViewController.m; sourceTree = "<group>"; };
+		8AB87EB51DB1DF810045CB90 /* CreatePayPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatePayPasswordView.h; sourceTree = "<group>"; };
+		8AB87EB61DB1DF810045CB90 /* CreatePayPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatePayPasswordView.m; sourceTree = "<group>"; };
+		8AB87EB81DB1E32E0045CB90 /* AlterPayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterPayPasswordViewController.h; sourceTree = "<group>"; };
+		8AB87EB91DB1E32E0045CB90 /* AlterPayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterPayPasswordViewController.m; sourceTree = "<group>"; };
+		8AB87EBB1DB1F7350045CB90 /* SetMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetMenuViewController.h; sourceTree = "<group>"; };
+		8AB87EBC1DB1F7350045CB90 /* SetMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMenuViewController.m; sourceTree = "<group>"; };
+		8AB87EBE1DB1F7490045CB90 /* SetMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetMenuView.h; sourceTree = "<group>"; };
+		8AB87EBF1DB1F7490045CB90 /* SetMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMenuView.m; sourceTree = "<group>"; };
+		8AB87EC11DB203AF0045CB90 /* FilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
+		8AB87EC21DB203AF0045CB90 /* FilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
+		8AB87EE71DB226DB0045CB90 /* NaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviViewController.h; sourceTree = "<group>"; };
+		8AB87EE81DB226DB0045CB90 /* NaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviViewController.m; sourceTree = "<group>"; };
 		8AD96E271DACCC640080CC8C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8AD96E291DACCCF50080CC8C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8AD96E2B1DACCD490080CC8C /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
@@ -441,6 +468,8 @@
 				8AD96E411DACCF900080CC8C /* CardViewController.m */,
 				8AEEF9881DAF60D200D3D6AD /* FinishCardViewController.h */,
 				8AEEF9891DAF60D200D3D6AD /* FinishCardViewController.m */,
+				8AB87EBB1DB1F7350045CB90 /* SetMenuViewController.h */,
+				8AB87EBC1DB1F7350045CB90 /* SetMenuViewController.m */,
 				8AEEF98E1DAF66CF00D3D6AD /* TransferCardViewController.h */,
 				8AEEF98F1DAF66CF00D3D6AD /* TransferCardViewController.m */,
 				8AEEF9A21DAF839700D3D6AD /* CardRepairViewController.h */,
@@ -463,6 +492,8 @@
 				8AABF8931DAE395D0088DD82 /* CardView.m */,
 				8AEEF98B1DAF60E100D3D6AD /* FinishCardView.h */,
 				8AEEF98C1DAF60E100D3D6AD /* FinishCardView.m */,
+				8AB87EBE1DB1F7490045CB90 /* SetMenuView.h */,
+				8AB87EBF1DB1F7490045CB90 /* SetMenuView.m */,
 				8AEEF9911DAF66E300D3D6AD /* TransferCardView.h */,
 				8AEEF9921DAF66E300D3D6AD /* TransferCardView.m */,
 				8AEEF99A1DAF802A00D3D6AD /* RepairCardView.h */,
@@ -533,6 +564,8 @@
 				8AD96E321DACCF090080CC8C /* MainTabBarController.m */,
 				8AD96E341DACCF220080CC8C /* MainNavigationController.h */,
 				8AD96E351DACCF220080CC8C /* MainNavigationController.m */,
+				8AB87EE71DB226DB0045CB90 /* NaviViewController.h */,
+				8AB87EE81DB226DB0045CB90 /* NaviViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -594,6 +627,8 @@
 			children = (
 				8AD96E7A1DAD0C7F0080CC8C /* DropDownView.h */,
 				8AD96E7B1DAD0C7F0080CC8C /* DropDownView.m */,
+				8AB87EC11DB203AF0045CB90 /* FilterView.h */,
+				8AB87EC21DB203AF0045CB90 /* FilterView.m */,
 				8AABF8871DAE11060088DD82 /* TopView.h */,
 				8AABF8881DAE11060088DD82 /* TopView.m */,
 				8A3D7D6B1DAF2A9700824B7D /* ContentView.h */,
@@ -732,8 +767,12 @@
 				8A6CBF411DB0B0D4002625E8 /* PersonalInfoViewController.m */,
 				8A6CBF431DB0B12C002625E8 /* PasswordManageViewController.h */,
 				8A6CBF441DB0B12C002625E8 /* PasswordManageViewController.m */,
-				8A6CBF491DB0B43E002625E8 /* NewsCenterViewController.h */,
-				8A6CBF4A1DB0B43E002625E8 /* NewsCenterViewController.m */,
+				8AB87EAC1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.h */,
+				8AB87EAD1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m */,
+				8AB87EB21DB1DF650045CB90 /* CreatePayPasswordViewController.h */,
+				8AB87EB31DB1DF650045CB90 /* CreatePayPasswordViewController.m */,
+				8AB87EB81DB1E32E0045CB90 /* AlterPayPasswordViewController.h */,
+				8AB87EB91DB1E32E0045CB90 /* AlterPayPasswordViewController.m */,
 				8A6CBF521DB0B4F9002625E8 /* CommisionCountViewController.h */,
 				8A6CBF531DB0B4F9002625E8 /* CommisionCountViewController.m */,
 				8A6CBF551DB0B510002625E8 /* SettingViewController.h */,
@@ -754,8 +793,14 @@
 			children = (
 				8A6CBF2D1DB0AB1E002625E8 /* PersonalHomeView.h */,
 				8A6CBF2E1DB0AB1E002625E8 /* PersonalHomeView.m */,
+				8AB87EA61DB1C37B0045CB90 /* PersonalInfoView.h */,
+				8AB87EA71DB1C37B0045CB90 /* PersonalInfoView.m */,
 				8A6CBF461DB0B13A002625E8 /* PasswordManageView.h */,
 				8A6CBF471DB0B13A002625E8 /* PasswordManageView.m */,
+				8AB87EAF1DB1DCDC0045CB90 /* AlterLoginPasswordView.h */,
+				8AB87EB01DB1DCDC0045CB90 /* AlterLoginPasswordView.m */,
+				8AB87EB51DB1DF810045CB90 /* CreatePayPasswordView.h */,
+				8AB87EB61DB1DF810045CB90 /* CreatePayPasswordView.m */,
 				8A6CBF4C1DB0B462002625E8 /* NewsCenterView.h */,
 				8A6CBF4D1DB0B462002625E8 /* NewsCenterView.m */,
 				8A6CBF4F1DB0B479002625E8 /* NewsCenterTableViewCell.h */,
@@ -920,6 +965,7 @@
 				8AABF88C1DAE34BA0088DD82 /* AccountTVCell.m in Sources */,
 				8A6CBF0D1DB07D50002625E8 /* RegisterViewController.m in Sources */,
 				8A6CBF571DB0B510002625E8 /* SettingViewController.m in Sources */,
+				8AB87EE91DB226DB0045CB90 /* NaviViewController.m in Sources */,
 				8AD96E481DACD7A50080CC8C /* MessageViewController.m in Sources */,
 				8A6CBF2C1DB0A5C5002625E8 /* ProposeView.m in Sources */,
 				8A6CBF2F1DB0AB1E002625E8 /* PersonalHomeView.m in Sources */,
@@ -928,10 +974,12 @@
 				8AD96E7C1DAD0C7F0080CC8C /* DropDownView.m in Sources */,
 				8A6CBF691DB0FEE6002625E8 /* NormalOrderDetailViewController.m in Sources */,
 				8A6CBF661DB0C939002625E8 /* OrderTwoView.m in Sources */,
+				8AB87EB41DB1DF650045CB90 /* CreatePayPasswordViewController.m in Sources */,
 				8A6CBF481DB0B13A002625E8 /* PasswordManageView.m in Sources */,
 				8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */,
 				8A6CBF5D1DB0C1C4002625E8 /* OrderTableViewCell.m in Sources */,
 				8A6CBF161DB086C8002625E8 /* ForgetPasswordView.m in Sources */,
+				8AB87EAE1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m in Sources */,
 				8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */,
 				8AD96E661DACEA570080CC8C /* HomeCell.m in Sources */,
 				8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */,
@@ -944,19 +992,23 @@
 				8AABF89D1DAE5AF20088DD82 /* CheckAndTopViewController.m in Sources */,
 				8AEEF98D1DAF60E100D3D6AD /* FinishCardView.m in Sources */,
 				8AD96E3C1DACCF790080CC8C /* OrderViewController.m in Sources */,
+				8AB87EB71DB1DF810045CB90 /* CreatePayPasswordView.m in Sources */,
 				8A6CBF511DB0B479002625E8 /* NewsCenterTableViewCell.m in Sources */,
 				8A6CBF451DB0B12C002625E8 /* PasswordManageViewController.m in Sources */,
 				8A6CBF631DB0C489002625E8 /* OrderTwoTableViewCell.m in Sources */,
 				8A3D7D921DAF3BBF00824B7D /* CJSelectTimeScrollView.m in Sources */,
 				8A6CBF541DB0B4F9002625E8 /* CommisionCountViewController.m in Sources */,
+				8AB87EC31DB203AF0045CB90 /* FilterView.m in Sources */,
+				8AB87EC01DB1F7490045CB90 /* SetMenuView.m in Sources */,
 				8A3D7D8C1DAF3BBF00824B7D /* CJMonthDayViewController.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
+				8AB87EA81DB1C37B0045CB90 /* PersonalInfoView.m in Sources */,
 				8AEEF98A1DAF60D200D3D6AD /* FinishCardViewController.m in Sources */,
 				8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */,
 				8A3D7D8B1DAF3BBF00824B7D /* CJCalendarViewController.m in Sources */,
+				8AB87EBA1DB1E32E0045CB90 /* AlterPayPasswordViewController.m in Sources */,
 				8A3D7D8F1DAF3BBF00824B7D /* CJDecisionView.m in Sources */,
-				8A6CBF4B1DB0B43E002625E8 /* NewsCenterViewController.m in Sources */,
 				8A6CBF191DB08CF9002625E8 /* ResetPasswordViewController.m in Sources */,
 				8A6CBF231DB09152002625E8 /* AboutUsViewController.m in Sources */,
 				8AABF8941DAE395D0088DD82 /* CardView.m in Sources */,
@@ -964,6 +1016,7 @@
 				8A3D7D931DAF3BBF00824B7D /* CJShowTimeView.m in Sources */,
 				8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */,
 				8A6CBF4E1DB0B462002625E8 /* NewsCenterView.m in Sources */,
+				8AB87EBD1DB1F7350045CB90 /* SetMenuViewController.m in Sources */,
 				8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */,
 				8A6CBF6C1DB0FF49002625E8 /* NormalOrderDetailView.m in Sources */,
 				8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */,
@@ -972,6 +1025,7 @@
 				8A6CBF601DB0C3F2002625E8 /* OrderView.m in Sources */,
 				8A3D7D6D1DAF2A9700824B7D /* ContentView.m in Sources */,
 				8A6CBF1C1DB08D09002625E8 /* ResetPasswordView.m in Sources */,
+				8AB87EB11DB1DCDC0045CB90 /* AlterLoginPasswordView.m in Sources */,
 				8A49D86E1DACCB4600A1D650 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1008,6 +1062,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1057,6 +1112,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

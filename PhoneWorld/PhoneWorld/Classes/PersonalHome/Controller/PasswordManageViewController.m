@@ -8,6 +8,9 @@
 
 #import "PasswordManageViewController.h"
 #import "PasswordManageView.h"
+#import "AlterLoginPasswordViewController.h"
+#import "CreatePayPasswordViewController.h"
+#import "AlterPayPasswordViewController.h"
 
 @interface PasswordManageViewController ()
 @property (nonatomic) PasswordManageView *passwordManageView;
@@ -20,5 +23,28 @@
     self.title = @"密码管理";
     self.passwordManageView = [[PasswordManageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.passwordManageView];
+    __block __weak PasswordManageViewController *weakself = self;
+    [self.passwordManageView setPasswordManagerCallBack:^(NSInteger row) {
+        switch (row) {
+            case 0:
+            {
+                AlterLoginPasswordViewController *vc = [AlterLoginPasswordViewController new];
+                [weakself.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 1:
+            {
+                CreatePayPasswordViewController *vc = [CreatePayPasswordViewController new];
+                [weakself.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 2:
+            {
+                AlterPayPasswordViewController *vc = [AlterPayPasswordViewController new];
+                [weakself.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+        }
+    }];
 }
 @end

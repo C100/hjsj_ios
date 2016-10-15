@@ -21,6 +21,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.titles = @[@"订单信息",@"资费信息",@"客户信息"];
+        self.titleButtons = [NSMutableArray array];
         [self headView];
         [self lineView];
         [self moveView];
@@ -48,6 +49,7 @@
             if (i == 0) {
                 button.selected = YES;
             }
+            [self.titleButtons addObject:button];
         }
     }
     return _headView;
@@ -79,10 +81,14 @@
 #pragma mark - Method
 - (void)buttonClickedAction:(UIButton *)button{
     //1130  1131  1132
+    for (UIButton *b in self.titleButtons) {
+        b.selected = NO;
+    }
+    button.selected = YES;
     NSInteger i = button.tag - 1130;
     [UIView animateWithDuration:0.5 animations:^{
         CGRect frame = self.moveView.frame;
-        frame.origin.y = i*screenWidth/3.0;
+        frame.origin.x = i*screenWidth/3.0;
         self.moveView.frame = frame;
     }];
 }

@@ -20,6 +20,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80)];
     [self.view addSubview:self.orderView];
+    [self.orderView setOrderViewCallBack:^(NSInteger section) {
+        
+    }];
 }
 
 @end

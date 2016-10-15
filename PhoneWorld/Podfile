@@ -9,4 +9,5 @@ pod 'SVPullToRefresh'
 pod 'MBProgressHUD', '~> 1.0.0'
 pod 'Masonry'
 pod 'SDCycleScrollView','~> 1.64'
+pod 'IQKeyboardManager'
 end

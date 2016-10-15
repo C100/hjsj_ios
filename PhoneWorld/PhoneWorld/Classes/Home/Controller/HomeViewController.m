@@ -15,7 +15,7 @@
 #import "MessageViewController.h"
 #import "PersonalHomeViewController.h"
 
-#define homeCellWH 125/152.0
+//#define homeCellWH 125/152.0
 
 @interface HomeViewController ()<SDCycleScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -33,8 +33,8 @@
     self.view.backgroundColor = COLOR_BACKGROUND;
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
 
     
     [self imageNames];
@@ -75,28 +75,30 @@
     cell.imageV.image = [UIImage imageNamed:self.imageNames[indexPath.row]];
     cell.titleLb.text = self.titleNames[indexPath.row];
     cell.contentView.backgroundColor = [UIColor whiteColor];
+    cell.layer.cornerRadius = 10;
+    cell.layer.masksToBounds = YES;
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGFloat width = (screenWidth-2)/3;
-    CGFloat height = width*152/125.0;
+    CGFloat width = (screenWidth-40)/3.0;
+    CGFloat height = width*120/112.0;
     
     return CGSizeMake(width, height-1);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+    return UIEdgeInsetsMake(0, 10, 10, 10);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 1;
+    return 10;
     
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 1;
+    return 10;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

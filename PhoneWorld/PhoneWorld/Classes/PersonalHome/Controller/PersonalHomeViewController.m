@@ -13,6 +13,7 @@
 #import "SettingViewController.h"
 #import "LoginViewController.h"
 #import "MainNavigationController.h"
+#import "MessageViewController.h"
 
 @interface PersonalHomeViewController ()
 @property (nonatomic) PersonalHomeView *personalHomeView;
@@ -42,7 +43,8 @@
                 break;
             case 2:
             {//消息中心
-                
+                MessageViewController *vc = [MessageViewController new];
+                [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 3:

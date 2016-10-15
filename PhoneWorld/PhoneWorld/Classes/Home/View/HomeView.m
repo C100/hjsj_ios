@@ -9,9 +9,9 @@
 #import "HomeView.h"
 #import "HomeCell.h"
 
-#define sc 180/433.0  //首页轮播图 高／宽
+#define sc 254/375.0  //首页轮播图 高／宽
 
-#define cv 301/375.0
+#define cv 260/375.0
 
 @implementation HomeView
 
@@ -39,16 +39,16 @@
                 make.width.mas_equalTo(_scrollView.mas_width);
             }];
             
-            _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, screenWidth*sc + 20, screenWidth, 1)];
-            _lineView.backgroundColor = MainColor;
+            _lineView = [[UIView alloc] initWithFrame:CGRectMake(10, screenWidth*sc + 20, screenWidth - 20, 1)];
+            _lineView.backgroundColor = [Utils colorRGB:@"#ec6c00"];
             _lineView.alpha = 0.3;
             [self.container addSubview:_lineView];
             
-            _fastRoadLB = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2 - 50 , screenWidth*sc + 10, 100, 18)];
+            _fastRoadLB = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2 - 50 , screenWidth*sc + 12, 100, 18)];
             _fastRoadLB.text = @"快捷通道";
             _fastRoadLB.textColor = MainColor;
             _fastRoadLB.textAlignment = NSTextAlignmentCenter;
-            _fastRoadLB.font = [UIFont systemFontOfSize:16];
+            _fastRoadLB.font = [UIFont systemFontOfSize:14];
             _fastRoadLB.backgroundColor = COLOR_BACKGROUND;
             [self.container addSubview:_fastRoadLB];
             
@@ -83,13 +83,5 @@
     }
     return self;
 }
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
 
 @end

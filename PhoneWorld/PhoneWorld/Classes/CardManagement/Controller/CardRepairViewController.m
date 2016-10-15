@@ -72,7 +72,7 @@
 #pragma mark - UIImagePicker Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     NSLog(@"-=-=-=-=-=-=-=-=-=-=-%@",info);
-    UIImage *image = info[UIImagePickerControllerOriginalImage];
+//    UIImage *image = info[UIImagePickerControllerOriginalImage];
     
 //    self.repairCardView.
 }

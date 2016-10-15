@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "MainNavigationController.h"
 #import "LoginViewController.h"
+#import "NaviViewController.h"
 
 @interface AppDelegate ()
 
@@ -24,7 +25,13 @@
     [self.window makeKeyAndVisible];
     
     LoginViewController *vc = [[LoginViewController alloc] init];
-    self.window.rootViewController = [[MainNavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = [[NaviViewController alloc] initWithRootViewController:vc];
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;//控制整个功能是否启用
+    manager.enableAutoToolbar = NO;//控制是否显示键盘上的工具条
+    manager.shouldResignOnTouchOutside = YES;//点击背景收回键盘
+    
     return YES;
 }
 
@@ -32,7 +39,6 @@
     MainTabBarController *vc = [MainTabBarController new];
     self.window.rootViewController = vc;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -52,7 +58,7 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //重新进入刷新
 }
 
 

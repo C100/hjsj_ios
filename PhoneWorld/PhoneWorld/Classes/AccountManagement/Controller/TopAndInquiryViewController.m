@@ -33,12 +33,12 @@
     self.topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 80) andTitles:@[@"全部",@"话费充值",@"余额充值"]];
     [self.view addSubview:self.topView];
     
-    self.orderTwoView = [[OrderTwoView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, screenHeight - 80)];
+    self.orderTwoView = [[OrderTwoView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, screenHeight)];
     [self.view addSubview:self.orderTwoView];
     [self.orderTwoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(0);
         make.left.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(self.view.mas_bottom).mas_equalTo(44);
+        make.height.mas_equalTo(screenHeight - 64 - 80);
     }];
     
     self.selectView = [[DropDownView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 220)];

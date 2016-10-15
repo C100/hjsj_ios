@@ -15,14 +15,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(10, 0, screenWidth - 20, screenHeight - 108 - 80) style:UITableViewStyleGrouped];
-        self.orderTableView.backgroundColor = [UIColor whiteColor];
+        self.orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80) style:UITableViewStyleGrouped];
+        self.orderTableView.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
         [self addSubview:self.orderTableView];
         self.orderTableView.delegate = self;
         self.orderTableView.dataSource = self;
         self.orderTableView.bounces = NO;
         [self.orderTableView registerClass:[OrderTableViewCell class] forCellReuseIdentifier:@"cell"];
         self.orderTableView.tableHeaderView = self.resultNumLB;
+        self.orderTableView.separatorStyle = UITextBorderStyleNone;
     }
     return self;
 }
@@ -32,8 +33,9 @@
     if (_resultNumLB == nil) {
         _resultNumLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth - 20, 26)];
         _resultNumLB.text = @"共10条";
-        _resultNumLB.textColor = [Utils colorRGB:@"#666666"];
-        _resultNumLB.font = [UIFont systemFontOfSize:10];
+        _resultNumLB.textColor = [Utils colorRGB:@"#999999"];
+        _resultNumLB.font = [UIFont systemFontOfSize:8];
+        _resultNumLB.textAlignment = NSTextAlignmentCenter;
     }
     return _resultNumLB;
 }
@@ -57,18 +59,12 @@
     [cell dateLB];
     [cell phoneLB];
     
-    cell.contentView.layer.borderWidth = 1;
-    if(indexPath.section%2 == 1){
-        cell.contentView.layer.borderColor = [Utils colorRGB:@"#fff0aa"].CGColor;
-    }else{
-        cell.contentView.layer.borderColor = [Utils colorRGB:@"#ddfe98"].CGColor;
-    }
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 64;
+    return 62;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -76,7 +72,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 13;
+    return 10;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
