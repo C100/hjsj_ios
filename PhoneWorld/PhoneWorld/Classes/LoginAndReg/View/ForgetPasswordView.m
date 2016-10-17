@@ -8,6 +8,8 @@
 
 #import "ForgetPasswordView.h"
 
+#define leftDistance (screenWidth-171)/2.0
+
 @implementation ForgetPasswordView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -26,9 +28,9 @@
         _phoneNumTF = [[UITextField alloc] init];
         [self addSubview:_phoneNumTF];
         [_phoneNumTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(10);
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.top.mas_equalTo(0);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
         }];
         _phoneNumTF.placeholder = @"请输入手机号";
@@ -52,8 +54,8 @@
         [self addSubview:_identifyingCodeTF];
         [_identifyingCodeTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.phoneNumTF.mas_bottom).mas_equalTo(0);
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
         }];
         _identifyingCodeTF.placeholder = @"请输入验证码";
@@ -74,7 +76,7 @@
         [identifyingButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         [identifyingButton setTitleColor:[Utils colorRGB:@"#666666"] forState:UIControlStateNormal];
         identifyingButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        identifyingButton.backgroundColor = COLOR_BACKGROUND;
+        identifyingButton.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
         identifyingButton.layer.cornerRadius = 6;
         identifyingButton.layer.masksToBounds = YES;
         identifyingButton.tag = 1104;
@@ -92,17 +94,19 @@
         _nextButton = [[UIButton alloc] init];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.left.mas_equalTo(leftDistance);
+            make.right.mas_equalTo(-leftDistance);
             make.height.mas_equalTo(40);
-            make.top.mas_equalTo(self.identifyingCodeTF.mas_bottom).mas_equalTo(20);
+            make.top.mas_equalTo(self.identifyingCodeTF.mas_bottom).mas_equalTo(40);
         }];
-        _nextButton.backgroundColor = [Utils colorRGB:@"#008bd5"];
+        _nextButton.backgroundColor = [UIColor clearColor];
         [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
         _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 6;
+        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
+        _nextButton.layer.cornerRadius = 20;
         _nextButton.layer.masksToBounds = YES;
+        _nextButton.layer.borderColor = MainColor.CGColor;
+        _nextButton.layer.borderWidth = 1;
         _nextButton.tag = 1103;
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }

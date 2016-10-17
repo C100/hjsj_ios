@@ -31,7 +31,6 @@
     manager.enable = YES;//控制整个功能是否启用
     manager.enableAutoToolbar = NO;//控制是否显示键盘上的工具条
     manager.shouldResignOnTouchOutside = YES;//点击背景收回键盘
-    
     return YES;
 }
 

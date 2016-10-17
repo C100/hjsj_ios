@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NormalOrderDetailView : UIView
+@interface NormalOrderDetailView : UIView<UIScrollViewDelegate>
 
 @property (nonatomic) UIView *headView;
 @property (nonatomic) UIView *moveView;//黄色下标
-@property (nonatomic) UIView *lineView;
+@property (nonatomic) UIScrollView *contentView;
+@property (nonatomic) UIView *firstView;
+@property (nonatomic) UIView *secondView;
+@property (nonatomic) UIScrollView *thirdView;
 
 @property (nonatomic) NSMutableArray *titleButtons;
 

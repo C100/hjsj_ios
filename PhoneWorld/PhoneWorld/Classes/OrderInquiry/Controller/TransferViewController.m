@@ -8,6 +8,8 @@
 
 #import "TransferViewController.h"
 #import "OrderView.h"
+#import "TransferDetailViewController.h"
+#import "OrderViewController.h"
 
 @interface TransferViewController ()
 @property (nonatomic) OrderView *orderView;
@@ -21,7 +23,9 @@
     self.orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80)];
     [self.view addSubview:self.orderView];
     [self.orderView setOrderViewCallBack:^(NSInteger section) {
-        
+        TransferDetailViewController *vc = [TransferDetailViewController new];
+        vc.hidesBottomBarWhenPushed = YES;
+        [[OrderViewController shareOrderViewController].navigationController pushViewController:vc animated:YES];
     }];
 }
 

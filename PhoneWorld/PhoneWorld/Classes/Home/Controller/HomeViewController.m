@@ -27,6 +27,7 @@
 @end
 
 @implementation HomeViewController
+
 #pragma mark - LifeCircle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +37,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
 
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self imageNames];
     [self titleNames];
     _homeView = [[HomeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 44)];
@@ -82,10 +83,10 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGFloat width = (screenWidth-40)/3.0;
+    CGFloat width = (screenWidth-44)/3.0;
     CGFloat height = width*120/112.0;
     
-    return CGSizeMake(width, height-1);
+    return CGSizeMake(width, height);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{

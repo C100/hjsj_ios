@@ -8,20 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CheckAndTopView : UIView
+typedef enum : NSUInteger {
+    weixinPay,
+    aliPay,
+} payWay;
 
-@property (nonatomic) void(^checkAndTopCallBack)(NSInteger tag);
+@interface CheckAndTopView : UIView <UITextFieldDelegate>
 
-@property (nonatomic) UILabel *currentLeftMoney;//余额
-@property (nonatomic) UILabel *topMoney;
-@property (nonatomic) UILabel *payType;
-@property (nonatomic) UITextField *moneyNum;//充值金额
-@property (nonatomic) UIButton *aliPay;
-@property (nonatomic) UIButton *weixinPay;
+@property (nonatomic) void(^checkAndTopCallBack)(NSString money, payWay payway);
 
-@property (nonatomic) UIImageView *greenCheckIV1;
-@property (nonatomic) UIImageView *greenCheckIV2;
+@property (nonatomic) payWay payway;
+@property (nonatomic) UILabel *currentLeftMoney;
+@property (nonatomic) UILabel *currentRightMoney;
+@property (nonatomic) UIView *topMoney;
+@property (nonatomic) UITextField *moneyNumTF;
 
-@property (nonatomic) UIButton *rechargeButton;
+@property (nonatomic) UIView *payWay;
+@property (nonatomic) NSMutableArray *buttons;
+@property (nonatomic) UILabel *number;
+
+@property (nonatomic) UIButton *nextButton;
 
 @end

@@ -39,5 +39,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

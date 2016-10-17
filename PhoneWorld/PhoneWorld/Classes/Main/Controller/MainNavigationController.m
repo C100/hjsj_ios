@@ -22,8 +22,4 @@
     self.navigationBar.translucent = NO;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
-}
-
 @end

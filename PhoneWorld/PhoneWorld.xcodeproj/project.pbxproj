@@ -70,6 +70,14 @@
 		8AB87EC01DB1F7490045CB90 /* SetMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EBF1DB1F7490045CB90 /* SetMenuView.m */; };
 		8AB87EC31DB203AF0045CB90 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EC21DB203AF0045CB90 /* FilterView.m */; };
 		8AB87EE91DB226DB0045CB90 /* NaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EE81DB226DB0045CB90 /* NaviViewController.m */; };
+		8AB992C31DB4B74D00D75492 /* TransferDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB992C21DB4B74D00D75492 /* TransferDetailViewController.m */; };
+		8AB992C61DB4B75F00D75492 /* TransferDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB992C51DB4B75F00D75492 /* TransferDetailView.m */; };
+		8AB992C91DB4C10600D75492 /* RepairCardDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB992C81DB4C10600D75492 /* RepairCardDetailViewController.m */; };
+		8AB992CC1DB4C11800D75492 /* RepairCardDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB992CB1DB4C11800D75492 /* RepairCardDetailView.m */; };
+		8AB992CF1DB4CCA000D75492 /* PhoneCashCheckTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB992CE1DB4CCA000D75492 /* PhoneCashCheckTVCell.m */; };
+		8AC3A2851DB4657F007D432A /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3A2841DB4657F007D432A /* RegisterView.m */; };
+		8AC3A2881DB46C53007D432A /* RegisterOneTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3A2871DB46C53007D432A /* RegisterOneTVCell.m */; };
+		8AC3A28B1DB48708007D432A /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3A28A1DB48708007D432A /* AccountView.m */; };
 		8AD96E281DACCC640080CC8C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8AD96E271DACCC640080CC8C /* Podfile */; };
 		8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E2C1DACCD490080CC8C /* UIViewExt.m */; };
 		8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD96E321DACCF090080CC8C /* MainTabBarController.m */; };
@@ -223,6 +231,22 @@
 		8AB87EC21DB203AF0045CB90 /* FilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
 		8AB87EE71DB226DB0045CB90 /* NaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviViewController.h; sourceTree = "<group>"; };
 		8AB87EE81DB226DB0045CB90 /* NaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviViewController.m; sourceTree = "<group>"; };
+		8AB992C11DB4B74D00D75492 /* TransferDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferDetailViewController.h; sourceTree = "<group>"; };
+		8AB992C21DB4B74D00D75492 /* TransferDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferDetailViewController.m; sourceTree = "<group>"; };
+		8AB992C41DB4B75F00D75492 /* TransferDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferDetailView.h; sourceTree = "<group>"; };
+		8AB992C51DB4B75F00D75492 /* TransferDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferDetailView.m; sourceTree = "<group>"; };
+		8AB992C71DB4C10600D75492 /* RepairCardDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairCardDetailViewController.h; sourceTree = "<group>"; };
+		8AB992C81DB4C10600D75492 /* RepairCardDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairCardDetailViewController.m; sourceTree = "<group>"; };
+		8AB992CA1DB4C11800D75492 /* RepairCardDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepairCardDetailView.h; sourceTree = "<group>"; };
+		8AB992CB1DB4C11800D75492 /* RepairCardDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepairCardDetailView.m; sourceTree = "<group>"; };
+		8AB992CD1DB4CCA000D75492 /* PhoneCashCheckTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneCashCheckTVCell.h; sourceTree = "<group>"; };
+		8AB992CE1DB4CCA000D75492 /* PhoneCashCheckTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneCashCheckTVCell.m; sourceTree = "<group>"; };
+		8AC3A2831DB4657F007D432A /* RegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterView.h; sourceTree = "<group>"; };
+		8AC3A2841DB4657F007D432A /* RegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterView.m; sourceTree = "<group>"; };
+		8AC3A2861DB46C53007D432A /* RegisterOneTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterOneTVCell.h; sourceTree = "<group>"; };
+		8AC3A2871DB46C53007D432A /* RegisterOneTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterOneTVCell.m; sourceTree = "<group>"; };
+		8AC3A2891DB48708007D432A /* AccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountView.h; sourceTree = "<group>"; };
+		8AC3A28A1DB48708007D432A /* AccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountView.m; sourceTree = "<group>"; };
 		8AD96E271DACCC640080CC8C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8AD96E291DACCCF50080CC8C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		8AD96E2B1DACCD490080CC8C /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
@@ -439,10 +463,14 @@
 		8A49D8871DACCB9900A1D650 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8AC3A2891DB48708007D432A /* AccountView.h */,
+				8AC3A28A1DB48708007D432A /* AccountView.m */,
 				8AABF88A1DAE34BA0088DD82 /* AccountTVCell.h */,
 				8AABF88B1DAE34BA0088DD82 /* AccountTVCell.m */,
 				8AABF8981DAE517E0088DD82 /* PhoneCashCheckView.h */,
 				8AABF8991DAE517E0088DD82 /* PhoneCashCheckView.m */,
+				8AB992CD1DB4CCA000D75492 /* PhoneCashCheckTVCell.h */,
+				8AB992CE1DB4CCA000D75492 /* PhoneCashCheckTVCell.m */,
 				8AABF89E1DAE5BB90088DD82 /* CheckAndTopView.h */,
 				8AABF89F1DAE5BB90088DD82 /* CheckAndTopView.m */,
 				8AABF8A71DAE6C310088DD82 /* TopCallMoneyView.h */,
@@ -599,8 +627,6 @@
 			children = (
 				8AD96E3A1DACCF790080CC8C /* OrderViewController.h */,
 				8AD96E3B1DACCF790080CC8C /* OrderViewController.m */,
-				8A6CBF671DB0FEE6002625E8 /* NormalOrderDetailViewController.h */,
-				8A6CBF681DB0FEE6002625E8 /* NormalOrderDetailViewController.m */,
 				8AD96E6B1DAD09BD0080CC8C /* OpenAccomplishCardViewController.h */,
 				8AD96E6C1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m */,
 				8AD96E6E1DAD09C90080CC8C /* OpenWhiteCardViewController.h */,
@@ -611,6 +637,12 @@
 				8AD96E751DAD0A0B0080CC8C /* RepairCardViewController.m */,
 				8AD96E771DAD0A1E0080CC8C /* TopUpViewController.h */,
 				8AD96E781DAD0A1E0080CC8C /* TopUpViewController.m */,
+				8A6CBF671DB0FEE6002625E8 /* NormalOrderDetailViewController.h */,
+				8A6CBF681DB0FEE6002625E8 /* NormalOrderDetailViewController.m */,
+				8AB992C11DB4B74D00D75492 /* TransferDetailViewController.h */,
+				8AB992C21DB4B74D00D75492 /* TransferDetailViewController.m */,
+				8AB992C71DB4C10600D75492 /* RepairCardDetailViewController.h */,
+				8AB992C81DB4C10600D75492 /* RepairCardDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -643,6 +675,10 @@
 				8A6CBF651DB0C939002625E8 /* OrderTwoView.m */,
 				8A6CBF6A1DB0FF49002625E8 /* NormalOrderDetailView.h */,
 				8A6CBF6B1DB0FF49002625E8 /* NormalOrderDetailView.m */,
+				8AB992C41DB4B75F00D75492 /* TransferDetailView.h */,
+				8AB992C51DB4B75F00D75492 /* TransferDetailView.m */,
+				8AB992CA1DB4C11800D75492 /* RepairCardDetailView.h */,
+				8AB992CB1DB4C11800D75492 /* RepairCardDetailView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -740,6 +776,10 @@
 			children = (
 				8A6CBF0E1DB07DB4002625E8 /* LoginView.h */,
 				8A6CBF0F1DB07DB4002625E8 /* LoginView.m */,
+				8AC3A2831DB4657F007D432A /* RegisterView.h */,
+				8AC3A2841DB4657F007D432A /* RegisterView.m */,
+				8AC3A2861DB46C53007D432A /* RegisterOneTVCell.h */,
+				8AC3A2871DB46C53007D432A /* RegisterOneTVCell.m */,
 				8A6CBF141DB086C8002625E8 /* ForgetPasswordView.h */,
 				8A6CBF151DB086C8002625E8 /* ForgetPasswordView.m */,
 				8A6CBF1A1DB08D09002625E8 /* ResetPasswordView.h */,
@@ -948,6 +988,7 @@
 				8AEEF9901DAF66CF00D3D6AD /* TransferCardViewController.m in Sources */,
 				8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */,
 				8A3D7D8E1DAF3BBF00824B7D /* CJUseTime.m in Sources */,
+				8AB992CC1DB4C11800D75492 /* RepairCardDetailView.m in Sources */,
 				8AABF8891DAE11060088DD82 /* TopView.m in Sources */,
 				8AEEF99C1DAF802A00D3D6AD /* RepairCardView.m in Sources */,
 				8AABF8A01DAE5BB90088DD82 /* CheckAndTopView.m in Sources */,
@@ -970,12 +1011,15 @@
 				8A6CBF2C1DB0A5C5002625E8 /* ProposeView.m in Sources */,
 				8A6CBF2F1DB0AB1E002625E8 /* PersonalHomeView.m in Sources */,
 				8AABF8861DADFB750088DD82 /* Utils.m in Sources */,
+				8AC3A2851DB4657F007D432A /* RegisterView.m in Sources */,
+				8AB992C31DB4B74D00D75492 /* TransferDetailViewController.m in Sources */,
 				8A3D7D6A1DAF29DB00824B7D /* TopAndInquiryViewController.m in Sources */,
 				8AD96E7C1DAD0C7F0080CC8C /* DropDownView.m in Sources */,
 				8A6CBF691DB0FEE6002625E8 /* NormalOrderDetailViewController.m in Sources */,
 				8A6CBF661DB0C939002625E8 /* OrderTwoView.m in Sources */,
 				8AB87EB41DB1DF650045CB90 /* CreatePayPasswordViewController.m in Sources */,
 				8A6CBF481DB0B13A002625E8 /* PasswordManageView.m in Sources */,
+				8AB992C61DB4B75F00D75492 /* TransferDetailView.m in Sources */,
 				8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */,
 				8A6CBF5D1DB0C1C4002625E8 /* OrderTableViewCell.m in Sources */,
 				8A6CBF161DB086C8002625E8 /* ForgetPasswordView.m in Sources */,
@@ -999,10 +1043,13 @@
 				8A3D7D921DAF3BBF00824B7D /* CJSelectTimeScrollView.m in Sources */,
 				8A6CBF541DB0B4F9002625E8 /* CommisionCountViewController.m in Sources */,
 				8AB87EC31DB203AF0045CB90 /* FilterView.m in Sources */,
+				8AB992CF1DB4CCA000D75492 /* PhoneCashCheckTVCell.m in Sources */,
 				8AB87EC01DB1F7490045CB90 /* SetMenuView.m in Sources */,
 				8A3D7D8C1DAF3BBF00824B7D /* CJMonthDayViewController.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
+				8AB992C91DB4C10600D75492 /* RepairCardDetailViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
+				8AC3A2881DB46C53007D432A /* RegisterOneTVCell.m in Sources */,
 				8AB87EA81DB1C37B0045CB90 /* PersonalInfoView.m in Sources */,
 				8AEEF98A1DAF60D200D3D6AD /* FinishCardViewController.m in Sources */,
 				8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */,
@@ -1022,6 +1069,7 @@
 				8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */,
 				8AABF8A61DAE6BE00088DD82 /* TopCallMoneyViewController.m in Sources */,
 				8AD96E391DACCF3E0080CC8C /* HomeViewController.m in Sources */,
+				8AC3A28B1DB48708007D432A /* AccountView.m in Sources */,
 				8A6CBF601DB0C3F2002625E8 /* OrderView.m in Sources */,
 				8A3D7D6D1DAF2A9700824B7D /* ContentView.m in Sources */,
 				8A6CBF1C1DB08D09002625E8 /* ResetPasswordView.m in Sources */,

@@ -8,6 +8,8 @@
 
 #import "RepairCardViewController.h"
 #import "OrderView.h"
+#import "OrderViewController.h"
+#import "RepairCardDetailViewController.h"
 
 @interface RepairCardViewController ()
 @property (nonatomic) OrderView *orderView;
@@ -21,7 +23,9 @@
     self.orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80)];
     [self.view addSubview:self.orderView];
     [self.orderView setOrderViewCallBack:^(NSInteger section) {
-        
+        RepairCardDetailViewController *vc = [RepairCardDetailViewController new];
+        vc.hidesBottomBarWhenPushed = YES;
+        [[OrderViewController shareOrderViewController].navigationController pushViewController:vc animated:YES];
     }];
 }
 

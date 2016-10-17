@@ -23,6 +23,12 @@
     [super viewDidLoad];
     self.title = @"话费充值";
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+
     self.topCallMoneyView = [[TopCallMoneyView alloc] init];
     [self.view addSubview:self.topCallMoneyView];
     [self.topCallMoneyView mas_makeConstraints:^(MASConstraintMaker *make) {

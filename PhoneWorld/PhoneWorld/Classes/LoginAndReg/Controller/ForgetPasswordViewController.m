@@ -18,9 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"号码验证";
-    self.view.backgroundColor = COLOR_BACKGROUND;
+    self.view.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
     self.forgetView = [[ForgetPasswordView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.forgetView];
+    
     __block __weak ForgetPasswordViewController *weakself = self;
     [self.forgetView setForgetCallBack:^(NSInteger tag) {
         if (tag == 1103) {

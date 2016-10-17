@@ -27,6 +27,11 @@
     self.title = @"充值查询";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+
     [self grayView];
     
     /*---页头---*/

@@ -17,7 +17,7 @@
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
             make.left.mas_equalTo(10);
-            make.height.width.mas_equalTo(60);
+            make.height.width.mas_equalTo(40);
         }];
     }
     return _imageV;
@@ -31,7 +31,7 @@
             make.left.mas_equalTo(self.imageV.mas_right).mas_equalTo(10);
             make.centerY.mas_equalTo(0);
         }];
-        _titleLB.font = [UIFont systemFontOfSize:20];
+        _titleLB.font = [UIFont systemFontOfSize:18];
         _titleLB.textColor = [Utils colorRGB:@"#333333"];
     }
     return _titleLB;
