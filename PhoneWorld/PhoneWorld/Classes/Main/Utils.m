@@ -85,4 +85,21 @@
     return isMatch;
 }
 
++ (UIBarButtonItem *)returnBackButton{
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
+    backButton.title = @"返回";
+    [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
+    return backButton;
+}
+
++ (NSMutableAttributedString *)setTextColor:(NSString *)text FontNumber:(id)font AndRange:(NSRange)range AndColor:(UIColor *)vaColor
+{
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:text];
+    //设置字号
+    [str addAttribute:NSFontAttributeName value:font range:range];
+    //设置文字颜色
+    [str addAttribute:NSForegroundColorAttributeName value:vaColor range:range];
+    return str;
+}
+
 @end

@@ -7,15 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PayView.h"
 
-@interface TopCallMoneyView : UIView
+@interface TopCallMoneyView : UIView <UITextFieldDelegate>
 
-@property (nonatomic) void(^topCallMoneyCallBack) (NSInteger tag, NSInteger money);
+@property (nonatomic) void(^topCallMoneyCallBack) (NSInteger money, NSString *phoneNumber);
 
-@property (nonatomic) UILabel *leftMoney;// 话费余额
-@property (nonatomic) UILabel *phoneNum;
-@property (nonatomic) UITextField *phoneTF;// 手机号码
-@property (nonatomic) UILabel *topMoney;
-@property (nonatomic) UIButton *topButton;// 充值按钮
+@property (nonatomic) UILabel *currentLeftMoney;
+@property (nonatomic) UILabel *currentRightMoney;
+@property (nonatomic) UIView *phoneNumView;
+@property (nonatomic) UILabel *phoneNumberLB;
+@property (nonatomic) UITextField *phoneNumberTF;
+
+@property (nonatomic) UIView *topMoneyNumber;
+@property (nonatomic) UIView *topMoney;
+@property (nonatomic) UILabel *number;//保存充值金额的Label
+@property (nonatomic) UITextField *moneyNumberTF;//保存充值金额的TF
+
+@property (nonatomic) UIButton *nextButton;
+
+@property (nonatomic) PayView *payView;
 
 @end

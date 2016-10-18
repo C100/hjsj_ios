@@ -48,6 +48,16 @@
 		8A6CBF661DB0C939002625E8 /* OrderTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF651DB0C939002625E8 /* OrderTwoView.m */; };
 		8A6CBF691DB0FEE6002625E8 /* NormalOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF681DB0FEE6002625E8 /* NormalOrderDetailViewController.m */; };
 		8A6CBF6C1DB0FF49002625E8 /* NormalOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF6B1DB0FF49002625E8 /* NormalOrderDetailView.m */; };
+		8A90E8DD1DB5B522004ECA62 /* TopResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8DC1DB5B522004ECA62 /* TopResultViewController.m */; };
+		8A90E8E01DB5B552004ECA62 /* TopResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8DF1DB5B552004ECA62 /* TopResultView.m */; };
+		8A90E8E31DB5BD10004ECA62 /* UIView+ORGetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8E21DB5BD10004ECA62 /* UIView+ORGetController.m */; };
+		8A90E8E61DB5D326004ECA62 /* PayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8E51DB5D326004ECA62 /* PayView.m */; };
+		8A90E8E91DB5FB47004ECA62 /* CardManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8E81DB5FB47004ECA62 /* CardManageView.m */; };
+		8A90E8EC1DB6109B004ECA62 /* FailedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8EB1DB6109B004ECA62 /* FailedView.m */; };
+		8A90E8EF1DB61747004ECA62 /* ChoosePackageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8EE1DB61747004ECA62 /* ChoosePackageView.m */; };
+		8A90E8F21DB61805004ECA62 /* ChoosePackageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8F11DB61805004ECA62 /* ChoosePackageViewController.m */; };
+		8A90E8F51DB61F95004ECA62 /* InformationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8F41DB61F95004ECA62 /* InformationCollectionViewController.m */; };
+		8A90E8F81DB61FC2004ECA62 /* InformationCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8F71DB61FC2004ECA62 /* InformationCollectionView.m */; };
 		8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8821DADC6A80088DD82 /* HomeView.m */; };
 		8AABF8861DADFB750088DD82 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8851DADFB750088DD82 /* Utils.m */; };
 		8AABF8891DAE11060088DD82 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8881DAE11060088DD82 /* TopView.m */; };
@@ -187,6 +197,26 @@
 		8A6CBF681DB0FEE6002625E8 /* NormalOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalOrderDetailViewController.m; sourceTree = "<group>"; };
 		8A6CBF6A1DB0FF49002625E8 /* NormalOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalOrderDetailView.h; sourceTree = "<group>"; };
 		8A6CBF6B1DB0FF49002625E8 /* NormalOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormalOrderDetailView.m; sourceTree = "<group>"; };
+		8A90E8DB1DB5B522004ECA62 /* TopResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopResultViewController.h; sourceTree = "<group>"; };
+		8A90E8DC1DB5B522004ECA62 /* TopResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopResultViewController.m; sourceTree = "<group>"; };
+		8A90E8DE1DB5B552004ECA62 /* TopResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopResultView.h; sourceTree = "<group>"; };
+		8A90E8DF1DB5B552004ECA62 /* TopResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopResultView.m; sourceTree = "<group>"; };
+		8A90E8E11DB5BD10004ECA62 /* UIView+ORGetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ORGetController.h"; sourceTree = "<group>"; };
+		8A90E8E21DB5BD10004ECA62 /* UIView+ORGetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ORGetController.m"; sourceTree = "<group>"; };
+		8A90E8E41DB5D326004ECA62 /* PayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayView.h; sourceTree = "<group>"; };
+		8A90E8E51DB5D326004ECA62 /* PayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayView.m; sourceTree = "<group>"; };
+		8A90E8E71DB5FB47004ECA62 /* CardManageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardManageView.h; sourceTree = "<group>"; };
+		8A90E8E81DB5FB47004ECA62 /* CardManageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardManageView.m; sourceTree = "<group>"; };
+		8A90E8EA1DB6109B004ECA62 /* FailedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedView.h; sourceTree = "<group>"; };
+		8A90E8EB1DB6109B004ECA62 /* FailedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedView.m; sourceTree = "<group>"; };
+		8A90E8ED1DB61747004ECA62 /* ChoosePackageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePackageView.h; sourceTree = "<group>"; };
+		8A90E8EE1DB61747004ECA62 /* ChoosePackageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePackageView.m; sourceTree = "<group>"; };
+		8A90E8F01DB61805004ECA62 /* ChoosePackageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePackageViewController.h; sourceTree = "<group>"; };
+		8A90E8F11DB61805004ECA62 /* ChoosePackageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePackageViewController.m; sourceTree = "<group>"; };
+		8A90E8F31DB61F95004ECA62 /* InformationCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCollectionViewController.h; sourceTree = "<group>"; };
+		8A90E8F41DB61F95004ECA62 /* InformationCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationCollectionViewController.m; sourceTree = "<group>"; };
+		8A90E8F61DB61FC2004ECA62 /* InformationCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCollectionView.h; sourceTree = "<group>"; };
+		8A90E8F71DB61FC2004ECA62 /* InformationCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationCollectionView.m; sourceTree = "<group>"; };
 		8AABF8811DADC6A80088DD82 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
 		8AABF8821DADC6A80088DD82 /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
 		8AABF8841DADFB750088DD82 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -445,6 +475,8 @@
 				8AABF8961DAE51460088DD82 /* PhoneCashCheckViewController.m */,
 				8AABF89B1DAE5AF20088DD82 /* CheckAndTopViewController.h */,
 				8AABF89C1DAE5AF20088DD82 /* CheckAndTopViewController.m */,
+				8A90E8DB1DB5B522004ECA62 /* TopResultViewController.h */,
+				8A90E8DC1DB5B522004ECA62 /* TopResultViewController.m */,
 				8AABF8A41DAE6BE00088DD82 /* TopCallMoneyViewController.h */,
 				8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */,
 				8A3D7D681DAF29DB00824B7D /* TopAndInquiryViewController.h */,
@@ -473,8 +505,12 @@
 				8AB992CE1DB4CCA000D75492 /* PhoneCashCheckTVCell.m */,
 				8AABF89E1DAE5BB90088DD82 /* CheckAndTopView.h */,
 				8AABF89F1DAE5BB90088DD82 /* CheckAndTopView.m */,
+				8A90E8DE1DB5B552004ECA62 /* TopResultView.h */,
+				8A90E8DF1DB5B552004ECA62 /* TopResultView.m */,
 				8AABF8A71DAE6C310088DD82 /* TopCallMoneyView.h */,
 				8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */,
+				8A90E8E41DB5D326004ECA62 /* PayView.h */,
+				8A90E8E51DB5D326004ECA62 /* PayView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -496,6 +532,10 @@
 				8AD96E411DACCF900080CC8C /* CardViewController.m */,
 				8AEEF9881DAF60D200D3D6AD /* FinishCardViewController.h */,
 				8AEEF9891DAF60D200D3D6AD /* FinishCardViewController.m */,
+				8A90E8F01DB61805004ECA62 /* ChoosePackageViewController.h */,
+				8A90E8F11DB61805004ECA62 /* ChoosePackageViewController.m */,
+				8A90E8F31DB61F95004ECA62 /* InformationCollectionViewController.h */,
+				8A90E8F41DB61F95004ECA62 /* InformationCollectionViewController.m */,
 				8AB87EBB1DB1F7350045CB90 /* SetMenuViewController.h */,
 				8AB87EBC1DB1F7350045CB90 /* SetMenuViewController.m */,
 				8AEEF98E1DAF66CF00D3D6AD /* TransferCardViewController.h */,
@@ -518,8 +558,16 @@
 			children = (
 				8AABF8921DAE395D0088DD82 /* CardView.h */,
 				8AABF8931DAE395D0088DD82 /* CardView.m */,
+				8A90E8E71DB5FB47004ECA62 /* CardManageView.h */,
+				8A90E8E81DB5FB47004ECA62 /* CardManageView.m */,
 				8AEEF98B1DAF60E100D3D6AD /* FinishCardView.h */,
 				8AEEF98C1DAF60E100D3D6AD /* FinishCardView.m */,
+				8A90E8EA1DB6109B004ECA62 /* FailedView.h */,
+				8A90E8EB1DB6109B004ECA62 /* FailedView.m */,
+				8A90E8ED1DB61747004ECA62 /* ChoosePackageView.h */,
+				8A90E8EE1DB61747004ECA62 /* ChoosePackageView.m */,
+				8A90E8F61DB61FC2004ECA62 /* InformationCollectionView.h */,
+				8A90E8F71DB61FC2004ECA62 /* InformationCollectionView.m */,
 				8AB87EBE1DB1F7490045CB90 /* SetMenuView.h */,
 				8AB87EBF1DB1F7490045CB90 /* SetMenuView.m */,
 				8AEEF9911DAF66E300D3D6AD /* TransferCardView.h */,
@@ -576,6 +624,8 @@
 				8A49D8701DACCB4600A1D650 /* AppDelegate.m */,
 				8AABF8841DADFB750088DD82 /* Utils.h */,
 				8AABF8851DADFB750088DD82 /* Utils.m */,
+				8A90E8E11DB5BD10004ECA62 /* UIView+ORGetController.h */,
+				8A90E8E21DB5BD10004ECA62 /* UIView+ORGetController.m */,
 				8AABF8A11DAE68980088DD82 /* UIView+Toast.h */,
 				8AABF8A21DAE68980088DD82 /* UIView+Toast.m */,
 				8A49D8911DACCB9900A1D650 /* Controller */,
@@ -987,6 +1037,7 @@
 			files = (
 				8AEEF9901DAF66CF00D3D6AD /* TransferCardViewController.m in Sources */,
 				8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */,
+				8A90E8F51DB61F95004ECA62 /* InformationCollectionViewController.m in Sources */,
 				8A3D7D8E1DAF3BBF00824B7D /* CJUseTime.m in Sources */,
 				8AB992CC1DB4C11800D75492 /* RepairCardDetailView.m in Sources */,
 				8AABF8891DAE11060088DD82 /* TopView.m in Sources */,
@@ -998,8 +1049,10 @@
 				8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */,
 				8A6CBF291DB0A5AD002625E8 /* ProposeViewController.m in Sources */,
 				8AABF8971DAE51460088DD82 /* PhoneCashCheckViewController.m in Sources */,
+				8A90E8E61DB5D326004ECA62 /* PayView.m in Sources */,
 				8AABF8A31DAE68980088DD82 /* UIView+Toast.m in Sources */,
 				8A6CBF0A1DB07D47002625E8 /* LoginViewController.m in Sources */,
+				8A90E8E01DB5B552004ECA62 /* TopResultView.m in Sources */,
 				8AD96E421DACCF900080CC8C /* CardViewController.m in Sources */,
 				8AABF89A1DAE517E0088DD82 /* PhoneCashCheckView.m in Sources */,
 				8A6CBF5A1DB0B52B002625E8 /* SettingView.m in Sources */,
@@ -1018,10 +1071,12 @@
 				8A6CBF691DB0FEE6002625E8 /* NormalOrderDetailViewController.m in Sources */,
 				8A6CBF661DB0C939002625E8 /* OrderTwoView.m in Sources */,
 				8AB87EB41DB1DF650045CB90 /* CreatePayPasswordViewController.m in Sources */,
+				8A90E8EF1DB61747004ECA62 /* ChoosePackageView.m in Sources */,
 				8A6CBF481DB0B13A002625E8 /* PasswordManageView.m in Sources */,
 				8AB992C61DB4B75F00D75492 /* TransferDetailView.m in Sources */,
 				8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */,
 				8A6CBF5D1DB0C1C4002625E8 /* OrderTableViewCell.m in Sources */,
+				8A90E8EC1DB6109B004ECA62 /* FailedView.m in Sources */,
 				8A6CBF161DB086C8002625E8 /* ForgetPasswordView.m in Sources */,
 				8AB87EAE1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m in Sources */,
 				8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */,
@@ -1033,6 +1088,7 @@
 				8A6CBF421DB0B0D4002625E8 /* PersonalInfoViewController.m in Sources */,
 				8AD96E731DAD09F10080CC8C /* TransferViewController.m in Sources */,
 				8AD96E361DACCF220080CC8C /* MainNavigationController.m in Sources */,
+				8A90E8DD1DB5B522004ECA62 /* TopResultViewController.m in Sources */,
 				8AABF89D1DAE5AF20088DD82 /* CheckAndTopViewController.m in Sources */,
 				8AEEF98D1DAF60E100D3D6AD /* FinishCardView.m in Sources */,
 				8AD96E3C1DACCF790080CC8C /* OrderViewController.m in Sources */,
@@ -1046,6 +1102,7 @@
 				8AB992CF1DB4CCA000D75492 /* PhoneCashCheckTVCell.m in Sources */,
 				8AB87EC01DB1F7490045CB90 /* SetMenuView.m in Sources */,
 				8A3D7D8C1DAF3BBF00824B7D /* CJMonthDayViewController.m in Sources */,
+				8A90E8E91DB5FB47004ECA62 /* CardManageView.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
 				8AB992C91DB4C10600D75492 /* RepairCardDetailViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
@@ -1053,6 +1110,7 @@
 				8AB87EA81DB1C37B0045CB90 /* PersonalInfoView.m in Sources */,
 				8AEEF98A1DAF60D200D3D6AD /* FinishCardViewController.m in Sources */,
 				8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */,
+				8A90E8F81DB61FC2004ECA62 /* InformationCollectionView.m in Sources */,
 				8A3D7D8B1DAF3BBF00824B7D /* CJCalendarViewController.m in Sources */,
 				8AB87EBA1DB1E32E0045CB90 /* AlterPayPasswordViewController.m in Sources */,
 				8A3D7D8F1DAF3BBF00824B7D /* CJDecisionView.m in Sources */,
@@ -1067,8 +1125,10 @@
 				8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */,
 				8A6CBF6C1DB0FF49002625E8 /* NormalOrderDetailView.m in Sources */,
 				8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */,
+				8A90E8F21DB61805004ECA62 /* ChoosePackageViewController.m in Sources */,
 				8AABF8A61DAE6BE00088DD82 /* TopCallMoneyViewController.m in Sources */,
 				8AD96E391DACCF3E0080CC8C /* HomeViewController.m in Sources */,
+				8A90E8E31DB5BD10004ECA62 /* UIView+ORGetController.m in Sources */,
 				8AC3A28B1DB48708007D432A /* AccountView.m in Sources */,
 				8A6CBF601DB0C3F2002625E8 /* OrderView.m in Sources */,
 				8A3D7D6D1DAF2A9700824B7D /* ContentView.m in Sources */,

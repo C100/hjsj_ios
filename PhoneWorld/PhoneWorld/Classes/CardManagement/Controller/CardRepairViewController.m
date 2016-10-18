@@ -18,7 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"补卡";
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
     self.repairCardView = [[RepairCardView alloc] init];
     [self.view addSubview:self.repairCardView];
     [self.repairCardView mas_makeConstraints:^(MASConstraintMaker *make) {

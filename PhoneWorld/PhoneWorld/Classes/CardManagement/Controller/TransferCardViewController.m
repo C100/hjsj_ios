@@ -18,7 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"过户";
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
     self.transferCardView = [[TransferCardView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.transferCardView];
     self.transferCardView.delegate = self;

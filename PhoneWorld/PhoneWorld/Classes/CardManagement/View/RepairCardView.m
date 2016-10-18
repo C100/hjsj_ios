@@ -27,7 +27,8 @@
         self.contentSize = CGSizeMake(screenWidth, 650);
         self.bounces = NO;
         self.showsVerticalScrollIndicator = NO;
-        
+        self.backgroundColor = [UIColor whiteColor];
+
         self.choices = @[@"顺丰到付",@"充值一百免邮费"];
         self.warnings = @[@"上传手持身份证正面照", @"上传身份证背面照"];
         

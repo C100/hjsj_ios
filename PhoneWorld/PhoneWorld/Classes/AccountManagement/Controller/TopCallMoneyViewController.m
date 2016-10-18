@@ -8,6 +8,7 @@
 
 #import "TopCallMoneyViewController.h"
 #import "TopCallMoneyView.h"
+#import "PayView.h"
 
 @interface TopCallMoneyViewController ()
 @property (nonatomic) TopCallMoneyView *topCallMoneyView;
@@ -15,20 +16,31 @@
 
 @implementation TopCallMoneyViewController
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    [IQKeyboardManager sharedManager].enable = NO;
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    [IQKeyboardManager sharedManager].enable = YES;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"话费充值";
-    self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-
+    
     self.topCallMoneyView = [[TopCallMoneyView alloc] init];
     [self.view addSubview:self.topCallMoneyView];
     [self.topCallMoneyView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -36,17 +48,8 @@
     }];
     
     __block __weak TopCallMoneyViewController *weakself = self;
-    [self.topCallMoneyView setTopCallMoneyCallBack:^(NSInteger tag, NSInteger money) {
-        if (tag == 650) {
-            //话费充值确定操作
-            if (money == 0) {
-                [Utils toastview:@"请选择充值面额"];
-            }else if([Utils isMobile:weakself.topCallMoneyView.phoneTF.text] == NO){
-                [Utils toastview:@"请输入正确手机号"];
-            }else{
-                NSLog(@"--------确定？");
-            }            
-        }
+    [self.topCallMoneyView setTopCallMoneyCallBack:^(NSInteger money, NSString *phone) {
+        
     }];
 }
 

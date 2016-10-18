@@ -7,6 +7,14 @@
 //
 
 #import "FinishCardView.h"
+#import "FailedView.h"
+#import "ChoosePackageViewController.h"
+
+@interface FinishCardView ()
+
+@property (nonatomic) FailedView *failedView;
+
+@end
 
 @implementation FinishCardView
 
@@ -18,102 +26,132 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self phoneLB];
-        [self phoneTF];
-        [self pukLB];
-        [self pukButton];
-        [self pukTF];
+        self.backgroundColor = COLOR_BACKGROUND;
+        [self phoneView];
+        [self pukView];
         [self nextButton];
     }
     return self;
 }
 
-- (UILabel *)phoneLB{
-    if (_phoneLB == nil) {
-        _phoneLB = [[UILabel alloc] init];
-        [self addSubview:_phoneLB];
-        [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(15);
-            make.left.mas_equalTo(10);
+- (UIView *)phoneView{
+    if (_phoneView == nil) {
+        _phoneView = [[UIView alloc] init];
+        _phoneView.tag = 111;
+        [self addSubview:_phoneView];
+        [_phoneView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(1);
+            make.height.mas_equalTo(40);
         }];
-        _phoneLB.text = @"手机号码：";
-        _phoneLB.textColor = [Utils colorRGB:@"#333333"];
-        _phoneLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _phoneLB;
-}
-
-- (UITextField *)phoneTF{
-    if (_phoneTF == nil) {
-        _phoneTF = [[UITextField alloc] init];
-        [self addSubview:_phoneTF];
-        [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(10);
-            make.width.mas_equalTo(screenWidth - 90);
-            make.right.mas_equalTo(-10);
-            make.height.mas_equalTo(30);
-        }];
-        _phoneTF.placeholder = @"请输入手机号码";
-        _phoneTF.textColor = [Utils colorRGB:@"#333333"];
-        _phoneTF.font = [UIFont systemFontOfSize:14];
-        _phoneTF.borderStyle = UITextBorderStyleRoundedRect;
-    }
-    return _phoneTF;
-}
-
-- (UILabel *)pukLB{
-    if (_pukLB == nil) {
-        _pukLB = [[UILabel alloc] init];
-        [self addSubview:_pukLB];
-        [_pukLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.phoneLB.mas_bottom).mas_equalTo(35);
-            make.left.mas_equalTo(10);
-        }];
-        _pukLB.text = @"PUK码：";
-        _pukLB.textColor = [Utils colorRGB:@"#333333"];
-        _pukLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _pukLB;
-}
-
-- (UIButton *)pukButton{
-    if (_pukButton == nil) {
-        _pukButton = [[UIButton alloc] init];
-        [self addSubview:_pukButton];
-        [_pukButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-10);
-            make.height.mas_equalTo(30);
-            make.top.mas_equalTo(self.phoneTF.mas_bottom).mas_equalTo(20);
+        _phoneView.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *leftLB = [[UILabel alloc] init];
+        [_phoneView addSubview:leftLB];
+        [leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.centerY.mas_equalTo(0);
             make.width.mas_equalTo(60);
         }];
-        _pukButton.backgroundColor = [Utils colorRGB:@"#008bd5"];
-        [_pukButton setTitle:@"校验" forState:UIControlStateNormal];
-        _pukButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_pukButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _pukButton.layer.cornerRadius = 6;
-        _pukButton.layer.masksToBounds = YES;
-        _pukButton.tag = 750;
-        [_pukButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _pukButton;
-}
-
-- (UITextField *)pukTF{
-    if (_pukTF == nil) {
-        _pukTF = [[UITextField alloc] init];
-        [self addSubview:_pukTF];
-        [_pukTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.phoneTF.mas_bottom).mas_equalTo(20);
-            make.width.mas_equalTo(screenWidth - 160);
-            make.right.mas_equalTo(self.pukButton.mas_left).mas_equalTo(-10);
+        leftLB.text = @"手机号码";
+        leftLB.textColor = [Utils colorRGB:@"#666666"];
+        leftLB.font = [UIFont systemFontOfSize:14];
+        
+        UILabel *rightLB = [[UILabel alloc] init];
+        [_phoneView addSubview:rightLB];
+        [rightLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-15);
+            make.centerY.mas_equalTo(0);
+            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(0);
+        }];
+        rightLB.textAlignment = NSTextAlignmentRight;
+        rightLB.text = @"请输入手机号码";
+        rightLB.textColor = [Utils colorRGB:@"#cccccc"];
+        rightLB.font = [UIFont systemFontOfSize:12];
+        self.phoneLB = rightLB;
+        
+        UITextField *tf = [[UITextField alloc] init];
+        tf.tag = 1000;
+        [_phoneView addSubview:tf];
+        [tf mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(0);
+            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(10);
+            make.right.mas_equalTo(-15);
             make.height.mas_equalTo(30);
         }];
-        _pukTF.placeholder = @"请输入PUK码";
-        _pukTF.textColor = [Utils colorRGB:@"#333333"];
-        _pukTF.font = [UIFont systemFontOfSize:14];
-        _pukTF.borderStyle = UITextBorderStyleRoundedRect;
+        tf.borderStyle = UITextBorderStyleRoundedRect;
+        tf.hidden = YES;
+        tf.textColor = [Utils colorRGB:@"#666666"];
+        tf.font = [UIFont systemFontOfSize:14];
+        [tf setReturnKeyType:UIReturnKeyDone];
+        tf.delegate = self;
+        [tf addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
+        self.phoneTF = tf;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [_phoneView addGestureRecognizer:tap];
     }
-    return _pukTF;
+    return _phoneView;
+}
+
+- (UIView *)pukView{
+    if (_pukView == nil) {
+        _pukView = [[UIView alloc] init];
+        _pukView.tag = 222;
+        [self addSubview:_pukView];
+        [_pukView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(self.phoneView.mas_bottom).mas_equalTo(1);
+            make.height.mas_equalTo(40);
+        }];
+        _pukView.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *leftLB = [[UILabel alloc] init];
+        [_pukView addSubview:leftLB];
+        [leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.centerY.mas_equalTo(0);
+            make.width.mas_equalTo(60);
+        }];
+        leftLB.text = @"PUK码";
+        leftLB.textColor = [Utils colorRGB:@"#666666"];
+        leftLB.font = [UIFont systemFontOfSize:14];
+        
+        UILabel *rightLB = [[UILabel alloc] init];
+        [_pukView addSubview:rightLB];
+        [rightLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-15);
+            make.centerY.mas_equalTo(0);
+            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(0);
+        }];
+        rightLB.textAlignment = NSTextAlignmentRight;
+        rightLB.text = @"请输入PUK码";
+        rightLB.textColor = [Utils colorRGB:@"#cccccc"];
+        rightLB.font = [UIFont systemFontOfSize:12];
+        self.pukLB = rightLB;
+        
+        UITextField *tf = [[UITextField alloc] init];
+        [_pukView addSubview:tf];
+        [tf mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(0);
+            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(10);
+            make.right.mas_equalTo(-15);
+            make.height.mas_equalTo(30);
+        }];
+        tf.borderStyle = UITextBorderStyleRoundedRect;
+        tf.hidden = YES;
+        tf.textColor = [Utils colorRGB:@"#666666"];
+        tf.font = [UIFont systemFontOfSize:14];
+        tf.tag = 2000;
+        [tf setReturnKeyType:UIReturnKeyDone];
+        tf.delegate = self;
+        [tf addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
+        self.pukTF = tf;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [_pukView addGestureRecognizer:tap];
+    }
+    return _pukView;
 }
 
 - (UIButton *)nextButton{
@@ -121,30 +159,97 @@
         _nextButton = [[UIButton alloc] init];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-10);
+            make.top.mas_equalTo(self.pukView.mas_bottom).mas_equalTo(40);
+            make.centerX.mas_equalTo(0);
             make.height.mas_equalTo(40);
-            make.top.mas_equalTo(self.pukTF.mas_bottom).mas_equalTo(20);
-            make.left.mas_equalTo(10);
+            make.width.mas_equalTo(171);
         }];
-        _nextButton.backgroundColor = [Utils colorRGB:@"#008bd5"];
         [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 6;
+        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
+        _nextButton.layer.cornerRadius = 20;
+        _nextButton.layer.borderColor = MainColor.CGColor;
+        _nextButton.layer.borderWidth = 1;
         _nextButton.layer.masksToBounds = YES;
-        _nextButton.tag = 760;
+        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;
 }
 
-#pragma mark - Method
-- (void)buttonClickAction:(UIButton *)button{
-    if (button.tag == 750) {
-        //校验按钮
-    }else if(button.tag == 760){
-        //下一步按钮
+#pragma mark - Method 
+- (void)textFieldDidChanged:(UITextField *)textField{
+    if (textField.tag == 1000) {
+        //phone
+        self.phoneLB.text = textField.text;
+        self.phoneLB.textColor = [Utils colorRGB:@"#666666"];
+    }else if(textField.tag == 2000){
+        //puk
+        self.pukLB.text = textField.text;
+        self.pukLB.textColor = [Utils colorRGB:@"#666666"];
     }
+}
+
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (![Utils isMobile:self.phoneTF.text]) {
+        self.phoneLB.text = @"请输入手机号码";
+        [Utils toastview:@"请输入正确格式手机号"];
+    }
+    if(![Utils isNumber:self.pukTF.text]){
+        self.pukLB.text = @"请输入PUK码";
+        [Utils toastview:@"请输入数字"];
+    }
+    self.phoneTF.hidden = YES;
+    self.pukTF.hidden = YES;
+    return YES;
+}
+
+#pragma mark - Method
+
+- (void)tapAction:(UITapGestureRecognizer *)tap{
+    if (tap.view.tag == 222) {//puk
+        self.pukTF.hidden = self.pukTF.hidden == NO ? YES : NO;
+        self.phoneTF.hidden = YES;
+        [self.pukTF becomeFirstResponder];
+    }else{
+        self.phoneTF.hidden = self.phoneTF.hidden == NO ? YES : NO;
+        self.pukTF.hidden = YES;
+        [self.phoneTF becomeFirstResponder];
+    }
+}
+
+- (void)buttonClickAction:(UIButton *)button{
+    //下一步
+    [self endEditing:YES];
+    if ([Utils isMobile:self.phoneTF.text] && [Utils isNumber:self.pukTF.text]) {
+        //检测
+        //成功
+        ChoosePackageViewController *vc = [ChoosePackageViewController new];
+        vc.userinfos = @[self.phoneTF.text,@"浙江省杭州市",@"已激活",@"话机通信"];
+        UIViewController *viewController = [self viewController];
+        [viewController.navigationController pushViewController:vc animated:YES];
+        //失败
+        /*
+        self.failedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.failedView];
+        
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
+         */
+    }else{
+        if (![Utils isMobile:self.phoneTF.text]) {
+            [Utils toastview:@"请输入正确格式手机号"];
+        }else if(![Utils isNumber:self.pukTF.text]){
+            [Utils toastview:@"请输入正确格式PUK码"];
+        }
+    }
+}
+
+- (void)removeGrayView{
+    [UIView animateWithDuration:1.0 animations:^{
+        self.failedView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.failedView removeFromSuperview];
+    }];
 }
 
 @end

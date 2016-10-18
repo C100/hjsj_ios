@@ -191,9 +191,6 @@
                 make.centerY.mas_equalTo(0);
                 make.left.mas_equalTo(imageV.mas_right).mas_equalTo(10);
             }];
-//            if (<#condition#>) {
-//                <#statements#>
-//            }
         }
     }
     return _payWay;

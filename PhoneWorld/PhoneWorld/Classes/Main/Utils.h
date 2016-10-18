@@ -21,4 +21,8 @@
 
 + (BOOL)checkPassword:(NSString*) password;
 
++ (UIBarButtonItem *)returnBackButton;
+
++ (NSMutableAttributedString *)setTextColor:(NSString *)text FontNumber:(id)font AndRange:(NSRange)range AndColor:(UIColor *)vaColor;
+
 @end

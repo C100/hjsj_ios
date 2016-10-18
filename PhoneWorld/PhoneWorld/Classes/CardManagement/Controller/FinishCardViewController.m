@@ -17,8 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"成卡开户";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"号码验证";
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
+    backButton.title = @"返回";
+    [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
+    self.navigationItem.backBarButtonItem = backButton;
+    
     self.finishCardView = [[FinishCardView alloc] init];
     [self.view addSubview:self.finishCardView];
     [self.finishCardView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -19,6 +19,7 @@
             make.left.mas_equalTo(10);
             make.height.width.mas_equalTo(40);
         }];
+        _imageV.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _imageV;
 }

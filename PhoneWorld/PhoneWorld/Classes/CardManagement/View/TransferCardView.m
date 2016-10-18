@@ -27,6 +27,7 @@
         self.contentSize = CGSizeMake(screenWidth, imageW*hw*2 + 500);
         self.bounces = NO;
         self.showsVerticalScrollIndicator = NO;
+        self.backgroundColor = [UIColor whiteColor];
         [self transferLB];
         [self transferTF];
         [self nameLB];

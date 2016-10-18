@@ -60,7 +60,7 @@
         _accountTableView.delegate = self;
         _accountTableView.dataSource = self;
         _accountTableView.bounces = NO;
-        _accountTableView.backgroundColor = [Utils colorRGB:@"#eaeaea"];
+        _accountTableView.backgroundColor = COLOR_BACKGROUND;
         [self addSubview:_accountTableView];
         _accountTableView.tableFooterView = [UIView new];
     }
