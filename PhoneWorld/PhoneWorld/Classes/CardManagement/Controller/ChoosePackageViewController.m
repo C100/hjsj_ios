@@ -24,7 +24,7 @@
     [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
     self.navigationItem.backBarButtonItem = backButton;
     
-    self.chooseView = [[ChoosePackageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andUserinfos:self.userinfos];
+    self.chooseView = [[ChoosePackageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andUserinfos:self.userinfosDic];
     [self.view addSubview:self.chooseView];
 }
 

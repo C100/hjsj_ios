@@ -7,17 +7,16 @@
 //
 
 #import "CardViewController.h"
-//#import "CardView.h"
 #import "CardManageView.h"
 #import "FinishCardViewController.h"
 #import "TransferCardViewController.h"
 #import "CardRepairViewController.h"
+#import "WhiteCardViewController.h"
 
 #import "MessageViewController.h"
 #import "PersonalHomeViewController.h"
 
 @interface CardViewController ()
-//@property (nonatomic) CardView *cardView;
 @property (nonatomic) CardManageView *cardView;
 @end
 
@@ -58,7 +57,9 @@
                 break;
             case 1:
             {
-                
+                WhiteCardViewController *vc = [WhiteCardViewController new];
+                vc.hidesBottomBarWhenPushed = YES;
+                [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 2:

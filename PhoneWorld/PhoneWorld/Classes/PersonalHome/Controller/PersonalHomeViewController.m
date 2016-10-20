@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 #import "MessageViewController.h"
 #import "NaviViewController.h"
+#import "CommisionCountViewController.h"
 
 @interface PersonalHomeViewController ()
 @property (nonatomic) PersonalHomeView *personalHomeView;
@@ -21,9 +22,20 @@
 
 @implementation PersonalHomeViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.navigationController.navigationBar.barTintColor = MainColor;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"个人中心";
+    
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
+    
     self.personalHomeView = [[PersonalHomeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.personalHomeView];
     __block __weak PersonalHomeViewController *weakself = self;
@@ -49,7 +61,8 @@
                 break;
             case 3:
             {//佣金统计
-                
+                CommisionCountViewController *vc = [CommisionCountViewController new];
+                [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 4:

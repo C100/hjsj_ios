@@ -10,6 +10,12 @@
 
 @interface InformationCollectionView : UIView <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
+- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos;
+
 @property (nonatomic) UITableView *tableView;
+
+@property (nonatomic) UIButton *nextButton;
+
+@property (nonatomic) NSMutableDictionary *userinfosDic;
 
 @end

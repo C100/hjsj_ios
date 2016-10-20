@@ -59,9 +59,10 @@
         cell.imageView.image = [UIImage imageNamed:self.imageNames[indexPath.row]];
         cell.textLabel.text = self.titles[indexPath.row];
         cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
+        cell.textLabel.font = [UIFont systemFontOfSize:16];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else{
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 60)];
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 44)];
         lb.text = @"退出登录";
         lb.textColor = MainColor;
         lb.textAlignment = NSTextAlignmentCenter;
@@ -77,10 +78,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"关于我们";
-    self.view.backgroundColor = [UIColor whiteColor];
     self.aboutUsView = [[AboutUsView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.aboutUsView];
 }

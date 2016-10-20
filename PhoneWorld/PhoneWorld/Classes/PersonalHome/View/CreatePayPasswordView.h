@@ -10,8 +10,7 @@
 
 @interface CreatePayPasswordView : UIView
 
-@property (nonatomic) NSMutableArray *passwordTextFields;
-
+@property (nonatomic) void(^CreatePayPasswordCallBack) (id obj);
 @property (nonatomic) UIButton *saveButton;
 
 @end

@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ChoosePackageView : UIView <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
-- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSArray *)userinfos;
-@property (nonatomic) NSArray *userinfos;
+- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos;
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UIButton *nextButton;
 @property (nonatomic) UITextField *moneyTF;

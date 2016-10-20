@@ -37,8 +37,6 @@
 		8A6CBF421DB0B0D4002625E8 /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF411DB0B0D4002625E8 /* PersonalInfoViewController.m */; };
 		8A6CBF451DB0B12C002625E8 /* PasswordManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF441DB0B12C002625E8 /* PasswordManageViewController.m */; };
 		8A6CBF481DB0B13A002625E8 /* PasswordManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF471DB0B13A002625E8 /* PasswordManageView.m */; };
-		8A6CBF4E1DB0B462002625E8 /* NewsCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF4D1DB0B462002625E8 /* NewsCenterView.m */; };
-		8A6CBF511DB0B479002625E8 /* NewsCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF501DB0B479002625E8 /* NewsCenterTableViewCell.m */; };
 		8A6CBF541DB0B4F9002625E8 /* CommisionCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF531DB0B4F9002625E8 /* CommisionCountViewController.m */; };
 		8A6CBF571DB0B510002625E8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF561DB0B510002625E8 /* SettingViewController.m */; };
 		8A6CBF5A1DB0B52B002625E8 /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF591DB0B52B002625E8 /* SettingView.m */; };
@@ -58,6 +56,18 @@
 		8A90E8F21DB61805004ECA62 /* ChoosePackageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8F11DB61805004ECA62 /* ChoosePackageViewController.m */; };
 		8A90E8F51DB61F95004ECA62 /* InformationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8F41DB61F95004ECA62 /* InformationCollectionViewController.m */; };
 		8A90E8F81DB61FC2004ECA62 /* InformationCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A90E8F71DB61FC2004ECA62 /* InformationCollectionView.m */; };
+		8A9698981DB70FC1000841BA /* SettlementDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698971DB70FC1000841BA /* SettlementDetailViewController.m */; };
+		8A96989B1DB70FE9000841BA /* SettlementDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96989A1DB70FE9000841BA /* SettlementDetailView.m */; };
+		8A96989E1DB727CE000841BA /* WhiteCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96989D1DB727CE000841BA /* WhiteCardViewController.m */; };
+		8A9698A11DB727E9000841BA /* WhiteCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698A01DB727E9000841BA /* WhiteCardView.m */; };
+		8A9698A41DB74233000841BA /* WhiteCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698A31DB74233000841BA /* WhiteCardCell.m */; };
+		8A9698A71DB74B5D000841BA /* PhoneDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698A61DB74B5D000841BA /* PhoneDetailView.m */; };
+		8A9698AA1DB755DA000841BA /* ReadCardAndChoosePackageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698A91DB755DA000841BA /* ReadCardAndChoosePackageViewController.m */; };
+		8A9698AD1DB755F1000841BA /* ReadCardAndChoosePackageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698AC1DB755F1000841BA /* ReadCardAndChoosePackageView.m */; };
+		8A9698B01DB75CDB000841BA /* ChoosePackageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698AF1DB75CDB000841BA /* ChoosePackageTableView.m */; };
+		8A9698B31DB76D0D000841BA /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698B21DB76D0D000841BA /* InputView.m */; };
+		8A9698B91DB78A0D000841BA /* PhoneNumberCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698B81DB78A0D000841BA /* PhoneNumberCheckViewController.m */; };
+		8A9698BC1DB78A1E000841BA /* PhoneNumberCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698BB1DB78A1E000841BA /* PhoneNumberCheckView.m */; };
 		8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8821DADC6A80088DD82 /* HomeView.m */; };
 		8AABF8861DADFB750088DD82 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8851DADFB750088DD82 /* Utils.m */; };
 		8AABF8891DAE11060088DD82 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8881DAE11060088DD82 /* TopView.m */; };
@@ -76,8 +86,6 @@
 		8AB87EB41DB1DF650045CB90 /* CreatePayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EB31DB1DF650045CB90 /* CreatePayPasswordViewController.m */; };
 		8AB87EB71DB1DF810045CB90 /* CreatePayPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EB61DB1DF810045CB90 /* CreatePayPasswordView.m */; };
 		8AB87EBA1DB1E32E0045CB90 /* AlterPayPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EB91DB1E32E0045CB90 /* AlterPayPasswordViewController.m */; };
-		8AB87EBD1DB1F7350045CB90 /* SetMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EBC1DB1F7350045CB90 /* SetMenuViewController.m */; };
-		8AB87EC01DB1F7490045CB90 /* SetMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EBF1DB1F7490045CB90 /* SetMenuView.m */; };
 		8AB87EC31DB203AF0045CB90 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EC21DB203AF0045CB90 /* FilterView.m */; };
 		8AB87EE91DB226DB0045CB90 /* NaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EE81DB226DB0045CB90 /* NaviViewController.m */; };
 		8AB992C31DB4B74D00D75492 /* TransferDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB992C21DB4B74D00D75492 /* TransferDetailViewController.m */; };
@@ -175,10 +183,6 @@
 		8A6CBF441DB0B12C002625E8 /* PasswordManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordManageViewController.m; sourceTree = "<group>"; };
 		8A6CBF461DB0B13A002625E8 /* PasswordManageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordManageView.h; sourceTree = "<group>"; };
 		8A6CBF471DB0B13A002625E8 /* PasswordManageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordManageView.m; sourceTree = "<group>"; };
-		8A6CBF4C1DB0B462002625E8 /* NewsCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCenterView.h; sourceTree = "<group>"; };
-		8A6CBF4D1DB0B462002625E8 /* NewsCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCenterView.m; sourceTree = "<group>"; };
-		8A6CBF4F1DB0B479002625E8 /* NewsCenterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCenterTableViewCell.h; sourceTree = "<group>"; };
-		8A6CBF501DB0B479002625E8 /* NewsCenterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCenterTableViewCell.m; sourceTree = "<group>"; };
 		8A6CBF521DB0B4F9002625E8 /* CommisionCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommisionCountViewController.h; sourceTree = "<group>"; };
 		8A6CBF531DB0B4F9002625E8 /* CommisionCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommisionCountViewController.m; sourceTree = "<group>"; };
 		8A6CBF551DB0B510002625E8 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -217,6 +221,30 @@
 		8A90E8F41DB61F95004ECA62 /* InformationCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationCollectionViewController.m; sourceTree = "<group>"; };
 		8A90E8F61DB61FC2004ECA62 /* InformationCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationCollectionView.h; sourceTree = "<group>"; };
 		8A90E8F71DB61FC2004ECA62 /* InformationCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationCollectionView.m; sourceTree = "<group>"; };
+		8A9698961DB70FC1000841BA /* SettlementDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementDetailViewController.h; sourceTree = "<group>"; };
+		8A9698971DB70FC1000841BA /* SettlementDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementDetailViewController.m; sourceTree = "<group>"; };
+		8A9698991DB70FE9000841BA /* SettlementDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementDetailView.h; sourceTree = "<group>"; };
+		8A96989A1DB70FE9000841BA /* SettlementDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementDetailView.m; sourceTree = "<group>"; };
+		8A96989C1DB727CE000841BA /* WhiteCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteCardViewController.h; sourceTree = "<group>"; };
+		8A96989D1DB727CE000841BA /* WhiteCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteCardViewController.m; sourceTree = "<group>"; };
+		8A96989F1DB727E9000841BA /* WhiteCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteCardView.h; sourceTree = "<group>"; };
+		8A9698A01DB727E9000841BA /* WhiteCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteCardView.m; sourceTree = "<group>"; };
+		8A9698A21DB74233000841BA /* WhiteCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteCardCell.h; sourceTree = "<group>"; };
+		8A9698A31DB74233000841BA /* WhiteCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteCardCell.m; sourceTree = "<group>"; };
+		8A9698A51DB74B5D000841BA /* PhoneDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneDetailView.h; sourceTree = "<group>"; };
+		8A9698A61DB74B5D000841BA /* PhoneDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneDetailView.m; sourceTree = "<group>"; };
+		8A9698A81DB755DA000841BA /* ReadCardAndChoosePackageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadCardAndChoosePackageViewController.h; sourceTree = "<group>"; };
+		8A9698A91DB755DA000841BA /* ReadCardAndChoosePackageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadCardAndChoosePackageViewController.m; sourceTree = "<group>"; };
+		8A9698AB1DB755F1000841BA /* ReadCardAndChoosePackageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadCardAndChoosePackageView.h; sourceTree = "<group>"; };
+		8A9698AC1DB755F1000841BA /* ReadCardAndChoosePackageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadCardAndChoosePackageView.m; sourceTree = "<group>"; };
+		8A9698AE1DB75CDB000841BA /* ChoosePackageTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePackageTableView.h; sourceTree = "<group>"; };
+		8A9698AF1DB75CDB000841BA /* ChoosePackageTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePackageTableView.m; sourceTree = "<group>"; };
+		8A9698B11DB76D0D000841BA /* InputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
+		8A9698B21DB76D0D000841BA /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
+		8A9698B71DB78A0D000841BA /* PhoneNumberCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberCheckViewController.h; sourceTree = "<group>"; };
+		8A9698B81DB78A0D000841BA /* PhoneNumberCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberCheckViewController.m; sourceTree = "<group>"; };
+		8A9698BA1DB78A1E000841BA /* PhoneNumberCheckView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberCheckView.h; sourceTree = "<group>"; };
+		8A9698BB1DB78A1E000841BA /* PhoneNumberCheckView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberCheckView.m; sourceTree = "<group>"; };
 		8AABF8811DADC6A80088DD82 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
 		8AABF8821DADC6A80088DD82 /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
 		8AABF8841DADFB750088DD82 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -253,10 +281,6 @@
 		8AB87EB61DB1DF810045CB90 /* CreatePayPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatePayPasswordView.m; sourceTree = "<group>"; };
 		8AB87EB81DB1E32E0045CB90 /* AlterPayPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterPayPasswordViewController.h; sourceTree = "<group>"; };
 		8AB87EB91DB1E32E0045CB90 /* AlterPayPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlterPayPasswordViewController.m; sourceTree = "<group>"; };
-		8AB87EBB1DB1F7350045CB90 /* SetMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetMenuViewController.h; sourceTree = "<group>"; };
-		8AB87EBC1DB1F7350045CB90 /* SetMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMenuViewController.m; sourceTree = "<group>"; };
-		8AB87EBE1DB1F7490045CB90 /* SetMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetMenuView.h; sourceTree = "<group>"; };
-		8AB87EBF1DB1F7490045CB90 /* SetMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetMenuView.m; sourceTree = "<group>"; };
 		8AB87EC11DB203AF0045CB90 /* FilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
 		8AB87EC21DB203AF0045CB90 /* FilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
 		8AB87EE71DB226DB0045CB90 /* NaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviViewController.h; sourceTree = "<group>"; };
@@ -536,8 +560,12 @@
 				8A90E8F11DB61805004ECA62 /* ChoosePackageViewController.m */,
 				8A90E8F31DB61F95004ECA62 /* InformationCollectionViewController.h */,
 				8A90E8F41DB61F95004ECA62 /* InformationCollectionViewController.m */,
-				8AB87EBB1DB1F7350045CB90 /* SetMenuViewController.h */,
-				8AB87EBC1DB1F7350045CB90 /* SetMenuViewController.m */,
+				8A9698961DB70FC1000841BA /* SettlementDetailViewController.h */,
+				8A9698971DB70FC1000841BA /* SettlementDetailViewController.m */,
+				8A96989C1DB727CE000841BA /* WhiteCardViewController.h */,
+				8A96989D1DB727CE000841BA /* WhiteCardViewController.m */,
+				8A9698A81DB755DA000841BA /* ReadCardAndChoosePackageViewController.h */,
+				8A9698A91DB755DA000841BA /* ReadCardAndChoosePackageViewController.m */,
 				8AEEF98E1DAF66CF00D3D6AD /* TransferCardViewController.h */,
 				8AEEF98F1DAF66CF00D3D6AD /* TransferCardViewController.m */,
 				8AEEF9A21DAF839700D3D6AD /* CardRepairViewController.h */,
@@ -566,10 +594,20 @@
 				8A90E8EB1DB6109B004ECA62 /* FailedView.m */,
 				8A90E8ED1DB61747004ECA62 /* ChoosePackageView.h */,
 				8A90E8EE1DB61747004ECA62 /* ChoosePackageView.m */,
+				8A9698AE1DB75CDB000841BA /* ChoosePackageTableView.h */,
+				8A9698AF1DB75CDB000841BA /* ChoosePackageTableView.m */,
 				8A90E8F61DB61FC2004ECA62 /* InformationCollectionView.h */,
 				8A90E8F71DB61FC2004ECA62 /* InformationCollectionView.m */,
-				8AB87EBE1DB1F7490045CB90 /* SetMenuView.h */,
-				8AB87EBF1DB1F7490045CB90 /* SetMenuView.m */,
+				8A9698991DB70FE9000841BA /* SettlementDetailView.h */,
+				8A96989A1DB70FE9000841BA /* SettlementDetailView.m */,
+				8A96989F1DB727E9000841BA /* WhiteCardView.h */,
+				8A9698A01DB727E9000841BA /* WhiteCardView.m */,
+				8A9698A21DB74233000841BA /* WhiteCardCell.h */,
+				8A9698A31DB74233000841BA /* WhiteCardCell.m */,
+				8A9698A51DB74B5D000841BA /* PhoneDetailView.h */,
+				8A9698A61DB74B5D000841BA /* PhoneDetailView.m */,
+				8A9698AB1DB755F1000841BA /* ReadCardAndChoosePackageView.h */,
+				8A9698AC1DB755F1000841BA /* ReadCardAndChoosePackageView.m */,
 				8AEEF9911DAF66E300D3D6AD /* TransferCardView.h */,
 				8AEEF9921DAF66E300D3D6AD /* TransferCardView.m */,
 				8AEEF99A1DAF802A00D3D6AD /* RepairCardView.h */,
@@ -863,6 +901,8 @@
 				8AB87EB31DB1DF650045CB90 /* CreatePayPasswordViewController.m */,
 				8AB87EB81DB1E32E0045CB90 /* AlterPayPasswordViewController.h */,
 				8AB87EB91DB1E32E0045CB90 /* AlterPayPasswordViewController.m */,
+				8A9698B71DB78A0D000841BA /* PhoneNumberCheckViewController.h */,
+				8A9698B81DB78A0D000841BA /* PhoneNumberCheckViewController.m */,
 				8A6CBF521DB0B4F9002625E8 /* CommisionCountViewController.h */,
 				8A6CBF531DB0B4F9002625E8 /* CommisionCountViewController.m */,
 				8A6CBF551DB0B510002625E8 /* SettingViewController.h */,
@@ -885,16 +925,16 @@
 				8A6CBF2E1DB0AB1E002625E8 /* PersonalHomeView.m */,
 				8AB87EA61DB1C37B0045CB90 /* PersonalInfoView.h */,
 				8AB87EA71DB1C37B0045CB90 /* PersonalInfoView.m */,
+				8A9698B11DB76D0D000841BA /* InputView.h */,
+				8A9698B21DB76D0D000841BA /* InputView.m */,
 				8A6CBF461DB0B13A002625E8 /* PasswordManageView.h */,
 				8A6CBF471DB0B13A002625E8 /* PasswordManageView.m */,
 				8AB87EAF1DB1DCDC0045CB90 /* AlterLoginPasswordView.h */,
 				8AB87EB01DB1DCDC0045CB90 /* AlterLoginPasswordView.m */,
 				8AB87EB51DB1DF810045CB90 /* CreatePayPasswordView.h */,
 				8AB87EB61DB1DF810045CB90 /* CreatePayPasswordView.m */,
-				8A6CBF4C1DB0B462002625E8 /* NewsCenterView.h */,
-				8A6CBF4D1DB0B462002625E8 /* NewsCenterView.m */,
-				8A6CBF4F1DB0B479002625E8 /* NewsCenterTableViewCell.h */,
-				8A6CBF501DB0B479002625E8 /* NewsCenterTableViewCell.m */,
+				8A9698BA1DB78A1E000841BA /* PhoneNumberCheckView.h */,
+				8A9698BB1DB78A1E000841BA /* PhoneNumberCheckView.m */,
 				8A6CBF581DB0B52B002625E8 /* SettingView.h */,
 				8A6CBF591DB0B52B002625E8 /* SettingView.m */,
 			);
@@ -1035,6 +1075,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A9698A41DB74233000841BA /* WhiteCardCell.m in Sources */,
 				8AEEF9901DAF66CF00D3D6AD /* TransferCardViewController.m in Sources */,
 				8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */,
 				8A90E8F51DB61F95004ECA62 /* InformationCollectionViewController.m in Sources */,
@@ -1049,11 +1090,14 @@
 				8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */,
 				8A6CBF291DB0A5AD002625E8 /* ProposeViewController.m in Sources */,
 				8AABF8971DAE51460088DD82 /* PhoneCashCheckViewController.m in Sources */,
+				8A9698B01DB75CDB000841BA /* ChoosePackageTableView.m in Sources */,
 				8A90E8E61DB5D326004ECA62 /* PayView.m in Sources */,
 				8AABF8A31DAE68980088DD82 /* UIView+Toast.m in Sources */,
 				8A6CBF0A1DB07D47002625E8 /* LoginViewController.m in Sources */,
 				8A90E8E01DB5B552004ECA62 /* TopResultView.m in Sources */,
 				8AD96E421DACCF900080CC8C /* CardViewController.m in Sources */,
+				8A9698A71DB74B5D000841BA /* PhoneDetailView.m in Sources */,
+				8A9698B91DB78A0D000841BA /* PhoneNumberCheckViewController.m in Sources */,
 				8AABF89A1DAE517E0088DD82 /* PhoneCashCheckView.m in Sources */,
 				8A6CBF5A1DB0B52B002625E8 /* SettingView.m in Sources */,
 				8AABF88C1DAE34BA0088DD82 /* AccountTVCell.m in Sources */,
@@ -1064,11 +1108,13 @@
 				8A6CBF2C1DB0A5C5002625E8 /* ProposeView.m in Sources */,
 				8A6CBF2F1DB0AB1E002625E8 /* PersonalHomeView.m in Sources */,
 				8AABF8861DADFB750088DD82 /* Utils.m in Sources */,
+				8A9698BC1DB78A1E000841BA /* PhoneNumberCheckView.m in Sources */,
 				8AC3A2851DB4657F007D432A /* RegisterView.m in Sources */,
 				8AB992C31DB4B74D00D75492 /* TransferDetailViewController.m in Sources */,
 				8A3D7D6A1DAF29DB00824B7D /* TopAndInquiryViewController.m in Sources */,
 				8AD96E7C1DAD0C7F0080CC8C /* DropDownView.m in Sources */,
 				8A6CBF691DB0FEE6002625E8 /* NormalOrderDetailViewController.m in Sources */,
+				8A9698AD1DB755F1000841BA /* ReadCardAndChoosePackageView.m in Sources */,
 				8A6CBF661DB0C939002625E8 /* OrderTwoView.m in Sources */,
 				8AB87EB41DB1DF650045CB90 /* CreatePayPasswordViewController.m in Sources */,
 				8A90E8EF1DB61747004ECA62 /* ChoosePackageView.m in Sources */,
@@ -1088,22 +1134,25 @@
 				8A6CBF421DB0B0D4002625E8 /* PersonalInfoViewController.m in Sources */,
 				8AD96E731DAD09F10080CC8C /* TransferViewController.m in Sources */,
 				8AD96E361DACCF220080CC8C /* MainNavigationController.m in Sources */,
+				8A9698B31DB76D0D000841BA /* InputView.m in Sources */,
 				8A90E8DD1DB5B522004ECA62 /* TopResultViewController.m in Sources */,
 				8AABF89D1DAE5AF20088DD82 /* CheckAndTopViewController.m in Sources */,
 				8AEEF98D1DAF60E100D3D6AD /* FinishCardView.m in Sources */,
 				8AD96E3C1DACCF790080CC8C /* OrderViewController.m in Sources */,
 				8AB87EB71DB1DF810045CB90 /* CreatePayPasswordView.m in Sources */,
-				8A6CBF511DB0B479002625E8 /* NewsCenterTableViewCell.m in Sources */,
+				8A9698A11DB727E9000841BA /* WhiteCardView.m in Sources */,
 				8A6CBF451DB0B12C002625E8 /* PasswordManageViewController.m in Sources */,
+				8A9698981DB70FC1000841BA /* SettlementDetailViewController.m in Sources */,
 				8A6CBF631DB0C489002625E8 /* OrderTwoTableViewCell.m in Sources */,
 				8A3D7D921DAF3BBF00824B7D /* CJSelectTimeScrollView.m in Sources */,
 				8A6CBF541DB0B4F9002625E8 /* CommisionCountViewController.m in Sources */,
 				8AB87EC31DB203AF0045CB90 /* FilterView.m in Sources */,
 				8AB992CF1DB4CCA000D75492 /* PhoneCashCheckTVCell.m in Sources */,
-				8AB87EC01DB1F7490045CB90 /* SetMenuView.m in Sources */,
 				8A3D7D8C1DAF3BBF00824B7D /* CJMonthDayViewController.m in Sources */,
+				8A9698AA1DB755DA000841BA /* ReadCardAndChoosePackageViewController.m in Sources */,
 				8A90E8E91DB5FB47004ECA62 /* CardManageView.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
+				8A96989B1DB70FE9000841BA /* SettlementDetailView.m in Sources */,
 				8AB992C91DB4C10600D75492 /* RepairCardDetailViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
 				8AC3A2881DB46C53007D432A /* RegisterOneTVCell.m in Sources */,
@@ -1117,11 +1166,10 @@
 				8A6CBF191DB08CF9002625E8 /* ResetPasswordViewController.m in Sources */,
 				8A6CBF231DB09152002625E8 /* AboutUsViewController.m in Sources */,
 				8AABF8941DAE395D0088DD82 /* CardView.m in Sources */,
+				8A96989E1DB727CE000841BA /* WhiteCardViewController.m in Sources */,
 				8AEEF9931DAF66E300D3D6AD /* TransferCardView.m in Sources */,
 				8A3D7D931DAF3BBF00824B7D /* CJShowTimeView.m in Sources */,
 				8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */,
-				8A6CBF4E1DB0B462002625E8 /* NewsCenterView.m in Sources */,
-				8AB87EBD1DB1F7350045CB90 /* SetMenuViewController.m in Sources */,
 				8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */,
 				8A6CBF6C1DB0FF49002625E8 /* NormalOrderDetailView.m in Sources */,
 				8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */,

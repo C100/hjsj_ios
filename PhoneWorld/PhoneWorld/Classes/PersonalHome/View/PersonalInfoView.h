@@ -10,10 +10,12 @@
 
 @interface PersonalInfoView : UIScrollView
 
-@property (nonatomic) NSArray *userinfos;
+- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableArray *)userinfos;
+
+@property (nonatomic) void(^PersonalInfoCallBack) (id obj);
+
+@property (nonatomic) NSMutableArray *userinfos;
 
 @property (nonatomic) UIButton *saveButton;
-
-@property (nonatomic) NSMutableArray *userinfoTextFields;
 
 @end

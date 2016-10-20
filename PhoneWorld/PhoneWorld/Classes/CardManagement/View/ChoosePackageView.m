@@ -13,19 +13,20 @@
 
 @property (nonatomic) NSArray *titles;
 @property (nonatomic) NSArray *titlesTwo;
+@property (nonatomic) NSMutableDictionary *userinfosDic;
 
 @end
 
 @implementation ChoosePackageView
 
-- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSArray *)userinfos
+- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
         self.titles = @[@"号码：",@"号码归属地：",@"号码状态：",@"网络机制："];
         self.titlesTwo = @[@"套餐选择",@"活动包选择",@"预存金额"];
-        self.userinfos = userinfos;
+        self.userinfosDic = userinfos;
         [self addTopStateView];
         [self tableView];
         [self nextButton];
@@ -42,12 +43,17 @@
         make.height.mas_equalTo(130);
     }];
     v.backgroundColor = [UIColor whiteColor];
-    
-    for (int i = 0; i < self.userinfos.count; i++) {
+    NSArray *arr = @[@"phoneNumber",@"phoneAddress",@"phoneState",@"networkType"];
+    for (int i = 0; i < self.userinfosDic.count; i++) {
         UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15, 10 + 30*i, screenWidth - 30, 16)];
-        lb.text = [self.titles[i] stringByAppendingString:self.userinfos[i]];
+        lb.text = [self.titles[i] stringByAppendingString:self.userinfosDic[arr[i]]];
         lb.font = [UIFont systemFontOfSize:14];
-        lb.textColor = [Utils colorRGB:@"#999999"];
+        lb.textColor = [Utils colorRGB:@"#333333"];
+        
+        NSRange range = [lb.text rangeOfString:self.titles[i]];
+        
+        lb.attributedText = [Utils setTextColor:lb.text FontNumber:[UIFont systemFontOfSize:14] AndRange:range AndColor:[Utils colorRGB:@"#999999"]];
+
         [v addSubview:lb];
     }
     
@@ -109,6 +115,7 @@
         _moneyTF.hidden = YES;
         _moneyTF.returnKeyType = UIReturnKeyDone;
         _moneyTF.delegate = self;
+        [_moneyTF addTarget:self action:@selector(textFieldStateChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _moneyTF;
 }
@@ -173,11 +180,30 @@
 
 #pragma mark - Method
 
+- (void)textFieldStateChanged:(UITextField *)textField{
+    NSIndexPath *indexP = [NSIndexPath indexPathForRow:2 inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexP];
+    cell.detailTextLabel.text = textField.text;
+    cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
+}
+
 - (void)buttonClickAction:(UIButton *)button{
     /*---跳转到采集信息界面---*/
-    UIViewController *viewController = [self viewController];
-    InformationCollectionViewController *vc = [InformationCollectionViewController new];
-    [viewController.navigationController pushViewController:vc animated:YES];
+    NSIndexPath *indexP = [NSIndexPath indexPathForRow:2 inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexP];
+    if ([Utils isNumber:cell.detailTextLabel.text] && ![cell.detailTextLabel.text isEqualToString:@""]) {
+        cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
+//        NSLog(@"~~~~~~~~~~%@~~~~~~~~~~",cell.detailTextLabel.text);
+        
+        [self.userinfosDic addEntriesFromDictionary:@{@"prestoreMoney":self.moneyTF.text}];
+        
+        UIViewController *viewController = [self viewController];
+        InformationCollectionViewController *vc = [InformationCollectionViewController new];
+        vc.userinfosDic = self.userinfosDic;
+        [viewController.navigationController pushViewController:vc animated:YES];
+    }else{
+        [Utils toastview:@"请输入预存金额"];
+    }
 }
 
 @end

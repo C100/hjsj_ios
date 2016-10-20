@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegisterView : UIView <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface RegisterView : UIScrollView <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic) UITableView *registerTableView;
 @property (nonatomic) NSMutableArray *inputTFs;
-@property (nonatomic) UIButton *identifyingButton;
+@property (nonatomic) UIButton *verificationCodeButton;
+@property (nonatomic) UIButton *nextButton;
 
 @end

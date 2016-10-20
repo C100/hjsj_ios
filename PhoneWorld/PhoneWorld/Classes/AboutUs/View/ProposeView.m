@@ -27,10 +27,10 @@
         _placeholderLB = [[UILabel alloc] init];
         [self addSubview:_placeholderLB];
         [_placeholderLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.mas_equalTo(20);
+            make.top.left.mas_equalTo(5);
         }];
         _placeholderLB.text = @"请输入您的意见与建议";
-        _placeholderLB.textColor = [Utils colorRGB:@"#666666"];
+        _placeholderLB.textColor = [Utils colorRGB:@"#cccccc"];
         _placeholderLB.font = [UIFont systemFontOfSize:14];
         _placeholderLB.hidden = NO;
     }
@@ -42,8 +42,8 @@
         _proposeTV = [[UITextView alloc] init];
         [self addSubview:_proposeTV];
         [_proposeTV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.top.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
             make.height.mas_equalTo(125);
         }];
         _proposeTV.delegate = self;
@@ -60,18 +60,18 @@
         _submitButton = [[UIButton alloc] init];
         [self addSubview:_submitButton];
         [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.top.mas_equalTo(self.proposeTV.mas_bottom).mas_equalTo(40);
+            make.centerX.mas_equalTo(0);
             make.height.mas_equalTo(40);
-            make.top.mas_equalTo(self.proposeTV.mas_bottom).mas_equalTo(20);
+            make.width.mas_equalTo(171);
         }];
-        _submitButton.backgroundColor = [Utils colorRGB:@"#008bd5"];
         [_submitButton setTitle:@"确认" forState:UIControlStateNormal];
-        _submitButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _submitButton.layer.cornerRadius = 6;
+        [_submitButton setTitleColor:MainColor forState:UIControlStateNormal];
+        _submitButton.layer.cornerRadius = 20;
+        _submitButton.layer.borderColor = MainColor.CGColor;
+        _submitButton.layer.borderWidth = 1;
         _submitButton.layer.masksToBounds = YES;
-        _submitButton.tag = 1120;
+        _submitButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_submitButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;

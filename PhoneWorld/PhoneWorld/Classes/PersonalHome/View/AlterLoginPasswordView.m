@@ -7,11 +7,11 @@
 //
 
 #import "AlterLoginPasswordView.h"
+#import "InputView.h"
 
 @interface AlterLoginPasswordView ()
-
 @property (nonatomic) NSArray *leftTitles;
-
+@property (nonatomic) NSMutableArray *inputViews;
 @end
 
 @implementation AlterLoginPasswordView
@@ -21,23 +21,21 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.leftTitles = @[@"原密码：",@"新密码：",@"确认密码："];
-        self.backgroundColor = [UIColor whiteColor];
-        self.passwordTextFields = [NSMutableArray array];
+        self.backgroundColor = COLOR_BACKGROUND;
+        self.inputViews = [NSMutableArray array];
+        
         for (int i = 0; i < self.leftTitles.count; i ++) {
-            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(10, 15 + (16 + 34)*i, 90, 16)];
-            [self addSubview:lb];
-            lb.text = self.leftTitles[i];
-            lb.font = [UIFont systemFontOfSize:14];
-            lb.textColor = [Utils colorRGB:@"#333333"];
-            
-            UITextField  *tf = [[UITextField alloc] initWithFrame:CGRectMake(90, 10 + (30 + 20)*i, screenWidth - 100, 30)];
-            [self addSubview:tf];
-            tf.secureTextEntry = YES;
-            tf.borderStyle = UITextBorderStyleRoundedRect;
-            tf.textColor = [Utils colorRGB:@"#666666"];
-            tf.font = [UIFont systemFontOfSize:14];
-            [self.passwordTextFields addObject:tf];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+            InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
+            [self addSubview:view];
+            view.leftLabel.text = self.leftTitles[i];
+            view.rightLabel.text = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
+            [view addGestureRecognizer:tap];
+            view.tag = 100+i;
+            [self.inputViews addObject:view];
+            [self addSubview:view];
         }
+        
         [self saveButton];
     }
     return self;
@@ -48,25 +46,35 @@
         _saveButton = [[UIButton alloc] init];
         [self addSubview:_saveButton];
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(screenWidth - 20);
             make.top.mas_equalTo(160);
+            make.centerX.mas_equalTo(0);
             make.height.mas_equalTo(40);
+            make.width.mas_equalTo(171);
         }];
-        _saveButton.backgroundColor = [Utils colorRGB:@"#008bd5"];
-        _saveButton.layer.cornerRadius = 6;
+        [_saveButton setTitle:@"保存" forState:UIControlStateNormal];
+        [_saveButton setTitleColor:MainColor forState:UIControlStateNormal];
+        _saveButton.layer.cornerRadius = 20;
+        _saveButton.layer.borderColor = MainColor.CGColor;
+        _saveButton.layer.borderWidth = 1;
         _saveButton.layer.masksToBounds = YES;
-        [_saveButton setTitle:@"确定" forState:UIControlStateNormal];
-        [_saveButton setTintColor:[UIColor whiteColor]];
         _saveButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        _saveButton.tag = 1160;
         [_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _saveButton;
 }
 
+#pragma mark - Method
+- (void)tapAction:(UITapGestureRecognizer *)tap{
+    for (InputView *iv in self.inputViews) {
+        iv.textField.hidden = YES;
+    }
+    InputView *view = (InputView *)tap.view;
+    view.textField.hidden = NO;
+    [view.textField becomeFirstResponder];
+}
+
 - (void)saveAction:(UIButton *)button{
-    _AlterPasswordCallBack(button.tag);
+    _AlterPasswordCallBack(button);
 }
 
 @end

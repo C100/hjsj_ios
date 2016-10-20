@@ -18,14 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"信息采集";
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"读取信息" style:UIBarButtonItemStylePlain target:self action:@selector(readInfoAction)];
     [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
     
-    self.informationCollectionView = [[InformationCollectionView alloc] init];
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
+    
+    self.informationCollectionView = [[InformationCollectionView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andUserinfos:self.userinfosDic];
     [self.view addSubview:self.informationCollectionView];
-    [self.informationCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(0);
-    }];
 }
 
 - (void)readInfoAction{

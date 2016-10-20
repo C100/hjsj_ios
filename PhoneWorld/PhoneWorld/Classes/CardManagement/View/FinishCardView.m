@@ -225,16 +225,15 @@
         //检测
         //成功
         ChoosePackageViewController *vc = [ChoosePackageViewController new];
-        vc.userinfos = @[self.phoneTF.text,@"浙江省杭州市",@"已激活",@"话机通信"];
+        vc.userinfosDic = [@{@"phoneNumber":self.phoneTF.text,@"phoneAddress":@"浙江省杭州市",@"phoneState":@"已激活",@"networkType":@"话机通信"} mutableCopy];
         UIViewController *viewController = [self viewController];
         [viewController.navigationController pushViewController:vc animated:YES];
-        //失败
-        /*
-        self.failedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.failedView];
         
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
-         */
+        //失败
+//        self.failedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"验证失败" andDetail:@"手机号码或PUK码错误" andImageName:@"attention"];
+//        [[UIApplication sharedApplication].keyWindow addSubview:self.failedView];
+//        
+//        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
     }else{
         if (![Utils isMobile:self.phoneTF.text]) {
             [Utils toastview:@"请输入正确格式手机号"];

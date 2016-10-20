@@ -8,6 +8,7 @@
 
 #import "AlterLoginPasswordViewController.h"
 #import "AlterLoginPasswordView.h"
+#import "PhoneNumberCheckViewController.h"
 
 @interface AlterLoginPasswordViewController ()
 @property (nonatomic) AlterLoginPasswordView *alterView;
@@ -18,12 +19,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"登录密码修改";
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
+
     self.alterView = [[AlterLoginPasswordView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.alterView];
-    [self.alterView setAlterPasswordCallBack:^(NSInteger tag) {
-        if (tag == 1160) {
-            NSLog(@"----------登录密码修改");
-        }
+    __block __weak AlterLoginPasswordViewController *weakself = self;
+    [self.alterView setAlterPasswordCallBack:^(id obj) {
+        //手机号验证
+        PhoneNumberCheckViewController *vc = [[PhoneNumberCheckViewController alloc] init];
+        [weakself.navigationController pushViewController:vc animated:YES];
     }];
 }
 

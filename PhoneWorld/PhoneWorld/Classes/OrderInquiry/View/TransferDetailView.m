@@ -108,7 +108,7 @@
     imageV22.image = [UIImage imageNamed:@"identifyCard1"];
     [v addSubview:imageV22];
     [imageV22 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(lb2.mas_bottom).mas_equalTo(0);
+        make.top.mas_equalTo(imageV21.mas_bottom).mas_equalTo(10);
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
         make.height.mas_equalTo((screenWidth - 30)/(354/225.0));

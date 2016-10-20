@@ -44,15 +44,12 @@
     }
     cell.textLabel.text = self.titles[indexPath.row];
     cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
+    cell.textLabel.font = [UIFont systemFontOfSize:16];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.separatorInset = UIEdgeInsetsZero;
     cell.layoutMargins = UIEdgeInsetsZero;
     cell.preservesSuperviewLayoutMargins = NO;
     return cell;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

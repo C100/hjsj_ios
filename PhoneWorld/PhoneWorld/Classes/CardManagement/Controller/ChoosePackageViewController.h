@@ -10,6 +10,6 @@
 
 @interface ChoosePackageViewController : UIViewController
 
-@property (nonatomic) NSArray *userinfos;
+@property (nonatomic) NSMutableDictionary *userinfosDic;
 
 @end

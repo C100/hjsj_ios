@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 //筛选view
-@interface HomeView : UIView
+@interface HomeView : UIView<SDCycleScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) UIView *container;

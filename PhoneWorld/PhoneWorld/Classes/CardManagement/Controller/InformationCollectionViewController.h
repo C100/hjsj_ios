@@ -10,4 +10,6 @@
 
 @interface InformationCollectionViewController : UIViewController
 
+@property (nonatomic) NSMutableDictionary *userinfosDic;
+
 @end

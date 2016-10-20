@@ -7,6 +7,7 @@
 //
 
 #import "InformationCollectionView.h"
+#import "SettlementDetailViewController.h"
 
 @interface InformationCollectionView ()
 
@@ -14,12 +15,16 @@
 @property (nonatomic) NSArray *detailTitles;
 @property (nonatomic) NSArray *imageTitles;
 @property (nonatomic) NSMutableArray *textFields;
+@property (nonatomic) UIButton *currentImageButton;
+@property (nonatomic) NSMutableArray *removeButtons;
+@property (nonatomic) NSMutableArray *imageButtons;
+@property (nonatomic) UIView *view;
 
 @end
 
 @implementation InformationCollectionView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -28,9 +33,13 @@
         self.detailTitles = @[@"请输入开户人姓名",@"请输入证件号码",@"请输入证件地址",@"请输入备注信息"];
         self.imageTitles = @[@"手持身份证正面照",@"身份证背面照"];
         self.textFields = [NSMutableArray array];
+        self.removeButtons = [NSMutableArray array];
+        self.imageButtons = [NSMutableArray array];
+        self.userinfosDic = userinfos;
         [self tableView];
         [self addContent];
         [self addTextFields];
+        [self nextButton];
     }
     return self;
 }
@@ -77,6 +86,7 @@
         make.top.mas_equalTo(self.tableView.mas_bottom).mas_equalTo(10);
         make.height.mas_equalTo(130);
     }];
+    self.view = v;
     
     UILabel *lb = [[UILabel alloc] init];
     lb.text = @"图片（点击图片可放大）";
@@ -103,6 +113,20 @@
         imageV.titleLabel.font = [UIFont systemFontOfSize:30];
         imageV.tag = 1000 + i;
         [imageV addTarget:self action:@selector(chooseImageAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.imageButtons addObject:imageV];
+        
+        UIButton *removeButton = [[UIButton alloc] initWithFrame:CGRectMake(69+80*i, 32, 16, 16)];
+        removeButton.backgroundColor = [UIColor redColor];
+        removeButton.layer.cornerRadius = 8;
+        removeButton.layer.masksToBounds = YES;
+        [removeButton setTitle:@"X" forState:UIControlStateNormal];
+        [removeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        removeButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        removeButton.hidden = YES;
+        removeButton.tag = 1100+i;
+        [removeButton addTarget:self action:@selector(removeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [v addSubview:removeButton];
+        [self.removeButtons addObject:removeButton];
         
         UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15 + 80 *i, 104, 75, 10)];
         [v addSubview:lb];
@@ -110,6 +134,28 @@
         lb.textColor = [Utils colorRGB:@"#cccccc"];
         lb.font = [UIFont systemFontOfSize:8];
     }
+}
+
+- (UIButton *)nextButton{
+    if (_nextButton == nil) {
+        _nextButton = [[UIButton alloc] init];
+        [self addSubview:_nextButton];
+        [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.view.mas_bottom).mas_equalTo(40);
+            make.centerX.mas_equalTo(0);
+            make.height.mas_equalTo(40);
+            make.width.mas_equalTo(171);
+        }];
+        [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
+        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
+        _nextButton.layer.cornerRadius = 20;
+        _nextButton.layer.borderColor = MainColor.CGColor;
+        _nextButton.layer.borderWidth = 1;
+        _nextButton.layer.masksToBounds = YES;
+        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _nextButton;
 }
 
 #pragma mark - UITableView Delegate
@@ -167,7 +213,14 @@
 
 #pragma mark - UIImagePickerViewController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    [self.currentImageButton setBackgroundImage:image forState:UIControlStateNormal];
+    [self.currentImageButton setTitle:@"" forState:UIControlStateNormal];
+    NSInteger i = self.currentImageButton.tag - 1000;
+    UIButton *btn = self.removeButtons[i];
+    btn.hidden = NO;
+    UIViewController *viewController = [self viewController];
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -180,9 +233,9 @@
 }
 
 - (void)chooseImageAction:(UIButton *)button{
-    UIViewController *viewController = [self viewController];
+    self.currentImageButton = button;
     __block __weak InformationCollectionView *weakself = self;
-
+    UIViewController *viewController = [self viewController];
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -206,6 +259,23 @@
     [ac addAction:action2];
     [ac addAction:action3];
     [viewController presentViewController:ac animated:YES completion:nil];
+}
+
+- (void)removeAction:(UIButton *)button{
+    NSInteger i = button.tag - 1100;
+    UIButton *btn = self.imageButtons[i];
+    [btn setBackgroundImage:nil forState:UIControlStateNormal];
+    [btn setTitle:@"+" forState:UIControlStateNormal];
+    [btn setTitleColor:[Utils colorRGB:@"#cccccc"] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:30];
+    button.hidden = YES;
+}
+
+- (void)buttonClickAction:(UIButton *)button{
+    UIViewController *vc = [self viewController];
+    SettlementDetailViewController *svc = [SettlementDetailViewController new];
+    svc.userinfosDic = self.userinfosDic;
+    [vc.navigationController pushViewController:svc animated:YES];
 }
 
 @end

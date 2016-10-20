@@ -21,6 +21,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"密码管理";
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
+    
     self.passwordManageView = [[PasswordManageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.passwordManageView];
     __block __weak PasswordManageViewController *weakself = self;

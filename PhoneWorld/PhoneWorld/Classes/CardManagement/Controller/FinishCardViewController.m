@@ -24,10 +24,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
-    backButton.title = @"返回";
-    [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
-    self.navigationItem.backBarButtonItem = backButton;
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
     
     self.finishCardView = [[FinishCardView alloc] init];
     [self.view addSubview:self.finishCardView];
