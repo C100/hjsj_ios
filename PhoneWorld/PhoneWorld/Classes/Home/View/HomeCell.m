@@ -12,6 +12,16 @@
 
 @implementation HomeCell
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self imageV];
+        [self titleLb];
+    }
+    return self;
+}
+
 - (UIImageView *)imageV{
     if(_imageV == nil){
         _imageV = [[UIImageView alloc] init];

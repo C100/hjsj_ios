@@ -30,7 +30,7 @@
             InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
             [self addSubview:view];
             view.leftLabel.text = self.leftTitles[i];
-            view.rightLabel.text = [NSString stringWithFormat:@"请输入密码"];
+            view.textField.placeholder = [NSString stringWithFormat:@"请输入密码"];
             [view addGestureRecognizer:tap];
             view.tag = 100+i;
             [self.inputViews addObject:view];
@@ -65,16 +65,18 @@
 
 #pragma mark - Method
 - (void)tapAction:(UITapGestureRecognizer *)tap{
-    for (InputView *iv in self.inputViews) {
-        iv.textField.hidden = YES;
-    }
     InputView *view = (InputView *)tap.view;
-    view.textField.hidden = NO;
     [view.textField becomeFirstResponder];
 }
 
 - (void)saveAction:(UIButton *)button{
-    _CreatePayPasswordCallBack(button);
+    InputView *iv0 = self.inputViews[0];
+    InputView *iv1 = self.inputViews[1];
+    if ([iv0.textField.text isEqualToString:iv1.textField.text] && ![iv0.textField.text isEqualToString:@""]) {
+        _CreatePayPasswordCallBack(button);
+    }else{
+        [Utils toastview:@"两次密码输入不一致"];
+    }
 }
 
 @end

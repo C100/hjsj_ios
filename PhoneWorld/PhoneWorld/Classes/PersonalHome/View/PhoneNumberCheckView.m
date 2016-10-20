@@ -25,7 +25,7 @@
         self.backgroundColor = COLOR_BACKGROUND;
         self.inputView = [[InputView alloc] initWithFrame:CGRectMake(0, 1, screenWidth, 40)];
         self.inputView.leftLabel.text = @"手机号码";
-        self.inputView.rightLabel.text = @"请输入手机号码";
+        self.inputView.textField.placeholder = @"请输入手机号码";
         [self addSubview:self.inputView];
         
         [self verivicationCodeView];
@@ -107,7 +107,11 @@
 
 - (void)sendVericicationCodeAction:(UIButton *)button{
     //发送验证码
-    NSLog(@"--------------发送验证码");
+    if ([Utils isMobile:self.inputView.textField.text]) {
+        NSLog(@"--------------发送验证码");
+    }else{
+        [Utils toastview:@"请输入正确格式的手机号"];
+    }
 }
 
 - (void)buttonClickAction:(UIButton *)button{

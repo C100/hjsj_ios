@@ -8,29 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TransferCardView : UIScrollView
-
-@property (nonatomic) UILabel *transferLB;
-@property (nonatomic) UITextField *transferTF;
-
-@property (nonatomic) UILabel *nameLB;
-@property (nonatomic) UITextField *nameTF;
-
-@property (nonatomic) UILabel *IDCardLB;
-@property (nonatomic) UITextField *IDCardTF;
-
-@property (nonatomic) UILabel *phoneLB;
-@property (nonatomic) UITextField *phoneTF;
-
-@property (nonatomic) UILabel *addressLB;
-@property (nonatomic) UITextView *addressTV;
-
-@property (nonatomic) UILabel *theNewUserLB;
-@property (nonatomic) UIButton *theNewFrontBtn;
-
-@property (nonatomic) UILabel *theOldUserLB;
-@property (nonatomic) UIButton *theOldFrontBtn;
-
-@property (nonatomic) UIButton *nextBtn;
-
+@interface TransferCardView : UIScrollView <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@property (nonatomic) UIButton *nextButton;
 @end

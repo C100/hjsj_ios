@@ -40,18 +40,16 @@
     
     [self.checkAndTopView setCheckAndTopCallBack:^(NSString *money, payWay payway) {
         NSInteger moneyInt = money.integerValue;
-        if ([Utils isNumber:money]) {
-            if (moneyInt == 0) {
-                [Utils toastview:@"请输入充值金额"];
+        if (moneyInt == 0) {
+            [Utils toastview:@"请输入充值金额"];
+        }else{
+            if (payway == weixinPay || payway == aliPay) {
+                NSLog(@"-------------充值金额%@   充值方式%lu",money,(unsigned long)payway);
+                /*--------跳转到充值结果页面--------*/
+                TopResultViewController *vc = [TopResultViewController new];
+                [weakself.navigationController pushViewController:vc animated:YES];
             }else{
-                if (payway == weixinPay || payway == aliPay) {
-                    NSLog(@"-------------充值金额%@   充值方式%lu",money,(unsigned long)payway);
-                    /*--------跳转到充值结果页面--------*/
-                    TopResultViewController *vc = [TopResultViewController new];
-                    [weakself.navigationController pushViewController:vc animated:YES];
-                }else{
-                    [Utils toastview:@"请选择充值方式"];
-                }
+                [Utils toastview:@"请选择充值方式"];
             }
         }
     }];

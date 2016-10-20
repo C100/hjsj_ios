@@ -7,6 +7,13 @@
 //
 
 #import "ProposeView.h"
+#import "FailedView.h"
+
+@interface ProposeView ()
+
+@property (nonatomic) FailedView *resultView;
+
+@end
 
 @implementation ProposeView
 
@@ -84,7 +91,25 @@
 
 #pragma mark - Method
 - (void)buttonClickAction:(UIButton *)button{
-    //提交操作  1120
+    if ([self.proposeTV.text isEqualToString:@""]) {
+        [Utils toastview:@"请输入您的建议与意见"];
+    }else{
+        [self endEditing:YES];
+        _ProposeCallBack(self.proposeTV.text);
+        self.resultView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"多谢配合" andDetail:@"您的建议意见已收到，会尽快处理！" andImageName:@"icon_smile" andTextColorHex:@"#ec6c00"];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.resultView];
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(dismissResultView) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)dismissResultView{
+    [UIView animateWithDuration:1.0 animations:^{
+        self.resultView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.resultView removeFromSuperview];
+        UIViewController *viewController = [self viewController];
+        [viewController.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 @end

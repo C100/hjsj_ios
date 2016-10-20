@@ -20,30 +20,30 @@
 
 @implementation DropDownView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.states = [NSArray array];
-        self.topStates = @[@"全部",@"余额充值",@"话费充值"];
-        [self timeLB];
-        [self endTime];
-        [self v];
-        [self beginTime];
-        
-        [self stateLB];
-        [self stateTF];
-        
-        [self phoneLB];
-        [self phoneTF];
-        
-        [self findBtn];
-        [self resetBtn];
-        
-        [self stateTableView];
-    }
-    return self;
-}
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        self.states = [NSArray array];
+//        self.topStates = @[@"全部",@"余额充值",@"话费充值"];
+//        [self timeLB];
+//        [self endTime];
+//        [self v];
+//        [self beginTime];
+//        
+//        [self stateLB];
+//        [self stateTF];
+//        
+//        [self phoneLB];
+//        [self phoneTF];
+//        
+//        [self findBtn];
+//        [self resetBtn];
+//        
+//        [self stateTableView];
+//    }
+//    return self;
+//}
 
 /*---------时间-----------------*/
 - (UILabel *)timeLB{

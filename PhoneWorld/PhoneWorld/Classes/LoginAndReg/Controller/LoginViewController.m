@@ -43,11 +43,6 @@
     __weak __block LoginViewController *weakself = self;
     [self.loginView setLoginCallBack:^(NSInteger tag) {
         switch (tag) {
-            case 1100:
-            {
-                //注册
-            }
-                break;
             case 1101:
             {
                 //忘记密码
@@ -57,6 +52,9 @@
                 break;
             case 1102:
             {
+                /*
+                 登录操作
+                 */
                 MainTabBarController *vc = [MainTabBarController new];
                 [UIApplication sharedApplication].keyWindow.rootViewController = vc;
                 [weakself.view endEditing:YES];

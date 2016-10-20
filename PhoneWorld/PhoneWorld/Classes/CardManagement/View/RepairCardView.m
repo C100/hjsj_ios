@@ -7,19 +7,24 @@
 //
 
 #import "RepairCardView.h"
-
-#define imageW (screenWidth-40)/2
-#define hw 100/167.0
+#import "InputView.h"
 
 @interface RepairCardView ()
-@property (nonatomic) NSArray *choices;
-@property (nonatomic) NSArray *warnings;
+
+@property (nonatomic) NSMutableArray *inputViews;
+@property (nonatomic) NSMutableArray *imageButtons;
+@property (nonatomic) NSMutableArray *removeButtons;
+@property (nonatomic) NSArray *choices;//邮寄选项
+@property (nonatomic) NSArray *imageTitles;
+@property (nonatomic) NSArray *leftTitles;
+@property (nonatomic) UILabel *fastMailLB;
+@property (nonatomic) UIView *imagesV;
+@property (nonatomic) UIButton *currentImageButton;
+
 @end
 
 @implementation RepairCardView
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self endEditing:YES];
-}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -27,433 +32,243 @@
         self.contentSize = CGSizeMake(screenWidth, 650);
         self.bounces = NO;
         self.showsVerticalScrollIndicator = NO;
-        self.backgroundColor = [UIColor whiteColor];
-
+        self.backgroundColor = COLOR_BACKGROUND;
+        self.inputViews = [NSMutableArray array];
+        self.imageButtons = [NSMutableArray array];
+        self.removeButtons = [NSMutableArray array];
         self.choices = @[@"顺丰到付",@"充值一百免邮费"];
-        self.warnings = @[@"上传手持身份证正面照", @"上传身份证背面照"];
+        self.imageTitles = @[@"手持身份证正面照",@"身份证背面照"];
+        self.leftTitles = @[@"补卡号码",@"补卡人姓名",@"证件号码",@"联系电话",@"邮寄地址",@"收件人姓名",@"收件人电话",@"邮寄选项"];
         
-        [self repairUserLB];
-        [self repairUserTF];
-        [self nameLB];
-        [self nameTF];
-        [self IDCardLB];
-        [self IDCardTF];
-        [self phoneLB];
-        [self phoneTF];
-        [self addressLB];
-        [self addressTV];
+        for (int i = 0; i < self.leftTitles.count-1; i++) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+            InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
+            [self addSubview:view];
+            view.leftLabel.text = self.leftTitles[i];
+            view.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
+            [view addGestureRecognizer:tap];
+            [self.inputViews addObject:view];
+            [self addSubview:view];
+        }
         
-        [self receiveUserLB];
-        [self receiveUserTF];
-        [self receivePhoneLB];
-        [self receivePhoneTF];
-        [self emailChoiceLB];
-        [self emailChoiceTF];
-        [self addIDImageButton];
-        [self addIDWarningLb];
-        [self nextBtn];
-        [self choiceTableView];
+        [self emailChoiceView];
+        [self addContent];
+        [self nextButton];
     }
     return self;
 }
 
-- (UILabel *)repairUserLB{
-    if (_repairUserLB == nil) {
-        _repairUserLB = [[UILabel alloc] init];
-        [self addSubview:_repairUserLB];
-        [_repairUserLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(15);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(90);
-        }];
-        _repairUserLB.text = @"补卡号码：";
-        _repairUserLB.textColor = [Utils colorRGB:@"#333333"];
-        _repairUserLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _repairUserLB;
-}
-
-- (UITextField *)repairUserTF{
-    if (_repairUserTF == nil) {
-        _repairUserTF = [[UITextField alloc] init];
-        [self addSubview:_repairUserTF];
-        [_repairUserTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(10);
-            make.left.mas_equalTo(self.repairUserLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(screenWidth - 110);
-            make.height.mas_equalTo(30);
-        }];
-        _repairUserTF.placeholder = @"请输入号码";
-        _repairUserTF.textColor = [Utils colorRGB:@"#333333"];
-        _repairUserTF.font = [UIFont systemFontOfSize:14];
-        _repairUserTF.borderStyle = UITextBorderStyleRoundedRect;
-    }
-    return _repairUserTF;
-}
-
-- (UILabel *)nameLB{
-    if (_nameLB == nil) {
-        _nameLB = [[UILabel alloc] init];
-        [self addSubview:_nameLB];
-        [_nameLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.repairUserLB.mas_bottom).mas_equalTo(35);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(90);
-        }];
-        _nameLB.text = @"补卡人姓名：";
-        _nameLB.textColor = [Utils colorRGB:@"#333333"];
-        _nameLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _nameLB;
-}
-
-- (UITextField *)nameTF{
-    if (_nameTF == nil) {
-        _nameTF = [[UITextField alloc] init];
-        [self addSubview:_nameTF];
-        [_nameTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.repairUserTF.mas_bottom).mas_equalTo(22);
-            make.left.mas_equalTo(self.nameLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(screenWidth - 110);
-            make.height.mas_equalTo(30);
-        }];
-        _nameTF.placeholder = @"请输入姓名";
-        _nameTF.textColor = [Utils colorRGB:@"#333333"];
-        _nameTF.font = [UIFont systemFontOfSize:14];
-        _nameTF.borderStyle = UITextBorderStyleRoundedRect;
-    }
-    return _nameTF;
-}
-
-- (UILabel *)IDCardLB{
-    if (_IDCardLB == nil) {
-        _IDCardLB = [[UILabel alloc] init];
-        [self addSubview:_IDCardLB];
-        [_IDCardLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.nameLB.mas_bottom).mas_equalTo(35);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(90);
-        }];
-        _IDCardLB.text = @"身份证号码：";
-        _IDCardLB.textColor = [Utils colorRGB:@"#333333"];
-        _IDCardLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _IDCardLB;
-}
-
-- (UITextField *)IDCardTF{
-    if (_IDCardTF == nil) {
-        _IDCardTF = [[UITextField alloc] init];
-        [self addSubview:_IDCardTF];
-        [_IDCardTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.nameTF.mas_bottom).mas_equalTo(22);
-            make.left.mas_equalTo(self.IDCardLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(screenWidth - 110);
-            make.height.mas_equalTo(30);
-        }];
-        _IDCardTF.placeholder = @"请输入身份证号码";
-        _IDCardTF.textColor = [Utils colorRGB:@"#333333"];
-        _IDCardTF.font = [UIFont systemFontOfSize:14];
-        _IDCardTF.borderStyle = UITextBorderStyleRoundedRect;
-    }
-    return _IDCardTF;
-}
-
-- (UILabel *)phoneLB{
-    if (_phoneLB == nil) {
-        _phoneLB = [[UILabel alloc] init];
-        [self addSubview:_phoneLB];
-        [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.IDCardLB.mas_bottom).mas_equalTo(35);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(90);
-        }];
-        _phoneLB.text = @"联系电话：";
-        _phoneLB.textColor = [Utils colorRGB:@"#333333"];
-        _phoneLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _phoneLB;
-}
-
-- (UITextField *)phoneTF{
-    if (_phoneTF == nil) {
-        _phoneTF = [[UITextField alloc] init];
-        [self addSubview:_phoneTF];
-        [_phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.IDCardTF.mas_bottom).mas_equalTo(22);
-            make.left.mas_equalTo(self.phoneLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(screenWidth - 110);
-            make.height.mas_equalTo(30);
-        }];
-        _phoneTF.placeholder = @"请输入联系电话";
-        _phoneTF.textColor = [Utils colorRGB:@"#333333"];
-        _phoneTF.font = [UIFont systemFontOfSize:14];
-        _phoneTF.borderStyle = UITextBorderStyleRoundedRect;
-    }
-    return _phoneTF;
-}
-
-- (UILabel *)addressLB{
-    if (_addressLB == nil) {
-        _addressLB = [[UILabel alloc] init];
-        [self addSubview:_addressLB];
-        [_addressLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.phoneLB.mas_bottom).mas_equalTo(35);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(90);
-        }];
-        _addressLB.text = @"邮寄地址：";
-        _addressLB.textColor = [Utils colorRGB:@"#333333"];
-        _addressLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _addressLB;
-}
-
-- (UITextView *)addressTV{
-    if (_addressTV == nil) {
-        _addressTV = [[UITextView alloc] init];
-        _addressTV.bounces = NO;
-        [self addSubview:_addressTV];
-        [_addressTV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.phoneTF.mas_bottom).mas_equalTo(22);
-            make.left.mas_equalTo(self.addressLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(screenWidth - 110);
-            make.height.mas_equalTo(70);
-        }];
-        _addressTV.textColor = [Utils colorRGB:@"#333333"];
-        _addressTV.font = [UIFont systemFontOfSize:14];
-        _addressTV.layer.cornerRadius = 6;
-        _addressTV.layer.borderColor = COLOR_BACKGROUND.CGColor;
-        _addressTV.layer.borderWidth = 1;
-    }
-    return _addressTV;
-}
-
-- (UILabel *)receiveUserLB{
-    if (_receiveUserLB == nil) {
-        _receiveUserLB = [[UILabel alloc] init];
-        [self addSubview:_receiveUserLB];
-        [_receiveUserLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.addressLB.mas_bottom).mas_equalTo(75);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(90);
-        }];
-        _receiveUserLB.text = @"收件人姓名：";
-        _receiveUserLB.textColor = [Utils colorRGB:@"#333333"];
-        _receiveUserLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _receiveUserLB;
-}
-
-- (UITextField *)receiveUserTF{
-    if (_receiveUserTF == nil) {
-        _receiveUserTF = [[UITextField alloc] init];
-        [self addSubview:_receiveUserTF];
-        [_receiveUserTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.addressTV.mas_bottom).mas_equalTo(22);
-            make.left.mas_equalTo(self.receiveUserLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(screenWidth - 110);
-            make.height.mas_equalTo(30);
-        }];
-        _receiveUserTF.placeholder = @"请输入收件人姓名：";
-        _receiveUserTF.textColor = [Utils colorRGB:@"#333333"];
-        _receiveUserTF.font = [UIFont systemFontOfSize:14];
-        _receiveUserTF.borderStyle = UITextBorderStyleRoundedRect;
-    }
-    return _receiveUserTF;
-}
-
-- (UILabel *)receivePhoneLB{
-    if (_receivePhoneLB == nil) {
-        _receivePhoneLB = [[UILabel alloc] init];
-        [self addSubview:_receivePhoneLB];
-        [_receivePhoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.receiveUserLB.mas_bottom).mas_equalTo(35);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(90);
-        }];
-        _receivePhoneLB.text = @"收件人电话：";
-        _receivePhoneLB.textColor = [Utils colorRGB:@"#333333"];
-        _receivePhoneLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _receivePhoneLB;
-}
-
-- (UITextField *)receivePhoneTF{
-    if (_receivePhoneTF == nil) {
-        _receivePhoneTF = [[UITextField alloc] init];
-        [self addSubview:_receivePhoneTF];
-        [_receivePhoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.receiveUserTF.mas_bottom).mas_equalTo(22);
-            make.left.mas_equalTo(self.receivePhoneLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(screenWidth - 110);
-            make.height.mas_equalTo(30);
-        }];
-        _receivePhoneTF.placeholder = @"请输入收件人联系电话";
-        _receivePhoneTF.textColor = [Utils colorRGB:@"#333333"];
-        _receivePhoneTF.font = [UIFont systemFontOfSize:14];
-        _receivePhoneTF.borderStyle = UITextBorderStyleRoundedRect;
-    }
-    return _receivePhoneTF;
-}
-
-- (UILabel *)emailChoiceLB{
-    if (_emailChoiceLB == nil) {
-        _emailChoiceLB = [[UILabel alloc] init];
-        [self addSubview:_emailChoiceLB];
-        [_emailChoiceLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.receivePhoneLB.mas_bottom).mas_equalTo(35);
-            make.left.mas_equalTo(10);
-            make.width.mas_equalTo(90);
-        }];
-        _emailChoiceLB.text = @"邮寄选项：";
-        _emailChoiceLB.textColor = [Utils colorRGB:@"#333333"];
-        _emailChoiceLB.font = [UIFont systemFontOfSize:14];
-    }
-    return _emailChoiceLB;
-}
-
-- (UITextField *)emailChoiceTF{
-    if (_emailChoiceTF == nil) {
-        _emailChoiceTF = [[UITextField alloc] init];
-        _emailChoiceTF.borderStyle = UITextBorderStyleRoundedRect;
-        
-        [_emailChoiceTF setFont:[UIFont systemFontOfSize:14]];
-        [_emailChoiceTF setTextColor:[Utils colorRGB:@"#333333"]];
-        _emailChoiceTF.enabled = NO;
-        
-        [self addSubview:_emailChoiceTF];
-        [_emailChoiceTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.receivePhoneTF.mas_bottom).mas_equalTo(20);
-            make.height.mas_equalTo(30);
-            make.left.mas_equalTo(self.emailChoiceLB.mas_right).mas_equalTo(0);
-            make.width.mas_equalTo(screenWidth - 110);
-        }];
-        
-        UIButton *btn = [[UIButton alloc] init];
-        [self addSubview:btn];
-        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(_emailChoiceTF.mas_right).mas_equalTo(-6);
-            make.top.mas_equalTo(_emailChoiceTF.mas_top).mas_equalTo(12);
-            make.width.mas_equalTo(12);
-            make.height.mas_equalTo(6);
-        }];
-        [btn setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
-        btn.tag = 950;
-        [btn addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _emailChoiceTF;
-}
-
-- (UITableView *)choiceTableView{
-    if (_choiceTableView == nil) {
-        _choiceTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
-        [self addSubview:_choiceTableView];
-        [_choiceTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.emailChoiceTF.mas_bottom).mas_equalTo(0);
-            make.left.mas_equalTo(self.phoneLB.mas_right).mas_equalTo(0);
-            make.height.mas_equalTo(2*28);
-            make.width.mas_equalTo(screenWidth - 110);
-        }];
-        _choiceTableView.backgroundColor = [UIColor whiteColor];
-        _choiceTableView.delegate = self;
-        _choiceTableView.dataSource = self;
-        _choiceTableView.layer.cornerRadius = 6;
-        _choiceTableView.layer.masksToBounds = YES;
-        _choiceTableView.layer.borderColor = COLOR_BACKGROUND.CGColor;
-        _choiceTableView.layer.borderWidth = 1;
-        _choiceTableView.bounces = NO;
-        _choiceTableView.hidden = YES;
-    }
-    return _choiceTableView;
-}
-
-- (void)addIDImageButton{
-    for (int i = 0; i < 2; i ++) {
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(10 + (imageW + 20)*i, 460, imageW, imageW*hw)];
-        [self addSubview:btn];
-        [btn setTitle:@"+" forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:64];
-        [btn setTitleColor:COLOR_BACKGROUND forState:UIControlStateNormal];
-        btn.layer.cornerRadius = 6;
-        btn.layer.masksToBounds = YES;
-        btn.layer.borderColor = COLOR_BACKGROUND.CGColor;
-        btn.layer.borderWidth = 1;
-        btn.tag = 1000+i;
-        [btn addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-}
-
-- (void)addIDWarningLb{
-    for (int i = 0; i < 2; i++) {
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(10 + (imageW + 20)*i, 440 + imageW*hw + 25, imageW, 15)];
-        lb.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:lb];
-        lb.text = self.warnings[i];
-        lb.textColor = [Utils colorRGB:@"#999999"];
-        lb.font = [UIFont systemFontOfSize:12];
-    }
-}
-
-- (UIButton *)nextBtn{
-    if (_nextBtn == nil) {
-        _nextBtn = [[UIButton alloc] init];
-        [self addSubview:_nextBtn];
-        [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
+- (UIView *)emailChoiceView{
+    if (_emailChoiceView == nil) {
+        _emailChoiceView = [[UIView alloc] init];
+        [self addSubview:_emailChoiceView];
+        [_emailChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(288);
+            make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
-            make.width.mas_equalTo(screenWidth - 20);
-            make.top.mas_equalTo(self.emailChoiceTF.mas_bottom).mas_equalTo(imageW*hw + 60);
+            make.width.mas_equalTo(screenWidth);
         }];
-        _nextBtn.backgroundColor = [Utils colorRGB:@"#008bd5"];
-        [_nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
-        _nextBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _nextBtn.layer.cornerRadius = 6;
-        _nextBtn.layer.masksToBounds = YES;
-        _nextBtn.tag = 1050;
-        [_nextBtn addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
+        _emailChoiceView.backgroundColor = [UIColor whiteColor];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(chooseEmailAction)];
+        [_emailChoiceView addGestureRecognizer:tap];
+        
+        UILabel *leftLB = [[UILabel alloc] init];
+        [_emailChoiceView addSubview:leftLB];
+        [leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.centerY.mas_equalTo(0);
+        }];
+        leftLB.textColor = [Utils colorRGB:@"#666666"];
+        leftLB.font = [UIFont systemFontOfSize:14];
+        leftLB.text = self.leftTitles.lastObject;
+        
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [_emailChoiceView addSubview:imageView];
+        [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-15);
+            make.centerY.mas_equalTo(0);
+            make.width.mas_equalTo(10);
+            make.height.mas_equalTo(16);
+        }];
+        imageView.image = [UIImage imageNamed:@"right"];
+        imageView.contentMode = UIViewContentModeScaleToFill;
+        
+        
+        UILabel *rightLB = [[UILabel alloc] init];
+        [_emailChoiceView addSubview:rightLB];
+        [rightLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(imageView.mas_left).mas_equalTo(-10);
+            make.centerY.mas_equalTo(0);
+        }];
+        rightLB.textColor = [Utils colorRGB:@"#666666"];
+        rightLB.font = [UIFont systemFontOfSize:12];
+        rightLB.text = self.leftTitles.lastObject;
+        self.fastMailLB = rightLB;
     }
-    return _nextBtn;
+    return _emailChoiceView;
 }
 
-#pragma mark - UITableView Delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.choices.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+- (void)addContent{
+    UIView *v = [[UIView alloc] init];
+    v.backgroundColor = [UIColor whiteColor];
+    [self addSubview:v];
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(self.emailChoiceView.mas_bottom).mas_equalTo(10);
+        make.width.mas_equalTo(screenWidth);
+        make.height.mas_equalTo(130);
+    }];
+    self.imagesV = v;
+    
+    UILabel *lb = [[UILabel alloc] init];
+    lb.text = @"图片（点击图片可放大）";
+    lb.textColor = [Utils colorRGB:@"#666666"];
+    lb.font = [UIFont systemFontOfSize:14];
+    NSRange range = [lb.text rangeOfString:@"（点击图片可放大）"];
+    lb.attributedText = [Utils setTextColor:lb.text FontNumber:[UIFont systemFontOfSize:10] AndRange:range AndColor:[Utils colorRGB:@"#cccccc"]];
+    [v addSubview:lb];
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(10);
+        make.left.mas_equalTo(15);
+        make.width.mas_equalTo(135);
+        make.height.mas_equalTo(16);
+    }];
+    for (int i = 0; i < 2; i++) {
+        UIButton *imageV = [[UIButton alloc] initWithFrame:CGRectMake(17 + 80*i, 40, 60, 60)];
+        [v addSubview:imageV];
+        imageV.layer.cornerRadius = 3;
+        imageV.layer.masksToBounds = YES;
+        imageV.layer.borderColor = [Utils colorRGB:@"#cccccc"].CGColor;
+        imageV.layer.borderWidth = 1;
+        [imageV setTitle:@"+" forState:UIControlStateNormal];
+        [imageV setTitleColor:[Utils colorRGB:@"#cccccc"] forState:UIControlStateNormal];
+        imageV.titleLabel.font = [UIFont systemFontOfSize:30];
+        imageV.tag = 1000 + i;
+        [imageV addTarget:self action:@selector(chooseImageAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.imageButtons addObject:imageV];
+        
+        UIButton *removeButton = [[UIButton alloc] initWithFrame:CGRectMake(69+80*i, 32, 16, 16)];
+        removeButton.backgroundColor = [UIColor redColor];
+        removeButton.layer.cornerRadius = 8;
+        removeButton.layer.masksToBounds = YES;
+        [removeButton setTitle:@"X" forState:UIControlStateNormal];
+        [removeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        removeButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        removeButton.hidden = YES;
+        removeButton.tag = 1100+i;
+        [removeButton addTarget:self action:@selector(removeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [v addSubview:removeButton];
+        [self.removeButtons addObject:removeButton];
+        
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15 + 80 *i, 104, 75, 10)];
+        [v addSubview:lb];
+        lb.text = self.imageTitles[i];
+        lb.textColor = [Utils colorRGB:@"#cccccc"];
+        lb.font = [UIFont systemFontOfSize:8];
     }
-    cell.textLabel.font = [UIFont systemFontOfSize:12];
-    cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
-    cell.textLabel.text = self.choices[indexPath.row];
-    return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *choice = self.choices[indexPath.row];
-    self.emailChoiceTF.text = choice;
-    self.choiceTableView.hidden = YES;
+- (UIButton *)nextButton{
+    if (_nextButton == nil) {
+        _nextButton = [[UIButton alloc] init];
+        [self addSubview:_nextButton];
+        [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.imagesV.mas_bottom).mas_equalTo(40);
+            make.centerX.mas_equalTo(0);
+            make.height.mas_equalTo(40);
+            make.width.mas_equalTo(171);
+            make.bottom.mas_equalTo(-40);
+        }];
+        [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
+        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
+        _nextButton.layer.cornerRadius = 20;
+        _nextButton.layer.borderColor = MainColor.CGColor;
+        _nextButton.layer.borderWidth = 1;
+        _nextButton.layer.masksToBounds = YES;
+        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _nextButton;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 28;
+#pragma mark - UIImagePickerViewController Delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    [self.currentImageButton setBackgroundImage:image forState:UIControlStateNormal];
+    [self.currentImageButton setTitle:@"" forState:UIControlStateNormal];
+    NSInteger i = self.currentImageButton.tag - 1000;
+    UIButton *btn = self.removeButtons[i];
+    btn.hidden = NO;
+    UIViewController *viewController = [self viewController];
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 #pragma mark - Method
 
-- (void)buttonClickedAction:(UIButton *)button{
-    //950选择邮寄选项
-    if (button.tag == 950) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.choiceTableView.hidden = self.choiceTableView.hidden==YES ? NO : YES;
-        }];
-    }
-    _RepairCardCallBack(button.tag);
+- (void)chooseImageAction:(UIButton *)button{
+    self.currentImageButton = button;
+    __block __weak RepairCardView *weakself = self;
+    UIViewController *viewController = [self viewController];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = weakself;
+        imagePicker.allowsEditing = YES;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [viewController presentViewController:imagePicker animated:YES completion:nil];
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerController *imagePicker2 = [[UIImagePickerController alloc] init];
+        imagePicker2.delegate = weakself;
+        imagePicker2.allowsEditing = YES;
+        imagePicker2.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [viewController presentViewController:imagePicker2 animated:YES completion:nil];
+    }];
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [ac addAction:action1];
+    [ac addAction:action2];
+    [ac addAction:action3];
+    [viewController presentViewController:ac animated:YES completion:nil];
+}
+
+- (void)removeAction:(UIButton *)button{
+    NSInteger i = button.tag - 1100;
+    UIButton *btn = self.imageButtons[i];
+    [btn setBackgroundImage:nil forState:UIControlStateNormal];
+    [btn setTitle:@"+" forState:UIControlStateNormal];
+    [btn setTitleColor:[Utils colorRGB:@"#cccccc"] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:30];
+    button.hidden = YES;
+}
+
+- (void)tapAction:(UITapGestureRecognizer *)tap{
+//    for (InputView *iv in self.inputViews) {
+//        iv.textField.hidden = YES;
+//    }
+    InputView *view = (InputView *)tap.view;
+//    view.textField.hidden = NO;
+    [view.textField becomeFirstResponder];
+}
+
+- (void)chooseEmailAction{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"邮寄选项" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:self.choices.firstObject style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.fastMailLB.text = self.choices.firstObject;
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:self.choices.lastObject style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.fastMailLB.text = self.choices.lastObject;
+    }];
+    [ac addAction:action1];
+    [ac addAction:action2];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
+}
+
+- (void)buttonClickAction:(UIButton *)button{
+    NSLog(@"--------------下一步");
 }
 
 @end

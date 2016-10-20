@@ -8,16 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhoneCashCheckView : UIView <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface PhoneCashCheckView : UIView <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic) void(^orderCallBack)(NSInteger tag);
+@property (nonatomic) void(^orderCallBack)(NSString *phoneNumber);
 
-@property (nonatomic) UITableView *tableView;
 @property (nonatomic) UIButton *findButton;
-@property (nonatomic) NSString *phoneNum;
-@property (nonatomic) UITextField *inputTextField;
-
-@property (nonatomic) NSArray *userinfos;
-@property (nonatomic) UITableView *resultTableView;
+@property (nonatomic) NSArray *userinfos;//传入查询结果
+@property (nonatomic) UITableView *resultTableView;//显示查询结果
 
 @end

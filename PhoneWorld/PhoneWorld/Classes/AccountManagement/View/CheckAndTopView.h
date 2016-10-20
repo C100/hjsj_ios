@@ -16,17 +16,9 @@ typedef enum : NSUInteger {
 @interface CheckAndTopView : UIView <UITextFieldDelegate>
 
 @property (nonatomic) void(^checkAndTopCallBack)(NSString* money, payWay payway);
-
 @property (nonatomic) payWay payway;
-@property (nonatomic) UILabel *currentLeftMoney;
-@property (nonatomic) UILabel *currentRightMoney;
-@property (nonatomic) UIView *topMoney;
-@property (nonatomic) UITextField *moneyNumTF;
-
 @property (nonatomic) UIView *payWay;
 @property (nonatomic) NSMutableArray *buttons;
-@property (nonatomic) UILabel *number;
-
 @property (nonatomic) UIButton *nextButton;
 
 @end

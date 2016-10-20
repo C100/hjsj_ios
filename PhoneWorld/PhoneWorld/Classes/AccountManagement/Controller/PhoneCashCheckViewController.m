@@ -35,18 +35,10 @@
         make.left.right.mas_equalTo(0);
     }];
     __block __weak PhoneCashCheckViewController *weakself = self;
-    [self.phoneCashCheckView setOrderCallBack:^(NSInteger tag) {
+    [self.phoneCashCheckView setOrderCallBack:^(NSString *phoneNumber) {
         //查询操作
-        NSString *phoneNum = weakself.phoneCashCheckView.phoneNum;
-        if([Utils isMobile:phoneNum]){
-            
-            //查询操作
-            weakself.phoneCashCheckView.userinfos = @[@"账户余额：99元",@"资费信息",@"111",@"222",@"333",@"311",@"113",@"211",@"112"];
-            [weakself.phoneCashCheckView resultTableView];
-            
-        }else{
-            [Utils toastview:@"手机号格式不正确，请重新输入"];
-        }
+        weakself.phoneCashCheckView.userinfos = @[@"账户余额：99元",@"资费信息",@"套餐：",@"活动包：",@"起止日期：",@"客户信息",@"姓名：",@"手机号码：",@"身份证号码："];
+        [weakself.phoneCashCheckView resultTableView];
     }];
     
 }

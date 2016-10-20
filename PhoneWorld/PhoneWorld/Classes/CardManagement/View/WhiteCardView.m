@@ -53,31 +53,34 @@
 - (UICollectionView *)contentView{
     if (_contentView == nil) {
         _contentView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[UICollectionViewFlowLayout new]];
+        _contentView.bounces = NO;
+        _contentView.backgroundColor = COLOR_BACKGROUND;
         [self addSubview:_contentView];
         [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.width.mas_equalTo(screenWidth);
             make.top.mas_equalTo(self.siftView.mas_bottom).mas_equalTo(10);
-            make.height.mas_equalTo(400);
+            make.height.mas_equalTo(screenHeight - 128 - 120);
         }];
         _contentView.delegate = self;
         _contentView.dataSource = self;
         [_contentView registerClass:[WhiteCardCell class] forCellWithReuseIdentifier:@"cell"];
-        _contentView.backgroundColor = [UIColor whiteColor];
     }
     return _contentView;
 }
 
 - (void)addButton{
     NSArray *arr = @[@"换一批",@"下一步"];
-    NSArray *colors = @[@"#ff8929",@"#ec6c00"];
     for (int i = 0; i < 2; i++) {
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(i*screenWidth/2, screenHeight - 104, screenWidth/2, 40)];
-        button.backgroundColor = [Utils colorRGB:colors[i]];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10 + (10+(screenWidth-30)/2.0)*i, screenHeight - 140, (screenWidth-30)/2.0, 40)];
         [button setTitle:arr[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitleColor:MainColor forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:14];
         [button addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
+        button.layer.cornerRadius = 20;
+        button.layer.masksToBounds = YES;
+        button.layer.borderColor = MainColor.CGColor;
+        button.layer.borderWidth = 1;
         [self addSubview:button];
     }
 }
@@ -93,6 +96,8 @@
     cell.phoneLB.text = self.phoneNumbers[indexPath.row%3];
     if ([self.grayArrs containsObject:@(indexPath.row)]) {
         cell.backgroundColor = [Utils colorRGB:@"#f3f4f5"];
+    }else{
+        cell.backgroundColor = [UIColor whiteColor];
     }
     return cell;
 }

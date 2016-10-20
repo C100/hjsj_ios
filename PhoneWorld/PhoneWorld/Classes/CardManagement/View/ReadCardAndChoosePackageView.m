@@ -97,6 +97,7 @@
         _moneyTF.font = [UIFont systemFontOfSize:12];
         _moneyTF.returnKeyType = UIReturnKeyDone;
         _moneyTF.delegate = self;
+        _moneyTF.hidden = YES;
         [_moneyTF addTarget:self action:@selector(textFieldStateChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _moneyTF;
@@ -129,10 +130,14 @@
             self.chooseTableView = [[ChoosePackageTableView alloc] initWithFrame:CGRectMake(0, 170, screenWidth, 119) style:UITableViewStylePlain];
             [self addSubview:self.chooseTableView];
         }
+        
+        [self moneyTF];
+        
         __block __weak ReadCardAndChoosePackageView *weakself = self;
         [self.chooseTableView setChoosePackageCallBack:^(NSInteger row) {
             if (row == 2) {
-                [weakself moneyTF];
+                weakself.moneyTF.hidden = NO;
+                [weakself.moneyTF becomeFirstResponder];
             }
         }];
         [self.nextButton setTitle:@"下一步" forState:UIControlStateNormal];
@@ -140,7 +145,7 @@
             make.top.mas_equalTo(330);
         }];
         //读卡失败
-        self.failedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"读卡失败" andDetail:@"SIM卡状态不正确" andImageName:@"icon_cry"];
+        self.failedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"读卡失败" andDetail:@"SIM卡状态不正确" andImageName:@"icon_cry" andTextColorHex:@"#0081eb"];
         [[UIApplication sharedApplication].keyWindow addSubview:self.failedView];
         
         [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];

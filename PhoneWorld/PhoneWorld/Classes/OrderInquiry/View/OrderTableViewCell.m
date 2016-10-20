@@ -10,6 +10,17 @@
 
 @implementation OrderTableViewCell
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self numberLB];
+        [self nameLB];
+        [self dateLB];
+        [self phoneLB];
+    }
+    return self;
+}
+
 - (UILabel *)numberLB{
     if (_numberLB == nil) {
         _numberLB = [[UILabel alloc] init];

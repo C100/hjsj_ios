@@ -7,12 +7,15 @@
 //
 
 #import "CheckAndTopView.h"
+#import "InputView.h"
 
 #define imageWidth (screenWidth - 10*2 - 15)/2
 #define hw 42/170.0  //图片宽高比
 
 @interface CheckAndTopView ()
 
+@property (nonatomic) NSMutableArray *inputViews;
+@property (nonatomic) NSArray *leftTitles;
 @property (nonatomic) NSArray *imageNames;
 
 @end
@@ -26,112 +29,33 @@
         self.backgroundColor = COLOR_BACKGROUND;
         self.imageNames = @[@"weixin1",@"alipay1"];
         self.buttons = [NSMutableArray array];
-        [self currentLeftMoney];
-        [self currentRightMoney];
-        [self topMoney];
+        self.leftTitles = @[@"当前余额",@"充值金额"];
+        self.inputViews = [NSMutableArray array];
+        
+        for (int i = 0; i<2; i++) {
+            InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 40*i, screenWidth, 40)];
+            [self addSubview:inputV];
+            inputV.leftLabel.text = self.leftTitles[i];
+            if (i == 0) {
+                inputV.textField.text = @"99元";
+            }else{
+                inputV.textField.placeholder = @"请输入金额";
+            }
+            [self.inputViews addObject:inputV];
+        }
         [self payWay];
         [self nextButton];
     }
     return self;
 }
 
-- (UILabel *)currentLeftMoney{
-    if (_currentLeftMoney == nil) {
-        _currentLeftMoney = [[UILabel alloc] init];
-        _currentLeftMoney.backgroundColor = [UIColor whiteColor];
-        [self addSubview:_currentLeftMoney];
-        [_currentLeftMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.mas_equalTo(0);
-            make.height.mas_equalTo(40);
-        }];
-        _currentLeftMoney.textColor = [Utils colorRGB:@"#666666"];
-        _currentLeftMoney.font = [UIFont systemFontOfSize:14];
-        _currentLeftMoney.text = @"    当前余额";
-    }
-    return _currentLeftMoney;
-}
-
-- (UILabel *)currentRightMoney{
-    if (_currentRightMoney == nil) {
-        _currentRightMoney = [[UILabel alloc] init];
-        _currentRightMoney.backgroundColor = [UIColor whiteColor];
-        _currentRightMoney.textAlignment = NSTextAlignmentRight;
-        [self addSubview:_currentRightMoney];
-        [_currentRightMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.right.mas_equalTo(-15);
-            make.height.mas_equalTo(40);
-        }];
-        _currentRightMoney.textColor = [Utils colorRGB:@"#666666"];
-        _currentRightMoney.font = [UIFont systemFontOfSize:12];
-        _currentRightMoney.text = @"99";
-    }
-    return _currentRightMoney;
-}
-
-- (UIView *)topMoney{
-    if (_topMoney == nil) {
-        _topMoney = [[UIView alloc] init];
-        [self addSubview:_topMoney];
-        [_topMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(self.currentLeftMoney.mas_bottom).mas_equalTo(10);
-            make.height.mas_equalTo(40);
-        }];
-        _topMoney.backgroundColor = [UIColor whiteColor];
-        
-        UILabel *leftLB = [[UILabel alloc] init];
-        [_topMoney addSubview:leftLB];
-        [leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.centerY.mas_equalTo(0);
-            make.width.mas_equalTo(60);
-        }];
-        leftLB.text = @"充值金额";
-        leftLB.textColor = [Utils colorRGB:@"#666666"];
-        leftLB.font = [UIFont systemFontOfSize:14];
-        
-        UILabel *rightLB = [[UILabel alloc] init];
-        [_topMoney addSubview:rightLB];
-        [rightLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-15);
-            make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(0);
-        }];
-        rightLB.textAlignment = NSTextAlignmentRight;
-        rightLB.text = @"请输入金额";
-        rightLB.textColor = [Utils colorRGB:@"#cccccc"];
-        rightLB.font = [UIFont systemFontOfSize:12];
-        self.number = rightLB;
-        
-        UITextField *tf = [[UITextField alloc] init];
-        [_topMoney addSubview:tf];
-        [tf mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(10);
-            make.right.mas_equalTo(-15);
-            make.height.mas_equalTo(30);
-        }];
-        tf.borderStyle = UITextBorderStyleRoundedRect;
-        tf.hidden = YES;
-        tf.textColor = [Utils colorRGB:@"#666666"];
-        tf.font = [UIFont systemFontOfSize:14];
-        [tf setReturnKeyType:UIReturnKeyDone];
-        tf.delegate = self;
-        self.moneyNumTF = tf;
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        [_topMoney addGestureRecognizer:tap];
-    }
-    return _topMoney;
-}
-
 - (UIView *)payWay{
     if (_payWay == nil) {
         _payWay = [[UIView alloc] init];
         [self addSubview:_payWay];
+        InputView *inputV = self.inputViews.lastObject;
         [_payWay mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.topMoney.mas_bottom).mas_equalTo(10);
+            make.top.mas_equalTo(inputV.mas_bottom).mas_equalTo(10);
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(151);
         }];
@@ -218,19 +142,14 @@
     return _nextButton;
 }
 
-#pragma mark - UITextField Delegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    self.moneyNumTF.hidden = self.moneyNumTF.hidden == NO ? YES : NO;
-    self.number.text = self.moneyNumTF.text;
-    self.number.textColor = [Utils colorRGB:@"#666666"];
-    [self endEditing:YES];
-    return YES;
-}
-
 #pragma mark - Method
 - (void)nextAction:(UIButton *)button{
-    _checkAndTopCallBack(self.moneyNumTF.text, self.payway);
+    InputView *inputV = self.inputViews.lastObject;
+    if ([Utils isNumber:inputV.textField.text]) {
+        _checkAndTopCallBack(inputV.textField.text, self.payway);
+    }else{
+        [Utils toastview:@"请输入数字"];
+    }
 }
 
 - (void)choosePayWay:(UITapGestureRecognizer *)tap{
@@ -249,11 +168,6 @@
     }else{
         self.payway = aliPay;
     }
-}
-
-- (void)tapAction:(UITapGestureRecognizer *)tap{
-    self.moneyNumTF.hidden = self.moneyNumTF.hidden == NO ? YES : NO;
-    [self.moneyNumTF becomeFirstResponder];
 }
 
 @end

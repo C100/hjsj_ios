@@ -114,7 +114,7 @@
 }
 
 - (void)buttonClickAction:(UIButton *)button{
-    _ForgetCallBack(button.tag);
+    _ForgetCallBack(button.tag, self.phoneNumTF.text, self.identifyingCodeTF.text);
 }
 
 

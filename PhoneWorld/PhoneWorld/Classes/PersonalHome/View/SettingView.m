@@ -46,12 +46,13 @@
     cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-//    if (indexPath.row == 1) {
-//        //计算缓存
-//        [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
-//            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.3fMB",totalSize/1024.0/1024.0];
-//        }];
-//    }
+    if (indexPath.row == 1) {
+        //计算缓存
+        [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.3fMB",totalSize/1024.0/1024.0];
+        }];
+    }
+    
     cell.separatorInset = UIEdgeInsetsZero;
     cell.layoutMargins = UIEdgeInsetsZero;
     cell.preservesSuperviewLayoutMargins = NO;

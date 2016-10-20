@@ -15,6 +15,7 @@
 
 #import "MessageViewController.h"
 #import "PersonalHomeViewController.h"
+#import "CardInquiryViewController.h"
 
 @interface CardViewController ()
 @property (nonatomic) CardManageView *cardView;
@@ -78,7 +79,9 @@
                 break;
             case 4:
             {
-                
+                CardInquiryViewController *vc = [CardInquiryViewController new];
+                vc.hidesBottomBarWhenPushed = YES;
+                [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
         }

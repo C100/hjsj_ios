@@ -10,7 +10,7 @@
 
 @interface ForgetPasswordView : UIView
 
-@property (nonatomic) void(^ForgetCallBack)(NSInteger tag);
+@property (nonatomic) void(^ForgetCallBack)(NSInteger tag, NSString *phoneNumber, NSString *codeString);
 
 @property (nonatomic) UITextField *phoneNumTF;
 @property (nonatomic) UITextField *identifyingCodeTF;

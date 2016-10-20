@@ -8,35 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RepairCardView : UIScrollView <UITableViewDelegate, UITableViewDataSource>
+@interface RepairCardView : UIScrollView <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic) void(^RepairCardCallBack)(NSInteger tag);
-
-@property (nonatomic) UILabel *repairUserLB;
-@property (nonatomic) UITextField *repairUserTF;
-
-@property (nonatomic) UILabel *nameLB;
-@property (nonatomic) UITextField *nameTF;
-
-@property (nonatomic) UILabel *IDCardLB;
-@property (nonatomic) UITextField *IDCardTF;
-
-@property (nonatomic) UILabel *phoneLB;
-@property (nonatomic) UITextField *phoneTF;
-
-@property (nonatomic) UILabel *addressLB;
-@property (nonatomic) UITextView *addressTV;
-
-@property (nonatomic) UILabel *receiveUserLB;
-@property (nonatomic) UITextField *receiveUserTF;
-
-@property (nonatomic) UILabel *receivePhoneLB;
-@property (nonatomic) UITextField *receivePhoneTF;
-
-@property (nonatomic) UILabel *emailChoiceLB;
-@property (nonatomic) UITextField *emailChoiceTF;
-@property (nonatomic) UITableView *choiceTableView;
-
-@property (nonatomic) UIButton *nextBtn;
+@property (nonatomic) UIView *emailChoiceView;
+@property (nonatomic) UIButton *nextButton;
 
 @end

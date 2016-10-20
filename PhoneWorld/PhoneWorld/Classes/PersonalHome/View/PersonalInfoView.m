@@ -30,7 +30,7 @@
             InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
             [self addSubview:view];
             view.leftLabel.text = self.leftTitles[i];
-            view.rightLabel.text = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
+            view.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
             [view addGestureRecognizer:tap];
             view.tag = 100+i;
             [self.inputViews addObject:view];
@@ -65,11 +65,7 @@
 
 #pragma mark - Method
 - (void)tapAction:(UITapGestureRecognizer *)tap{
-    for (InputView *iv in self.inputViews) {
-        iv.textField.hidden = YES;
-    }
     InputView *view = (InputView *)tap.view;
-    view.textField.hidden = NO;
     [view.textField becomeFirstResponder];
 }
 

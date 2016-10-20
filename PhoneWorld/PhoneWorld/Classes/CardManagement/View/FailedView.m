@@ -13,19 +13,19 @@
 @property (nonatomic) NSString *titleStr;
 @property (nonatomic) NSString *detailStr;
 @property (nonatomic) NSString *imageName;
+@property (nonatomic) NSString *color;
 
 @end
 
 @implementation FailedView
-- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title andDetail:(NSString *)detail andImageName:(NSString *)imageName
+- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title andDetail:(NSString *)detail andImageName:(NSString *)imageName andTextColorHex:(NSString *)color
 {
     self = [super initWithFrame:frame];
     if (self) {
-//        self.backgroundColor = [UIColor blackColor];
-//        self.alpha = 0.4;
         self.titleStr = title;
         self.detailStr = detail;
         self.imageName = imageName;
+        self.color = color;
         
         UIView *v = [[UIView alloc] init];
         [self addSubview:v];
@@ -73,14 +73,14 @@
         make.height.mas_equalTo(18);
     }];
     lb.font = [UIFont systemFontOfSize:16];
-
-    if ([self.titleStr isEqualToString:@"提交成功"]) {
-        lb.textColor = [Utils colorRGB:@"#ec6c00"];
-    }else if([self.titleStr isEqualToString:@"读卡失败"]){
-        lb.textColor = [Utils colorRGB:@"#0081eb"];
-    }else{
-        lb.textColor = [Utils colorRGB:@"#333333"];
-    }
+    lb.textColor = [Utils colorRGB:self.color];
+//    if ([self.titleStr isEqualToString:@"提交成功"]) {
+//        lb.textColor = [Utils colorRGB:@"#ec6c00"];
+//    }else if([self.titleStr isEqualToString:@"读卡失败"]){
+//        lb.textColor = [Utils colorRGB:@"#0081eb"];
+//    }else{
+//        lb.textColor = [Utils colorRGB:@"#333333"];
+//    }
     
     UILabel *lb2 = [[UILabel alloc] init];
     lb2.text = self.detailStr;

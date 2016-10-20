@@ -42,5 +42,6 @@
 #import <IQKeyboardManager.h>
 #import <UIImageView+WebCache.h>
 #import "UIView+ORGetController.h"
+#import "PhotoBroswerVC.h"
 
 #endif /* PrefixHeader_pch */

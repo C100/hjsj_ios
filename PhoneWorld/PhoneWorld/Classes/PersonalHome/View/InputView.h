@@ -12,8 +12,6 @@
 
 @property (nonatomic) UILabel *leftLabel;
 
-@property (nonatomic) UILabel *rightLabel;
-
 @property (nonatomic) UITextField *textField;
 
 @end

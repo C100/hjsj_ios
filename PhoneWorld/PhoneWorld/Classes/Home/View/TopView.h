@@ -22,12 +22,8 @@
 @property (nonatomic) NSMutableArray *titlesButton;
 
 @property (nonatomic) void(^callback)(NSInteger tag);
+@property (nonatomic) void(^TopCallBack) (id obj);
 
 - (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles;
-
-/*--------查询的筛选信息---height 72---*/
-@property (nonatomic) UILabel *orderTimeLB;
-@property (nonatomic) UILabel *orderStateLB;
-@property (nonatomic) UILabel *orderPhoneLB;
 
 @end

@@ -186,7 +186,6 @@
 /**
  *  set month and day
  *
- *  @param rect
  */
 -(void)setMonthAndDay:(CGRect)rect{
 
@@ -269,7 +268,6 @@
 /**
  *  set year
  *
- *  @param rect
  */
 -(void)setYear:(CGRect)rect{
     CGFloat smallestUnitHeight = rect.size.height/4;

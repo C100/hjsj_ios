@@ -10,6 +10,7 @@
 
 @interface ProposeView : UIView<UITextViewDelegate>
 
+@property (nonatomic) void(^ProposeCallBack)(NSString *propose);
 @property (nonatomic) UILabel *placeholderLB;
 @property (nonatomic) UITextView *proposeTV;
 @property (nonatomic) UIButton *submitButton;

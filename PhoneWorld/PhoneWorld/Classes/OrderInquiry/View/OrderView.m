@@ -15,9 +15,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80) style:UITableViewStyleGrouped];
+        self.orderTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        self.titles = @[@"编号：",@"姓名：",@"日期：",@"手机号码："];
         self.orderTableView.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
         [self addSubview:self.orderTableView];
+        [self.orderTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.left.right.mas_equalTo(0);
+            make.width.mas_equalTo(screenWidth);
+        }];
         self.orderTableView.delegate = self;
         self.orderTableView.dataSource = self;
         self.orderTableView.bounces = NO;
@@ -54,10 +59,10 @@
     OrderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     //得到数据显示
-    [cell numberLB];
-    [cell nameLB];
-    [cell dateLB];
-    [cell phoneLB];
+    cell.numberLB.text = self.titles[0];
+    cell.nameLB.text = self.titles[1];
+    cell.dateLB.text = self.titles[2];
+    cell.phoneLB.text = self.titles[3];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;

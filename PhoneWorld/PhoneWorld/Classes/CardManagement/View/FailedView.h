@@ -10,8 +10,7 @@
 
 @interface FailedView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title andDetail:(NSString *)detail andImageName:(NSString *)imageName;
-
+- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title andDetail:(NSString *)detail andImageName:(NSString *)imageName andTextColorHex:(NSString *)color;
 @property (nonatomic) UIView *stateView;
 
 @end

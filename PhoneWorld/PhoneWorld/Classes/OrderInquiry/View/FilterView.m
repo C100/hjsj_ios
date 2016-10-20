@@ -207,6 +207,7 @@
                 UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     if ([Utils isMobile:ac.textFields.firstObject.text]) {
                         self.currentCell.detailTextLabel.text = ac.textFields.firstObject.text;
+                        self.currentCell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
                     }else{
                         [Utils toastview:@"手机号格式不正确，请重新输入"];
                     }

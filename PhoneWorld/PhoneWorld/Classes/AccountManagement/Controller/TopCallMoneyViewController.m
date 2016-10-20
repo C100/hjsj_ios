@@ -47,7 +47,7 @@
         make.top.left.right.bottom.mas_equalTo(0);
     }];
     
-    __block __weak TopCallMoneyViewController *weakself = self;
+//    __block __weak TopCallMoneyViewController *weakself = self;
     [self.topCallMoneyView setTopCallMoneyCallBack:^(NSInteger money, NSString *phone) {
         
     }];

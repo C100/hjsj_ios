@@ -23,9 +23,9 @@
     [self.view addSubview:self.forgetView];
     
     __block __weak ForgetPasswordViewController *weakself = self;
-    [self.forgetView setForgetCallBack:^(NSInteger tag) {
+    [self.forgetView setForgetCallBack:^(NSInteger tag, NSString *phoneNumber, NSString *codeString) {
         if (tag == 1103) {
-             //下一步
+            NSLog(@"----------下一步");
             if ([Utils isMobile:weakself.forgetView.phoneNumTF.text]) {
                 
             }else{
@@ -33,7 +33,6 @@
             }
         }
         if(tag == 1104){
-            //发送验证码
             NSLog(@"-------------发送验证码");
         }
     }];

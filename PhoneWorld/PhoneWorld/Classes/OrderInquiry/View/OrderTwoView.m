@@ -57,15 +57,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    [cell numberLB];
-    [cell dateLB];
-    [cell typeLB];
-    [cell moneyLB];
-    [cell phoneLB];
-    [cell stateLB];
-    
     return cell;
 }
 

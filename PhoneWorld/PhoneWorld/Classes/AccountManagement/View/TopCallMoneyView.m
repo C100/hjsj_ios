@@ -7,6 +7,7 @@
 //
 
 #import "TopCallMoneyView.h"
+#import "InputView.h"
 
 #define btnWidth (screenWidth - 46)/3.0
 #define hw 70/113.0
@@ -19,6 +20,9 @@
 @property (nonatomic) NSMutableArray *buttonArr;
 @property (nonatomic) NSInteger money;
 @property (nonatomic) UIView *grayView;
+@property (nonatomic) NSMutableArray *inputViews;
+@property (nonatomic) NSArray *leftTitles;
+@property (nonatomic) InputView *topMoney;
 
 @end
 
@@ -32,9 +36,19 @@
         self.backgroundColor = COLOR_BACKGROUND;
         self.titleArr = @[@"10元",@"20元",@"30元",@"50元",@"100元",@"200元"];
         self.detailArr = @[@"售价：9.98元",@"售价：19.96元",@"售价：29.94元",@"售价：49.92元",@"售价99.80元",@"售价199.60元"];
-        [self currentLeftMoney];
-        [self currentRightMoney];
-        [self phoneNumView];
+        self.inputViews = [NSMutableArray array];
+        self.leftTitles = @[@"当前余额",@"手机号码"];
+        for (int i = 0; i < 2; i ++) {
+            InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 40*i, screenWidth, 40)];
+            [self addSubview:inputV];
+            inputV.leftLabel.text = self.leftTitles[i];
+            if (i == 0) {
+                inputV.textField.text = @"99元";
+            }else{
+                inputV.textField.placeholder = @"请输入手机号码";
+            }
+            [self.inputViews addObject:inputV];
+        }
         [self topMoneyNumber];
         [self topMoney];
         [self nextButton];
@@ -42,108 +56,14 @@
     return self;
 }
 
-- (UILabel *)currentLeftMoney{
-    if (_currentLeftMoney == nil) {
-        _currentLeftMoney = [[UILabel alloc] init];
-        _currentLeftMoney.backgroundColor = [UIColor whiteColor];
-        [self addSubview:_currentLeftMoney];
-        [_currentLeftMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.mas_equalTo(0);
-            make.height.mas_equalTo(40);
-        }];
-        _currentLeftMoney.textColor = [Utils colorRGB:@"#666666"];
-        _currentLeftMoney.font = [UIFont systemFontOfSize:14];
-        _currentLeftMoney.text = @"    当前余额";
-    }
-    return _currentLeftMoney;
-}
-
-- (UILabel *)currentRightMoney{
-    if (_currentRightMoney == nil) {
-        _currentRightMoney = [[UILabel alloc] init];
-        _currentRightMoney.backgroundColor = [UIColor whiteColor];
-        _currentRightMoney.textAlignment = NSTextAlignmentRight;
-        [self addSubview:_currentRightMoney];
-        [_currentRightMoney mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.right.mas_equalTo(-15);
-            make.height.mas_equalTo(40);
-        }];
-        _currentRightMoney.textColor = [Utils colorRGB:@"#666666"];
-        _currentRightMoney.font = [UIFont systemFontOfSize:12];
-        _currentRightMoney.text = @"99";
-    }
-    return _currentRightMoney;
-}
-
-- (UIView *)phoneNumView{
-    if (_phoneNumView == nil) {
-        _phoneNumView = [[UIView alloc] init];
-        [self addSubview:_phoneNumView];
-        _phoneNumView.tag = 222;
-        [_phoneNumView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(self.currentLeftMoney.mas_bottom).mas_equalTo(10);
-            make.height.mas_equalTo(40);
-        }];
-        _phoneNumView.backgroundColor = [UIColor whiteColor];
-        
-        UILabel *leftLB = [[UILabel alloc] init];
-        [_phoneNumView addSubview:leftLB];
-        [leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.centerY.mas_equalTo(0);
-            make.width.mas_equalTo(60);
-        }];
-        leftLB.text = @"手机号码";
-        leftLB.textColor = [Utils colorRGB:@"#666666"];
-        leftLB.font = [UIFont systemFontOfSize:14];
-        
-        UILabel *rightLB = [[UILabel alloc] init];
-        [_phoneNumView addSubview:rightLB];
-        [rightLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-15);
-            make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(0);
-        }];
-        rightLB.textAlignment = NSTextAlignmentRight;
-        rightLB.text = @"请输入手机号码";
-        rightLB.textColor = [Utils colorRGB:@"#cccccc"];
-        rightLB.font = [UIFont systemFontOfSize:12];
-        self.phoneNumberLB = rightLB;
-        
-        UITextField *tf = [[UITextField alloc] init];
-        [_phoneNumView addSubview:tf];
-        tf.tag = 1000;
-        [tf mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(10);
-            make.right.mas_equalTo(-15);
-            make.height.mas_equalTo(30);
-        }];
-        tf.borderStyle = UITextBorderStyleRoundedRect;
-        tf.hidden = YES;
-        tf.textColor = [Utils colorRGB:@"#666666"];
-        tf.font = [UIFont systemFontOfSize:14];
-        [tf setReturnKeyType:UIReturnKeyDone];
-        tf.delegate = self;
-        [tf addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
-
-        self.phoneNumberTF = tf;
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        [_phoneNumView addGestureRecognizer:tap];
-    }
-    return _phoneNumView;
-}
-
 - (UIView *)topMoneyNumber{
     if (_topMoneyNumber == nil) {
         _topMoneyNumber = [[UIView alloc] init];
         _topMoneyNumber.backgroundColor = [UIColor whiteColor];
         [self addSubview:_topMoneyNumber];
+        InputView *inputV = self.inputViews.lastObject;
         [_topMoneyNumber mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.phoneNumView.mas_bottom).mas_equalTo(10);
+            make.top.mas_equalTo(inputV.mas_bottom).mas_equalTo(10);
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(btnWidth*hw*2 + 58);
         }];
@@ -196,62 +116,19 @@
     return _topMoneyNumber;
 }
 
-- (UIView *)topMoney{
+- (InputView *)topMoney{
     if (_topMoney == nil) {
-        _topMoney = [[UIView alloc] init];
-        _topMoney.tag = 111;
+        _topMoney = [[InputView alloc] init];
         [self addSubview:_topMoney];
         [_topMoney mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(self.topMoneyNumber.mas_bottom).mas_equalTo(1);
+            make.width.mas_equalTo(screenWidth);
             make.height.mas_equalTo(40);
+            make.top.mas_equalTo(self.topMoneyNumber.mas_bottom).mas_equalTo(1);;
         }];
-        _topMoney.backgroundColor = [UIColor whiteColor];
-        
-        UILabel *leftLB = [[UILabel alloc] init];
-        [_topMoney addSubview:leftLB];
-        [leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.centerY.mas_equalTo(0);
-            make.width.mas_equalTo(60);
-        }];
-        leftLB.text = @"充值金额";
-        leftLB.textColor = [Utils colorRGB:@"#666666"];
-        leftLB.font = [UIFont systemFontOfSize:14];
-        
-        UILabel *rightLB = [[UILabel alloc] init];
-        [_topMoney addSubview:rightLB];
-        [rightLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-15);
-            make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(0);
-        }];
-        rightLB.textAlignment = NSTextAlignmentRight;
-        rightLB.text = @"请输入金额";
-        rightLB.textColor = [Utils colorRGB:@"#cccccc"];
-        rightLB.font = [UIFont systemFontOfSize:12];
-        self.number = rightLB;
-        
-        UITextField *tf = [[UITextField alloc] init];
-        [_topMoney addSubview:tf];
-        tf.tag = 2000;
-        [tf mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(10);
-            make.right.mas_equalTo(-15);
-            make.height.mas_equalTo(30);
-        }];
-        tf.borderStyle = UITextBorderStyleRoundedRect;
-        tf.hidden = YES;
-        tf.textColor = [Utils colorRGB:@"#666666"];
-        tf.font = [UIFont systemFontOfSize:14];
-        [tf setReturnKeyType:UIReturnKeyDone];
-        tf.delegate = self;
-        [tf addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
-        self.moneyNumberTF = tf;
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        [_topMoney addGestureRecognizer:tap];
+        _topMoney.leftLabel.text = @"输入充值金额";
+        _topMoney.textField.placeholder = @"请输入充值金额";
+        _topMoney.textField.delegate = self;
     }
     return _topMoney;
 }
@@ -280,80 +157,25 @@
 }
 
 #pragma mark - UITextField Delegate
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([string isEqualToString:@""] && range.location == 0 && range.length == 1) {
-        self.moneyNumberTF.text = @"";
-    }
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
     for (UIButton *btn in self.buttonArr) {
         btn.backgroundColor = [UIColor clearColor];
         for (UILabel *lb in btn.subviews) {
             [lb setTextColor:[Utils colorRGB:@"#008bd5"]];
         }
     }
-    self.money = self.moneyNumberTF.text.integerValue;
-    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if ([self.phoneNumberTF isFirstResponder]) {
-        if ([Utils isMobile:self.phoneNumberTF.text]) {
-            self.phoneNumberTF.hidden = self.phoneNumberTF.hidden == NO ? YES : NO;
-            self.phoneNumberLB.text = self.phoneNumberTF.text;
-            self.phoneNumberLB.textColor = [Utils colorRGB:@"#666666"];
-        }else{
-            [Utils toastview:@"请输入正确格式手机号"];
-        }
-    }else{
-        if ([Utils isNumber:self.moneyNumberTF.text] && ![self.moneyNumberTF.text isEqualToString:@""]) {
-            for (UIButton *btn in self.buttonArr) {
-                btn.backgroundColor = [UIColor clearColor];
-                for (UILabel *lb in btn.subviews) {
-                    [lb setTextColor:[Utils colorRGB:@"#008bd5"]];
-                }
-            }
-            self.moneyNumberTF.hidden = self.moneyNumberTF.hidden == NO ? YES : NO;
-            self.number.text = self.moneyNumberTF.text;
-            self.number.textColor = [Utils colorRGB:@"#666666"];
-            self.money = self.moneyNumberTF.text.integerValue;
-        }else{
-            [Utils toastview:@"请输入正确金额"];
-        }
-    }
-    [self endEditing:YES];
     return YES;
 }
 
 #pragma mark - Method
-- (void)textFieldDidChanged:(UITextField *)textField{
-    if (textField.tag == 1000) {
-        //phone
-        self.phoneNumberLB.text = textField.text;
-        self.phoneNumberLB.textColor = [Utils colorRGB:@"#666666"];
-
-    }else if(textField.tag == 2000){
-        //puk
-        self.number.text = textField.text;
-        self.number.textColor = [Utils colorRGB:@"#666666"];
-    }
-}
-
-- (void)tapAction:(UITapGestureRecognizer *)tap{
-    if (tap.view.tag == 222) {
-        self.phoneNumberTF.hidden = self.phoneNumberTF.hidden == NO ? YES : NO;
-        self.moneyNumberTF.hidden = YES;
-        [self.phoneNumberTF becomeFirstResponder];
-    }else{
-        self.moneyNumberTF.hidden = self.moneyNumberTF.hidden == NO ? YES : NO;
-        self.phoneNumberTF.hidden = YES;
-        [self.moneyNumberTF becomeFirstResponder];
-    }
-}
 
 - (void)buttonClickAction:(UIButton *)button{
+    self.money = self.topMoney.textField.text.integerValue;
     if (button.tag != 650) {
-        self.number.text = @"";
-        self.moneyNumberTF.text = @"";
+        self.topMoney.textField.text = @"";
         for (UIButton *btn in self.buttonArr) {
             btn.backgroundColor = [UIColor clearColor];
             for (UILabel *lb in btn.subviews) {
@@ -388,13 +210,13 @@
                 break;
         }
     }else{
-        if (![Utils isMobile:self.phoneNumberTF.text]) {
+        InputView *phoneView = self.inputViews.lastObject;
+        if (![Utils isMobile:phoneView.textField.text]) {
             [Utils toastview:@"请输入正确格式手机号"];
         }else{
-            if (self.money == 0) {
+            if (self.money == 0 && [self.topMoney.textField.text isEqualToString:@""]) {
                 [Utils toastview:@"请选择充值金额"];
             }else{
-                
                 self.grayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
                 self.grayView.backgroundColor = [UIColor blackColor];
                 self.grayView.alpha = 0;
@@ -440,7 +262,7 @@
                     }];
                 }];
                 
-                _topCallMoneyCallBack(self.money, self.phoneNumberTF.text);
+                _topCallMoneyCallBack(self.money, phoneView.textField.text);
             }
         }
     }

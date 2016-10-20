@@ -7,7 +7,6 @@
 //
 
 #import "OrderViewController.h"
-#import "DropDownView.h"
 #import "TopView.h"
 #import "ContentView.h"
 #import "MessageViewController.h"
@@ -20,7 +19,6 @@ static OrderViewController *_orderViewController;
 
 @interface OrderViewController ()<UIScrollViewDelegate>
 
-//@property (nonatomic) DropDownView *selectView;//筛选old
 @property (nonatomic) FilterView *selectView;//筛选new
 
 @property (nonatomic) TopView *topView;//标题栏
@@ -78,16 +76,6 @@ static OrderViewController *_orderViewController;
     self.contentScrollView.delegate = self;
     
     [self grayView];
-
-    /*---筛选框old---*/
-    /*
-    self.selectView = [[DropDownView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 220)];
-    self.selectView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.selectView];
-    self.selectView.hidden = YES;
-    self.selectView.states = @[@"全部",@"已激活",@"锁定",@"开户中",@"已使用",@"失效"];
-    [self.selectView.stateTableView reloadData];
-    */
     
     /*-----筛选框new--------*/
     self.selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 81, screenWidth, 240)];
@@ -124,32 +112,18 @@ static OrderViewController *_orderViewController;
         
     }];
     
-    /*---------筛选框--------------*/
-    /*
-    [self.selectView setDropDownCallBack:^(NSInteger tag) {
-        if (tag == 50) {
-            //查询操作            
-            weakself.topView.orderTimeLB.text = [NSString stringWithFormat:@"订单时间：%@-%@",weakself.selectView.beginTime.text,weakself.selectView.endTime.text];
-            weakself.topView.orderStateLB.text = [NSString stringWithFormat:@"订单状态：%@",weakself.selectView.stateTF.text];
-            weakself.topView.orderPhoneLB.text = [NSString stringWithFormat:@"手机号码：%@",weakself.selectView.phoneTF.text];
-
-            
-            [UIView animateWithDuration:0.5 animations:^{
-                CGRect frame = weakself.topView.frame;
-                frame.size.height = 155;
-                weakself.topView.frame = frame;
-                
-                if (weakself.selectView.hidden == NO) {
-                    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-                }else{
-                    weakself.topView.showButton.transform = CGAffineTransformIdentity;
-                }
-                weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-                weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
-            }];
-        }
+    [self.topView setTopCallBack:^(id obj) {
+        [UIView animateWithDuration:0.5 animations:^{
+            if (weakself.selectView.hidden == NO) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            }else{
+                weakself.topView.showButton.transform = CGAffineTransformIdentity;
+            }
+            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
+            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
+        }];
     }];
-     */
+    
 }
 
 #pragma mark - Method
@@ -191,31 +165,6 @@ static OrderViewController *_orderViewController;
     }
     [self.selectView.filterTableView reloadData];
 
-    
-    /*筛选old
-    self.selectView.phoneLB.text = @"手机号码：";
-    self.selectView.phoneTF.placeholder = @"请输入手机号码";
-    self.selectView.phoneTF.enabled = YES;
-    self.selectView.phoneShowBtn.hidden = YES;
-    if (page == 0 || page == 1) {
-        self.selectView.states = @[@"全部",@"已激活",@"锁定",@"开户中",@"已使用",@"失效"];
-        [self.selectView.stateTableView reloadData];
-    }
-    
-    if (page == 2 || page == 3) {
-        self.selectView.states = @[@"全部",@"待审核",@"审核通过",@"审核不通过"];
-        [self.selectView.stateTableView reloadData];
-    }
-    
-    if (page == 4) {//充值
-        self.selectView.phoneShowBtn.hidden = NO;
-        self.selectView.phoneLB.text = @"充值类型：";
-        self.selectView.phoneTF.placeholder = @"";
-        self.selectView.phoneTF.enabled = NO;
-        self.selectView.states = @[@"全部",@"成功",@"失败",@"待定",@"出错"];
-        [self.selectView.stateTableView reloadData];
-    }
-     */
 }
 
 #pragma mark - LazyLoading

@@ -13,4 +13,5 @@
 @property (nonatomic) void(^OrderViewCallBack)(NSInteger section);
 @property (nonatomic) UITableView *orderTableView;
 @property (nonatomic) UILabel *resultNumLB;
+@property (nonatomic) NSArray *titles;
 @end

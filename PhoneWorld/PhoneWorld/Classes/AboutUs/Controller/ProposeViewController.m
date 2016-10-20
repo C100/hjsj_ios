@@ -20,6 +20,9 @@
     self.title = @"意见反馈";
     self.proposeView = [[ProposeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.proposeView];
+    [self.proposeView setProposeCallBack:^(NSString *propose) {
+        NSLog(@"----------上传建议意见：%@--------",propose);
+    }];
 }
 
 @end
