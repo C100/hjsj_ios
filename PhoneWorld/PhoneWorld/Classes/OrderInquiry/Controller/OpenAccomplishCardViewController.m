@@ -7,16 +7,20 @@
 //
 
 #import "OpenAccomplishCardViewController.h"
-#import "OrderView.h"
 #import "NormalOrderDetailViewController.h"
 #import "OrderViewController.h"
 #import "NaviViewController.h"
 
-@interface OpenAccomplishCardViewController ()
-@property (nonatomic) OrderView *orderView;
-@end
+static OpenAccomplishCardViewController *_openAccomplishCardViewController;
 
 @implementation OpenAccomplishCardViewController
+
++ (OpenAccomplishCardViewController *)sharedOpenAccomplishCardViewController{
+    if (_openAccomplishCardViewController == nil) {
+        _openAccomplishCardViewController = [[OpenAccomplishCardViewController alloc] init];
+    }
+    return _openAccomplishCardViewController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

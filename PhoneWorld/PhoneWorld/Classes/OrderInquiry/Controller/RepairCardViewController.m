@@ -11,11 +11,20 @@
 #import "OrderViewController.h"
 #import "RepairCardDetailViewController.h"
 
-@interface RepairCardViewController ()
-@property (nonatomic) OrderView *orderView;
-@end
+static RepairCardViewController *_repairCardViewController;
+
+//@interface RepairCardViewController ()
+//@property (nonatomic) OrderView *orderView;
+//@end
 
 @implementation RepairCardViewController
+
++ (RepairCardViewController *)sharedRepairCardViewController{
+    if (_repairCardViewController == nil) {
+        _repairCardViewController = [[RepairCardViewController alloc] init];
+    }
+    return _repairCardViewController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

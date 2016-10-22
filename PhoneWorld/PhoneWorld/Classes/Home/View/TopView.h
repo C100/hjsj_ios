@@ -16,5 +16,6 @@
 - (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles;
 @property (nonatomic) UIButton *showButton;//up按钮  只能传出去做动画
 @property (nonatomic) NSMutableArray *titlesButton;
+@property (nonatomic) NSMutableArray *resultArr;//结果Label
 
 @end

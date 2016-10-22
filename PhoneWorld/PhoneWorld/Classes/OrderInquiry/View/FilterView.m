@@ -14,11 +14,13 @@
 
 @property (nonatomic) NSArray *phoneTopType;
 @property (nonatomic) UITableViewCell *currentCell;
-//保存筛选条件
-@property (nonatomic) NSString *beginTime;
-@property (nonatomic) NSString *endTime;
-@property (nonatomic) NSString *state;
-@property (nonatomic) NSString *phoneNumber;
+
+@property (nonatomic) UIDatePicker *beginDatePicker;
+@property (nonatomic) UIButton *closeImagePickerButton;
+@property (nonatomic) NSDate *beginDate;
+@property (nonatomic) NSDate *endDate;
+@property (nonatomic) NSString *thirdCondition;//第三个筛选条件
+@property (nonatomic) NSString *forthCondition;//第四个筛选条件
 
 @end
 
@@ -36,8 +38,37 @@
         [self filterTableView];
         [self findBtn];
         [self resetBtn];
+        [self beginDatePicker];
     }
     return self;
+}
+
+- (UIDatePicker *)beginDatePicker{
+    if (_beginDatePicker == nil) {
+        _beginDatePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 64+80+240, screenWidth, screenHeight - 108 - 80 - 240)];
+        [[UIApplication sharedApplication].keyWindow addSubview:_beginDatePicker];
+        [_beginDatePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"]];
+        _beginDatePicker.backgroundColor = [UIColor whiteColor];
+        _beginDatePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        // 设置时区
+        [_beginDatePicker setTimeZone:[NSTimeZone localTimeZone]];
+        
+        // 设置当前显示时间
+        [_beginDatePicker setDate:[NSDate date] animated:YES];
+        // 设置UIDatePicker的显示模式
+        [_beginDatePicker setDatePickerMode:UIDatePickerModeDate];
+        _beginDatePicker.hidden = YES;
+        
+        UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - 60, 64+80+240, 60, 30)];
+        closeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [[UIApplication sharedApplication].keyWindow addSubview:closeButton];
+        [closeButton setTitle:@"确定" forState:UIControlStateNormal];
+        [closeButton setTitleColor:[Utils colorRGB:@"#333333"] forState:UIControlStateNormal];
+        [closeButton addTarget:self action:@selector(closeDatePickerAction) forControlEvents:UIControlEventTouchUpInside];
+        closeButton.hidden = YES;
+        self.closeImagePickerButton = closeButton;
+    }
+    return _beginDatePicker;
 }
 
 - (UITableView *)filterTableView{
@@ -104,28 +135,6 @@
     return _resetBtn;
 }
 
-- (CJCalendarViewController *)calendarViewController{
-    if (_calendarViewController == nil) {
-        _calendarViewController = [[CJCalendarViewController alloc] init];
-        _calendarViewController.view.frame = CGRectMake(0, 0, screenWidth, screenHeight - 64);
-        _calendarViewController.delegate = self;
-        _calendarViewController.headerBackgroundColor = MainColor;
-        _calendarViewController.contentBackgroundColor = MainColor;
-    }
-    return _calendarViewController;
-}
-
-#pragma mark - CJCalendarViewController Delegate
--(void)CalendarViewController:(CJCalendarViewController *)controller didSelectActionYear:(NSString *)year month:(NSString *)month day:(NSString *)day{
-    NSString *string = [NSString stringWithFormat:@"%02d-%02d-%02d", year.integerValue, month.integerValue, day.integerValue];
-    self.currentCell.detailTextLabel.text = string;
-    if ([self.currentCell.textLabel.text isEqualToString:@"起始时间"]) {
-        self.beginTime = string;
-    }else{
-        self.endTime = string;
-    }
-}
-
 #pragma mark - UITableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 4;
@@ -168,36 +177,58 @@
     switch (indexPath.row) {
         case 0:
         {
-            [self showCalendar];
+            self.beginDatePicker.hidden = NO;
+            self.closeImagePickerButton.hidden = NO;
+            [_beginDatePicker setMaximumDate:[NSDate date]];
+            [_beginDatePicker setMinimumDate:nil];
+            if (self.endDate) {
+                [self.beginDatePicker setMaximumDate:self.endDate];
+            }
         }
             break;
         case 1:
         {
-            [self showCalendar];
+            self.beginDatePicker.hidden = NO;
+            self.closeImagePickerButton.hidden = NO;
+            self.beginDatePicker.minimumDate = [NSDate date];
+            [self.beginDatePicker setMaximumDate:nil];
+            if (self.beginDate) {
+                [self.beginDatePicker setMinimumDate:self.beginDate];
+            }
         }
             break;
         case 2:
         {
-            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"订单状态" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"订单状态" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
             for (int i = 0; i < self.orderStates.count; i ++) {
                 UIAlertAction *action1 = [UIAlertAction actionWithTitle:self.orderStates[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     self.currentCell.detailTextLabel.text = self.orderStates[i];
                 }];
                 [ac addAction:action1];
+                self.thirdCondition = self.orderStates[i];
             }
+            UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                self.currentCell.detailTextLabel.text = @"请选择";
+            }];
+            [ac addAction:action4];
             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
         }
             break;
         case 3:
         {
             if ([self.details[indexPath.row] isEqualToString:@"请选择"]) {
-                UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"充值类型" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"充值类型" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
                 for (int i = 0; i < self.phoneTopType.count; i ++) {
                     UIAlertAction *action1 = [UIAlertAction actionWithTitle:self.phoneTopType[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         self.currentCell.detailTextLabel.text = self.phoneTopType[i];
+                        self.forthCondition = self.phoneTopType[i];
                     }];
                     [ac addAction:action1];
                 }
+                UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    self.currentCell.detailTextLabel.text = @"请选择";
+                }];
+                [ac addAction:action4];
                 [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
             }else{
                 UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"请输入手机号码" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -208,6 +239,7 @@
                     if ([Utils isMobile:ac.textFields.firstObject.text]) {
                         self.currentCell.detailTextLabel.text = ac.textFields.firstObject.text;
                         self.currentCell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
+                        self.forthCondition = ac.textFields.firstObject.text;
                     }else{
                         [Utils toastview:@"手机号格式不正确，请重新输入"];
                     }
@@ -225,45 +257,50 @@
 }
 
 #pragma mark - Method
-- (void)showCalendar{
-    NSDate *date = [[NSDate alloc] init];
-    NSString *dateStr = [[NSString stringWithFormat:@"%@",date] componentsSeparatedByString:@" "].firstObject;
-    NSArray *arr = [dateStr componentsSeparatedByString:@"-"];
-    if (arr.count > 1) {
-        [self.calendarViewController setYear:arr[0] month:arr[1] day:arr[2]];
-    }
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:self.calendarViewController animated:YES completion:nil];
-}
-
 //查询 70   重置 71
 - (void)buttonClickedAction:(UIButton *)button{
     switch (button.tag) {
         case 70:
         {
-            if (self.beginTime == nil) {
-                [Utils toastview:@"请选择起始时间"];
-            }else if(self.endTime == nil){
-                [Utils toastview:@"请选择截止时间"];
-            }else{
-                NSString *beginStr = [self.beginTime stringByReplacingOccurrencesOfString:@"-" withString:@""];
-                NSString *endStr = [self.endTime stringByReplacingOccurrencesOfString:@"-" withString:@""];
-                
-                NSInteger beginInt = beginStr.integerValue;
-                NSInteger endInt = endStr.integerValue;
-                if (beginInt > endInt) {
-                    [Utils toastview:@"起始时间不得晚于截止时间"];
-                }else{
-                    NSLog(@"万事俱备，就要查询啦！！！！！！！！");
-                }
+            NSString *beginStr = @"无";
+            NSString *endStr = @"无";
+            if (self.beginDate) {
+                beginStr = [[NSString stringWithFormat:@"%@",self.beginDate] componentsSeparatedByString:@" "].firstObject;
             }
+            if (self.endDate) {
+                endStr = [[NSString stringWithFormat:@"%@",self.endDate] componentsSeparatedByString:@" "].firstObject;
+            }
+            if (!self.thirdCondition) {
+                self.thirdCondition = @"无";
+            }
+            if (!self.forthCondition) {
+                self.forthCondition = @"无";
+            }
+            _FilterCallBack(beginStr,endStr,self.thirdCondition,self.forthCondition);
+            NSLog(@"万事俱备，就要查询啦！！！！！！！！");
         }
             break;
         case 71:
         {
+            self.beginDate = nil;
+            self.endDate = nil;
             [self.filterTableView reloadData];
         }
             break;
     }
+}
+
+- (void)closeDatePickerAction{
+    if ([self.currentCell.textLabel.text isEqualToString:@"起始时间"]) {
+        self.beginDate = self.beginDatePicker.date;
+    }
+    if ([self.currentCell.textLabel.text isEqualToString:@"截止时间"]) {
+        self.endDate = self.beginDatePicker.date;
+    }
+    NSString *dateString = [[NSString stringWithFormat:@"%@",self.beginDatePicker.date] componentsSeparatedByString:@" "].firstObject;
+    self.currentCell.detailTextLabel.text = [NSString stringWithFormat:@"%@",dateString];
+    self.beginDatePicker.hidden = YES;
+    self.closeImagePickerButton.hidden = YES;
 }
 
 @end

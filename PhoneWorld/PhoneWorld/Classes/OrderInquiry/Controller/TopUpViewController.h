@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderTwoView.h"
 
 @interface TopUpViewController : UIViewController
-
++ (TopUpViewController *)sharedTopUpViewController;
+@property (nonatomic) OrderTwoView *orderTwoView;
 @end

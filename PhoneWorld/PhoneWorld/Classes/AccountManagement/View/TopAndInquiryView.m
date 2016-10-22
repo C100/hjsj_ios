@@ -28,11 +28,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 80) andTitles:@[@"全部",@"话费充值",@"余额充值"]];
+        self.topView = [[TopView alloc] initWithFrame:CGRectZero andTitles:@[@"全部",@"话费充值",@"余额充值"]];
         [self addSubview:self.topView];
+        [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.mas_equalTo(0);
+            make.height.mas_equalTo(80);
+        }];
         
-        self.contentView = [[OrderTwoView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, screenHeight - 64 - 80)];
+        self.contentView = [[OrderTwoView alloc] init];
         [self addSubview:self.contentView];
+        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(0);
+            make.left.right.mas_equalTo(0);
+            make.bottom.mas_equalTo(0);
+        }];
         
         /*-----筛选框new--------*/
         self.selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 240)];
@@ -87,6 +96,18 @@
             }];
         }];
         
+        [self.selectView setFilterCallBack:^(NSString *beginDate, NSString *endDate, NSString *third, NSString *forth) {
+            [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.mas_equalTo(0);
+                make.top.mas_equalTo(0);
+                make.height.mas_equalTo(130);
+            }];
+            [UIView animateWithDuration:0.3 animations:^{
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                weakself.selectView.hidden = YES;
+                weakself.grayView.hidden = YES;
+            }];
+        }];
     }
     return self;
 }

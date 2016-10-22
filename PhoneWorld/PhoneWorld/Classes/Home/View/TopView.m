@@ -15,12 +15,14 @@
 @property (nonatomic) CGFloat allWidth;
 @property (nonatomic) CGFloat leftDistance;
 
-@property (nonatomic) NSArray *titles;//标题名称
 @property (nonatomic) UIView *titlesView;
+@property (nonatomic) NSArray *titles;//标题名称
 
 @property (nonatomic) UIView *siftView;//筛选栏
-
 @property (nonatomic) UIView *lineView;
+
+@property (nonatomic) UIView *resultView;
+@property (nonatomic) NSArray *resultViewLeftTitles;
 
 @end
 
@@ -37,10 +39,12 @@
             CGSize size = [Utils sizeWithFont:[UIFont systemFontOfSize:14] andMaxSize:CGSizeMake(0, 20) andStr:str];
             self.allWidth += size.width;
         }
-        
+        self.resultViewLeftTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
+        self.resultArr = [NSMutableArray array];
         [self titlesView];
         [self siftView];
         [self lineView];
+        [self resultView];
     }
     return self;
 }
@@ -141,6 +145,30 @@
         self.showButton = btn;
     }
     return _siftView;
+}
+
+- (UIView *)resultView{
+    if (_resultView == nil) {
+        _resultView = [[UIView alloc] init];
+        [self addSubview:_resultView];
+        [_resultView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.siftView.mas_bottom).mas_equalTo(0);
+            make.left.right.mas_equalTo(0);
+            make.width.mas_equalTo(screenWidth);
+            make.height.mas_equalTo(50);
+        }];
+        for (int i = 0; i < 4; i++) {
+            NSInteger queue = i%2;
+            NSInteger line = i/2;
+            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15+queue*(screenWidth-30)/2, 10+20*line, (screenWidth-30)/2, 14)];
+            lb.font = [UIFont systemFontOfSize:12];
+            lb.textColor = [Utils colorRGB:@"#999999"];
+            lb.text = self.resultViewLeftTitles[i];
+            [_resultView addSubview:lb];
+            [self.resultArr addObject:lb];
+        }
+    }
+    return _resultView;
 }
 
 #pragma mark - Method

@@ -10,6 +10,8 @@
 
 @interface FilterView : UIView <UITableViewDelegate, UITableViewDataSource, CalendarViewControllerDelegate>
 
+@property (nonatomic) void(^FilterCallBack)(NSString *beginDate,NSString *endDate,NSString *third,NSString *forth);
+
 @property (nonatomic) UITableView *filterTableView;
 @property (nonatomic) UITextField *phoneTF;//手机号输入框
 @property (nonatomic) NSArray *orderStates;//订单状态
@@ -19,6 +21,5 @@
 @property (nonatomic) UIButton *findBtn;
 //重置
 @property (nonatomic) UIButton *resetBtn;
-//日历
-@property (nonatomic) CJCalendarViewController *calendarViewController;
+
 @end

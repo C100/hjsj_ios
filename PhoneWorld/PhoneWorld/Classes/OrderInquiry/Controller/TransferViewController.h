@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderView.h"
 
 @interface TransferViewController : UIViewController
-
++ (TransferViewController *)sharedTransferViewController;
+@property (nonatomic) OrderView *orderView;
 @end

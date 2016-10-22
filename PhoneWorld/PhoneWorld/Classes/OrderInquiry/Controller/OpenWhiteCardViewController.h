@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderView.h"
 
 @interface OpenWhiteCardViewController : UIViewController
-
++ (OpenWhiteCardViewController *)sharedOpenWhiteCardViewController;
+@property (nonatomic) OrderView *orderView;
 @end

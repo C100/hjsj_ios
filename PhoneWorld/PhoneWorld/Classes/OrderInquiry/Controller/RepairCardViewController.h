@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderView.h"
 
 @interface RepairCardViewController : UIViewController
-
++ (RepairCardViewController *)sharedRepairCardViewController;
+@property (nonatomic) OrderView *orderView;
 @end

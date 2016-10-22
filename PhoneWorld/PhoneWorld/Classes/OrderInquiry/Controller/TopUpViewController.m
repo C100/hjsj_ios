@@ -7,13 +7,22 @@
 //
 
 #import "TopUpViewController.h"
-#import "OrderTwoView.h"
+//#import "OrderTwoView.h"
+
+static TopUpViewController *_topUpViewController;
 
 @interface TopUpViewController ()
-@property (nonatomic) OrderTwoView *orderTwoView;
+//@property (nonatomic) OrderTwoView *orderTwoView;
 @end
 
 @implementation TopUpViewController
+
++ (TopUpViewController *)sharedTopUpViewController{
+    if (_topUpViewController == nil) {
+        _topUpViewController = [[TopUpViewController alloc] init];
+    }
+    return _topUpViewController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -15,10 +15,4 @@
 
 @interface ContentView : UIScrollView
 
-@property (nonatomic) OpenAccomplishCardViewController *pageView1;
-@property (nonatomic) OpenWhiteCardViewController *pageView2;
-@property (nonatomic) TransferViewController *pageView3;
-@property (nonatomic) RepairCardViewController *pageView4;
-@property (nonatomic) TopUpViewController *pageView5;
-
 @end

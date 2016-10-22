@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderView.h"
 
 @interface OpenAccomplishCardViewController : UIViewController
+
++ (OpenAccomplishCardViewController *)sharedOpenAccomplishCardViewController;
+@property (nonatomic) OrderView *orderView;
 
 @end

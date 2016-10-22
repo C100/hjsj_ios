@@ -119,6 +119,7 @@
 		8A9698B31DB76D0D000841BA /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698B21DB76D0D000841BA /* InputView.m */; };
 		8A9698B91DB78A0D000841BA /* PhoneNumberCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698B81DB78A0D000841BA /* PhoneNumberCheckViewController.m */; };
 		8A9698BC1DB78A1E000841BA /* PhoneNumberCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698BB1DB78A1E000841BA /* PhoneNumberCheckView.m */; };
+		8AAA8A401DBB441800368395 /* OrderMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA8A3F1DBB441800368395 /* OrderMainView.m */; };
 		8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8821DADC6A80088DD82 /* HomeView.m */; };
 		8AABF8861DADFB750088DD82 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8851DADFB750088DD82 /* Utils.m */; };
 		8AABF8891DAE11060088DD82 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8881DAE11060088DD82 /* TopView.m */; };
@@ -392,6 +393,8 @@
 		8A9698B81DB78A0D000841BA /* PhoneNumberCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberCheckViewController.m; sourceTree = "<group>"; };
 		8A9698BA1DB78A1E000841BA /* PhoneNumberCheckView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberCheckView.h; sourceTree = "<group>"; };
 		8A9698BB1DB78A1E000841BA /* PhoneNumberCheckView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberCheckView.m; sourceTree = "<group>"; };
+		8AAA8A3E1DBB441800368395 /* OrderMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMainView.h; sourceTree = "<group>"; };
+		8AAA8A3F1DBB441800368395 /* OrderMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMainView.m; sourceTree = "<group>"; };
 		8AABF8811DADC6A80088DD82 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
 		8AABF8821DADC6A80088DD82 /* HomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeView.m; sourceTree = "<group>"; };
 		8AABF8841DADFB750088DD82 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -890,6 +893,8 @@
 		8A49D8971DACCB9900A1D650 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8AAA8A3E1DBB441800368395 /* OrderMainView.h */,
+				8AAA8A3F1DBB441800368395 /* OrderMainView.m */,
 				8AB87EC11DB203AF0045CB90 /* FilterView.h */,
 				8AB87EC21DB203AF0045CB90 /* FilterView.m */,
 				8AABF8871DAE11060088DD82 /* TopView.h */,
@@ -1591,6 +1596,7 @@
 				8AEEF9901DAF66CF00D3D6AD /* TransferCardViewController.m in Sources */,
 				8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */,
 				8A90E8F51DB61F95004ECA62 /* InformationCollectionViewController.m in Sources */,
+				8AAA8A401DBB441800368395 /* OrderMainView.m in Sources */,
 				8A70DB891DB8CAB6005E76C2 /* UIButton+SD.m in Sources */,
 				8A3D7D8E1DAF3BBF00824B7D /* CJUseTime.m in Sources */,
 				8AB992CC1DB4C11800D75492 /* RepairCardDetailView.m in Sources */,

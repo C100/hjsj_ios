@@ -7,15 +7,19 @@
 //
 
 #import "OpenWhiteCardViewController.h"
-#import "OrderView.h"
 #import "NormalOrderDetailViewController.h"
 #import "OrderViewController.h"
 
-@interface OpenWhiteCardViewController ()
-@property (nonatomic) OrderView *orderView;
-@end
+static OpenWhiteCardViewController *_openWhiteCardViewController;
 
 @implementation OpenWhiteCardViewController
+
++ (OpenWhiteCardViewController *)sharedOpenWhiteCardViewController{
+    if (_openWhiteCardViewController == nil) {
+        _openWhiteCardViewController = [[OpenWhiteCardViewController alloc] init];
+    }
+    return _openWhiteCardViewController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

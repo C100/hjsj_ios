@@ -11,11 +11,19 @@
 #import "TransferDetailViewController.h"
 #import "OrderViewController.h"
 
+static TransferViewController *_transferViewController;
+
 @interface TransferViewController ()
-@property (nonatomic) OrderView *orderView;
 @end
 
 @implementation TransferViewController
+
++ (TransferViewController *)sharedTransferViewController{
+    if (_transferViewController == nil) {
+        _transferViewController = [[TransferViewController alloc] init];
+    }
+    return _transferViewController;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
