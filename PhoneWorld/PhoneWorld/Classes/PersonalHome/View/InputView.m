@@ -28,6 +28,7 @@
         [_leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.centerY.mas_equalTo(0);
+            make.width.mas_equalTo(90);
         }];
         _leftLabel.textColor = [Utils colorRGB:@"#666666"];
         _leftLabel.font = [UIFont systemFontOfSize:14];

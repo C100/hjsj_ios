@@ -55,7 +55,6 @@
             NSRange range = [lb.text rangeOfString:self.leftTitles[i]];
             lb.attributedText = [Utils setTextColor:lb.text FontNumber:[UIFont systemFontOfSize:14] AndRange:range AndColor:[Utils colorRGB:@"#999999"]];
         }
-        
     }
     return _infoView;
 }
@@ -82,64 +81,16 @@
     return _nextButton;
 }
 
-- (UITextField *)moneyTF{
-    if (_moneyTF == nil) {
-        _moneyTF = [[UITextField alloc] init];
-        [self addSubview:_moneyTF];
-        [_moneyTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-15);
-            make.left.mas_equalTo(90);
-            make.height.mas_equalTo(30);
-            make.top.mas_equalTo(255);
-        }];
-        _moneyTF.borderStyle = UITextBorderStyleRoundedRect;
-        _moneyTF.textColor = [Utils colorRGB:@"#666666"];
-        _moneyTF.font = [UIFont systemFontOfSize:12];
-        _moneyTF.returnKeyType = UIReturnKeyDone;
-        _moneyTF.delegate = self;
-        _moneyTF.hidden = YES;
-        [_moneyTF addTarget:self action:@selector(textFieldStateChanged:) forControlEvents:UIControlEventEditingChanged];
-    }
-    return _moneyTF;
-}
-
-#pragma mark - UITextField Delegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if ([Utils isNumber:self.moneyTF.text]) {
-        self.moneyTF.hidden = YES;
-        [self endEditing:YES];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-        UITableViewCell *cell = [self.chooseTableView cellForRowAtIndexPath:indexPath];
-        cell.detailTextLabel.text = self.moneyTF.text;
-        cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-    }else{
-        [Utils toastview:@"请输入数字"];
-    }
-    return YES;
-}
-
 #pragma mark - Method
 
 - (void)buttonClickAction:(UIButton *)button{
     if ([button.currentTitle isEqualToString:@"读卡"]) {
-        //读卡操作
-        
         //读卡成功
         if (_chooseTableView == nil) {
             self.chooseTableView = [[ChoosePackageTableView alloc] initWithFrame:CGRectMake(0, 170, screenWidth, 119) style:UITableViewStylePlain];
             [self addSubview:self.chooseTableView];
         }
-        
-        [self moneyTF];
-        
-        __block __weak ReadCardAndChoosePackageView *weakself = self;
-        [self.chooseTableView setChoosePackageCallBack:^(NSInteger row) {
-            if (row == 2) {
-                weakself.moneyTF.hidden = NO;
-                [weakself.moneyTF becomeFirstResponder];
-            }
-        }];
+                
         [self.nextButton setTitle:@"下一步" forState:UIControlStateNormal];
         [self.nextButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(330);
@@ -154,12 +105,6 @@
         //下一步
         
     }
-}
-
-- (void)textFieldStateChanged:(UITextField *)textField{
-    NSIndexPath *indexP = [NSIndexPath indexPathForRow:2 inSection:0];
-    UITableViewCell *cell = [self.chooseTableView cellForRowAtIndexPath:indexP];
-    cell.detailTextLabel.text = textField.text;
 }
 
 - (void)removeGrayView{

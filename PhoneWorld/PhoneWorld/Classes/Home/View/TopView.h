@@ -10,20 +10,11 @@
 
 @interface TopView : UIView
 
-@property (nonatomic) NSArray *titles;
-
-@property (nonatomic) UIView *titlesView;
-@property (nonatomic) UIView *siftView;//筛选栏
-
-@property (nonatomic) UIButton *showButton;//保存用
-
-@property (nonatomic) UIView *lineView;
-
-@property (nonatomic) NSMutableArray *titlesButton;
-
 @property (nonatomic) void(^callback)(NSInteger tag);
 @property (nonatomic) void(^TopCallBack) (id obj);
 
 - (instancetype)initWithFrame:(CGRect)frame andTitles:(NSArray *)titles;
+@property (nonatomic) UIButton *showButton;//up按钮  只能传出去做动画
+@property (nonatomic) NSMutableArray *titlesButton;
 
 @end

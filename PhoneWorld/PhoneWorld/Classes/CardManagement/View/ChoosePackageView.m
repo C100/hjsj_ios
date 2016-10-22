@@ -8,6 +8,7 @@
 
 #import "ChoosePackageView.h"
 #import "InformationCollectionViewController.h"
+#import "InputView.h"
 
 @interface ChoosePackageView ()
 
@@ -30,7 +31,6 @@
         [self addTopStateView];
         [self tableView];
         [self nextButton];
-        [self moneyTF];
     }
     return self;
 }
@@ -49,31 +49,23 @@
         lb.text = [self.titles[i] stringByAppendingString:self.userinfosDic[arr[i]]];
         lb.font = [UIFont systemFontOfSize:14];
         lb.textColor = [Utils colorRGB:@"#333333"];
-        
         NSRange range = [lb.text rangeOfString:self.titles[i]];
-        
         lb.attributedText = [Utils setTextColor:lb.text FontNumber:[UIFont systemFontOfSize:14] AndRange:range AndColor:[Utils colorRGB:@"#999999"]];
 
         [v addSubview:lb];
     }
-    
 }
 
 - (UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] init];
+        _tableView = [[ChoosePackageTableView alloc] init];
         [self addSubview:_tableView];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(140);
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(119);
         }];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.tableFooterView = [UIView new];
-        _tableView.bounces = NO;
     }
-    
     return _tableView;
 }
 
@@ -99,103 +91,11 @@
     return _nextButton;
 }
 
-- (UITextField *)moneyTF{
-    if (_moneyTF == nil) {
-        _moneyTF = [[UITextField alloc] init];
-        [self addSubview:_moneyTF];
-        [_moneyTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-15);
-            make.left.mas_equalTo(90);
-            make.bottom.mas_equalTo(self.tableView.mas_bottom).mas_equalTo(-5);
-            make.height.mas_equalTo(30);
-        }];
-        _moneyTF.borderStyle = UITextBorderStyleRoundedRect;
-        _moneyTF.textColor = [Utils colorRGB:@"#666666"];
-        _moneyTF.font = [UIFont systemFontOfSize:12];
-        _moneyTF.hidden = YES;
-        _moneyTF.returnKeyType = UIReturnKeyDone;
-        _moneyTF.delegate = self;
-        [_moneyTF addTarget:self action:@selector(textFieldStateChanged:) forControlEvents:UIControlEventEditingChanged];
-    }
-    return _moneyTF;
-}
-
-#pragma mark - UITextField Delegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if ([Utils isNumber:self.moneyTF.text]) {
-        self.moneyTF.hidden = YES;
-        [self endEditing:YES];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        cell.detailTextLabel.text = self.moneyTF.text;
-        cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-    }else{
-        [Utils toastview:@"请输入数字"];
-    }
-    return YES;
-}
-
-#pragma mark - UITableView Delegate
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-    }
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.preservesSuperviewLayoutMargins = NO;
-    
-    cell.textLabel.text = self.titlesTwo[indexPath.row];
-    cell.detailTextLabel.text = @"请选择";
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor = [Utils colorRGB:@"#666666"];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-    if (indexPath.row == 2) {
-        cell.detailTextLabel.text = @"请输入预存金额";
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.detailTextLabel.textColor = [Utils colorRGB:@"#cccccc"];
-    }
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 40;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 2) {
-        self.moneyTF.hidden = NO;
-        [self.moneyTF becomeFirstResponder];
-    }
-}
-
 #pragma mark - Method
-
-- (void)textFieldStateChanged:(UITextField *)textField{
-    NSIndexPath *indexP = [NSIndexPath indexPathForRow:2 inSection:0];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexP];
-    cell.detailTextLabel.text = textField.text;
-    cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-}
-
 - (void)buttonClickAction:(UIButton *)button{
     /*---跳转到采集信息界面---*/
-    NSIndexPath *indexP = [NSIndexPath indexPathForRow:2 inSection:0];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexP];
-    if ([Utils isNumber:cell.detailTextLabel.text] && ![cell.detailTextLabel.text isEqualToString:@""]) {
-        cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-//        NSLog(@"~~~~~~~~~~%@~~~~~~~~~~",cell.detailTextLabel.text);
-        
-        [self.userinfosDic addEntriesFromDictionary:@{@"prestoreMoney":self.moneyTF.text}];
+    if ([Utils isNumber:self.tableView.inputView.textField.text] && ![self.tableView.inputView.textField.text isEqualToString:@""]) {
+        [self.userinfosDic addEntriesFromDictionary:@{@"prestoreMoney":self.tableView.inputView.textField.text}];
         
         UIViewController *viewController = [self viewController];
         InformationCollectionViewController *vc = [InformationCollectionViewController new];

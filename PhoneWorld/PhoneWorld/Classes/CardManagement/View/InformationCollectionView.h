@@ -8,14 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InformationCollectionView : UIView <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface InformationCollectionView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos;
-
-@property (nonatomic) UITableView *tableView;
-
 @property (nonatomic) UIButton *nextButton;
-
 @property (nonatomic) NSMutableDictionary *userinfosDic;
 
 @end

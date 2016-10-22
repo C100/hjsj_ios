@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RepairCardView : UIScrollView <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface RepairCardView : UIScrollView
 
-@property (nonatomic) UIView *emailChoiceView;
+//@property (nonatomic) UIView *emailChoiceView;
 @property (nonatomic) UIButton *nextButton;
 
 @end

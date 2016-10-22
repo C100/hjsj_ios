@@ -27,11 +27,6 @@
     self.personalInfoView = [[PersonalInfoView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andUserinfos:[@[@"userinfos"] mutableCopy]];
     self.personalInfoView.contentSize = CGSizeMake(0, 520);
     [self.view addSubview:self.personalInfoView];
-    [self.personalInfoView setPersonalInfoCallBack:^(id obj) {
-        /*
-         个人信息保存
-         */
-    }];
 }
 
 @end

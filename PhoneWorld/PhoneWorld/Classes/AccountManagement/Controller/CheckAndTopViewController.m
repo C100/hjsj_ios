@@ -47,6 +47,7 @@
                 NSLog(@"-------------充值金额%@   充值方式%lu",money,(unsigned long)payway);
                 /*--------跳转到充值结果页面--------*/
                 TopResultViewController *vc = [TopResultViewController new];
+                vc.isSucceed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }else{
                 [Utils toastview:@"请选择充值方式"];

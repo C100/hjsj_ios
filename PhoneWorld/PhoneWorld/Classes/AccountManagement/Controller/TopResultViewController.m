@@ -24,7 +24,7 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
-    self.topResultView = [[TopResultView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andIsSucceed:NO];
+    self.topResultView = [[TopResultView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andIsSucceed:self.isSucceed];
     [self.view addSubview:self.topResultView];
 }
 

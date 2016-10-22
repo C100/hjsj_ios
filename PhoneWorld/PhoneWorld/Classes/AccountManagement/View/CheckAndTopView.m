@@ -38,6 +38,7 @@
             inputV.leftLabel.text = self.leftTitles[i];
             if (i == 0) {
                 inputV.textField.text = @"99元";
+                inputV.textField.userInteractionEnabled = NO;
             }else{
                 inputV.textField.placeholder = @"请输入金额";
             }

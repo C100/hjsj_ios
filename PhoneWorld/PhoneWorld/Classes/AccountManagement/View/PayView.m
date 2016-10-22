@@ -47,7 +47,7 @@
         [self addSubview:self.textField];
 
         [self initPwdTextField];
-        
+        [self forgetPasswodButton];
     }
     return self;
 }
@@ -113,6 +113,24 @@
     }
 }
 
+- (UIButton *)forgetPasswodButton{
+    if (_forgetPasswodButton == nil) {
+        _forgetPasswodButton = [[UIButton alloc] init];
+        [self addSubview:_forgetPasswodButton];
+        [_forgetPasswodButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-16);
+            make.top.mas_equalTo(self.textField.mas_bottom).mas_equalTo(10);
+            make.width.mas_equalTo(100);
+            make.height.mas_equalTo(18);
+        }];
+        [_forgetPasswodButton setTitle:@"忘记密码？" forState:UIControlStateNormal];
+        [_forgetPasswodButton setTitleColor:[Utils colorRGB:@"#0081eb"] forState:UIControlStateNormal];
+        _forgetPasswodButton.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_forgetPasswodButton addTarget:self action:@selector(forgetPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _forgetPasswodButton;
+}
+
 #pragma mark - UITextField Delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -150,7 +168,6 @@
     }
     if (textField.text.length == kDotCount) {
         _PayCallBack(textField.text);
-//        NSLog(@"-=-=-=-=-=-=-=-输入完毕");
     }
 }
 
@@ -158,6 +175,10 @@
 
 - (void)closeAction:(UIButton *)button{
     _ClosePayCallBack(button);
+}
+
+- (void)forgetPasswordAction:(UIButton *)button{
+    _ForgetPasswordCallBack(button);
 }
 
 @end

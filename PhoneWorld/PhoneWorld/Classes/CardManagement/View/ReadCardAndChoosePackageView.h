@@ -14,6 +14,5 @@
 
 @property (nonatomic) UIView *infoView;
 @property (nonatomic) UIButton *nextButton;
-@property (nonatomic) UITextField *moneyTF;
 
 @end

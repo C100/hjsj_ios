@@ -17,5 +17,6 @@
 @property (nonatomic) UIView *detailView;
 @property (nonatomic) NSArray *detailArr;
 @property (nonatomic) UIButton *nextButton;
+@property (nonatomic) UIButton *backToHomeButton;
 
 @end

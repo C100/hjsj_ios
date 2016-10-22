@@ -8,6 +8,7 @@
 
 #import "TopCallMoneyView.h"
 #import "InputView.h"
+#import "ForgetPasswordViewController.h"
 
 #define btnWidth (screenWidth - 46)/3.0
 #define hw 70/113.0
@@ -44,6 +45,7 @@
             inputV.leftLabel.text = self.leftTitles[i];
             if (i == 0) {
                 inputV.textField.text = @"99元";
+                inputV.textField.userInteractionEnabled = NO;
             }else{
                 inputV.textField.placeholder = @"请输入手机号码";
             }
@@ -157,13 +159,14 @@
 }
 
 #pragma mark - UITextField Delegate
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     for (UIButton *btn in self.buttonArr) {
         btn.backgroundColor = [UIColor clearColor];
         for (UILabel *lb in btn.subviews) {
             [lb setTextColor:[Utils colorRGB:@"#008bd5"]];
         }
     }
+    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -173,7 +176,6 @@
 #pragma mark - Method
 
 - (void)buttonClickAction:(UIButton *)button{
-    self.money = self.topMoney.textField.text.integerValue;
     if (button.tag != 650) {
         self.topMoney.textField.text = @"";
         for (UIButton *btn in self.buttonArr) {
@@ -217,11 +219,14 @@
             if (self.money == 0 && [self.topMoney.textField.text isEqualToString:@""]) {
                 [Utils toastview:@"请选择充值金额"];
             }else{
+                if (![self.topMoney.textField.text isEqualToString:@""]) {
+                    self.money = self.topMoney.textField.text.integerValue;
+                }
                 self.grayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
                 self.grayView.backgroundColor = [UIColor blackColor];
                 self.grayView.alpha = 0;
                 [self addSubview:self.grayView];
-                self.payView = [[PayView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, 500)];
+                self.payView = [[PayView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, 550)];
                 [self addSubview:self.payView];
                 
                 __block __weak TopCallMoneyView *weakself = self;
@@ -229,15 +234,14 @@
                 [self.payView.textField becomeFirstResponder];
                 [UIView animateWithDuration:0.3 animations:^{
                     CGRect frame = self.payView.frame;
-                    frame.origin.y = screenHeight - 500;
+                    frame.origin.y = screenHeight - 550;
                     self.payView.frame = frame;
                     weakself.grayView.alpha = 0.4;
                 }];
                 
                 [self.payView setPayCallBack:^(NSString *password) {
-                    
                     /*
-                     支付操作
+                     输入完毕，支付操作
                      */
                     [weakself endEditing:YES];
                     [UIView animateWithDuration:0.5 animations:^{
@@ -260,6 +264,12 @@
                     } completion:^(BOOL finished) {
                         [weakself.grayView removeFromSuperview];
                     }];
+                }];
+                
+                [self.payView setForgetPasswordCallBack:^(id obj) {
+                    [weakself endEditing:YES];
+                    UIViewController *viewController = [weakself viewController];
+                    [viewController.navigationController pushViewController:[ForgetPasswordViewController new] animated:YES];
                 }];
                 
                 _topCallMoneyCallBack(self.money, phoneView.textField.text);

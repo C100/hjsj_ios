@@ -74,13 +74,6 @@
     }];
     lb.font = [UIFont systemFontOfSize:16];
     lb.textColor = [Utils colorRGB:self.color];
-//    if ([self.titleStr isEqualToString:@"提交成功"]) {
-//        lb.textColor = [Utils colorRGB:@"#ec6c00"];
-//    }else if([self.titleStr isEqualToString:@"读卡失败"]){
-//        lb.textColor = [Utils colorRGB:@"#0081eb"];
-//    }else{
-//        lb.textColor = [Utils colorRGB:@"#333333"];
-//    }
     
     UILabel *lb2 = [[UILabel alloc] init];
     lb2.text = self.detailStr;

@@ -84,14 +84,14 @@
     /*
      保存信息并返回首页
      */
-    self.finishedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"提交成功" andDetail:@"请耐心等待..." andImageName:@"icon_smile" andTextColorHex:@"#ec6c00"];
+    self.finishedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"提交成功" andDetail:@"请耐心等待..." andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
     [[UIApplication sharedApplication].keyWindow addSubview:self.finishedView];
     
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
 }
 
 - (void)removeGrayView{
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.finishedView.alpha = 0;
     } completion:^(BOOL finished) {
         [self.finishedView removeFromSuperview];

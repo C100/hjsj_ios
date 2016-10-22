@@ -40,6 +40,7 @@
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
     
     self.topCallMoneyView = [[TopCallMoneyView alloc] init];
     [self.view addSubview:self.topCallMoneyView];
@@ -47,9 +48,8 @@
         make.top.left.right.bottom.mas_equalTo(0);
     }];
     
-//    __block __weak TopCallMoneyViewController *weakself = self;
     [self.topCallMoneyView setTopCallMoneyCallBack:^(NSInteger money, NSString *phone) {
-        
+        NSLog(@"----------%ld--------%@",money,phone);
     }];
 }
 

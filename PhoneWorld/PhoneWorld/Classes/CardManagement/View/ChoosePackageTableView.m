@@ -43,17 +43,19 @@
     cell.layoutMargins = UIEdgeInsetsZero;
     cell.preservesSuperviewLayoutMargins = NO;
     
-    cell.textLabel.text = self.titles[indexPath.row];
-    cell.detailTextLabel.text = @"请选择";
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.textColor = [Utils colorRGB:@"#666666"];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
     if (indexPath.row == 2) {
-        cell.detailTextLabel.text = @"请输入预存金额";
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.detailTextLabel.textColor = [Utils colorRGB:@"#cccccc"];
+        self.inputView = [[InputView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 40)];
+        self.inputView.textField.placeholder = @"请输入预存金额";
+        self.inputView.leftLabel.text = @"预存金额";
+        [cell.contentView addSubview:self.inputView];
+    }else{
+        cell.textLabel.text = self.titles[indexPath.row];
+        cell.detailTextLabel.text = @"请选择";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.textColor = [Utils colorRGB:@"#666666"];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
     }
     return cell;
 }
@@ -64,7 +66,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    _ChoosePackageCallBack(indexPath.row);
+    /*
+     套餐选择
+     活动包选择
+     */
 }
 
 #pragma mark - Method

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChoosePackageTableView.h"
 
-@interface ChoosePackageView : UIView <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface ChoosePackageView : UIView
+
 - (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos;
-@property (nonatomic) UITableView *tableView;
+
+@property (nonatomic) ChoosePackageTableView *tableView;
 @property (nonatomic) UIButton *nextButton;
-@property (nonatomic) UITextField *moneyTF;
+
 @end

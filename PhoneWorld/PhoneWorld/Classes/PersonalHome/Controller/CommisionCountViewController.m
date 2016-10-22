@@ -7,21 +7,24 @@
 //
 
 #import "CommisionCountViewController.h"
+#import "CommisionCountView.h"
 
 @interface CommisionCountViewController ()
-
+@property (nonatomic) CommisionCountView *countView;
 @end
 
 @implementation CommisionCountViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = COLOR_BACKGROUND;
     self.title = @"佣金统计";
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    self.countView = [[CommisionCountView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    [self.view addSubview:self.countView];
 }
 
 @end

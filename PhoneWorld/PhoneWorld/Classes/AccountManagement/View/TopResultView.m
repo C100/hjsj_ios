@@ -20,6 +20,7 @@
         [self stateView];
         [self detailView];
         [self nextButton];
+        [self backToHomeButton];
     }
     return self;
 }
@@ -107,10 +108,37 @@
     return _nextButton;
 }
 
+- (UIButton *)backToHomeButton{
+    if (_backToHomeButton == nil) {
+        _backToHomeButton = [[UIButton alloc] init];
+        [self addSubview:_backToHomeButton];
+        [_backToHomeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(0);
+            make.top.mas_equalTo(self.nextButton.mas_bottom).mas_equalTo(20);
+            make.width.mas_equalTo(60);
+            make.height.mas_equalTo(30);
+        }];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"返回首页"];
+        NSRange strRange = {0,[str length]};
+        [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
+        [str addAttribute:NSForegroundColorAttributeName value:[Utils colorRGB:@"#0081eb"] range:strRange];
+        [_backToHomeButton setAttributedTitle:str forState:UIControlStateNormal];
+        [_backToHomeButton setTitleColor:[Utils colorRGB:@"#0081eb"] forState:UIControlStateNormal];
+        _backToHomeButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_backToHomeButton addTarget:self action:@selector(backToHomeAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backToHomeButton;
+}
+
 #pragma mark - Method 
 - (void)nextAction:(UIButton *)button{
     UIViewController *controller = [self viewController];
     [controller.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)backToHomeAction{
+    UIViewController *viewController = [self viewController];
+    [viewController.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

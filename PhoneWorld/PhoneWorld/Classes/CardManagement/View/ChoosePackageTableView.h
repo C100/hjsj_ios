@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InputView.h"
 
-@interface ChoosePackageTableView : UITableView <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface ChoosePackageTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic) void(^ChoosePackageCallBack)(NSInteger row);
+@property (nonatomic) InputView *inputView;
 
 @end

@@ -9,6 +9,7 @@
 #import "RegisterView.h"
 #import "InputView.h"
 #import "ChooseImageView.h"
+#import "FailedView.h"
 
 @interface RegisterView ()
 
@@ -16,14 +17,8 @@
 @property (nonatomic) NSArray *details;
 @property (nonatomic) NSArray *channelType;
 @property (nonatomic) NSMutableArray *inputViews;
-@property (nonatomic) InputView *lastInputView;
-//选择图片
-//@property (nonatomic) UIView *view;
-//@property (nonatomic) NSMutableArray *imageButtons;
-//@property (nonatomic) NSMutableArray *removeButtons;
-//@property (nonatomic) NSArray *imageTitles;
-//@property (nonatomic) UIButton *currentImageButton;
 @property (nonatomic) ChooseImageView *chooseImageView;
+@property (nonatomic) FailedView *resultView;
 
 @end
 
@@ -93,12 +88,10 @@
                 [inputView.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.centerY.mas_equalTo(0);
                     make.right.mas_equalTo(rightButton.mas_left).mas_equalTo(-10);
-//                    make.left.mas_equalTo(inputView.leftLabel.mas_right).mas_equalTo(10);
+                    make.left.mas_equalTo(inputView.leftLabel.mas_right).mas_equalTo(10);
                     make.height.mas_equalTo(30);
-                    make.width.mas_equalTo(200);
                 }];
             }
-            self.lastInputView = inputView;
         }
         [self chooseImageView];
         [self nextButton];
@@ -110,9 +103,10 @@
     if (_chooseImageView == nil) {
         _chooseImageView = [[ChooseImageView alloc] initWithFrame:CGRectZero andTitle:@"图片（点击图片可放大）"];
         [self addSubview:_chooseImageView];
+        InputView *lastInputView = self.inputViews.lastObject;
         [_chooseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(self.lastInputView.mas_bottom).mas_equalTo(10);
+            make.top.mas_equalTo(lastInputView.mas_bottom).mas_equalTo(10);
             make.width.mas_equalTo(screenWidth);
             make.height.mas_equalTo(130);
         }];
@@ -162,8 +156,63 @@
 - (void)buttonClickAction:(UIButton *)button{
     if ([button.currentTitle isEqualToString:@"确定"]) {
         NSLog(@"---------确定注册------");
+        for (int i = 0; i < self.inputViews.count; i++) {
+            InputView *inputV = self.inputViews[i];
+            //判断是否为空
+            if ([inputV.leftLabel.text isEqualToString:@"邮箱"]) {
                 
+            }else{
+                if ([inputV.textField.text isEqualToString:@""]) {
+                    NSString *string = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
+                    if (i == 7) {
+                        string = [string stringByReplacingOccurrencesOfString:@"请输入" withString:@"请选择"];
+                    }
+                    string = [string stringByReplacingOccurrencesOfString:@"＊" withString:@""];
+                    [Utils toastview:string];
+                    return;
+                }
+            }
+            
+            //判断格式是否正确
+            if ([inputV.leftLabel.text isEqualToString:@"＊密码"]) {
+                if (![Utils checkPassword:inputV.textField.text]) {
+                    [Utils toastview:@"密码必须至少包含数字和字母，且不得少于六位"];
+                    return;
+                }
+            }
+            if ([inputV.leftLabel.text isEqualToString:@"＊身份证号码"]) {
+                if (![Utils isIDNumber:inputV.textField.text]) {
+                    [Utils toastview:@"请输入正确身份证号码"];
+                    return;
+                }
+            }
+            if ([inputV.leftLabel.text isEqualToString:@"＊手机号码"]) {
+                if (![Utils isMobile:inputV.textField.text]) {
+                    [Utils toastview:@"请输入正确手机号"];
+                    return;
+                }
+            }
+            if ([inputV.leftLabel.text isEqualToString:@"＊验证码"]) {
+                if (![Utils isNumber:inputV.textField.text]) {
+                    [Utils toastview:@"验证码格式不正确"];
+                    return;
+                }
+            }
+            if ([inputV.leftLabel.text isEqualToString:@"邮箱"] && ![inputV.textField.text isEqualToString:@""]) {
+                if (![Utils isEmailAddress:inputV.textField.text]) {
+                    [Utils toastview:@"请输入正确邮箱"];
+                    return;
+                }
+            }
+        }
+        
+        //注册操作
+        self.resultView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"注册成功" andDetail:@"请耐心等待1-2个审核日" andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.resultView];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(dismissResultViewAction) userInfo:nil repeats:NO];
+        
     }else{
+        //获取验证码
         InputView *inputView = self.inputViews[4];
         NSString *phone = inputView.textField.text;
         if ([Utils isMobile:phone]) {
@@ -172,6 +221,14 @@
             [Utils toastview:@"请输入正确格式手机号"];
         }
     }
+}
+
+- (void)dismissResultViewAction{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.resultView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.resultView removeFromSuperview];
+    }];
 }
 
 @end

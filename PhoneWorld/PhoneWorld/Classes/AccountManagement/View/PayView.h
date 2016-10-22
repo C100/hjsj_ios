@@ -12,7 +12,10 @@
 
 @property (nonatomic) void(^PayCallBack)(NSString *password);
 @property (nonatomic) void(^ClosePayCallBack)(id obj);
-@property (nonatomic) UIButton *closeButton;
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic) void(^ForgetPasswordCallBack)(id obj);
+
+@property (nonatomic) UIButton *closeButton;//关闭按钮
+@property (nonatomic, strong) UITextField *textField;//密码输入框
+@property (nonatomic) UIButton *forgetPasswodButton;
 
 @end

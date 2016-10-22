@@ -198,9 +198,11 @@ static OrderViewController *_orderViewController;
     __block __weak OrderViewController *weakself = self;
     [UIView animateWithDuration:0.3 animations:^{
         if (weakself.selectView.hidden == NO) {
+            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
             weakself.selectView.hidden = YES;
             weakself.grayView.hidden = YES;
         }else{
+            weakself.topView.showButton.transform = CGAffineTransformIdentity;
             weakself.selectView.hidden = NO;
             weakself.grayView.hidden = NO;
         }

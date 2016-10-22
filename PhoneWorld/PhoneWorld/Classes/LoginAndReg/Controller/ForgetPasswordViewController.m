@@ -25,15 +25,10 @@
     __block __weak ForgetPasswordViewController *weakself = self;
     [self.forgetView setForgetCallBack:^(NSInteger tag, NSString *phoneNumber, NSString *codeString) {
         if (tag == 1103) {
-            NSLog(@"----------下一步");
-            if ([Utils isMobile:weakself.forgetView.phoneNumTF.text]) {
-                
-            }else{
-                [Utils toastview:@"请输入正确格式手机号"];
-            }
+            NSLog(@"------------号码验证下一步");
         }
         if(tag == 1104){
-            NSLog(@"-------------发送验证码");
+            NSLog(@"------------发送验证码");
         }
     }];
 }

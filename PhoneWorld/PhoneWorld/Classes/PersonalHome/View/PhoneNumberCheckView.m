@@ -13,6 +13,7 @@
 
 @property (nonatomic) InputView *inputView;
 @property (nonatomic) UIView *verivicationCodeView;
+@property (nonatomic) UITextField *codeTF;
 
 @end
 
@@ -67,16 +68,18 @@
         button.titleLabel.font = [UIFont systemFontOfSize:12];
         [button addTarget:self action:@selector(sendVericicationCodeAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *rightLB = [[UILabel alloc] init];
-        [_verivicationCodeView addSubview:rightLB];
-        [rightLB mas_makeConstraints:^(MASConstraintMaker *make) {
+        UITextField *codeTF = [[UITextField alloc] init];
+        [_verivicationCodeView addSubview:codeTF];
+        [codeTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
             make.right.mas_equalTo(button.mas_left).mas_equalTo(-10);
-            make.height.mas_equalTo(16);
+            make.left.mas_equalTo(leftLB.mas_right).mas_equalTo(10);
         }];
-        rightLB.text = @"请输入验证码";
-        rightLB.font = [UIFont systemFontOfSize:12];
-        rightLB.textColor = [Utils colorRGB:@"#cccccc"];
+        codeTF.placeholder = @"请输入验证码";
+        codeTF.font = [UIFont systemFontOfSize:12];
+        codeTF.textColor = [Utils colorRGB:@"#333333"];
+        codeTF.textAlignment = NSTextAlignmentRight;
+        self.codeTF = codeTF;
     }
     return _verivicationCodeView;
 }
@@ -115,6 +118,18 @@
 }
 
 - (void)buttonClickAction:(UIButton *)button{
+    if ([self.inputView.textField.text isEqualToString:@""]) {
+        [Utils toastview:@"请输入手机号"];
+        return;
+    }
+    if (![Utils isMobile:self.inputView.textField.text]) {
+        [Utils toastview:@"请输入正确格式的手机号"];
+        return;
+    }
+    if ([self.codeTF.text isEqualToString:@""]) {
+        [Utils toastview:@"请输入验证码"];
+        return;
+    }
     NSLog(@"------------下一步");
 }
 

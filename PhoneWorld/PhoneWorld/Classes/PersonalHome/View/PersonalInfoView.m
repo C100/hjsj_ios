@@ -8,10 +8,12 @@
 
 #import "PersonalInfoView.h"
 #import "InputView.h"
+#import "FailedView.h"
 
 @interface PersonalInfoView ()
 @property (nonatomic) NSArray *leftTitles;
 @property (nonatomic) NSMutableArray *inputViews;
+@property (nonatomic) FailedView *resultView;
 @end
 
 @implementation PersonalInfoView
@@ -70,8 +72,41 @@
 }
 
 - (void)buttonClickAction:(UIButton *)button{
+    for (int i = 0; i < self.inputViews.count; i++) {
+        InputView *inputV = self.inputViews[i];
+        if ([inputV.leftLabel.text isEqualToString:@"联系号码"] && ![inputV.textField.text isEqualToString:@""]) {
+            if (![Utils isMobile:inputV.textField.text]) {
+                [Utils toastview:@"请输入正确联系号码"];
+                return;
+            }
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"电子邮箱"] && ![inputV.textField.text isEqualToString:@""]) {
+            if (![Utils isMobile:inputV.textField.text]) {
+                [Utils toastview:@"请输入正确电子邮箱"];
+                return;
+            }
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"上级电话"] && ![inputV.textField.text isEqualToString:@""]) {
+            if (![Utils isMobile:inputV.textField.text]) {
+                [Utils toastview:@"请输入正确上级电话号码"];
+                return;
+            }
+        }
+    }
     //个人信息保存
-    _PersonalInfoCallBack(button);
+    self.resultView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"保存成功" andDetail:@"正在跳转..." andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.resultView];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(dismissResultViewAction) userInfo:nil repeats:NO];
+}
+
+- (void)dismissResultViewAction{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.resultView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.resultView removeFromSuperview];
+        UIViewController *viewController = [self viewController];
+        [viewController.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 @end

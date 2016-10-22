@@ -8,14 +8,19 @@
 
 #import "TopView.h"
 
-//#define distanceX (screenWidth - 7*33 - 20)/4.0
-
 #define btnW (screenWidth-20)/self.titles.count
 
 @interface TopView()
 
 @property (nonatomic) CGFloat allWidth;
 @property (nonatomic) CGFloat leftDistance;
+
+@property (nonatomic) NSArray *titles;//标题名称
+@property (nonatomic) UIView *titlesView;
+
+@property (nonatomic) UIView *siftView;//筛选栏
+
+@property (nonatomic) UIView *lineView;
 
 @end
 
@@ -55,39 +60,30 @@
         self.leftDistance = 10;
         for (int i = 0; i < self.titles.count; i ++) {
             NSString *str = self.titles[i];
+            UIButton *btn = [[UIButton alloc] init];
+            btn.tag = 10 + i;
+            btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            [btn setTitle:self.titles[i] forState:UIControlStateNormal];
+            [btn setTitleColor:[Utils colorRGB:@"#333333"] forState:UIControlStateNormal];
+            [btn setTitleColor:MainColor forState:UIControlStateSelected];
+            btn.selected = NO;
+            if (i == 0) {
+                btn.selected = YES;
+            }
+            [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [_titlesView addSubview:btn];
+            [self.titlesButton addObject:btn];
+            
             if (self.titles.count == 3) {
-                UIButton *btn = [[UIButton alloc] init];
                 btn.frame = CGRectMake(i*screenWidth/3, 10, screenWidth/3, 20);
-                btn.tag = 10 + i;
-                btn.titleLabel.font = [UIFont systemFontOfSize:14];
-                [btn setTitle:self.titles[i] forState:UIControlStateNormal];
-                [btn setTitleColor:[Utils colorRGB:@"#333333"] forState:UIControlStateNormal];
-                [btn setTitleColor:MainColor forState:UIControlStateSelected];
-                btn.selected = NO;
-                if (i == 0) {
-                    btn.selected = YES;
-                }
-                [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-                [_titlesView addSubview:btn];
+                
                 [self.titlesButton addObject:btn];
             }else{
                 CGSize size = [Utils sizeWithFont:[UIFont systemFontOfSize:14] andMaxSize:CGSizeMake(0, 20) andStr:str];
                 CGFloat btnWidth = size.width;
                 
-                UIButton *btn = [[UIButton alloc] init];
                 btn.frame = CGRectMake(self.leftDistance, 10, btnWidth, 20);
-                btn.tag = 10 + i;
-                btn.titleLabel.font = [UIFont systemFontOfSize:14];
-                [btn setTitle:self.titles[i] forState:UIControlStateNormal];
-                [btn setTitleColor:[Utils colorRGB:@"#333333"] forState:UIControlStateNormal];
-                [btn setTitleColor:MainColor forState:UIControlStateSelected];
-                btn.selected = NO;
-                if (i == 0) {
-                    btn.selected = YES;
-                }
-                [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
-                [_titlesView addSubview:btn];
-                [self.titlesButton addObject:btn];
+
                 self.leftDistance += (btnWidth + distance);
             }
         }
@@ -150,7 +146,7 @@
 #pragma mark - Method
 
 - (void)btnClicked:(UIButton *)button{
-    if (button.tag == 101) {
+    if (button.tag == 101) {//up按钮动画
         
     }else{
         for (UIButton *btn in self.titlesButton) {
