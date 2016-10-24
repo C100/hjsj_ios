@@ -43,6 +43,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     cell.textLabel.text = self.titles[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:textfont16];
     cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -50,6 +51,7 @@
         //计算缓存
         [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%.3fMB",totalSize/1024.0/1024.0];
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         }];
     }
     

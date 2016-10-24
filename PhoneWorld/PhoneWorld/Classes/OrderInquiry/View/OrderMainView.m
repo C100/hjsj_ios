@@ -21,11 +21,11 @@
 
 @property (nonatomic) TopView *topView;//标题栏
 @property (nonatomic) FilterView *selectView;//筛选new
-@property (nonatomic) UIView *grayView;//灰色
-@property (nonatomic) UITapGestureRecognizer *tapGrayGR;
 @property (nonatomic) ContentView *contentScrollView;
 
-@property (nonatomic) NSArray *arr;
+@property (nonatomic) UIView *grayView;//灰色
+@property (nonatomic) UITapGestureRecognizer *tapGrayGR;
+
 @property (nonatomic) NSArray *arrTitles;
 
 @end
@@ -36,8 +36,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = COLOR_BACKGROUND;
         /*----top栏-----*/
-        self.topView = [[TopView alloc] initWithFrame:CGRectZero andTitles:@[@"成卡开户",@"白卡开户",@"过户",@"补卡",@"充值"]];
+        self.topView = [[TopView alloc] initWithFrame:CGRectZero andTitles:@[@"成卡开户",@"白卡开户",@"过户",@"补卡",@"话费充值"]];
         self.arrTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
         [self addSubview:self.topView];
         [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -51,14 +52,14 @@
         [self.contentScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(0);
             make.left.right.mas_equalTo(0);
-            make.bottom.mas_equalTo(0);
+            make.bottom.mas_equalTo(-20);
         }];
         self.contentScrollView.delegate = self;
         
         [self grayView];
         
         /*-----筛选框new--------*/
-        self.selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 81, screenWidth, 240)];
+        self.selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 240)];
         self.selectView.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.selectView];
         self.selectView.hidden = YES;
@@ -66,6 +67,8 @@
         
         
         __block __weak OrderMainView *weakself = self;
+        
+        /*----------topView点击事件---------*/
         [self.topView setCallback:^(NSInteger tag) {
             /*---按钮点击事件---*/
             
@@ -86,15 +89,13 @@
                 default:{
                     //10 11 12 13 14
                     [weakself.contentScrollView setContentOffset:CGPointMake(screenWidth*(tag - 10), 0)];
-                    
-                    
-                    
                 }
                     break;
             }
         }];
         
         [self.topView setTopCallBack:^(id obj) {
+            // 点击筛选栏时的操作
             [UIView animateWithDuration:0.5 animations:^{
                 if (weakself.selectView.hidden == NO) {
                     weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
@@ -107,18 +108,13 @@
         }];
         
         //点击筛选框查询按钮操作
-        [self.selectView setFilterCallBack:^(NSString *beginDate, NSString *endDate, NSString *third, NSString *forth) {
-            NSLog(@"-----%@------%@",beginDate,endDate);
-            weakself.arr = @[beginDate,endDate,third,forth];
-            for (int i = 0; i < self.arr.count; i++) {
+        [self.selectView setFilterCallBack:^(NSArray *array) {
+            NSLog(@"-----%@------",array);
+            
+            for (int i = 0; i < array.count; i++) {
                 UILabel *lb = weakself.topView.resultArr[i];
-                if (weakself.arr[i]) {
-                    lb.text = [NSString stringWithFormat:@"%@%@",weakself.arrTitles[i],weakself.arr[i]];
-                    if (i == self.arr.count - 1) {
-                        if ([weakself.selectView.titles.lastObject isEqualToString:@"请选择"]) {
-                            lb.text = [NSString stringWithFormat:@"充值类型：%@",weakself.arr[i]];
-                        }
-                    }
+                if (array[i]) {
+                    lb.text = [NSString stringWithFormat:@"%@%@",weakself.arrTitles[i],array[i]];
                 }
             }
             
@@ -128,37 +124,35 @@
                 make.height.mas_equalTo(130);
             }];
             
-#warning 更新约束
             [[OpenAccomplishCardViewController sharedOpenAccomplishCardViewController].orderView.orderTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
                 make.width.mas_equalTo(screenWidth);
             }];
             
             [[OpenWhiteCardViewController sharedOpenWhiteCardViewController].orderView.orderTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
                 make.width.mas_equalTo(screenWidth);
             }];
             
             [[TransferViewController sharedTransferViewController].orderView.orderTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
                 make.width.mas_equalTo(screenWidth);
             }];
             
             [[RepairCardViewController sharedRepairCardViewController].orderView.orderTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
                 make.width.mas_equalTo(screenWidth);
             }];
             
             [[TopUpViewController sharedTopUpViewController].orderTwoView.orderTwoTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
                 make.width.mas_equalTo(screenWidth);
             }];
-            
             
             [UIView animateWithDuration:0.3 animations:^{
                 weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
@@ -191,8 +185,6 @@
     
     if (page == 4) {//充值
         self.selectView.orderStates = @[@"全部",@"成功",@"失败",@"待定",@"出错"];
-        self.selectView.titles = @[@"起始时间",@"截止时间",@"订单状态",@"充值类型"];
-        self.selectView.details = @[@"请选择",@"请选择",@"请选择",@"请选择"];
     }
     [self.selectView.filterTableView reloadData];
     

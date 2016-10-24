@@ -13,8 +13,7 @@
 @interface TransferCardView ()
 @property (nonatomic) NSArray *leftTitles;
 @property (nonatomic) NSMutableArray *inputViews;
-@property (nonatomic) NSArray *titles;
-@property (nonatomic) NSMutableArray *chooseImageViews;
+@property (nonatomic) ChooseImageView *chooseImageView;
 @end
 
 @implementation TransferCardView
@@ -26,7 +25,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.leftTitles = @[@"过户号码",@"姓名",@"证件号码",@"联系电话",@"地址"];
+        self.leftTitles = @[@"过户号码",@"姓名",@"证件号码",@"证件地址",@"联系电话"];
         self.inputViews = [NSMutableArray array];
         self.contentSize = CGSizeMake(screenWidth, 600);
         self.bounces = NO;
@@ -39,25 +38,33 @@
             [self addSubview:view];
         }
         
-        self.titles = @[@"老用户（点击图片可放大）",@"新用户（点击图片可放大）"];
-        self.chooseImageViews = [NSMutableArray array];
-        for (int i = 0; i < 2; i ++) {
-            ChooseImageView *chooseImageV = [[ChooseImageView alloc] initWithFrame:CGRectMake(0, 215 + 140*i, screenWidth, 130) andTitle:self.titles[i]];
-            [self addSubview:chooseImageV];
-            [self.chooseImageViews addObject:chooseImageV];
-        }
+        [self chooseImageView];
         [self nextButton];
     }
     return self;
+}
+
+- (ChooseImageView *)chooseImageView{
+    if (_chooseImageView == nil) {
+        _chooseImageView = [[ChooseImageView alloc] initWithFrame:CGRectZero andTitle:@"新用户（点击图片可放大）" andDetail:@[@"手持身份证正面照",@"身份证背面照"] andCount:2];
+        [self addSubview:_chooseImageView];
+        InputView *inputV = self.inputViews.lastObject;
+        [_chooseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(inputV.mas_bottom).mas_equalTo(10);
+            make.width.mas_equalTo(screenWidth);
+            make.height.mas_equalTo(130);
+        }];
+    }
+    return _chooseImageView;
 }
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
         _nextButton = [[UIButton alloc] init];
         [self addSubview:_nextButton];
-        ChooseImageView *chooseIV = self.chooseImageViews.lastObject;
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(chooseIV.mas_bottom).mas_equalTo(40);
+            make.top.mas_equalTo(self.chooseImageView.mas_bottom).mas_equalTo(40);
             make.centerX.mas_equalTo(0);
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
@@ -69,7 +76,7 @@
         _nextButton.layer.borderColor = MainColor.CGColor;
         _nextButton.layer.borderWidth = 1;
         _nextButton.layer.masksToBounds = YES;
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _nextButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;

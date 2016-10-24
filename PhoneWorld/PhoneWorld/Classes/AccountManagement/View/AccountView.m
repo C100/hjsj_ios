@@ -39,6 +39,7 @@
     cell.separatorInset = UIEdgeInsetsZero;
     cell.layoutMargins = UIEdgeInsetsZero;
     cell.preservesSuperviewLayoutMargins = NO;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -76,7 +77,7 @@
 
 - (NSArray *)titles{
     if (_titles == nil) {
-        _titles = @[@"号码余额查询",@"余额查询与充值",@"话费充值",@"充值查询"];
+        _titles = @[@"号码余额查询",@"余额查询与充值",@"话费充值",@"余额充值查询"];
     }
     return _titles;
 }

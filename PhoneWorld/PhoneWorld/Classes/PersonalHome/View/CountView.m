@@ -17,6 +17,7 @@
 
 @property (nonatomic) UIView *yearView;
 @property (nonatomic) NSMutableArray *chooseViews;
+@property (nonatomic) NSMutableArray *monthArr;
 
 @end
 
@@ -31,6 +32,7 @@
         NSArray *titles = @[@"半年",@"一年"];
         for (int i = 0; i < 2; i ++) {
             ChooseView *cv = [[ChooseView alloc] initWithFrame:CGRectMake((screenWidth-chooseViewWidth*2-50)/2.0 + (chooseViewWidth+50)*i, 10, chooseViewWidth, chooseViewHeight) andTitle:titles[i]];
+            cv.tag = 100+i;
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
             [cv addGestureRecognizer:tap];
             if (i == 0) {
@@ -42,7 +44,7 @@
             [self addSubview:cv];
         }
         
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, 36, 14)];
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, 40, 14)];
         lb.text = @"开户量";
         lb.textColor = [Utils colorRGB:@"#666666"];
         lb.font = [UIFont systemFontOfSize:12];
@@ -61,9 +63,34 @@
     cv.leftView.layer.borderColor = [Utils colorRGB:@"#0081eb"].CGColor;
     cv.leftView.layer.borderWidth = 3;
     cv.titleLB.textColor = [Utils colorRGB:@"#0081eb"];
+    
+    if (tap.view.tag == 100) {
+        //半年
+    }else{
+        //一年
+    }
 }
 
 - (void)drawRect:(CGRect)rect {
+    self.monthArr = [NSMutableArray array];
+    for (int i = 0; i < 6; i ++) {
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(58+i * (screenWidth - 58*2)/5, 290, (screenWidth - 58*2)/5, 12)];
+        lb.textColor = [Utils colorRGB:@"#999999"];
+        lb.font = [UIFont systemFontOfSize:10];
+        lb.text = [NSString stringWithFormat:@"%d月",i+1];
+        [self addSubview:lb];
+        [self.monthArr addObject:lb];
+    }
+    
+    for (int i = 0; i < 4; i ++) {
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(33, 227-50*i, 23, 16)];
+        lb.textAlignment = NSTextAlignmentRight;
+        lb.textColor = [Utils colorRGB:@"#999999"];
+        lb.font = [UIFont systemFontOfSize:10];
+        lb.text = [NSString stringWithFormat:@"%d",25*(i+1)];
+        [self addSubview:lb];
+    }
+    
     UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
     //58 60
     [bezierPath moveToPoint:CGPointMake(58, 60)];
@@ -79,6 +106,11 @@
     [bezierPath moveToPoint:CGPointMake(screenWidth-45, 280)];
     [bezierPath addLineToPoint:CGPointMake(screenWidth-40, 285)];
     [bezierPath addLineToPoint:CGPointMake(screenWidth-45, 290)];
+    
+    for (int i = 0; i < 4; i ++) {
+        [bezierPath moveToPoint:CGPointMake(58, 235-50*i)];
+        [bezierPath addLineToPoint:CGPointMake(60, 235-50*i)];
+    }
     
     [[Utils colorRGB:@"#cccccc"] setStroke];
     bezierPath.lineWidth = 1;

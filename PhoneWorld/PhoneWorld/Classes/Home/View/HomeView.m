@@ -10,6 +10,7 @@
 #import "HomeCell.h"
 #import "TopCallMoneyViewController.h"  //话费充值
 #import "CheckAndTopViewController.h"  //余额查询与充值
+#import "TransferCardViewController.h"
 #import "FinishCardViewController.h"//成卡开户
 #import "WhiteCardViewController.h"//白卡开户
 #import "CardRepairViewController.h"//补卡
@@ -32,7 +33,7 @@
     if (self) {
         {
             self.imageNames = @[@"home1",@"home2",@"home3",@"home4",@"home5",@"home6"];
-            self.titleNames = @[@"话费充值",@"余额充值",@"余额查询",@"成卡开户",@"白卡开户",@"补卡"];
+            self.titleNames = @[@"话费充值",@"余额充值与查询",@"过户",@"成卡开户",@"白卡开户",@"补卡"];
             self.bounces = NO;
             [self imageScrollView];
             [self lineView];
@@ -176,7 +177,7 @@
             break;
         case 2:
         {
-            CheckAndTopViewController *vc = [CheckAndTopViewController new];
+            TransferCardViewController *vc = [TransferCardViewController new];
             vc.hidesBottomBarWhenPushed = YES;
             [viewCon.navigationController pushViewController:vc animated:YES];
         }

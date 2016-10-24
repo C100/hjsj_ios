@@ -21,7 +21,10 @@
     [super viewWillAppear:animated];
     
     [IQKeyboardManager sharedManager].enable = NO;
-    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -35,11 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"话费充值";
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+
     self.navigationItem.backBarButtonItem = [Utils returnBackButton];
     
     self.topCallMoneyView = [[TopCallMoneyView alloc] init];

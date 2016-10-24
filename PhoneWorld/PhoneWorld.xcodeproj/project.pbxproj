@@ -25,6 +25,8 @@
 		8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A49D8701DACCB4600A1D650 /* AppDelegate.m */; };
 		8A49D8791DACCB4600A1D650 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D8781DACCB4600A1D650 /* Assets.xcassets */; };
 		8A49D87C1DACCB4600A1D650 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D87A1DACCB4600A1D650 /* LaunchScreen.storyboard */; };
+		8A5E30E21DBDBB58005D309A /* WhiteCardTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E30E11DBDBB58005D309A /* WhiteCardTopView.m */; };
+		8A5E30E51DBDC14C005D309A /* WhiteCardFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E30E41DBDC14C005D309A /* WhiteCardFilterView.m */; };
 		8A6CBF0A1DB07D47002625E8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF091DB07D47002625E8 /* LoginViewController.m */; };
 		8A6CBF0D1DB07D50002625E8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF0C1DB07D50002625E8 /* RegisterViewController.m */; };
 		8A6CBF101DB07DB4002625E8 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF0F1DB07DB4002625E8 /* LoginView.m */; };
@@ -208,6 +210,10 @@
 		8A49D8781DACCB4600A1D650 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A49D87B1DACCB4600A1D650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A49D87D1DACCB4600A1D650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A5E30E01DBDBB58005D309A /* WhiteCardTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteCardTopView.h; sourceTree = "<group>"; };
+		8A5E30E11DBDBB58005D309A /* WhiteCardTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteCardTopView.m; sourceTree = "<group>"; };
+		8A5E30E31DBDC14C005D309A /* WhiteCardFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteCardFilterView.h; sourceTree = "<group>"; };
+		8A5E30E41DBDC14C005D309A /* WhiteCardFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteCardFilterView.m; sourceTree = "<group>"; };
 		8A6CBF081DB07D47002625E8 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		8A6CBF091DB07D47002625E8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		8A6CBF0B1DB07D50002625E8 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -748,6 +754,10 @@
 				8A96989A1DB70FE9000841BA /* SettlementDetailView.m */,
 				8A96989F1DB727E9000841BA /* WhiteCardView.h */,
 				8A9698A01DB727E9000841BA /* WhiteCardView.m */,
+				8A5E30E01DBDBB58005D309A /* WhiteCardTopView.h */,
+				8A5E30E11DBDBB58005D309A /* WhiteCardTopView.m */,
+				8A5E30E31DBDC14C005D309A /* WhiteCardFilterView.h */,
+				8A5E30E41DBDC14C005D309A /* WhiteCardFilterView.m */,
 				8A9698A21DB74233000841BA /* WhiteCardCell.h */,
 				8A9698A31DB74233000841BA /* WhiteCardCell.m */,
 				8A9698A51DB74B5D000841BA /* PhoneDetailView.h */,
@@ -1644,6 +1654,7 @@
 				8A9698BC1DB78A1E000841BA /* PhoneNumberCheckView.m in Sources */,
 				8A70DB711DB8CAB6005E76C2 /* UIImage+Color.m in Sources */,
 				8AC3A2851DB4657F007D432A /* RegisterView.m in Sources */,
+				8A5E30E21DBDBB58005D309A /* WhiteCardTopView.m in Sources */,
 				8AB992C31DB4B74D00D75492 /* TransferDetailViewController.m in Sources */,
 				8A3D7D6A1DAF29DB00824B7D /* TopAndInquiryViewController.m in Sources */,
 				8A6CBF691DB0FEE6002625E8 /* NormalOrderDetailViewController.m in Sources */,
@@ -1700,6 +1711,7 @@
 				8A9698AA1DB755DA000841BA /* ReadCardAndChoosePackageViewController.m in Sources */,
 				8A70DAED1DB8C38B005E76C2 /* ChooseImageView.m in Sources */,
 				8A2142701DB9F4B700116F62 /* CommisionCountView.m in Sources */,
+				8A5E30E51DBDC14C005D309A /* WhiteCardFilterView.m in Sources */,
 				8A70DB751DB8CAB6005E76C2 /* UIImage+Water.m in Sources */,
 				8A90E8E91DB5FB47004ECA62 /* CardManageView.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,

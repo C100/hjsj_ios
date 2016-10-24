@@ -15,6 +15,8 @@
 @property (nonatomic) NSArray *phoneNumbers;
 @property (nonatomic) NSArray *grayArrs;
 @property (nonatomic) WhiteCardCell *currentCell;
+@property (nonatomic) UIView *grayView;
+@property (nonatomic) NSArray *topViewTitles;
 
 @end
 
@@ -28,26 +30,74 @@
         self.contentSize = CGSizeMake(screenWidth, 474);
         self.grayArrs = @[@0,@3,@4,@7,@8,@11,@12,@15,@16,@19,@20];
         self.phoneNumbers = @[@"18754369021",@"13234543564",@"15732535555"];
-        [self siftView];
+        self.topViewTitles = @[@"号码池：",@"靓号规则："];
+        [self topView];
         [self contentView];
+        [self selectView];
         [self addButton];
+        [self grayView];
+        
+        __block __weak WhiteCardView *weakself = self;
+
+        [self.topView setWhiteCardTopCallBack:^(id obj) {
+            [UIView animateWithDuration:0.5 animations:^{
+                if (weakself.selectView.hidden == NO) {
+                    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                }else{
+                    weakself.topView.showButton.transform = CGAffineTransformIdentity;
+                }
+                weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
+                weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
+            }];
+        }];
+        
+        [self.selectView setWhiteCardFilterCallBack:^(NSArray *array) {
+            NSLog(@"-----%@----",array);
+            weakself.selectView.hidden = YES;
+            weakself.grayView.hidden = YES;
+            
+            for (int i = 0; i < weakself.topView.resultArr.count; i ++) {
+                UILabel *lb = weakself.topView.resultArr[i];
+                lb.text = [NSString stringWithFormat:@"%@%@",weakself.topViewTitles[i],array[i]];
+            }
+            [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.left.right.mas_equalTo(0);
+                make.width.mas_equalTo(screenWidth);
+                make.height.mas_equalTo(80);
+            }];
+            weakself.topView.resultView.hidden = NO;
+        }];
     }
     return self;
 }
 
-- (UIView *)siftView{
-    if (_siftView == nil) {
-        _siftView = [[UIView alloc] init];
-        [self addSubview:_siftView];
-        [_siftView mas_makeConstraints:^(MASConstraintMaker *make) {
+- (WhiteCardTopView *)topView{
+    if (_topView == nil) {
+        _topView = [[WhiteCardTopView alloc] initWithFrame:CGRectZero];
+        [self addSubview:_topView];
+        [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
             make.left.right.mas_equalTo(0);
             make.width.mas_equalTo(screenWidth);
-            make.height.mas_equalTo(64);
+            make.height.mas_equalTo(40);
         }];
-        _siftView.backgroundColor = [UIColor redColor];
     }
-    return _siftView;
+    return _topView;
+}
+
+- (WhiteCardFilterView *)selectView{
+    if (_selectView == nil) {
+        _selectView = [[WhiteCardFilterView alloc] init];
+        [self addSubview:_selectView];
+        [_selectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(1);
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(160);
+            make.width.mas_equalTo(screenWidth);
+        }];
+        _selectView.hidden = YES;
+    }
+    return _selectView;
 }
 
 - (UICollectionView *)contentView{
@@ -59,7 +109,7 @@
         [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.width.mas_equalTo(screenWidth);
-            make.top.mas_equalTo(self.siftView.mas_bottom).mas_equalTo(10);
+            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(10);
             make.height.mas_equalTo(screenHeight - 128 - 120);
         }];
         _contentView.delegate = self;
@@ -68,6 +118,26 @@
     }
     return _contentView;
 }
+
+- (UIView *)grayView{
+    if (_grayView == nil) {
+        _grayView = [[UIView alloc] init];
+        [self addSubview:_grayView];
+        _grayView.backgroundColor = [UIColor blackColor];
+        _grayView.alpha = 0.4;
+        [_grayView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.width.mas_equalTo(screenWidth);
+            make.top.mas_equalTo(self.selectView.mas_bottom).mas_equalTo(0);
+            make.height.mas_equalTo(screenHeight - 64 - 40 - 160);
+        }];
+        _grayView.hidden = YES;
+        UITapGestureRecognizer *tapGrayGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGrayAction:)];
+        [_grayView addGestureRecognizer:tapGrayGR];
+    }
+    return _grayView;
+}
+
 
 - (void)addButton{
     NSArray *arr = @[@"换一批",@"下一步"];
@@ -146,6 +216,15 @@
     }else{
         //换一批
     }
+}
+
+- (void)tapGrayAction:(UITapGestureRecognizer *)tap{
+    self.grayView.hidden = YES;
+    self.selectView.hidden = YES;
+    __block __weak WhiteCardView *weakself = self;
+    [UIView animateWithDuration:0.3 animations:^{
+        weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+    }];
 }
 
 @end

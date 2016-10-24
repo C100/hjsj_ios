@@ -19,14 +19,16 @@
     [self.view endEditing:YES];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"号码余额查询";
+- (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"号码余额查询";
     
     self.phoneCashCheckView = [[PhoneCashCheckView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.phoneCashCheckView];

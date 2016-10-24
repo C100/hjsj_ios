@@ -15,12 +15,15 @@
 
 @implementation CardInquiryViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     self.title = @"过户、补卡状态查询";
     
     self.inquiryView = [[CardInquiryView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];

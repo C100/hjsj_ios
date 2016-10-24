@@ -16,8 +16,8 @@
 @property (nonatomic) TopView *topView;
 @property (nonatomic) FilterView *selectView;
 @property (nonatomic) UIView *grayView;
-@property (nonatomic) UIView *lineView;
 @property (nonatomic) OrderTwoView *contentView;
+@property (nonatomic) NSArray *arrTitles;
 
 @end
 
@@ -28,10 +28,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.topView = [[TopView alloc] initWithFrame:CGRectZero andTitles:@[@"全部",@"话费充值",@"余额充值"]];
+        self.topView = [[TopView alloc] initWithFrame:CGRectZero andTitles:@[@""]];
         [self addSubview:self.topView];
+        self.arrTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
         [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.mas_equalTo(0);
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(-40);
             make.height.mas_equalTo(80);
         }];
         
@@ -44,15 +46,24 @@
         }];
         
         /*-----筛选框new--------*/
-        self.selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 240)];
+        self.selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 40, screenWidth, 240)];
         self.selectView.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.selectView];
         self.selectView.hidden = YES;
         self.selectView.orderStates = @[@"全部",@"成功",@"失败",@"待定",@"出错"];
         
-        [self grayView];
-        [self lineView];
+        [self.selectView.pickerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(0);
+            make.width.mas_equalTo(screenWidth);
+            make.height.mas_equalTo(screenHeight - 64 - 80 - 240 + 40);
+        }];
+        [self.selectView.beginDatePicker mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(0);
+            make.width.mas_equalTo(screenWidth);
+            make.height.mas_equalTo(screenHeight - 64 - 80 - 240 + 40);
+        }];
         
+        [self grayView];
         
         __block __weak TopAndInquiryView *weakself = self;
         [self.topView setCallback:^(NSInteger tag) {
@@ -73,11 +84,7 @@
                     break;
                     
                 default:{
-                    [UIView animateWithDuration:0.5 animations:^{
-                        CGRect frame = weakself.lineView.frame;
-                        frame = CGRectMake((tag - 10)*(screenWidth/3.0), 39, screenWidth/3.0, 1);
-                        weakself.lineView.frame = frame;
-                    }];
+
                 }
                     break;
             }
@@ -96,10 +103,23 @@
             }];
         }];
         
-        [self.selectView setFilterCallBack:^(NSString *beginDate, NSString *endDate, NSString *third, NSString *forth) {
+        [self.selectView setFilterCallBack:^(NSArray *array) {
+            
+            for (int i = 0; i < array.count; i++) {
+                UILabel *lb = weakself.topView.resultArr[i];
+                if (array[i]) {
+                    lb.text = [NSString stringWithFormat:@"%@%@",weakself.arrTitles[i],array[i]];
+                    if (i == array.count - 1) {
+                        if ([weakself.selectView.titles.lastObject isEqualToString:@"请选择"]) {
+                            lb.text = [NSString stringWithFormat:@"充值类型：%@",array[i]];
+                        }
+                    }
+                }
+            }
+            
             [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.mas_equalTo(0);
-                make.top.mas_equalTo(0);
+                make.top.mas_equalTo(-40);
                 make.height.mas_equalTo(130);
             }];
             [UIView animateWithDuration:0.3 animations:^{
@@ -128,15 +148,6 @@
         [_grayView addGestureRecognizer:tapGrayGR];
     }
     return _grayView;
-}
-
-- (UIView *)lineView{
-    if (_lineView == nil) {
-        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 39, screenWidth/3, 1)];
-        [self addSubview:_lineView];
-        _lineView.backgroundColor = MainColor;
-    }
-    return _lineView;
 }
 
 #pragma mark - Method

@@ -15,14 +15,16 @@
 
 @implementation FinishCardViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"号码验证";
-    
+- (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"号码验证";
     
     self.navigationItem.backBarButtonItem = [Utils returnBackButton];
     

@@ -25,7 +25,7 @@ static OpenAccomplishCardViewController *_openAccomplishCardViewController;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80)];
+    self.orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80 - 20)];
     [self.view addSubview:self.orderView];
     
     [self.orderView setOrderViewCallBack:^(NSInteger section) {

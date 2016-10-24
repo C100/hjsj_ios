@@ -15,15 +15,17 @@
 
 @implementation TopResultViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"支付结果";
-    
+- (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"支付结果";
+
     self.topResultView = [[TopResultView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andIsSucceed:self.isSucceed];
     [self.view addSubview:self.topResultView];
 }

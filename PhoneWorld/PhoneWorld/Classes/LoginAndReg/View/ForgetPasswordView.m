@@ -114,12 +114,14 @@
 }
 
 - (void)buttonClickAction:(UIButton *)button{
-    if (button.tag == 1104) {//验证码
-        if (![Utils isMobile:self.phoneNumTF.text]) {
-            [Utils toastview:@"请输入正确格式的手机号码"];
+    if (![Utils isMobile:self.phoneNumTF.text]) {
+        [Utils toastview:@"请输入正确格式的手机号码"];
+        return;
+    }
+    if (button.tag == 1103) {
+        if (![Utils isNumber:self.identifyingCodeTF.text] || [self.identifyingCodeTF.text isEqualToString:@""]) {
+            [Utils toastview:@"请输入验证码"];
             return;
-        }else{
-            
         }
     }
     _ForgetCallBack(button.tag, self.phoneNumTF.text, self.identifyingCodeTF.text);

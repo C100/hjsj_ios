@@ -13,20 +13,17 @@
 
 #define screenWidth [UIScreen mainScreen].bounds.size.width
 #define screenHeight [UIScreen mainScreen].bounds.size.height
-#define PX_WIDTH [UIScreen mainScreen].bounds.size.width/375
-#define PX_HEIGHT [UIScreen mainScreen].bounds.size.height/667
 #define kMargin 10
 
 #define kRGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define COLOR_BACKGROUND [Utils colorRGB:@"#f9f9f9"]
-#define COLOR_BLUE [UIColor colorWithRed:132.0/255.0 green:184.0/255.0 blue:255.0/255.0 alpha:1]
-#define COLOR_PINK [UIColor colorWithRed:255.0/255.0 green:217.0/255.0 blue:217.0/255.0 alpha:1]
-#define COLOR_RED [UIColor colorWithRed:252.0/255.0 green:40.0/255.0 blue:65.0/255.0 alpha:1]
-#define COLOR_DARK_GREY [UIColor colorWithRed:92.0/255.0 green:93.0/255.0 blue:93.0/255.0 alpha:1]
-#define COLOR_LIGHT_GREY [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1]
 
 //236 108 0
 #define MainColor [UIColor colorWithRed:236/255.0 green:108/255.0 blue:0/255.0 alpha:1]
+
+#define textfont14 14
+#define textfont12 12
+#define textfont16 16
 
 //#define MAS_SHORTHAND_GLOBALS
 #import <Masonry.h>

@@ -36,7 +36,7 @@
         }];
         _usernameTF.placeholder = @"请输入用户名／手机号码";
         _usernameTF.textColor = [Utils colorRGB:@"#333333"];
-        _usernameTF.font = [UIFont systemFontOfSize:14];
+        _usernameTF.font = [UIFont systemFontOfSize:textfont14];
         _usernameTF.borderStyle = UITextBorderStyleNone;
         _usernameTF.backgroundColor = [UIColor whiteColor];
         
@@ -62,7 +62,7 @@
         _passwordTF.placeholder = @"请输入密码";
         _passwordTF.secureTextEntry = YES;
         _passwordTF.textColor = [Utils colorRGB:@"#333333"];
-        _passwordTF.font = [UIFont systemFontOfSize:14];
+        _passwordTF.font = [UIFont systemFontOfSize:textfont14];
         _passwordTF.borderStyle = UITextBorderStyleNone;
         _passwordTF.backgroundColor = [UIColor whiteColor];
         
@@ -86,7 +86,7 @@
             make.height.mas_equalTo(14);
         }];
         [_forgetPassword setTitle:@"忘记密码？" forState:UIControlStateNormal];
-        _forgetPassword.titleLabel.font = [UIFont systemFontOfSize:12];
+        _forgetPassword.titleLabel.font = [UIFont systemFontOfSize:textfont12];
         [_forgetPassword setTitleColor:MainColor forState:UIControlStateNormal];
         _forgetPassword.tag = 1101;
         [_forgetPassword addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -105,8 +105,8 @@
             make.width.mas_equalTo(170);
             make.top.mas_equalTo(self.forgetPassword.mas_bottom).mas_equalTo(20);
         }];
-        [_submitButton setTitle:@"提交" forState:UIControlStateNormal];
-        _submitButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_submitButton setTitle:@"登录" forState:UIControlStateNormal];
+        _submitButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [_submitButton setTitleColor:MainColor forState:UIControlStateNormal];
         _submitButton.layer.cornerRadius = 20;
         _submitButton.layer.masksToBounds = YES;

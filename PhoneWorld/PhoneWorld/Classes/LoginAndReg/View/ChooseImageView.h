@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ChooseImageView : UIView <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title;
+- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title andDetail:(NSArray *)details andCount:(NSInteger)count;
 @property (nonatomic) NSMutableArray *imageButtons;
 @property (nonatomic) NSMutableArray *removeButtons;
 @property (nonatomic) NSMutableArray *imageViews;

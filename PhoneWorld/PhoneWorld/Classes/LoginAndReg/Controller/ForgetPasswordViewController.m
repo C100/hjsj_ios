@@ -22,7 +22,7 @@
     self.forgetView = [[ForgetPasswordView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.forgetView];
     
-    __block __weak ForgetPasswordViewController *weakself = self;
+//    __block __weak ForgetPasswordViewController *weakself = self;
     [self.forgetView setForgetCallBack:^(NSInteger tag, NSString *phoneNumber, NSString *codeString) {
         if (tag == 1103) {
             NSLog(@"------------号码验证下一步");

@@ -31,7 +31,7 @@
         self.backgroundColor = COLOR_BACKGROUND;
         self.inputViews = [NSMutableArray array];
         self.choices = @[@"顺丰到付",@"充值一百免邮费"];
-        self.leftTitles = @[@"补卡号码",@"补卡人姓名",@"证件号码",@"联系电话",@"邮寄地址",@"收件人姓名",@"收件人电话",@"邮寄选项"];
+        self.leftTitles = @[@"补卡号码",@"补卡人姓名",@"证件号码",@"联系电话",@"近期联系号码",@"邮寄地址",@"收件人姓名",@"收件人电话",@"邮寄选项"];
         
         for (int i = 0; i < self.leftTitles.count; i++) {
             InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
@@ -72,7 +72,7 @@
 
 - (ChooseImageView *)chooseImageView{
     if (_chooseImageView == nil) {
-        _chooseImageView = [[ChooseImageView alloc] initWithFrame:CGRectZero andTitle:@"图片（点击图片可放大）"];
+        _chooseImageView = [[ChooseImageView alloc] initWithFrame:CGRectZero andTitle:@"图片（点击图片可放大）" andDetail:@[@"手持身份证正面照",@"身份证背面照"] andCount:2];
         [self addSubview:_chooseImageView];
         InputView *inputV = self.inputViews.lastObject;
         [_chooseImageView mas_makeConstraints:^(MASConstraintMaker *make) {

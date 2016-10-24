@@ -7,13 +7,8 @@
 //
 
 #import "TopUpViewController.h"
-//#import "OrderTwoView.h"
 
 static TopUpViewController *_topUpViewController;
-
-@interface TopUpViewController ()
-//@property (nonatomic) OrderTwoView *orderTwoView;
-@end
 
 @implementation TopUpViewController
 
@@ -27,7 +22,7 @@ static TopUpViewController *_topUpViewController;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.orderTwoView = [[OrderTwoView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80)];
+    self.orderTwoView = [[OrderTwoView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80 - 20)];
     [self.view addSubview:self.orderTwoView];
 }
 

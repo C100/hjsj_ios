@@ -12,23 +12,25 @@
 
 @property (nonatomic) UILabel *titleLB;
 @property (nonatomic) NSString *title;
-@property (nonatomic) NSArray *imageTitles;
 @property (nonatomic) UIButton *currentImageButton;
+@property (nonatomic) NSArray *details;
+@property (nonatomic) NSInteger count;
 
 @end
 
 @implementation ChooseImageView
 
-- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title
+- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title andDetail:(NSArray *)details andCount:(NSInteger)count
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.imageTitles = @[@"手持身份证正面照",@"身份证背面照"];
+        self.backgroundColor = [UIColor whiteColor];
         self.imageViews = [NSMutableArray array];
         self.imageButtons = [NSMutableArray array];
         self.removeButtons = [NSMutableArray array];
-        self.backgroundColor = [UIColor whiteColor];
         self.title = title;
+        self.details = details;
+        self.count = count;
         [self titleLB];
         [self addContent];
     }
@@ -55,7 +57,7 @@
 }
 
 - (void)addContent{
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < self.count; i++) {
         UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(17 + 80*i, 40, 60, 60)];
         [self addSubview:imageButton];
         imageButton.layer.cornerRadius = 3;
@@ -94,9 +96,10 @@
         [self addSubview:removeButton];
         [self.removeButtons addObject:removeButton];
         
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15 + 80 *i, 104, 75, 10)];
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(7 + 80 *i, 104, 80, 10)];
+        lb.textAlignment = NSTextAlignmentCenter;
         [self addSubview:lb];
-        lb.text = self.imageTitles[i];
+        lb.text = self.details[i];
         lb.textColor = [Utils colorRGB:@"#cccccc"];
         lb.font = [UIFont systemFontOfSize:8];
     }

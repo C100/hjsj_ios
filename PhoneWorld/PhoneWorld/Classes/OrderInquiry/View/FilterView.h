@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FilterView : UIView <UITableViewDelegate, UITableViewDataSource, CalendarViewControllerDelegate>
+@interface FilterView : UIView <UITableViewDelegate, UITableViewDataSource, CalendarViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
-@property (nonatomic) void(^FilterCallBack)(NSString *beginDate,NSString *endDate,NSString *third,NSString *forth);
+@property (nonatomic) void(^FilterCallBack)(NSArray *array);
 
 @property (nonatomic) UITableView *filterTableView;
-@property (nonatomic) UITextField *phoneTF;//手机号输入框
 @property (nonatomic) NSArray *orderStates;//订单状态
 @property (nonatomic) NSArray *titles;
 @property (nonatomic) NSArray *details;
@@ -21,5 +20,12 @@
 @property (nonatomic) UIButton *findBtn;
 //重置
 @property (nonatomic) UIButton *resetBtn;
+
+@property (nonatomic) UIView *pickView;
+@property (nonatomic) UIDatePicker *beginDatePicker;
+@property (nonatomic) UIButton *closeImagePickerButton;//确定
+@property (nonatomic) UIButton *cancelButton;
+
+@property (nonatomic) UIPickerView *pickerView;//订单状态等pickerView
 
 @end

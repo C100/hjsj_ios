@@ -45,7 +45,7 @@
 - (ChooseImageView *)chooseImageView{
     if (_chooseImageView == nil) {
         InputView *inputV = self.inputViews.lastObject;
-        _chooseImageView = [[ChooseImageView alloc] initWithFrame:CGRectZero andTitle:@"图片（点击图片可放大）"];
+        _chooseImageView = [[ChooseImageView alloc] initWithFrame:CGRectZero andTitle:@"图片（点击图片可放大）" andDetail:@[@"手持身份证正面照",@"身份证背面照"] andCount:2];
         [self addSubview:_chooseImageView];
         [_chooseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);

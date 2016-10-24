@@ -17,6 +17,7 @@
 @property (nonatomic) FilterView *selectView;
 @property (nonatomic) UIView *grayView;
 @property (nonatomic) OrderView *contentView;
+@property (nonatomic) NSArray *arrTitles;
 
 @end
 
@@ -30,6 +31,8 @@
         [self topView];
         [self contentView];
         [self selectView];
+        self.arrTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
+
         __block __weak CardInquiryView *weakself = self;
         [self.topView setCallback:^(NSInteger tag) {
             /*---按钮点击事件---*/
@@ -71,7 +74,20 @@
             //什么都不做
         }];
         
-        [self.selectView setFilterCallBack:^(NSString *beginDate, NSString *endDate, NSString *third, NSString *forth) {
+        [self.selectView setFilterCallBack:^(NSArray *array) {
+            NSLog(@"---%@----",array);
+            for (int i = 0; i < array.count; i++) {
+                UILabel *lb = weakself.topView.resultArr[i];
+                if (array[i]) {
+                    lb.text = [NSString stringWithFormat:@"%@%@",weakself.arrTitles[i],array[i]];
+                    if (i == array.count - 1) {
+                        if ([weakself.selectView.titles.lastObject isEqualToString:@"请选择"]) {
+                            lb.text = [NSString stringWithFormat:@"充值类型：%@",array[i]];
+                        }
+                    }
+                }
+            }
+            
             [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.mas_equalTo(0);
                 make.top.mas_equalTo(0);

@@ -16,6 +16,13 @@
 
 @implementation CheckAndTopViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"号码余额查询";
@@ -24,11 +31,6 @@
     backButton.title = @"返回";
     [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
     self.navigationItem.backBarButtonItem = backButton;
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     self.checkAndTopView = [[CheckAndTopView alloc] init];
     [self.view addSubview:self.checkAndTopView];

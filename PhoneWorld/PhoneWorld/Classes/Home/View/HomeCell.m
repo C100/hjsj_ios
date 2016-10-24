@@ -43,7 +43,7 @@
         [self addSubview:_titleLb];
         _titleLb.textAlignment = NSTextAlignmentCenter;
         _titleLb.font = [UIFont systemFontOfSize:14];
-        _titleLb.textColor = [Utils colorRGB:@"#333333"];
+        _titleLb.textColor = [Utils colorRGB:@"#666666"];
         [_titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.left.equalTo(self);
             make.height.mas_equalTo(16);
