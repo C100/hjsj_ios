@@ -13,7 +13,8 @@
 @interface CommisionCountView ()
 
 @property (nonatomic) InputView *inputView;
-@property (nonatomic) CountView *countView;
+@property (nonatomic) CountView *countView;//金额
+@property (nonatomic) CountView *countView2;//开户量
 
 @end
 
@@ -23,6 +24,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.contentSize = CGSizeMake(screenWidth, 800);
+        self.bounces = NO;
         self.backgroundColor = COLOR_BACKGROUND;
         InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 40)];
         [self addSubview:inputView];
@@ -37,16 +40,25 @@
         self.inputView = inputView;
         
         [self countView];
+        [self countView2];
     }
     return self;
 }
 
 - (CountView *)countView{
     if (_countView == nil) {
-        _countView = [[CountView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, 312)];
+        _countView = [[CountView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, 330) andTitle:@"金额"];
         [self addSubview:_countView];
     }
     return _countView;
+}
+
+- (CountView *)countView2{
+    if (_countView2 == nil) {
+        _countView2 = [[CountView alloc] initWithFrame:CGRectMake(0, 390, screenWidth, 330) andTitle:@"开户量"];
+        [self addSubview:_countView2];
+    }
+    return _countView2;
 }
 
 @end

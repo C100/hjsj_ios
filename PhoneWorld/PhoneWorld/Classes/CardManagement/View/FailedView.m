@@ -53,38 +53,64 @@
     _stateView.layer.cornerRadius = 10;
     _stateView.layer.masksToBounds = YES;
     
-    UIImageView *imageV = [[UIImageView alloc] init];
-    [_stateView addSubview:imageV];
-    [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(87);
-        make.top.mas_equalTo(20);
-        make.width.height.mas_equalTo(24);
-    }];
-    imageV.image = [UIImage imageNamed:self.imageName];
-    imageV.contentMode = UIViewContentModeScaleToFill;
-    
-    UILabel *lb = [[UILabel alloc] init];
-    lb.text = self.titleStr;
-    [_stateView addSubview:lb];
-    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(imageV.mas_right).mas_equalTo(8);
-        make.top.mas_equalTo(23);
-        make.width.mas_equalTo(70);
-        make.height.mas_equalTo(18);
-    }];
-    lb.font = [UIFont systemFontOfSize:16];
-    lb.textColor = [Utils colorRGB:self.color];
-    
-    UILabel *lb2 = [[UILabel alloc] init];
-    lb2.text = self.detailStr;
-    [_stateView addSubview:lb2];
-    [lb2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        make.bottom.mas_equalTo(-23);
-        make.height.mas_equalTo(14);
-    }];
-    lb2.font = [UIFont systemFontOfSize:12];
-    lb2.textColor = [Utils colorRGB:@"#333333"];
+    if ([self.detailStr isEqualToString:@""]) {
+        
+        UIImageView *imageV = [[UIImageView alloc] init];
+        [_stateView addSubview:imageV];
+        [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(85);
+            make.centerY.mas_equalTo(0);
+            make.width.height.mas_equalTo(24);
+        }];
+        imageV.image = [UIImage imageNamed:self.imageName];
+        imageV.contentMode = UIViewContentModeScaleToFill;
+        
+        UILabel *lb = [[UILabel alloc] init];
+        lb.text = self.titleStr;
+        [_stateView addSubview:lb];
+        [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(imageV.mas_right).mas_equalTo(5);
+            make.centerY.mas_equalTo(0);
+            make.width.mas_equalTo(100);
+            make.height.mas_equalTo(18);
+        }];
+        lb.font = [UIFont systemFontOfSize:16];
+        lb.textColor = [Utils colorRGB:self.color];
+
+    }else{
+        UIImageView *imageV = [[UIImageView alloc] init];
+        [_stateView addSubview:imageV];
+        [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(85);
+            make.top.mas_equalTo(20);
+            make.width.height.mas_equalTo(24);
+        }];
+        imageV.image = [UIImage imageNamed:self.imageName];
+        imageV.contentMode = UIViewContentModeScaleToFill;
+        
+        UILabel *lb = [[UILabel alloc] init];
+        lb.text = self.titleStr;
+        [_stateView addSubview:lb];
+        [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(imageV.mas_right).mas_equalTo(5);
+            make.top.mas_equalTo(23);
+            make.width.mas_equalTo(100);
+            make.height.mas_equalTo(18);
+        }];
+        lb.font = [UIFont systemFontOfSize:16];
+        lb.textColor = [Utils colorRGB:self.color];
+        
+        UILabel *lb2 = [[UILabel alloc] init];
+        lb2.text = self.detailStr;
+        [_stateView addSubview:lb2];
+        [lb2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(0);
+            make.bottom.mas_equalTo(-23);
+            make.height.mas_equalTo(14);
+        }];
+        lb2.font = [UIFont systemFontOfSize:12];
+        lb2.textColor = [Utils colorRGB:@"#333333"];
+    }
     
     return _stateView;
 }

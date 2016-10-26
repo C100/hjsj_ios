@@ -12,19 +12,12 @@
 		8A2142761DB9F7D200116F62 /* ChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A2142751DB9F7D200116F62 /* ChooseView.m */; };
 		8A3D7D6A1DAF29DB00824B7D /* TopAndInquiryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D691DAF29DB00824B7D /* TopAndInquiryViewController.m */; };
 		8A3D7D6D1DAF2A9700824B7D /* ContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D6C1DAF2A9700824B7D /* ContentView.m */; };
-		8A3D7D8B1DAF3BBF00824B7D /* CJCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D791DAF3BBF00824B7D /* CJCalendarViewController.m */; };
-		8A3D7D8C1DAF3BBF00824B7D /* CJMonthDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D7B1DAF3BBF00824B7D /* CJMonthDayViewController.m */; };
-		8A3D7D8D1DAF3BBF00824B7D /* CJYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D7D1DAF3BBF00824B7D /* CJYearViewController.m */; };
-		8A3D7D8E1DAF3BBF00824B7D /* CJUseTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D801DAF3BBF00824B7D /* CJUseTime.m */; };
-		8A3D7D8F1DAF3BBF00824B7D /* CJDecisionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D831DAF3BBF00824B7D /* CJDecisionView.m */; };
-		8A3D7D901DAF3BBF00824B7D /* CJMonthDayCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D851DAF3BBF00824B7D /* CJMonthDayCollectionCell.m */; };
-		8A3D7D911DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A3D7D861DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib */; };
-		8A3D7D921DAF3BBF00824B7D /* CJSelectTimeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D881DAF3BBF00824B7D /* CJSelectTimeScrollView.m */; };
-		8A3D7D931DAF3BBF00824B7D /* CJShowTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3D7D8A1DAF3BBF00824B7D /* CJShowTimeView.m */; };
 		8A49D86E1DACCB4600A1D650 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A49D86D1DACCB4600A1D650 /* main.m */; };
 		8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A49D8701DACCB4600A1D650 /* AppDelegate.m */; };
 		8A49D8791DACCB4600A1D650 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D8781DACCB4600A1D650 /* Assets.xcassets */; };
 		8A49D87C1DACCB4600A1D650 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A49D87A1DACCB4600A1D650 /* LaunchScreen.storyboard */; };
+		8A52CD461DBF698C00D9DC91 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A52CD451DBF698C00D9DC91 /* CoreTelephony.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		8A52CD481DBF6CB100D9DC91 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A52CD471DBF6CB100D9DC91 /* CoreBluetooth.framework */; };
 		8A5E30E21DBDBB58005D309A /* WhiteCardTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E30E11DBDBB58005D309A /* WhiteCardTopView.m */; };
 		8A5E30E51DBDC14C005D309A /* WhiteCardFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5E30E41DBDC14C005D309A /* WhiteCardFilterView.m */; };
 		8A6CBF0A1DB07D47002625E8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A6CBF091DB07D47002625E8 /* LoginViewController.m */; };
@@ -121,6 +114,14 @@
 		8A9698B31DB76D0D000841BA /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698B21DB76D0D000841BA /* InputView.m */; };
 		8A9698B91DB78A0D000841BA /* PhoneNumberCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698B81DB78A0D000841BA /* PhoneNumberCheckViewController.m */; };
 		8A9698BC1DB78A1E000841BA /* PhoneNumberCheckView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9698BB1DB78A1E000841BA /* PhoneNumberCheckView.m */; };
+		8A96D2D81DC03FB10052C46C /* ChoosePackageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2D71DC03FB10052C46C /* ChoosePackageDetailViewController.m */; };
+		8A96D2DB1DC03FC50052C46C /* ChoosePackageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2DA1DC03FC50052C46C /* ChoosePackageDetailView.m */; };
+		8A96D2E21DC05E890052C46C /* ChannelPartnersManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2E11DC05E890052C46C /* ChannelPartnersManageViewController.m */; };
+		8A96D2E51DC05EAE0052C46C /* ChannelPartnersManageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2E41DC05EAE0052C46C /* ChannelPartnersManageView.m */; };
+		8A96D2E81DC084E90052C46C /* ChannelPartnersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2E71DC084E90052C46C /* ChannelPartnersCell.m */; };
+		8A96D2EB1DC08EC70052C46C /* ChannelOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2EA1DC08EC70052C46C /* ChannelOrderCell.m */; };
+		8A96D2EE1DC0A0BC0052C46C /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2ED1DC0A0BC0052C46C /* ScreenView.m */; };
+		8A96D2F11DC0A4A80052C46C /* ScreenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2F01DC0A4A80052C46C /* ScreenCell.m */; };
 		8AAA8A401DBB441800368395 /* OrderMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA8A3F1DBB441800368395 /* OrderMainView.m */; };
 		8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8821DADC6A80088DD82 /* HomeView.m */; };
 		8AABF8861DADFB750088DD82 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8851DADFB750088DD82 /* Utils.m */; };
@@ -186,23 +187,6 @@
 		8A3D7D691DAF29DB00824B7D /* TopAndInquiryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopAndInquiryViewController.m; sourceTree = "<group>"; };
 		8A3D7D6B1DAF2A9700824B7D /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentView.h; sourceTree = "<group>"; };
 		8A3D7D6C1DAF2A9700824B7D /* ContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentView.m; sourceTree = "<group>"; };
-		8A3D7D781DAF3BBF00824B7D /* CJCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJCalendarViewController.h; sourceTree = "<group>"; };
-		8A3D7D791DAF3BBF00824B7D /* CJCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJCalendarViewController.m; sourceTree = "<group>"; };
-		8A3D7D7A1DAF3BBF00824B7D /* CJMonthDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMonthDayViewController.h; sourceTree = "<group>"; };
-		8A3D7D7B1DAF3BBF00824B7D /* CJMonthDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMonthDayViewController.m; sourceTree = "<group>"; };
-		8A3D7D7C1DAF3BBF00824B7D /* CJYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJYearViewController.h; sourceTree = "<group>"; };
-		8A3D7D7D1DAF3BBF00824B7D /* CJYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJYearViewController.m; sourceTree = "<group>"; };
-		8A3D7D7F1DAF3BBF00824B7D /* CJUseTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJUseTime.h; sourceTree = "<group>"; };
-		8A3D7D801DAF3BBF00824B7D /* CJUseTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJUseTime.m; sourceTree = "<group>"; };
-		8A3D7D821DAF3BBF00824B7D /* CJDecisionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJDecisionView.h; sourceTree = "<group>"; };
-		8A3D7D831DAF3BBF00824B7D /* CJDecisionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJDecisionView.m; sourceTree = "<group>"; };
-		8A3D7D841DAF3BBF00824B7D /* CJMonthDayCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJMonthDayCollectionCell.h; sourceTree = "<group>"; };
-		8A3D7D851DAF3BBF00824B7D /* CJMonthDayCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJMonthDayCollectionCell.m; sourceTree = "<group>"; };
-		8A3D7D861DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CJMonthDayCollectionCell.xib; sourceTree = "<group>"; };
-		8A3D7D871DAF3BBF00824B7D /* CJSelectTimeScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSelectTimeScrollView.h; sourceTree = "<group>"; };
-		8A3D7D881DAF3BBF00824B7D /* CJSelectTimeScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSelectTimeScrollView.m; sourceTree = "<group>"; };
-		8A3D7D891DAF3BBF00824B7D /* CJShowTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJShowTimeView.h; sourceTree = "<group>"; };
-		8A3D7D8A1DAF3BBF00824B7D /* CJShowTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJShowTimeView.m; sourceTree = "<group>"; };
 		8A49D8691DACCB4600A1D650 /* PhoneWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhoneWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A49D86D1DACCB4600A1D650 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8A49D86F1DACCB4600A1D650 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
@@ -210,6 +194,8 @@
 		8A49D8781DACCB4600A1D650 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A49D87B1DACCB4600A1D650 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A49D87D1DACCB4600A1D650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A52CD451DBF698C00D9DC91 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		8A52CD471DBF6CB100D9DC91 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8A5E30E01DBDBB58005D309A /* WhiteCardTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteCardTopView.h; sourceTree = "<group>"; };
 		8A5E30E11DBDBB58005D309A /* WhiteCardTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteCardTopView.m; sourceTree = "<group>"; };
 		8A5E30E31DBDC14C005D309A /* WhiteCardFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteCardFilterView.h; sourceTree = "<group>"; };
@@ -399,6 +385,22 @@
 		8A9698B81DB78A0D000841BA /* PhoneNumberCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberCheckViewController.m; sourceTree = "<group>"; };
 		8A9698BA1DB78A1E000841BA /* PhoneNumberCheckView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberCheckView.h; sourceTree = "<group>"; };
 		8A9698BB1DB78A1E000841BA /* PhoneNumberCheckView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberCheckView.m; sourceTree = "<group>"; };
+		8A96D2D61DC03FB10052C46C /* ChoosePackageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePackageDetailViewController.h; sourceTree = "<group>"; };
+		8A96D2D71DC03FB10052C46C /* ChoosePackageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePackageDetailViewController.m; sourceTree = "<group>"; };
+		8A96D2D91DC03FC50052C46C /* ChoosePackageDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoosePackageDetailView.h; sourceTree = "<group>"; };
+		8A96D2DA1DC03FC50052C46C /* ChoosePackageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoosePackageDetailView.m; sourceTree = "<group>"; };
+		8A96D2E01DC05E890052C46C /* ChannelPartnersManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelPartnersManageViewController.h; sourceTree = "<group>"; };
+		8A96D2E11DC05E890052C46C /* ChannelPartnersManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelPartnersManageViewController.m; sourceTree = "<group>"; };
+		8A96D2E31DC05EAE0052C46C /* ChannelPartnersManageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelPartnersManageView.h; sourceTree = "<group>"; };
+		8A96D2E41DC05EAE0052C46C /* ChannelPartnersManageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelPartnersManageView.m; sourceTree = "<group>"; };
+		8A96D2E61DC084E90052C46C /* ChannelPartnersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelPartnersCell.h; sourceTree = "<group>"; };
+		8A96D2E71DC084E90052C46C /* ChannelPartnersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelPartnersCell.m; sourceTree = "<group>"; };
+		8A96D2E91DC08EC70052C46C /* ChannelOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelOrderCell.h; sourceTree = "<group>"; };
+		8A96D2EA1DC08EC70052C46C /* ChannelOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelOrderCell.m; sourceTree = "<group>"; };
+		8A96D2EC1DC0A0BC0052C46C /* ScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenView.h; sourceTree = "<group>"; };
+		8A96D2ED1DC0A0BC0052C46C /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
+		8A96D2EF1DC0A4A80052C46C /* ScreenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCell.h; sourceTree = "<group>"; };
+		8A96D2F01DC0A4A80052C46C /* ScreenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCell.m; sourceTree = "<group>"; };
 		8AAA8A3E1DBB441800368395 /* OrderMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMainView.h; sourceTree = "<group>"; };
 		8AAA8A3F1DBB441800368395 /* OrderMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMainView.m; sourceTree = "<group>"; };
 		8AABF8811DADC6A80088DD82 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
@@ -508,6 +510,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A52CD481DBF6CB100D9DC91 /* CoreBluetooth.framework in Frameworks */,
+				8A52CD461DBF698C00D9DC91 /* CoreTelephony.framework in Frameworks */,
 				EE79FCC9EBCAAA8F6CEA2ECA /* libPods-PhoneWorld.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,54 +526,6 @@
 				D3185A9261F048735B2A06F2 /* Pods-PhoneWorld.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		8A3D7D761DAF3BBF00824B7D /* calendar */ = {
-			isa = PBXGroup;
-			children = (
-				8A3D7D771DAF3BBF00824B7D /* controller */,
-				8A3D7D7E1DAF3BBF00824B7D /* service */,
-				8A3D7D811DAF3BBF00824B7D /* view */,
-			);
-			path = calendar;
-			sourceTree = "<group>";
-		};
-		8A3D7D771DAF3BBF00824B7D /* controller */ = {
-			isa = PBXGroup;
-			children = (
-				8A3D7D781DAF3BBF00824B7D /* CJCalendarViewController.h */,
-				8A3D7D791DAF3BBF00824B7D /* CJCalendarViewController.m */,
-				8A3D7D7A1DAF3BBF00824B7D /* CJMonthDayViewController.h */,
-				8A3D7D7B1DAF3BBF00824B7D /* CJMonthDayViewController.m */,
-				8A3D7D7C1DAF3BBF00824B7D /* CJYearViewController.h */,
-				8A3D7D7D1DAF3BBF00824B7D /* CJYearViewController.m */,
-			);
-			path = controller;
-			sourceTree = "<group>";
-		};
-		8A3D7D7E1DAF3BBF00824B7D /* service */ = {
-			isa = PBXGroup;
-			children = (
-				8A3D7D7F1DAF3BBF00824B7D /* CJUseTime.h */,
-				8A3D7D801DAF3BBF00824B7D /* CJUseTime.m */,
-			);
-			path = service;
-			sourceTree = "<group>";
-		};
-		8A3D7D811DAF3BBF00824B7D /* view */ = {
-			isa = PBXGroup;
-			children = (
-				8A3D7D821DAF3BBF00824B7D /* CJDecisionView.h */,
-				8A3D7D831DAF3BBF00824B7D /* CJDecisionView.m */,
-				8A3D7D841DAF3BBF00824B7D /* CJMonthDayCollectionCell.h */,
-				8A3D7D851DAF3BBF00824B7D /* CJMonthDayCollectionCell.m */,
-				8A3D7D861DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib */,
-				8A3D7D871DAF3BBF00824B7D /* CJSelectTimeScrollView.h */,
-				8A3D7D881DAF3BBF00824B7D /* CJSelectTimeScrollView.m */,
-				8A3D7D891DAF3BBF00824B7D /* CJShowTimeView.h */,
-				8A3D7D8A1DAF3BBF00824B7D /* CJShowTimeView.m */,
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		8A49D8601DACCB4600A1D650 = {
@@ -618,7 +574,6 @@
 			isa = PBXGroup;
 			children = (
 				8A49D8901DACCB9900A1D650 /* Main */,
-				8A3D7D761DAF3BBF00824B7D /* calendar */,
 				8A49D88C1DACCB9900A1D650 /* Home */,
 				8A49D8941DACCB9900A1D650 /* OrderInquiry */,
 				8A49D8841DACCB9900A1D650 /* AccountManagement */,
@@ -626,6 +581,7 @@
 				8AD96E511DACD9380080CC8C /* PersonalHome */,
 				8AD96E4D1DACD9340080CC8C /* LoginAndReg */,
 				8A6CBF1D1DB09130002625E8 /* AboutUs */,
+				8A96D2DC1DC05E1D0052C46C /* AgencyInquiry */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -710,6 +666,8 @@
 				8AEEF9891DAF60D200D3D6AD /* FinishCardViewController.m */,
 				8A90E8F01DB61805004ECA62 /* ChoosePackageViewController.h */,
 				8A90E8F11DB61805004ECA62 /* ChoosePackageViewController.m */,
+				8A96D2D61DC03FB10052C46C /* ChoosePackageDetailViewController.h */,
+				8A96D2D71DC03FB10052C46C /* ChoosePackageDetailViewController.m */,
 				8A90E8F31DB61F95004ECA62 /* InformationCollectionViewController.h */,
 				8A90E8F41DB61F95004ECA62 /* InformationCollectionViewController.m */,
 				8A9698961DB70FC1000841BA /* SettlementDetailViewController.h */,
@@ -748,6 +706,8 @@
 				8A90E8EE1DB61747004ECA62 /* ChoosePackageView.m */,
 				8A9698AE1DB75CDB000841BA /* ChoosePackageTableView.h */,
 				8A9698AF1DB75CDB000841BA /* ChoosePackageTableView.m */,
+				8A96D2D91DC03FC50052C46C /* ChoosePackageDetailView.h */,
+				8A96D2DA1DC03FC50052C46C /* ChoosePackageDetailView.m */,
 				8A90E8F61DB61FC2004ECA62 /* InformationCollectionView.h */,
 				8A90E8F71DB61FC2004ECA62 /* InformationCollectionView.m */,
 				8A9698991DB70FE9000841BA /* SettlementDetailView.h */,
@@ -1324,6 +1284,49 @@
 			path = LFRoundProgressView;
 			sourceTree = "<group>";
 		};
+		8A96D2DC1DC05E1D0052C46C /* AgencyInquiry */ = {
+			isa = PBXGroup;
+			children = (
+				8A96D2DD1DC05E1D0052C46C /* Controller */,
+				8A96D2DE1DC05E1D0052C46C /* Model */,
+				8A96D2DF1DC05E1D0052C46C /* View */,
+			);
+			path = AgencyInquiry;
+			sourceTree = "<group>";
+		};
+		8A96D2DD1DC05E1D0052C46C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8A96D2E01DC05E890052C46C /* ChannelPartnersManageViewController.h */,
+				8A96D2E11DC05E890052C46C /* ChannelPartnersManageViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A96D2DE1DC05E1D0052C46C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8A96D2DF1DC05E1D0052C46C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8A96D2E31DC05EAE0052C46C /* ChannelPartnersManageView.h */,
+				8A96D2E41DC05EAE0052C46C /* ChannelPartnersManageView.m */,
+				8A96D2EC1DC0A0BC0052C46C /* ScreenView.h */,
+				8A96D2ED1DC0A0BC0052C46C /* ScreenView.m */,
+				8A96D2EF1DC0A4A80052C46C /* ScreenCell.h */,
+				8A96D2F01DC0A4A80052C46C /* ScreenCell.m */,
+				8A96D2E61DC084E90052C46C /* ChannelPartnersCell.h */,
+				8A96D2E71DC084E90052C46C /* ChannelPartnersCell.m */,
+				8A96D2E91DC08EC70052C46C /* ChannelOrderCell.h */,
+				8A96D2EA1DC08EC70052C46C /* ChannelOrderCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8AD96E2A1DACCD450080CC8C /* parties */ = {
 			isa = PBXGroup;
 			children = (
@@ -1465,6 +1468,8 @@
 		DA80E4F2E2E91AB3F7C1426A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A52CD471DBF6CB100D9DC91 /* CoreBluetooth.framework */,
+				8A52CD451DBF698C00D9DC91 /* CoreTelephony.framework */,
 				8AEEF99D1DAF828600D3D6AD /* Security.framework */,
 				4DC23F93AE94DD6F67AAD0F2 /* libPods-PhoneWorld.a */,
 			);
@@ -1539,7 +1544,6 @@
 				8A70DB861DB8CAB6005E76C2 /* PhotoBroswerVC.xib in Resources */,
 				8A49D87C1DACCB4600A1D650 /* LaunchScreen.storyboard in Resources */,
 				8AD96E451DACD17F0080CC8C /* tm.png in Resources */,
-				8A3D7D911DAF3BBF00824B7D /* CJMonthDayCollectionCell.xib in Resources */,
 				8A49D8791DACCB4600A1D650 /* Assets.xcassets in Resources */,
 				8A70DB881DB8CAB6005E76C2 /* CoreSDWebImage.bundle in Resources */,
 				8A70DB841DB8CAB6005E76C2 /* PhotoItemView.xib in Resources */,
@@ -1604,11 +1608,12 @@
 			files = (
 				8A9698A41DB74233000841BA /* WhiteCardCell.m in Sources */,
 				8AEEF9901DAF66CF00D3D6AD /* TransferCardViewController.m in Sources */,
+				8A96D2EE1DC0A0BC0052C46C /* ScreenView.m in Sources */,
+				8A96D2E81DC084E90052C46C /* ChannelPartnersCell.m in Sources */,
 				8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */,
 				8A90E8F51DB61F95004ECA62 /* InformationCollectionViewController.m in Sources */,
 				8AAA8A401DBB441800368395 /* OrderMainView.m in Sources */,
 				8A70DB891DB8CAB6005E76C2 /* UIButton+SD.m in Sources */,
-				8A3D7D8E1DAF3BBF00824B7D /* CJUseTime.m in Sources */,
 				8AB992CC1DB4C11800D75492 /* RepairCardDetailView.m in Sources */,
 				8AABF8891DAE11060088DD82 /* TopView.m in Sources */,
 				8A70DB901DB8CAB6005E76C2 /* LFRoundProgressView.m in Sources */,
@@ -1617,7 +1622,6 @@
 				8A6CBF131DB0867E002625E8 /* ForgetPasswordViewController.m in Sources */,
 				8A2142731DB9F65700116F62 /* CountView.m in Sources */,
 				8A70DB761DB8CAB6005E76C2 /* UITableViewCell+Extend.m in Sources */,
-				8A3D7D8D1DAF3BBF00824B7D /* CJYearViewController.m in Sources */,
 				8A6CBF261DB09171002625E8 /* AboutUsView.m in Sources */,
 				8A70DB6D1DB8CAB6005E76C2 /* NSString+Password.m in Sources */,
 				8AD96E761DAD0A0B0080CC8C /* RepairCardViewController.m in Sources */,
@@ -1665,6 +1669,7 @@
 				8A6CBF481DB0B13A002625E8 /* PasswordManageView.m in Sources */,
 				8A70DB651DB8CAB6005E76C2 /* NSString+File.m in Sources */,
 				8AB992C61DB4B75F00D75492 /* TransferDetailView.m in Sources */,
+				8A96D2D81DC03FB10052C46C /* ChoosePackageDetailViewController.m in Sources */,
 				8A49D8711DACCB4600A1D650 /* AppDelegate.m in Sources */,
 				8A6CBF5D1DB0C1C4002625E8 /* OrderTableViewCell.m in Sources */,
 				8A90E8EC1DB6109B004ECA62 /* FailedView.m in Sources */,
@@ -1675,14 +1680,17 @@
 				8AB87EAE1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m in Sources */,
 				8A70DB8D1DB8CAB6005E76C2 /* SVIndefiniteAnimatedView.m in Sources */,
 				8AD96E581DACD95A0080CC8C /* PersonalHomeViewController.m in Sources */,
+				8A96D2EB1DC08EC70052C46C /* ChannelOrderCell.m in Sources */,
 				8AD96E661DACEA570080CC8C /* HomeCell.m in Sources */,
 				8AD96E331DACCF090080CC8C /* MainTabBarController.m in Sources */,
+				8A96D2E21DC05E890052C46C /* ChannelPartnersManageViewController.m in Sources */,
 				8A6CBF101DB07DB4002625E8 /* LoginView.m in Sources */,
 				8AABF8A91DAE6C310088DD82 /* TopCallMoneyView.m in Sources */,
-				8A3D7D901DAF3BBF00824B7D /* CJMonthDayCollectionCell.m in Sources */,
+				8A96D2E51DC05EAE0052C46C /* ChannelPartnersManageView.m in Sources */,
 				8A6CBF421DB0B0D4002625E8 /* PersonalInfoViewController.m in Sources */,
 				8A70DB731DB8CAB6005E76C2 /* UIImage+Extend.m in Sources */,
 				8A70DB8C1DB8CAB6005E76C2 /* CoreSVP.m in Sources */,
+				8A96D2DB1DC03FC50052C46C /* ChoosePackageDetailView.m in Sources */,
 				8A70DB831DB8CAB6005E76C2 /* PhotoItemView.m in Sources */,
 				8A70DB811DB8CAB6005E76C2 /* PBScrollView.m in Sources */,
 				8A70DB771DB8CAB6005E76C2 /* UIView+Extend.m in Sources */,
@@ -1702,11 +1710,9 @@
 				8A6CBF451DB0B12C002625E8 /* PasswordManageViewController.m in Sources */,
 				8A9698981DB70FC1000841BA /* SettlementDetailViewController.m in Sources */,
 				8A6CBF631DB0C489002625E8 /* OrderTwoTableViewCell.m in Sources */,
-				8A3D7D921DAF3BBF00824B7D /* CJSelectTimeScrollView.m in Sources */,
 				8A6CBF541DB0B4F9002625E8 /* CommisionCountViewController.m in Sources */,
 				8AB87EC31DB203AF0045CB90 /* FilterView.m in Sources */,
 				8AB992CF1DB4CCA000D75492 /* PhoneCashCheckTVCell.m in Sources */,
-				8A3D7D8C1DAF3BBF00824B7D /* CJMonthDayViewController.m in Sources */,
 				8A70DB701DB8CAB6005E76C2 /* UIFont+Extend.m in Sources */,
 				8A9698AA1DB755DA000841BA /* ReadCardAndChoosePackageViewController.m in Sources */,
 				8A70DAED1DB8C38B005E76C2 /* ChooseImageView.m in Sources */,
@@ -1716,6 +1722,7 @@
 				8A90E8E91DB5FB47004ECA62 /* CardManageView.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
 				8A96989B1DB70FE9000841BA /* SettlementDetailView.m in Sources */,
+				8A96D2F11DC0A4A80052C46C /* ScreenCell.m in Sources */,
 				8AB992C91DB4C10600D75492 /* RepairCardDetailViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
 				8A70DB781DB8CAB6005E76C2 /* UIWindow+Launch.m in Sources */,
@@ -1723,17 +1730,14 @@
 				8AEEF98A1DAF60D200D3D6AD /* FinishCardViewController.m in Sources */,
 				8AD96E2D1DACCD490080CC8C /* UIViewExt.m in Sources */,
 				8A90E8F81DB61FC2004ECA62 /* InformationCollectionView.m in Sources */,
-				8A3D7D8B1DAF3BBF00824B7D /* CJCalendarViewController.m in Sources */,
 				8A70DB6A1DB8CAB6005E76C2 /* NSDate+Extend.m in Sources */,
 				8AB87EBA1DB1E32E0045CB90 /* AlterPayPasswordViewController.m in Sources */,
 				8A2142761DB9F7D200116F62 /* ChooseView.m in Sources */,
-				8A3D7D8F1DAF3BBF00824B7D /* CJDecisionView.m in Sources */,
 				8A6CBF191DB08CF9002625E8 /* ResetPasswordViewController.m in Sources */,
 				8A6CBF231DB09152002625E8 /* AboutUsViewController.m in Sources */,
 				8A96989E1DB727CE000841BA /* WhiteCardViewController.m in Sources */,
 				8A70DB691DB8CAB6005E76C2 /* NSArray+Extend.m in Sources */,
 				8AEEF9931DAF66E300D3D6AD /* TransferCardView.m in Sources */,
-				8A3D7D931DAF3BBF00824B7D /* CJShowTimeView.m in Sources */,
 				8AD96E701DAD09C90080CC8C /* OpenWhiteCardViewController.m in Sources */,
 				8AD96E6D1DAD09BD0080CC8C /* OpenAccomplishCardViewController.m in Sources */,
 				8A70DB871DB8CAB6005E76C2 /* UIImage+ReMake.m in Sources */,

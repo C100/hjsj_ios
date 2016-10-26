@@ -16,5 +16,6 @@
 @property (nonatomic) UITextField *passwordTF;
 @property (nonatomic) UIButton *forgetPassword;
 @property (nonatomic) UIButton *submitButton;
+@property (nonatomic) UIView *lineView;
 
 @end

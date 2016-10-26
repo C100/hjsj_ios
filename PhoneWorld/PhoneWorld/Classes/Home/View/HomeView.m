@@ -33,7 +33,7 @@
     if (self) {
         {
             self.imageNames = @[@"home1",@"home2",@"home3",@"home4",@"home5",@"home6"];
-            self.titleNames = @[@"话费充值",@"余额充值与查询",@"过户",@"成卡开户",@"白卡开户",@"补卡"];
+            self.titleNames = @[@"话费充值",@"余额充值",@"过户",@"成卡开户",@"白卡开户",@"补卡"];
             self.bounces = NO;
             [self imageScrollView];
             [self lineView];
@@ -150,12 +150,12 @@
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 10;
+    return 9;
     
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return 10;
+    return 9;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

@@ -9,6 +9,18 @@
 #import "Utils.h"
 
 @implementation Utils
+
++ (BOOL)isSIMInstalled{
+    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
+    
+    if (!carrier.isoCountryCode) {
+        NSLog(@"No sim present Or No cellular coverage or phone is on airplane mode.");
+        return NO;
+    }
+    return YES;
+}
+
 + (UIColor *)colorRGB:(NSString *)color{
     // 转换成标准16进制数
     NSString *newColor = [color stringByReplacingCharactersInRange:[color rangeOfString:@"#"] withString:@"0x"];
@@ -116,6 +128,18 @@
     //设置文字颜色
     [str addAttribute:NSForegroundColorAttributeName value:vaColor range:range];
     return str;
+}
+
++ (UIButton *)returnBextButtonWithTitle:(NSString *)title{
+    UIButton *button = [[UIButton alloc] init];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:MainColor forState:UIControlStateNormal];
+    button.layer.cornerRadius = 20;
+    button.layer.borderColor = MainColor.CGColor;
+    button.layer.borderWidth = 1;
+    button.layer.masksToBounds = YES;
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    return button;
 }
 
 @end

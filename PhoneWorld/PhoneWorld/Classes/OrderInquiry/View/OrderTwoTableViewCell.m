@@ -90,9 +90,9 @@
     if (_phoneLB == nil) {
         _phoneLB = [[UILabel alloc] init];
         [self addSubview:_phoneLB];
-        _phoneLB.font = [UIFont systemFontOfSize:textfont12];
+        _phoneLB.font = [UIFont systemFontOfSize:12];
         _phoneLB.textColor = [Utils colorRGB:@"#666666"];
-        _phoneLB.text = @"手机号码：";
+        _phoneLB.text = @"号码：00000000000";
         [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.typeLB.mas_bottom).mas_equalTo(13);
             make.left.mas_equalTo(10);

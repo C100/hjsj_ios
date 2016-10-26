@@ -95,6 +95,10 @@
         }
         [self chooseImageView];
         [self nextButton];
+        
+        UIView *leftWhiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 400)];
+        leftWhiteView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:leftWhiteView];
     }
     return self;
 }
@@ -116,7 +120,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [[UIButton alloc] init];
+        _nextButton = [Utils returnBextButtonWithTitle:@"确定"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.chooseImageView.mas_bottom).mas_equalTo(40);
@@ -125,13 +129,6 @@
             make.width.mas_equalTo(171);
             make.bottom.mas_equalTo(-40);
         }];
-        [_nextButton setTitle:@"确定" forState:UIControlStateNormal];
-        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 20;
-        _nextButton.layer.borderColor = MainColor.CGColor;
-        _nextButton.layer.borderWidth = 1;
-        _nextButton.layer.masksToBounds = YES;
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;

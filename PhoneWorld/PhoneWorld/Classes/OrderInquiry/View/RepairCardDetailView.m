@@ -23,7 +23,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.titles = @[@"    订单编号：",@"    订单时间：",@"    订单类型：",@"    订单状态：",@"    审核时间：",@"    审核结果：",@"    补卡人姓名：",@"    补卡号码：",@"    证件号码：",@"    证件地址：",@"    联系电话：",@"    证件联系号码：",@"    收件人姓名：",@"    收件人号码：",@"    收件人地址：",@"    邮寄选项：",@"    状态："];
+        self.titles = @[@"    订单编号：",@"    订单时间：",@"    订单类型：",@"    订单状态：",@"    审核时间：",@"    审核结果：",@"    补卡人姓名：",@"    补卡号码：",@"    证件号码：",@"    证件地址：",@"    联系电话：",@"    近期联系号码：",@"    收件人姓名：",@"    收件人号码：",@"    收件人地址：",@"    邮寄选项：",@"    状态："];
         [self addInfo];
         self.bounces = NO;
     }
@@ -55,6 +55,9 @@
         make.bottom.mas_equalTo(0);
     }];
     
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapAction:)];
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapAction:)];
+    
     UIImageView *imageV1 = [[UIImageView alloc] initWithFrame:CGRectMake(15, 30, screenWidth - 30, (screenWidth - 30)/(354/225.0))];
     imageV1.image = [UIImage imageNamed:@"identifyCard2"];
     [v addSubview:imageV1];
@@ -64,6 +67,8 @@
         make.right.mas_equalTo(-15);
         make.height.mas_equalTo((screenWidth - 30)/(354/225.0));
     }];
+    [imageV1 addGestureRecognizer:tap1];
+    imageV1.userInteractionEnabled = YES;
     
     UIImageView *imageV2 = [[UIImageView alloc] init];
     imageV2.image = [UIImage imageNamed:@"identifyCard1"];
@@ -75,7 +80,23 @@
         make.height.mas_equalTo((screenWidth - 30)/(354/225.0));
         make.bottom.mas_equalTo(-10);
     }];
+    [imageV2 addGestureRecognizer:tap2];
+    imageV2.userInteractionEnabled = YES;
 }
 
+- (void)imageTapAction:(UITapGestureRecognizer *)tap{
+    UIImageView *imageV = (UIImageView *)tap.view;
+    [PhotoBroswerVC show:[UIApplication sharedApplication].keyWindow.rootViewController type:PhotoBroswerVCTypeZoom index:0 photoModelBlock:^NSArray *{
+        //创建多大容量数组
+        NSMutableArray *modelsM = [NSMutableArray array];
+        PhotoModel *pbModel=[[PhotoModel alloc] init];
+        pbModel.mid = 11;
+        //设置查看大图的时候的图片
+        pbModel.image = imageV.image;
+        pbModel.sourceImageView = imageV;//点击返回时图片做动画用
+        [modelsM addObject:pbModel];
+        return modelsM;
+    }];
+}
 
 @end

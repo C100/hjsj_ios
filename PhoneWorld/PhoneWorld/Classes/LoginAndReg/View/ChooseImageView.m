@@ -122,10 +122,11 @@
 
 #pragma mark - Method
 - (void)chooseImageAction:(UIButton *)button{
+    NSInteger i = button.tag - 1000;
     self.currentImageButton = button;
     __block __weak ChooseImageView *weakself = self;
     UIViewController *viewController = [self viewController];
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:self.details[i] message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = weakself;

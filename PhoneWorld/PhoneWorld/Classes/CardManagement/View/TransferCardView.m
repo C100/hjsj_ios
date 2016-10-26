@@ -9,11 +9,13 @@
 #import "TransferCardView.h"
 #import "InputView.h"
 #import "ChooseImageView.h"
+#import "FailedView.h"
 
 @interface TransferCardView ()
 @property (nonatomic) NSArray *leftTitles;
 @property (nonatomic) NSMutableArray *inputViews;
 @property (nonatomic) ChooseImageView *chooseImageView;
+@property (nonatomic) FailedView *finishedView;
 @end
 
 @implementation TransferCardView
@@ -61,7 +63,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [[UIButton alloc] init];
+        _nextButton = [Utils returnBextButtonWithTitle:@"提交"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.chooseImageView.mas_bottom).mas_equalTo(40);
@@ -70,13 +72,6 @@
             make.width.mas_equalTo(171);
             make.bottom.mas_equalTo(-40);
         }];
-        [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
-        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 20;
-        _nextButton.layer.borderColor = MainColor.CGColor;
-        _nextButton.layer.borderWidth = 1;
-        _nextButton.layer.masksToBounds = YES;
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;
@@ -84,6 +79,19 @@
 
 #pragma mark - Method
 - (void)buttonClickAction:(UIButton *)button{
-    NSLog(@"---------下一步");
+    self.finishedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"提交成功" andDetail:@"请耐心等待..." andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.finishedView];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
+}
+
+- (void)removeGrayView{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.finishedView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.finishedView removeFromSuperview];
+        UIViewController *vc = [self viewController];
+        [vc.navigationController popToRootViewControllerAnimated:YES];
+    }];
 }
 @end

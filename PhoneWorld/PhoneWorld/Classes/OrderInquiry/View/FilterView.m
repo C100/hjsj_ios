@@ -12,11 +12,7 @@
 
 @interface FilterView ()
 
-//@property (nonatomic) NSArray *phoneTopType;
 @property (nonatomic) UITableViewCell *currentCell;
-
-//@property (nonatomic) NSDate *beginDate;
-//@property (nonatomic) NSDate *endDate;
 
 @end
 
@@ -28,7 +24,6 @@
     if (self) {
         self.orderStates = [NSArray array];
         self.backgroundColor = [UIColor whiteColor];
-//        self.phoneTopType = @[@"全部",@"余额充值",@"话费充值"];
         self.titles = @[@"起始时间",@"截止时间",@"订单状态",@"手机号码"];
         self.details = @[@"请选择",@"请选择",@"请选择",@"请输入手机号码"];
         [self filterTableView];
@@ -121,11 +116,12 @@
         [self addSubview:_filterTableView];
         [_filterTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.mas_equalTo(0);
-            make.height.mas_equalTo(164);
+            make.height.mas_equalTo(41*self.titles.count);
         }];
         _filterTableView.delegate = self;
         _filterTableView.dataSource = self;
         _filterTableView.bounces = NO;
+        _filterTableView.tableFooterView = [UIView new];
     }
     return _filterTableView;
 }
@@ -181,7 +177,7 @@
 
 #pragma mark - UITableView Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return self.titles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -209,54 +205,41 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.currentCell = [tableView cellForRowAtIndexPath:indexPath];
-    switch (indexPath.row) {
-        case 0:
-        {
-            self.beginDatePicker.hidden = NO;
-            self.pickView.hidden = NO;
-            self.closeImagePickerButton.hidden = NO;
-            self.cancelButton.hidden = NO;
-        }
-            break;
-        case 1:
-        {
-            self.beginDatePicker.hidden = NO;
-            self.pickView.hidden = NO;
-            self.closeImagePickerButton.hidden = NO;
-            self.cancelButton.hidden = NO;
-        }
-            break;
-        case 2:
-        {
-            [self.pickerView reloadAllComponents];
-            self.pickView.hidden = NO;
-            self.closeImagePickerButton.hidden = NO;
-            self.cancelButton.hidden = NO;
-            self.pickerView.hidden = NO;
-        }
-            break;
-        case 3:
-        {
-            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"请输入手机号码" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            [ac addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-                
-            }];
-            UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if ([Utils isMobile:ac.textFields.firstObject.text]) {
-                    self.currentCell.detailTextLabel.text = ac.textFields.firstObject.text;
-                    self.currentCell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-                }else{
-                    [Utils toastview:@"手机号格式不正确，请重新输入"];
-                }
-            }];
-            UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            [ac addAction:action1];
-            [ac addAction:action2];
-            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
-        }
-            break;
+    
+    if (indexPath.row == 0 || indexPath.row == 1) {
+        self.beginDatePicker.hidden = NO;
+        self.pickView.hidden = NO;
+        self.closeImagePickerButton.hidden = NO;
+        self.cancelButton.hidden = NO;
+    }
+    
+    if (indexPath.row == 2) {
+        [self.pickerView reloadAllComponents];
+        self.pickView.hidden = NO;
+        self.closeImagePickerButton.hidden = NO;
+        self.cancelButton.hidden = NO;
+        self.pickerView.hidden = NO;
+    }
+    
+    if (indexPath.row == 3) {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"请输入手机号码" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [ac addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            
+        }];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if ([Utils isMobile:ac.textFields.firstObject.text]) {
+                self.currentCell.detailTextLabel.text = ac.textFields.firstObject.text;
+                self.currentCell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
+            }else{
+                [Utils toastview:@"手机号格式不正确，请重新输入"];
+            }
+        }];
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [ac addAction:action1];
+        [ac addAction:action2];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
     }
 }
 
@@ -284,17 +267,17 @@
         case 70:
         {
             NSMutableArray *conditions = [NSMutableArray array];
-            for (int i = 0; i < 4; i ++) {
+            for (int i = 0; i < self.titles.count; i ++) {
                 NSIndexPath *indexP = [NSIndexPath indexPathForRow:i inSection:0];
                 UITableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:indexP];
-                if ([cell.detailTextLabel.text isEqualToString:@"请选择"]) {
+                if ([cell.detailTextLabel.text isEqualToString:@"请选择"] || [cell.detailTextLabel.text isEqualToString:@"请输入手机号码"]) {
                     [conditions addObject:@"无"];
                 }else{
                     [conditions addObject:cell.detailTextLabel.text];
                 }
             }
 
-            _FilterCallBack(conditions);
+            _FilterCallBack(conditions,@"查询");
             NSLog(@"万事俱备，就要查询啦！！！！！！！！");
             self.pickView.hidden = YES;
             self.beginDatePicker.hidden = YES;
@@ -305,6 +288,11 @@
         case 71:
         {
             [self.filterTableView reloadData];
+            NSMutableArray *conditions = [NSMutableArray array];
+            for (int i = 0; i < self.titles.count; i ++) {
+                [conditions addObject:@"无"];
+            }
+            _FilterCallBack(conditions,@"重置");
         }
             break;
     }

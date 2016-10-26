@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AlterLoginPasswordView : UIView
+- (instancetype)initWithFrame:(CGRect)frame andType:(NSInteger)type;
 @property (nonatomic) void(^AlterPasswordCallBack) (id obj);
 @property (nonatomic) UIButton *saveButton;
 @end

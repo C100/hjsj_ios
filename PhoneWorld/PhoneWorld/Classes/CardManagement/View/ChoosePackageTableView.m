@@ -7,8 +7,10 @@
 //
 
 #import "ChoosePackageTableView.h"
+#import "ChoosePackageDetailViewController.h"
+#import "ChoosePackageDetailView.h"
 
-@interface ChoosePackageTableView ()
+@interface ChoosePackageTableView ()<ChoosePackageDetailViewDelegate>
 @property (nonatomic) NSArray *titles;
 @end
 
@@ -70,6 +72,30 @@
      套餐选择
      活动包选择
      */
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    self.currentCell = cell;
+    
+    UIViewController *viewController = [self viewController];
+
+    switch (indexPath.row) {
+        case 0:
+        {
+            ChoosePackageDetailViewController *vc = [[ChoosePackageDetailViewController alloc] init];
+            vc.title = @"套餐选择";
+            vc.packageTableView = self;
+            [viewController.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:
+        {
+            ChoosePackageDetailViewController *vc = [[ChoosePackageDetailViewController alloc] init];
+            vc.title = @"活动包选择";
+            vc.packageTableView = self;
+            [viewController.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+    }
 }
 
 #pragma mark - Method
@@ -79,5 +105,10 @@
     cell.detailTextLabel.text = textField.text;
     cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
 }
+
+- (void)getPackage:(NSString *)package{
+    self.currentCell.detailTextLabel.text = package;
+}
+
 
 @end

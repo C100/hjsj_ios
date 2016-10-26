@@ -75,20 +75,14 @@
 
 - (UIButton *)finishButton{
     if (_finishButton == nil) {
-        _finishButton = [[UIButton alloc] init];
+        _finishButton = [Utils returnBextButtonWithTitle:@"完成"];
         [self addSubview:_finishButton];
         [_finishButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
+            make.centerX.mas_equalTo(0);
             make.height.mas_equalTo(40);
             make.top.mas_equalTo(self.passwordAgainTF.mas_bottom).mas_equalTo(20);
+            make.width.mas_equalTo(171);
         }];
-        _finishButton.backgroundColor = [Utils colorRGB:@"#008bd5"];
-        [_finishButton setTitle:@"完成" forState:UIControlStateNormal];
-        _finishButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_finishButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _finishButton.layer.cornerRadius = 6;
-        _finishButton.layer.masksToBounds = YES;
         _finishButton.tag = 1110;
         [_finishButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }

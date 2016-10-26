@@ -109,8 +109,8 @@
         [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.width.mas_equalTo(screenWidth);
-            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(10);
-            make.height.mas_equalTo(screenHeight - 128 - 120);
+            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(0);
+            make.height.mas_equalTo(screenHeight - 128 - 100);
         }];
         _contentView.delegate = self;
         _contentView.dataSource = self;
@@ -173,7 +173,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(screenWidth/2, 40);
+    return CGSizeMake(screenWidth/2, 50);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{

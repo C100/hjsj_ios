@@ -128,8 +128,8 @@
             make.height.mas_equalTo(40);
             make.top.mas_equalTo(self.topMoneyNumber.mas_bottom).mas_equalTo(1);;
         }];
-        _topMoney.leftLabel.text = @"输入充值金额";
-        _topMoney.textField.placeholder = @"请输入充值金额";
+        _topMoney.leftLabel.text = @"其它充值金额";
+        _topMoney.textField.placeholder = @"请输入金额";
         _topMoney.textField.delegate = self;
     }
     return _topMoney;
@@ -137,7 +137,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [[UIButton alloc] init];
+        _nextButton = [Utils returnBextButtonWithTitle:@"确认"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.topMoney.mas_bottom).mas_equalTo(40);
@@ -145,14 +145,7 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        [_nextButton setTitle:@"确认" forState:UIControlStateNormal];
-        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 20;
-        _nextButton.layer.borderColor = MainColor.CGColor;
-        _nextButton.layer.borderWidth = 1;
-        _nextButton.layer.masksToBounds = YES;
         _nextButton.tag = 650;
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;

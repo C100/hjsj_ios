@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface Utils : NSObject
+
++ (BOOL)isSIMInstalled;
+
 + (UIColor *)colorRGB:(NSString *)color;
 
 + (BOOL)isMobile:(NSString *)mobileNumbel;
@@ -28,5 +31,7 @@
 + (UIBarButtonItem *)returnBackButton;
 
 + (NSMutableAttributedString *)setTextColor:(NSString *)text FontNumber:(id)font AndRange:(NSRange)range AndColor:(UIColor *)vaColor;
+
++ (UIButton *)returnBextButtonWithTitle:(NSString *)title;
 
 @end

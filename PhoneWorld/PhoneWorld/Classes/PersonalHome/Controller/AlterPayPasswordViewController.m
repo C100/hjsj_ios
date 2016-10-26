@@ -21,7 +21,7 @@
     self.title = @"支付密码修改";
     self.navigationItem.backBarButtonItem = [Utils returnBackButton];
 
-    self.alterView = [[AlterLoginPasswordView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
+    self.alterView = [[AlterLoginPasswordView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andType:2];
     [self.view addSubview:self.alterView];
     __block __weak AlterPayPasswordViewController *weakself = self;
     [self.alterView setAlterPasswordCallBack:^(id obj) {

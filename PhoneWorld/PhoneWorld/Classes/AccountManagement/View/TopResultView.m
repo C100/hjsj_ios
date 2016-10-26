@@ -88,21 +88,15 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [[UIButton alloc] init];
+        _nextButton = [Utils returnBextButtonWithTitle:@"继续充值"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.detailView.mas_bottom).mas_equalTo(40);
-            make.centerX.mas_equalTo(0);
+            make.left.mas_equalTo(15);
             make.height.mas_equalTo(40);
-            make.width.mas_equalTo(171);
+            make.width.mas_equalTo(self.backToHomeButton.mas_width);
+            make.right.mas_equalTo(self.backToHomeButton.mas_left).mas_equalTo(-15);
         }];
-        [_nextButton setTitle:@"继续充值" forState:UIControlStateNormal];
-        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 20;
-        _nextButton.layer.borderColor = MainColor.CGColor;
-        _nextButton.layer.borderWidth = 1;
-        _nextButton.layer.masksToBounds = YES;
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_nextButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;
@@ -110,22 +104,17 @@
 
 - (UIButton *)backToHomeButton{
     if (_backToHomeButton == nil) {
-        _backToHomeButton = [[UIButton alloc] init];
+        
+        _backToHomeButton = [Utils returnBextButtonWithTitle:@"返回首页"];
         [self addSubview:_backToHomeButton];
         [_backToHomeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(0);
-            make.top.mas_equalTo(self.nextButton.mas_bottom).mas_equalTo(20);
-            make.width.mas_equalTo(60);
-            make.height.mas_equalTo(30);
+            make.top.mas_equalTo(self.detailView.mas_bottom).mas_equalTo(40);
+            make.right.mas_equalTo(-15);
+            make.height.mas_equalTo(40);
+            make.width.mas_equalTo(self.nextButton.mas_width);
+            make.left.mas_equalTo(self.nextButton.mas_right).mas_equalTo(15);
         }];
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"返回首页"];
-        NSRange strRange = {0,[str length]};
-        [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
-        [str addAttribute:NSForegroundColorAttributeName value:[Utils colorRGB:@"#0081eb"] range:strRange];
-        [_backToHomeButton setAttributedTitle:str forState:UIControlStateNormal];
-        [_backToHomeButton setTitleColor:[Utils colorRGB:@"#0081eb"] forState:UIControlStateNormal];
-        _backToHomeButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_backToHomeButton addTarget:self action:@selector(backToHomeAction) forControlEvents:UIControlEventTouchUpInside];
+        [_backToHomeButton addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backToHomeButton;
 }
@@ -133,12 +122,11 @@
 #pragma mark - Method 
 - (void)nextAction:(UIButton *)button{
     UIViewController *controller = [self viewController];
-    [controller.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)backToHomeAction{
-    UIViewController *viewController = [self viewController];
-    [viewController.navigationController popToRootViewControllerAnimated:YES];
+    if ([button.currentTitle isEqualToString:@"继续充值"]) {
+        [controller.navigationController popViewControllerAnimated:YES];
+    }else{
+        [controller.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 @end

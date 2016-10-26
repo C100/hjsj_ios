@@ -8,15 +8,17 @@
 
 #import "AlterLoginPasswordView.h"
 #import "InputView.h"
+#import "FailedView.h"
 
 @interface AlterLoginPasswordView ()
 @property (nonatomic) NSArray *leftTitles;
 @property (nonatomic) NSMutableArray *inputViews;
+@property (nonatomic) FailedView *failedView;
 @end
 
 @implementation AlterLoginPasswordView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame andType:(NSInteger)type
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -34,6 +36,24 @@
             view.tag = 100+i;
             [self.inputViews addObject:view];
             [self addSubview:view];
+            
+            if (type == 2) {
+                UILabel *lb = [[UILabel alloc] init];
+                [self addSubview:lb];
+                [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.right.mas_equalTo(-10);
+                    make.width.mas_equalTo(80);
+                    make.height.mas_equalTo(20);
+                    make.top.mas_equalTo(130);
+                }];
+                lb.textAlignment = NSTextAlignmentCenter;
+                lb.text = @"忘记密码？";
+                lb.textColor = MainColor;
+                lb.font = [UIFont systemFontOfSize:12];
+                lb.userInteractionEnabled = YES;
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgetPasswordAction:)];
+                [lb addGestureRecognizer:tap];
+            }
         }
         
         [self saveButton];
@@ -43,7 +63,7 @@
 
 - (UIButton *)saveButton{
     if (_saveButton == nil) {
-        _saveButton = [[UIButton alloc] init];
+        _saveButton = [Utils returnBextButtonWithTitle:@"保存"];
         [self addSubview:_saveButton];
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(160);
@@ -51,13 +71,6 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        [_saveButton setTitle:@"保存" forState:UIControlStateNormal];
-        [_saveButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _saveButton.layer.cornerRadius = 20;
-        _saveButton.layer.borderColor = MainColor.CGColor;
-        _saveButton.layer.borderWidth = 1;
-        _saveButton.layer.masksToBounds = YES;
-        _saveButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _saveButton;
@@ -80,6 +93,23 @@
     }else{
         [Utils toastview:@"两次密码输入不一致"];
     }
+}
+
+- (void)forgetPasswordAction:(UITapGestureRecognizer *)tap{
+    //弹窗
+    self.failedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"请联系客服" andDetail:@"" andImageName:@"attention" andTextColorHex:@"#333333"];
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:self.failedView];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
+}
+
+- (void)removeGrayView{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.failedView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.failedView removeFromSuperview];
+    }];
 }
 
 @end

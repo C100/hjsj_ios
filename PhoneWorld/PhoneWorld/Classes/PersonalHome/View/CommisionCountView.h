@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommisionCountView : UIView
+@interface CommisionCountView : UIScrollView
 
 @end

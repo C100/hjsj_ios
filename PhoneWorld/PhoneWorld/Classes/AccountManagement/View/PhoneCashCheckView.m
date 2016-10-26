@@ -57,7 +57,7 @@
 
 - (UIButton *)findButton{
     if (_findButton == nil) {
-        _findButton = [[UIButton alloc] init];
+        _findButton = [Utils returnBextButtonWithTitle:@"查询"];
         [self addSubview:_findButton];
         [_findButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(0);
@@ -65,13 +65,6 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        _findButton.layer.cornerRadius = 20;
-        _findButton.layer.masksToBounds = YES;
-        _findButton.layer.borderColor = MainColor.CGColor;
-        _findButton.layer.borderWidth = 1;
-        [_findButton setTitle:@"查询" forState:UIControlStateNormal];
-        [_findButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _findButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_findButton addTarget:self action:@selector(findAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _findButton;

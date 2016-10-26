@@ -82,6 +82,11 @@
                 btn.frame = CGRectMake(i*screenWidth/3, 10, screenWidth/3, 20);
                 
                 [self.titlesButton addObject:btn];
+            }else if(self.titles.count == 2){
+            
+                btn.frame = CGRectMake(i*screenWidth/2, 10, screenWidth/2, 20);
+                
+                [self.titlesButton addObject:btn];
             }else{
                 CGSize size = [Utils sizeWithFont:[UIFont systemFontOfSize:14] andMaxSize:CGSizeMake(0, 20) andStr:str];
                 CGFloat btnWidth = size.width;
@@ -175,14 +180,15 @@
 
 - (void)btnClicked:(UIButton *)button{
     if (button.tag == 101) {//up按钮动画
-        
+        //选中出现筛选框按钮（按钮太小所以给试图也加了一个点击操作）
+        _TopCallBack(button);
     }else{
         for (UIButton *btn in self.titlesButton) {
             btn.selected = NO;
         }
         button.selected = YES;
+        _callback(button.tag);
     }
-    _callback(button.tag);
 }
 
 - (void)tapSiftAction:(UITapGestureRecognizer *)tap{

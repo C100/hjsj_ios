@@ -13,6 +13,8 @@
 #import "CardViewController.h"
 #import "MainNavigationController.h"
 
+#import "ChannelPartnersManageViewController.h"
+
 @interface MainTabBarController ()
 
 @end
@@ -31,6 +33,11 @@
     orderVC.tabBarItem.image = [UIImage imageNamed:@"order"];
     orderVC.tabBarItem.title = @"订单查询";
     
+    ChannelPartnersManageViewController *channelVC = [[ChannelPartnersManageViewController alloc] init];
+    channelVC.title = @"渠道商管理";
+    channelVC.tabBarItem.image = [UIImage imageNamed:@"order"];
+    channelVC.tabBarItem.title = @"渠道商管理";
+    
     AccountViewController *accountVC = [AccountViewController new];
     accountVC.title = @"账户管理";
     accountVC.tabBarItem.image = [UIImage imageNamed:@"setting"];
@@ -41,7 +48,7 @@
     cardVC.tabBarItem.image = [UIImage imageNamed:@"card"];
     cardVC.tabBarItem.title = @"卡片管理";
     
-    self.viewControllers = @[[[MainNavigationController alloc] initWithRootViewController:homeVC], [[MainNavigationController alloc] initWithRootViewController:orderVC], [[MainNavigationController alloc] initWithRootViewController:accountVC], [[MainNavigationController alloc] initWithRootViewController:cardVC]];
+    self.viewControllers = @[[[MainNavigationController alloc] initWithRootViewController:homeVC], [[MainNavigationController alloc] initWithRootViewController:orderVC], [[MainNavigationController alloc] initWithRootViewController:channelVC], [[MainNavigationController alloc] initWithRootViewController:accountVC], [[MainNavigationController alloc] initWithRootViewController:cardVC]];
     
     self.tabBar.tintColor = MainColor;
     self.tabBar.translucent = NO;

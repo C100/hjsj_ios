@@ -32,41 +32,20 @@
         [self contentView];
         [self selectView];
         self.arrTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
-
+        
         __block __weak CardInquiryView *weakself = self;
         [self.topView setCallback:^(NSInteger tag) {
             /*---按钮点击事件---*/
-            switch (tag) {
-                case 101:{//出现筛选框按钮
-                    [UIView animateWithDuration:0.5 animations:^{
-                        if (weakself.selectView.hidden == NO) {
-                            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-                        }else{
-                            weakself.topView.showButton.transform = CGAffineTransformIdentity;
-                        }
-                        weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-                        weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
-                    }];
-                }
-                    break;
-                    
-                default:{
-                    
-                }
-                    break;
-            }
         }];
         
         [self.topView setTopCallBack:^(id obj) {
-            [UIView animateWithDuration:0.5 animations:^{
-                if (weakself.selectView.hidden == NO) {
-                    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-                }else{
-                    weakself.topView.showButton.transform = CGAffineTransformIdentity;
-                }
-                weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-                weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
-            }];
+            if (weakself.selectView.hidden == NO) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            }else{
+                weakself.topView.showButton.transform = CGAffineTransformIdentity;
+            }
+            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
+            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
         }];
         
         [self grayView];
@@ -74,8 +53,7 @@
             //什么都不做
         }];
         
-        [self.selectView setFilterCallBack:^(NSArray *array) {
-            NSLog(@"---%@----",array);
+        [self.selectView setFilterCallBack:^(NSArray *array,NSString *string) {
             for (int i = 0; i < array.count; i++) {
                 UILabel *lb = weakself.topView.resultArr[i];
                 if (array[i]) {
@@ -93,11 +71,12 @@
                 make.top.mas_equalTo(0);
                 make.height.mas_equalTo(130);
             }];
-            [UIView animateWithDuration:0.3 animations:^{
-                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            
+            if ([string isEqualToString:@"查询"]) {
                 weakself.selectView.hidden = YES;
                 weakself.grayView.hidden = YES;
-            }];
+            }
         }];
     }
     return self;
@@ -168,11 +147,11 @@
     [self endEditing:YES];
     __block __weak CardInquiryView *weakself = self;
     
-    [UIView animateWithDuration:0.3 animations:^{
-        weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-        weakself.selectView.hidden = YES;
-        weakself.grayView.hidden = YES;
-    }];
+    //    [UIView animateWithDuration:0.3 animations:^{
+    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+    weakself.selectView.hidden = YES;
+    weakself.grayView.hidden = YES;
+    //    }];
 }
 
 @end

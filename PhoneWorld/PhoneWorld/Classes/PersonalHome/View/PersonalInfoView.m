@@ -32,11 +32,17 @@
             InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
             [self addSubview:view];
             view.leftLabel.text = self.leftTitles[i];
-            view.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
+            view.textField.text = self.leftTitles[i];
             [view addGestureRecognizer:tap];
             view.tag = 100+i;
             [self.inputViews addObject:view];
             [self addSubview:view];
+            view.textField.userInteractionEnabled = NO;
+            if ([self.leftTitles[i] isEqualToString:@"电子邮箱"]) {
+                view.textField.userInteractionEnabled = YES;
+                view.textField.text = @"";
+                view.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
+            }
         }
         [self saveButton];
     }
@@ -45,7 +51,7 @@
 
 - (UIButton *)saveButton{
     if (_saveButton == nil) {
-        _saveButton = [[UIButton alloc] init];
+        _saveButton = [Utils returnBextButtonWithTitle:@"保存"];
         [self addSubview:_saveButton];
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(400);
@@ -53,13 +59,6 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        [_saveButton setTitle:@"保存" forState:UIControlStateNormal];
-        [_saveButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _saveButton.layer.cornerRadius = 20;
-        _saveButton.layer.borderColor = MainColor.CGColor;
-        _saveButton.layer.borderWidth = 1;
-        _saveButton.layer.masksToBounds = YES;
-        _saveButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_saveButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _saveButton;

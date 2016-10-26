@@ -16,10 +16,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 80)];
+        backView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:backView];
         [self usernameTF];
         [self passwordTF];
         [self forgetPassword];
         [self submitButton];
+        [self lineView];
     }
     return self;
 }
@@ -30,7 +34,7 @@
         [self addSubview:_usernameTF];
         [_usernameTF mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
-            make.left.mas_equalTo(0);
+            make.left.mas_equalTo(5);
             make.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
         }];
@@ -54,8 +58,8 @@
         _passwordTF = [[UITextField alloc] init];
         [self addSubview:_passwordTF];
         [_passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.usernameTF.mas_bottom).mas_equalTo(1);
-            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(self.usernameTF.mas_bottom).mas_equalTo(0);
+            make.left.mas_equalTo(5);
             make.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
         }];
@@ -96,7 +100,7 @@
 
 - (UIButton *)submitButton{
     if (_submitButton == nil) {
-        _submitButton = [[UIButton alloc] init];
+        _submitButton = [Utils returnBextButtonWithTitle:@"登录"];
         [self addSubview:_submitButton];
         [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(leftDistance);
@@ -105,17 +109,19 @@
             make.width.mas_equalTo(170);
             make.top.mas_equalTo(self.forgetPassword.mas_bottom).mas_equalTo(20);
         }];
-        [_submitButton setTitle:@"登录" forState:UIControlStateNormal];
-        _submitButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
-        [_submitButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _submitButton.layer.cornerRadius = 20;
-        _submitButton.layer.masksToBounds = YES;
-        _submitButton.layer.borderColor = MainColor.CGColor;
-        _submitButton.layer.borderWidth = 1;
         _submitButton.tag = 1102;
         [_submitButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;
+}
+
+- (UIView *)lineView{
+    if (_lineView == nil) {
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 39, screenWidth - 15, 1)];
+        _lineView.backgroundColor = COLOR_BACKGROUND;
+        [self addSubview:_lineView];
+    }
+    return _lineView;
 }
 
 #pragma mark - Method

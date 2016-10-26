@@ -58,7 +58,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [[UIButton alloc] init];
+        _nextButton = [Utils returnBextButtonWithTitle:@"提交订单"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.v.mas_bottom).mas_equalTo(40);
@@ -66,13 +66,6 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        [_nextButton setTitle:@"提交订单" forState:UIControlStateNormal];
-        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 20;
-        _nextButton.layer.borderColor = MainColor.CGColor;
-        _nextButton.layer.borderWidth = 1;
-        _nextButton.layer.masksToBounds = YES;
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;

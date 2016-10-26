@@ -61,10 +61,10 @@
         [self addSubview:_phoneLB];
         [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(self.leftButton.mas_right).mas_equalTo(10);
+            make.left.mas_equalTo(self.leftButton.mas_right).mas_equalTo(5);
             make.right.mas_equalTo(self.rightButton.mas_right).mas_equalTo(-10);
         }];
-        _phoneLB.font = [UIFont systemFontOfSize:12];
+        _phoneLB.font = [UIFont systemFontOfSize:14];
         _phoneLB.textColor = [Utils colorRGB:@"#666666"];
     }
     return _phoneLB;

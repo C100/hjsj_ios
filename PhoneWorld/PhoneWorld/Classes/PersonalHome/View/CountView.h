@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CountView : UIView
-
+- (instancetype)initWithFrame:(CGRect)frame andTitle:(NSString *)title;
+@property (nonatomic) NSArray *accountsOpenedArr;
 @end

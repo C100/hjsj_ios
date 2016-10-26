@@ -9,6 +9,8 @@
 #import "ReadCardAndChoosePackageView.h"
 #import "ChoosePackageTableView.h"
 #import "FailedView.h"
+#import "InformationCollectionViewController.h"
+
 
 @interface ReadCardAndChoosePackageView ()
 
@@ -61,7 +63,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [[UIButton alloc] init];
+        _nextButton = [Utils returnBextButtonWithTitle:@"读卡"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(200);
@@ -69,13 +71,6 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        [_nextButton setTitle:@"读卡" forState:UIControlStateNormal];
-        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 20;
-        _nextButton.layer.borderColor = MainColor.CGColor;
-        _nextButton.layer.borderWidth = 1;
-        _nextButton.layer.masksToBounds = YES;
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;
@@ -85,6 +80,15 @@
 
 - (void)buttonClickAction:(UIButton *)button{
     if ([button.currentTitle isEqualToString:@"读卡"]) {
+        
+        
+#warning bluetooth
+        //蓝牙读卡
+        
+        
+        
+        
+        
         //读卡成功
         if (_chooseTableView == nil) {
             self.chooseTableView = [[ChoosePackageTableView alloc] initWithFrame:CGRectMake(0, 170, screenWidth, 119) style:UITableViewStylePlain];
@@ -102,8 +106,11 @@
         [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
         
     }else{
-        //下一步
-        
+        //下一步        
+        UIViewController *viewController = [self viewController];
+        InformationCollectionViewController *vc = [InformationCollectionViewController new];
+        vc.userinfosDic = [@{@"phoneNumber":self.infos[0],@"phoneAddress":@"浙江省杭州市",@"phoneState":@"已激活",@"networkType":@"话机通信"} mutableCopy];
+        [viewController.navigationController pushViewController:vc animated:YES];
     }
 }
 

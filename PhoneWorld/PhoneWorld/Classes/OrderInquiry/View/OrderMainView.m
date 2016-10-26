@@ -55,6 +55,7 @@
             make.bottom.mas_equalTo(-20);
         }];
         self.contentScrollView.delegate = self;
+        self.contentScrollView.scrollEnabled = NO;
         
         [self grayView];
         
@@ -71,44 +72,22 @@
         /*----------topView点击事件---------*/
         [self.topView setCallback:^(NSInteger tag) {
             /*---按钮点击事件---*/
-            
-            switch (tag) {
-                case 101:{//出现筛选框按钮
-                    [UIView animateWithDuration:0.5 animations:^{
-                        if (weakself.selectView.hidden == NO) {
-                            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-                        }else{
-                            weakself.topView.showButton.transform = CGAffineTransformIdentity;
-                        }
-                        weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-                        weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
-                    }];
-                }
-                    break;
-                    
-                default:{
-                    //10 11 12 13 14
-                    [weakself.contentScrollView setContentOffset:CGPointMake(screenWidth*(tag - 10), 0)];
-                }
-                    break;
-            }
+            [weakself.contentScrollView setContentOffset:CGPointMake(screenWidth*(tag - 10), 0)];
         }];
         
         [self.topView setTopCallBack:^(id obj) {
             // 点击筛选栏时的操作
-            [UIView animateWithDuration:0.5 animations:^{
-                if (weakself.selectView.hidden == NO) {
-                    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-                }else{
-                    weakself.topView.showButton.transform = CGAffineTransformIdentity;
-                }
-                weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-                weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
-            }];
+            if (weakself.selectView.hidden == NO) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            }else{
+                weakself.topView.showButton.transform = CGAffineTransformIdentity;
+            }
+            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
+            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
         }];
         
         //点击筛选框查询按钮操作
-        [self.selectView setFilterCallBack:^(NSArray *array) {
+        [self.selectView setFilterCallBack:^(NSArray *array,NSString *string) {
             NSLog(@"-----%@------",array);
             
             for (int i = 0; i < array.count; i++) {
@@ -154,11 +133,12 @@
                 make.width.mas_equalTo(screenWidth);
             }];
             
-            [UIView animateWithDuration:0.3 animations:^{
-                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            if ([string isEqualToString:@"查询"]) {
                 weakself.selectView.hidden = YES;
                 weakself.grayView.hidden = YES;
-            }];
+            }
+            
         }];
     }
     return self;
@@ -219,17 +199,15 @@
 - (void)tapAction{
     [self endEditing:YES];
     __block __weak OrderMainView *weakself = self;
-    [UIView animateWithDuration:0.3 animations:^{
-        if (weakself.selectView.hidden == NO) {
-            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-            weakself.selectView.hidden = YES;
-            weakself.grayView.hidden = YES;
-        }else{
-            weakself.topView.showButton.transform = CGAffineTransformIdentity;
-            weakself.selectView.hidden = NO;
-            weakself.grayView.hidden = NO;
-        }
-    }];
+    if (weakself.selectView.hidden == NO) {
+        weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+        weakself.selectView.hidden = YES;
+        weakself.grayView.hidden = YES;
+    }else{
+        weakself.topView.showButton.transform = CGAffineTransformIdentity;
+        weakself.selectView.hidden = NO;
+        weakself.grayView.hidden = NO;
+    }
 }
 
 @end

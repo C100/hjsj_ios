@@ -20,6 +20,7 @@
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
 }
 
 - (void)viewDidLoad {

@@ -163,16 +163,24 @@
             make.height.mas_equalTo(30+2*(screenWidth - 30)/(354/225.0));
             make.bottom.mas_equalTo(-10);
         }];
+        
+        UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapAction:)];
+        UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapAction:)];
+
+        
         UIImageView *imageV1 = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, screenWidth - 30, (screenWidth - 30)/(354/225.0))];
         imageV1.image = [UIImage imageNamed:@"identifyCard2"];
 //        [imageV1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"identifyCard2"]];
         [v addSubview:imageV1];
+        [imageV1 addGestureRecognizer:tap1];
+        imageV1.userInteractionEnabled = YES;
         
         UIImageView *imageV2 = [[UIImageView alloc] initWithFrame:CGRectMake(15, 20+(screenWidth - 30)/(354/225.0), screenWidth - 30, (screenWidth - 30)/(354/225.0))];
         imageV2.image = [UIImage imageNamed:@"identifyCard1"];
 //        [imageV2 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"identifyCard2"]];
         [v addSubview:imageV2];
-        
+        [imageV2 addGestureRecognizer:tap2];
+        imageV2.userInteractionEnabled = YES;
     }
     return _thirdView;
 }
@@ -205,6 +213,21 @@
         frame.origin.x = i*screenWidth/3.0;
         self.moveView.frame = frame;
         self.contentView.contentOffset = CGPointMake(screenWidth*i, 0);
+    }];
+}
+
+- (void)imageTapAction:(UITapGestureRecognizer *)tap{
+    UIImageView *imageV = (UIImageView *)tap.view;
+    [PhotoBroswerVC show:[UIApplication sharedApplication].keyWindow.rootViewController type:PhotoBroswerVCTypeZoom index:0 photoModelBlock:^NSArray *{
+        //创建多大容量数组
+        NSMutableArray *modelsM = [NSMutableArray array];
+        PhotoModel *pbModel=[[PhotoModel alloc] init];
+        pbModel.mid = 11;
+        //设置查看大图的时候的图片
+        pbModel.image = imageV.image;
+        pbModel.sourceImageView = imageV;//点击返回时图片做动画用
+        [modelsM addObject:pbModel];
+        return modelsM;
     }];
 }
 

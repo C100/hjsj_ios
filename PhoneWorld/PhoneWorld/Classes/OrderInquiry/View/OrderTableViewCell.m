@@ -25,7 +25,7 @@
     if (_numberLB == nil) {
         _numberLB = [[UILabel alloc] init];
         [self addSubview:_numberLB];
-        _numberLB.font = [UIFont systemFontOfSize:12];
+        _numberLB.font = [UIFont systemFontOfSize:13];
         _numberLB.textColor = [Utils colorRGB:@"#666666"];
         _numberLB.text = @"编号：";
         [_numberLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,7 +41,7 @@
     if (_nameLB == nil) {
         _nameLB = [[UILabel alloc] init];
         [self addSubview:_nameLB];
-        _nameLB.font = [UIFont systemFontOfSize:12];
+        _nameLB.font = [UIFont systemFontOfSize:13];
         _nameLB.textColor = [Utils colorRGB:@"#666666"];
         _nameLB.text = @"姓名：";
         [_nameLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -57,7 +57,7 @@
     if (_dateLB == nil) {
         _dateLB = [[UILabel alloc] init];
         [self addSubview:_dateLB];
-        _dateLB.font = [UIFont systemFontOfSize:12];
+        _dateLB.font = [UIFont systemFontOfSize:13];
         _dateLB.textColor = [Utils colorRGB:@"#666666"];
         _dateLB.text = @"日期：";
         [_dateLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -73,9 +73,9 @@
     if (_phoneLB == nil) {
         _phoneLB = [[UILabel alloc] init];
         [self addSubview:_phoneLB];
-        _phoneLB.font = [UIFont systemFontOfSize:12];
+        _phoneLB.font = [UIFont systemFontOfSize:13];
         _phoneLB.textColor = [Utils colorRGB:@"#666666"];
-        _phoneLB.text = @"手机号码：";
+        _phoneLB.text = @"手机号码：00000000000";
         [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.dateLB.mas_bottom).mas_equalTo(13);
             make.left.mas_equalTo(screenWidth/2);

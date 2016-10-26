@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FilterView : UIView <UITableViewDelegate, UITableViewDataSource, CalendarViewControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface FilterView : UIView <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 
-@property (nonatomic) void(^FilterCallBack)(NSArray *array);
+@property (nonatomic) void(^FilterCallBack)(NSArray *array,NSString *string);
 
 @property (nonatomic) UITableView *filterTableView;
 @property (nonatomic) NSArray *orderStates;//订单状态

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AlterLoginPasswordViewController : UIViewController
-
+@property (nonatomic) NSInteger type;
 @end

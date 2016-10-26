@@ -12,5 +12,6 @@
 @interface ChoosePackageTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic) InputView *inputView;
+@property (nonatomic) UITableViewCell *currentCell;
 
 @end

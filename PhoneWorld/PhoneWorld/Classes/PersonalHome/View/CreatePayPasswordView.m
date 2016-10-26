@@ -43,7 +43,7 @@
 
 - (UIButton *)saveButton{
     if (_saveButton == nil) {
-        _saveButton = [[UIButton alloc] init];
+        _saveButton = [Utils returnBextButtonWithTitle:@"保存"];
         [self addSubview:_saveButton];
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(120);
@@ -51,13 +51,6 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        [_saveButton setTitle:@"保存" forState:UIControlStateNormal];
-        [_saveButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _saveButton.layer.cornerRadius = 20;
-        _saveButton.layer.borderColor = MainColor.CGColor;
-        _saveButton.layer.borderWidth = 1;
-        _saveButton.layer.masksToBounds = YES;
-        _saveButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _saveButton;

@@ -91,7 +91,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [[UIButton alloc] init];
+        _nextButton = [Utils returnBextButtonWithTitle:@"下一步"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(leftDistance);
@@ -99,14 +99,6 @@
             make.height.mas_equalTo(40);
             make.top.mas_equalTo(self.identifyingCodeTF.mas_bottom).mas_equalTo(40);
         }];
-        _nextButton.backgroundColor = [UIColor clearColor];
-        [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 20;
-        _nextButton.layer.masksToBounds = YES;
-        _nextButton.layer.borderColor = MainColor.CGColor;
-        _nextButton.layer.borderWidth = 1;
         _nextButton.tag = 1103;
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }

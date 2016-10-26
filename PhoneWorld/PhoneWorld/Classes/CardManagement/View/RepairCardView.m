@@ -9,6 +9,7 @@
 #import "RepairCardView.h"
 #import "InputView.h"
 #import "ChooseImageView.h"
+#import "FailedView.h"
 
 @interface RepairCardView ()
 
@@ -16,6 +17,7 @@
 @property (nonatomic) NSArray *choices;//邮寄选项
 @property (nonatomic) NSArray *leftTitles;
 @property (nonatomic) ChooseImageView *chooseImageView;
+@property (nonatomic) FailedView *finishedView;
 
 @end
 
@@ -87,7 +89,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [[UIButton alloc] init];
+        _nextButton = [Utils returnBextButtonWithTitle:@"提交"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.chooseImageView.mas_bottom).mas_equalTo(40);
@@ -96,13 +98,6 @@
             make.width.mas_equalTo(171);
             make.bottom.mas_equalTo(-40);
         }];
-        [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
-        [_nextButton setTitleColor:MainColor forState:UIControlStateNormal];
-        _nextButton.layer.cornerRadius = 20;
-        _nextButton.layer.borderColor = MainColor.CGColor;
-        _nextButton.layer.borderWidth = 1;
-        _nextButton.layer.masksToBounds = YES;
-        _nextButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_nextButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nextButton;
@@ -126,6 +121,44 @@
 
 - (void)buttonClickAction:(UIButton *)button{
     NSLog(@"--------------下一步");
+    //判断信息栏
+    for (int i = 0; i < self.leftTitles.count; i ++) {
+        InputView *inputV = self.inputViews[i];
+        if (i == self.leftTitles.count - 1) {
+            if ([inputV.textField.text isEqualToString:@"请选择"]) {
+                [Utils toastview:@"请选择邮寄选项"];
+                return;
+            }
+        }
+        if ([inputV.textField.text isEqualToString:@""]) {
+            NSString *string = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
+            [Utils toastview:string];
+            return;
+        }
+    }
+    
+    for (int i = 0; i < self.chooseImageView.imageViews.count; i ++) {
+        UIImageView *imageV = self.chooseImageView.imageViews[i];
+        if (!imageV.image) {
+            [Utils toastview:@"请选择图片"];
+            return;
+        }
+    }
+    
+    self.finishedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"提交成功" andDetail:@"请耐心等待..." andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.finishedView];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
+}
+
+- (void)removeGrayView{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.finishedView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.finishedView removeFromSuperview];
+        UIViewController *vc = [self viewController];
+        [vc.navigationController popToRootViewControllerAnimated:YES];
+    }];
 }
 
 @end

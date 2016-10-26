@@ -33,6 +33,7 @@
         _aboutUsTV.text = @"关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们";
         _aboutUsTV.font = [UIFont systemFontOfSize:14];
         _aboutUsTV.textColor = [Utils colorRGB:@"#666666"];
+        _aboutUsTV.userInteractionEnabled = NO;
     }
     return _aboutUsTV;
 }
