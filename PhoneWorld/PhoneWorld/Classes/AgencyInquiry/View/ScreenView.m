@@ -7,7 +7,6 @@
 //
 
 #import "ScreenView.h"
-#import "ScreenCell.h"
 #import "InputView.h"
 
 #define leftDistance (screenWidth - 210)/2.0
@@ -20,12 +19,7 @@
 @property (nonatomic) UITableView *screenTableView;
 @property (nonatomic) InputView *phoneInputView;//手机号码
 
-@property (nonatomic) UIView *backPickView;
-@property (nonatomic) UIPickerView *pickerView;
-@property (nonatomic) UIDatePicker *datePickerView;
 @property (nonatomic) NSArray *currentPickerArray;
-@property (nonatomic) UIButton *sureButton;
-@property (nonatomic) UIButton *cancelButton;
 
 @property (nonatomic) UITableViewCell *currentCell;
 
@@ -70,7 +64,7 @@
         _screenTableView.delegate = self;
         _screenTableView.dataSource = self;
         _screenTableView.bounces = NO;
-        [_screenTableView registerClass:[ScreenCell class] forCellReuseIdentifier:@"cell"];
+        [_screenTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
         [self addSubview:_screenTableView];
     }
     return _screenTableView;
@@ -80,8 +74,11 @@
     if (_backPickView == nil) {
         _backPickView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
         [[UIApplication sharedApplication].keyWindow addSubview:_backPickView];
-        _backPickView.backgroundColor = [UIColor clearColor];
+        _backPickView.backgroundColor = [UIColor blackColor];
+        _backPickView.alpha = 0.5;
         _backPickView.hidden = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackPickViewAction:)];
+        [_backPickView addGestureRecognizer:tap];
     }
     return _backPickView;
 }
@@ -167,14 +164,22 @@
         [cell.contentView addSubview:self.phoneInputView];
         return cell;
     }else{
-        ScreenCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
         cell.textLabel.text = title;
         cell.detailTextLabel.text = detail;
+        
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.textColor = [Utils colorRGB:@"#666666"];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
         if (indexPath.row == self.contentDic.count - 1) {
             cell.separatorInset = UIEdgeInsetsZero;
             cell.layoutMargins = UIEdgeInsetsZero;
             cell.preservesSuperviewLayoutMargins = NO;
         }
+        [cell layoutSubviews];
         return cell;
     }
     return nil;
@@ -224,10 +229,10 @@
     return 30;
 }
 
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    NSAttributedString *astring = [[NSAttributedString alloc] initWithString:self.currentPickerArray[row] attributes:@{NSForegroundColorAttributeName:[Utils colorRGB:@"#666666"],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
-    return astring;
-}
+//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//    NSAttributedString *astring = [[NSAttributedString alloc] initWithString:self.currentPickerArray[row] attributes:@{NSForegroundColorAttributeName:[Utils colorRGB:@"#666666"],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
+//    return astring;
+//}
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel *myView = nil;
@@ -246,15 +251,36 @@
 
 #pragma mark - Method
 - (void)buttonClickedAction:(UIButton *)button{
+    NSMutableDictionary *conditions = [NSMutableDictionary dictionary];
     if ([button.currentTitle isEqualToString:@"查询"]) {
-        
+        for (int i = 0; i<self.leftTitles.count ;i ++) {
+            NSString *title = self.leftTitles[i];
+            if ([title isEqualToString:@"手机号码"]) {
+                [conditions setObject:self.phoneInputView.textField.text forKey:@"手机号码"];
+            }else{
+                NSIndexPath *indexP = [NSIndexPath indexPathForRow:i inSection:0];
+                UITableViewCell *cell = [self.screenTableView cellForRowAtIndexPath:indexP];
+                [conditions setObject:cell.detailTextLabel.text forKey:title];
+            }
+        }
     }else{
         [self.screenTableView reloadData];
+        for (NSString *title in self.leftTitles) {
+            [conditions setObject:@"" forKey:title];
+        }
     }
-    _ScreenCallBack(button.currentTitle);
+    _ScreenCallBack(conditions,button.currentTitle);
 }
 
 - (void)choosePickerAction:(UIButton *)button{
+    if ([self.currentCell.textLabel.text isEqualToString:@"起始时间"] || [self.currentCell.textLabel.text isEqualToString:@"截止时间"]) {
+        NSString *dateString = [[NSString stringWithFormat:@"%@",self.datePickerView.date] componentsSeparatedByString:@" "].firstObject;
+        self.currentCell.detailTextLabel.text = dateString;
+    }else{
+        NSInteger row = [self.pickerView selectedRowInComponent:0];
+        NSArray *array = self.contentDic[self.currentCell.textLabel.text];
+        self.currentCell.detailTextLabel.text = array[row];
+    }
     self.backPickView.hidden = YES;
     self.datePickerView.hidden = YES;
     self.pickerView.hidden = YES;
@@ -268,6 +294,10 @@
     self.pickerView.hidden = YES;
     self.sureButton.hidden = YES;
     self.cancelButton.hidden = YES;
+}
+
+- (void)tapBackPickViewAction:(UITapGestureRecognizer *)tap{
+    _ScreenDismissCallBack(tap);
 }
 
 @end

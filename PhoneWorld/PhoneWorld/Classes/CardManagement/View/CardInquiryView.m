@@ -18,6 +18,7 @@
 @property (nonatomic) UIView *grayView;
 @property (nonatomic) OrderView *contentView;
 @property (nonatomic) NSArray *arrTitles;
+@property (nonatomic) UIView *yellowLineView;
 
 @end
 
@@ -32,10 +33,16 @@
         [self contentView];
         [self selectView];
         self.arrTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
-        
+        [self yellowLineView];
         __block __weak CardInquiryView *weakself = self;
         [self.topView setCallback:^(NSInteger tag) {
             /*---按钮点击事件---*/
+            NSInteger i = tag - 10;
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect frame = weakself.yellowLineView.frame;
+                frame.origin.x = i*screenWidth/4;
+                weakself.yellowLineView.frame = frame;
+            }];
         }];
         
         [self.topView setTopCallBack:^(id obj) {
@@ -78,8 +85,26 @@
                 weakself.grayView.hidden = YES;
             }
         }];
+        
+        [self.selectView setDismissPickerViewCallBack:^(id obj) {
+            weakself.selectView.beginDatePicker.hidden = YES;
+            weakself.selectView.pickView.hidden = YES;
+            weakself.selectView.pickerView.hidden = YES;
+            weakself.selectView.closeImagePickerButton.hidden = YES;
+            weakself.selectView.cancelButton.hidden = YES;
+        }];
+        
     }
     return self;
+}
+
+- (UIView *)yellowLineView{
+    if (_yellowLineView == nil) {
+        _yellowLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 39, screenWidth/4, 1)];
+        _yellowLineView.backgroundColor = MainColor;
+        [self addSubview:_yellowLineView];
+    }
+    return _yellowLineView;
 }
 
 - (TopView *)topView{

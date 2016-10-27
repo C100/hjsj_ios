@@ -26,8 +26,8 @@
     __block __weak AlterLoginPasswordViewController *weakself = self;
     [self.alterView setAlterPasswordCallBack:^(id obj) {
         //手机号验证
-        PhoneNumberCheckViewController *vc = [[PhoneNumberCheckViewController alloc] init];
-        [weakself.navigationController pushViewController:vc animated:YES];
+//        PhoneNumberCheckViewController *vc = [[PhoneNumberCheckViewController alloc] init];
+//        [weakself.navigationController pushViewController:vc animated:YES];
     }];
 }
 

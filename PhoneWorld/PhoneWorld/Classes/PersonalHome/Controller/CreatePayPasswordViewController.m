@@ -25,9 +25,7 @@
     [self.view addSubview:self.createView];
     __block __weak CreatePayPasswordViewController *weakself = self;
     [self.createView setCreatePayPasswordCallBack:^(id obj) {
-        //手机号验证
-        PhoneNumberCheckViewController *vc = [[PhoneNumberCheckViewController alloc] init];
-        [weakself.navigationController pushViewController:vc animated:YES];
+
     }];
 }
 

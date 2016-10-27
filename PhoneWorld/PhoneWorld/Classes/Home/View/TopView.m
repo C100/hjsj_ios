@@ -78,13 +78,8 @@
             [_titlesView addSubview:btn];
             [self.titlesButton addObject:btn];
             
-            if (self.titles.count == 3) {
-                btn.frame = CGRectMake(i*screenWidth/3, 10, screenWidth/3, 20);
-                
-                [self.titlesButton addObject:btn];
-            }else if(self.titles.count == 2){
-            
-                btn.frame = CGRectMake(i*screenWidth/2, 10, screenWidth/2, 20);
+            if (self.titles.count == 3 || self.titles.count == 2 || self.titles.count == 4) {
+                btn.frame = CGRectMake(i*screenWidth/self.titles.count, 10, screenWidth/self.titles.count, 20);
                 
                 [self.titlesButton addObject:btn];
             }else{

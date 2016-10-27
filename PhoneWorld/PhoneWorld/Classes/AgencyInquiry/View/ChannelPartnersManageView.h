@@ -10,7 +10,6 @@
 
 @interface ChannelPartnersManageView : UIView <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic) UIScrollView *contentView;
 @property (nonatomic) UILabel *channelNumberLB;
 @property (nonatomic) UILabel *orderNumberLB;
 @property (nonatomic) UITableView *channelPartnersTableView;

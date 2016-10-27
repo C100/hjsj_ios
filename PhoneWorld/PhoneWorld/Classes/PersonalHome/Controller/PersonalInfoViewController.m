@@ -15,14 +15,17 @@
 
 @implementation PersonalInfoViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.title = @"个人信息";
-    
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.title = @"个人信息";
     
     self.personalInfoView = [[PersonalInfoView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andUserinfos:[@[@"userinfos"] mutableCopy]];
     self.personalInfoView.contentSize = CGSizeMake(0, 520);

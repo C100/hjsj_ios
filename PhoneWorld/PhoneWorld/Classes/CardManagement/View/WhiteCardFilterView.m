@@ -108,8 +108,11 @@
         [_pickView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.mas_equalTo(0);
         }];
-        _pickView.backgroundColor = [UIColor clearColor];
+        _pickView.backgroundColor = [UIColor blackColor];
+        _pickView.alpha = 0.5;
         _pickView.hidden = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissAction:)];
+        [_pickView addGestureRecognizer:tap];
     }
     return _pickView;
 }
@@ -129,7 +132,7 @@
         _pickerView.dataSource = self;
         _pickerView.hidden = YES;
         
-        UIButton *sureButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - 60, 240, 60, 30)];
+        UIButton *sureButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - 60, 270, 60, 30)];
         sureButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [[UIApplication sharedApplication].keyWindow addSubview:sureButton];
         [sureButton setTitle:@"确定" forState:UIControlStateNormal];
@@ -138,7 +141,7 @@
         sureButton.hidden = YES;
         self.sureButton = sureButton;
         
-        UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 240, 60, 30)];
+        UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 270, 60, 30)];
         cancelButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [[UIApplication sharedApplication].keyWindow addSubview:cancelButton];
         [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -247,6 +250,13 @@
 
 - (void)cancelPickerAction:(UIButton *)button{
     NSLog(@"取消");
+    self.pickerView.hidden = YES;
+    self.pickView.hidden = YES;
+    self.sureButton.hidden = YES;
+    self.cancelButton.hidden = YES;
+}
+
+- (void)dismissAction:(UITapGestureRecognizer *)tap{
     self.pickerView.hidden = YES;
     self.pickView.hidden = YES;
     self.sureButton.hidden = YES;

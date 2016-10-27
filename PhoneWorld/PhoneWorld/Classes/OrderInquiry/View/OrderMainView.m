@@ -28,6 +28,8 @@
 
 @property (nonatomic) NSArray *arrTitles;
 
+@property (nonatomic) UIView *yellowLineView;
+
 @end
 
 @implementation OrderMainView
@@ -73,17 +75,54 @@
         [self.topView setCallback:^(NSInteger tag) {
             /*---按钮点击事件---*/
             [weakself.contentScrollView setContentOffset:CGPointMake(screenWidth*(tag - 10), 0)];
+            NSInteger i = tag - 10;
+            UIButton *button = weakself.topView.titlesButton[i];
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect frame = weakself.yellowLineView.frame;
+                frame.origin.x = button.origin.x;
+                frame.size.width = button.size.width;
+                weakself.yellowLineView.frame = frame;
+                [weakself layoutIfNeeded];
+            }];
+            
+            if (weakself.selectView.hidden == NO) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 0;
+                    weakself.grayView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    weakself.selectView.hidden = YES;
+                    weakself.grayView.hidden = YES;
+                }];
+            }
+            
         }];
         
         [self.topView setTopCallBack:^(id obj) {
             // 点击筛选栏时的操作
             if (weakself.selectView.hidden == NO) {
                 weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 0;
+                    weakself.grayView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    weakself.selectView.hidden = YES;
+                    weakself.grayView.hidden = YES;
+                }];
             }else{
                 weakself.topView.showButton.transform = CGAffineTransformIdentity;
+                weakself.selectView.hidden = NO;
+                weakself.grayView.hidden = NO;
+                weakself.selectView.alpha = 0;
+                weakself.grayView.alpha = 0;
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 1;
+                    weakself.grayView.alpha = 0.5;
+                } completion:^(BOOL finished) {
+                }];
             }
-            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
+//            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
+//            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
         }];
         
         //点击筛选框查询按钮操作
@@ -140,9 +179,31 @@
             }
             
         }];
+        
+        [self.selectView setDismissPickerViewCallBack:^(id obj) {
+            weakself.selectView.beginDatePicker.hidden = YES;
+            weakself.selectView.pickView.hidden = YES;
+            weakself.selectView.pickerView.hidden = YES;
+            weakself.selectView.closeImagePickerButton.hidden = YES;
+            weakself.selectView.cancelButton.hidden = YES;
+        }];
+        
+        [self yellowLineView];
+        
     }
     return self;
 }
+
+- (UIView *)yellowLineView{
+    if (_yellowLineView == nil) {
+        UIButton *button = self.topView.titlesButton.firstObject;
+        _yellowLineView = [[UIView alloc] initWithFrame:CGRectMake(button.frame.origin.x, 39, button.size.width, 1)];
+        [self addSubview:_yellowLineView];
+        _yellowLineView.backgroundColor = MainColor;
+    }
+    return _yellowLineView;
+}
+
 
 #pragma mark - UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -171,6 +232,7 @@
 }
 
 #pragma mark - LazyLoading
+
 - (UIView *)grayView{
     if (_grayView == nil) {
         _grayView = [[UIView alloc] init];
@@ -180,7 +242,7 @@
         [_grayView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.bottom.mas_equalTo(0);
-            make.height.mas_equalTo(screenHeight - 108 - 80 - 220);
+            make.height.mas_equalTo(screenHeight - 108 - 80 - 245);
         }];
         _grayView.hidden = YES;
         [_grayView addGestureRecognizer:self.tapGrayGR];
@@ -201,12 +263,24 @@
     __block __weak OrderMainView *weakself = self;
     if (weakself.selectView.hidden == NO) {
         weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-        weakself.selectView.hidden = YES;
-        weakself.grayView.hidden = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.selectView.alpha = 0;
+            weakself.grayView.alpha = 0;
+        } completion:^(BOOL finished) {
+            weakself.selectView.hidden = YES;
+            weakself.grayView.hidden = YES;
+        }];
     }else{
         weakself.topView.showButton.transform = CGAffineTransformIdentity;
         weakself.selectView.hidden = NO;
         weakself.grayView.hidden = NO;
+        weakself.selectView.alpha = 0;
+        weakself.grayView.alpha = 0;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.selectView.alpha = 1;
+            weakself.grayView.alpha = 0.5;
+        } completion:^(BOOL finished) {
+        }];
     }
 }
 

@@ -20,6 +20,9 @@
 @property (nonatomic) UIView *grayView;
 
 @property (nonatomic) NSDictionary *contentDic;
+@property (nonatomic) NSArray *leftTitles;
+
+@property (nonatomic) BOOL isInquiried;
 
 @end
 
@@ -30,6 +33,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
+        self.leftTitles = @[@"时间",@"手机号码"];
+        self.isInquiried = NO;
+
         [self topView];
         [self lineView];
         
@@ -38,40 +44,96 @@
         [self.topView setCallback:^(NSInteger tag) {
             //10  11
             NSInteger i = tag - 10;
-            [weakself.contentView setContentOffset:CGPointMake(screenWidth*i, 0)];
             [UIView animateWithDuration:0.5 animations:^{
                 CGRect frame = CGRectMake(i*screenWidth/2, 39, screenWidth/2, 1);
                 weakself.lineView.frame = frame;
             }];
             if (i == 1) {
+                CGFloat height = 80;
+                if (weakself.isInquiried == YES) {
+                    height = 108;
+                }
                 CGRect frame = weakself.topView.frame;
-                frame.size.height = 80;
-                weakself.topView.frame = frame;
+                frame.size.height = height;
+                weakself.topView.frame = frame;//修改topView的frame
+                
+                weakself.channelPartnersTableView.hidden = YES;
+                weakself.orderTableView.hidden = NO;
             }else{
                 CGRect frame = weakself.topView.frame;
                 frame.size.height = 40;
                 weakself.topView.frame = frame;
+                
+                weakself.channelPartnersTableView.hidden = NO;
+                weakself.orderTableView.hidden = YES;
+                
+                CGRect frameCh = weakself.channelPartnersTableView.frame;
+                frameCh = CGRectMake(0, 40, screenWidth, screenHeight - 108 - 40);
+                weakself.channelPartnersTableView.frame = frameCh;
+                
+                weakself.screenView.hidden = YES;
+                weakself.grayView.hidden = YES;
             }
         }];
         
         [self.topView setTopCallBack:^(id obj) {
-            // 点击筛选栏时的操作
-            weakself.screenView.hidden = weakself.screenView.hidden == YES ? NO : YES;
-            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO : YES;
+            if (weakself.screenView.hidden == NO) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.screenView.alpha = 0;
+                    weakself.grayView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    weakself.screenView.hidden = YES;
+                    weakself.grayView.hidden = YES;
+                }];
+            }else{
+                weakself.topView.showButton.transform = CGAffineTransformIdentity;
+                weakself.screenView.hidden = NO;
+                weakself.grayView.hidden = NO;
+                weakself.screenView.alpha = 0;
+                weakself.grayView.alpha = 0;
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.screenView.alpha = 1;
+                    weakself.grayView.alpha = 0.5;
+                } completion:^(BOOL finished) {
+                }];
+            }
         }];
         
-        [self contentView];
         [self channelPartnersTableView];
         [self orderTableView];
         [self screenView];
         
-        //筛选框block回调
-        [self.screenView setScreenCallBack:^(NSString *buttonTitle) {
-            if ([buttonTitle isEqualToString:@"查询"]) {
-                
-            }else{
-                
+        //筛选框block回调  返回数组查询
+        [self.screenView setScreenCallBack:^(NSDictionary *conditions, NSString *string) {
+            weakself.isInquiried = YES;
+            for (int i = 0; i < weakself.topView.resultArr.count; i ++) {
+                UILabel *lb = weakself.topView.resultArr[i];
+                if (i < conditions.count) {
+                    NSString *conStr = conditions[weakself.leftTitles[i]];
+                    lb.text = [NSString stringWithFormat:@"%@：%@",weakself.leftTitles[i],conStr];
+                }else{
+                    lb.text = [NSString stringWithFormat:@""];
+                }
             }
+            
+            [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.mas_equalTo(0);
+                make.top.mas_equalTo(0);
+                make.height.mas_equalTo(108);
+            }];
+            if ([string isEqualToString:@"查询"]) {
+                weakself.screenView.hidden = YES;
+                weakself.grayView.hidden = YES;
+            }
+        }];
+        
+        [self.screenView setScreenDismissCallBack:^(id obj) {
+            weakself.screenView.datePickerView.hidden = YES;
+            weakself.screenView.pickerView.hidden = YES;
+            weakself.screenView.backPickView.hidden = YES;
+            weakself.screenView.cancelButton.hidden = YES;
+            weakself.screenView.sureButton.hidden = YES;
         }];
         
         [self grayView];
@@ -103,7 +165,7 @@
         _channelNumberLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 26)];
         [self addSubview:_channelNumberLB];
         _channelNumberLB.font = [UIFont systemFontOfSize:8];
-        _channelNumberLB.text = @"共20条";
+        _channelNumberLB.text = @"共8条";
         _channelNumberLB.textColor = [Utils colorRGB:@"#999999"];
         _channelNumberLB.textAlignment = NSTextAlignmentCenter;
         _channelNumberLB.backgroundColor = COLOR_BACKGROUND;
@@ -116,7 +178,7 @@
         _orderNumberLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 26)];
         [self addSubview:_orderNumberLB];
         _orderNumberLB.font = [UIFont systemFontOfSize:8];
-        _orderNumberLB.text = @"共20条";
+        _orderNumberLB.text = @"共8条";
         _orderNumberLB.textColor = [Utils colorRGB:@"#999999"];
         _orderNumberLB.textAlignment = NSTextAlignmentCenter;
         _orderNumberLB.backgroundColor = COLOR_BACKGROUND;
@@ -124,27 +186,15 @@
     return _orderNumberLB;
 }
 
-
-- (UIScrollView *)contentView{
-    if (_contentView == nil) {
-        _contentView = [[UIScrollView alloc] init];
-        _contentView.bounces = NO;
-        _contentView.scrollEnabled = NO;
-        _contentView.contentSize = CGSizeMake(screenWidth*2, 0);
-        [self addSubview:_contentView];
-        [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UITableView *)channelPartnersTableView{
+    if (_channelPartnersTableView == nil) {
+        _channelPartnersTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        [self addSubview:_channelPartnersTableView];
+        [_channelPartnersTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(0);
             make.bottom.mas_equalTo(0);
         }];
-    }
-    return _contentView;
-}
-
-- (UITableView *)channelPartnersTableView{
-    if (_channelPartnersTableView == nil) {
-        _channelPartnersTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64 - 60 - 44) style:UITableViewStyleGrouped];
-        [self.contentView addSubview:_channelPartnersTableView];
         _channelPartnersTableView.backgroundColor = COLOR_BACKGROUND;
         _channelPartnersTableView.tag = 100;
         _channelPartnersTableView.delegate = self;
@@ -160,8 +210,13 @@
 
 - (UITableView *)orderTableView{
     if (_orderTableView == nil) {
-        _orderTableView = [[UITableView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, screenHeight - 64 - 60 - 44) style:UITableViewStyleGrouped];
-        [self.contentView addSubview:_orderTableView];
+        _orderTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        [self addSubview:_orderTableView];
+        [_orderTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(0);
+            make.bottom.mas_equalTo(0);
+        }];
         _orderTableView.backgroundColor = COLOR_BACKGROUND;
         _orderTableView.tag = 200;
         _orderTableView.delegate = self;
@@ -171,6 +226,7 @@
         _orderTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _orderTableView.tableHeaderView = self.orderNumberLB;
         [_orderTableView registerClass:[ChannelOrderCell class] forCellReuseIdentifier:@"ChannelOrderCell"];
+        _orderTableView.hidden = YES;
     }
     return _orderTableView;
 }
@@ -178,7 +234,7 @@
 - (ScreenView *)screenView{
     if (_screenView == nil) {
         self.contentDic = @{@"时间":@[@"一个月",@"两个月",@"三个月"],@"手机号码":@"phoneNumber"};
-        _screenView = [[ScreenView alloc] initWithFrame:CGRectMake(0, 81, screenWidth, 150) andContent:self.contentDic andLeftTitles:@[@"时间",@"手机号码"] andRightDetails:@[@"请选择",@"请输入手机号码"]];
+        _screenView = [[ScreenView alloc] initWithFrame:CGRectMake(0, 81, screenWidth, 150) andContent:self.contentDic andLeftTitles:self.leftTitles andRightDetails:@[@"请选择",@"请输入手机号码"]];
         [self addSubview:_screenView];
         _screenView.hidden = YES;
     }
@@ -206,7 +262,7 @@
 #pragma mark - UITableView Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 20;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -244,8 +300,29 @@
 #pragma mark - Method
 
 - (void)dismissScreenViewAction:(UITapGestureRecognizer *)tap{
-    self.screenView.hidden = self.screenView.hidden == YES ? NO : YES;
-    self.grayView.hidden = self.grayView.hidden == YES ? NO : YES;
+    __block __weak ChannelPartnersManageView *weakself = self;
+
+    if (weakself.screenView.hidden == NO) {
+        weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.screenView.alpha = 0;
+            weakself.grayView.alpha = 0;
+        } completion:^(BOOL finished) {
+            weakself.screenView.hidden = YES;
+            weakself.grayView.hidden = YES;
+        }];
+    }else{
+        weakself.topView.showButton.transform = CGAffineTransformIdentity;
+        weakself.screenView.hidden = NO;
+        weakself.grayView.hidden = NO;
+        weakself.screenView.alpha = 0;
+        weakself.grayView.alpha = 0;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.screenView.alpha = 1;
+            weakself.grayView.alpha = 0.5;
+        } completion:^(BOOL finished) {
+        }];
+    }
 }
 
 @end

@@ -95,13 +95,28 @@
         }];
         
         [self.topView setTopCallBack:^(id obj) {
+            // 点击筛选栏时的操作
             if (weakself.selectView.hidden == NO) {
                 weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 0;
+                    weakself.grayView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    weakself.selectView.hidden = YES;
+                    weakself.grayView.hidden = YES;
+                }];
             }else{
                 weakself.topView.showButton.transform = CGAffineTransformIdentity;
+                weakself.selectView.hidden = NO;
+                weakself.grayView.hidden = NO;
+                weakself.selectView.alpha = 0;
+                weakself.grayView.alpha = 0;
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 1;
+                    weakself.grayView.alpha = 0.5;
+                } completion:^(BOOL finished) {
+                }];
             }
-            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
         }];
         
         [self.selectView setFilterCallBack:^(NSArray *array,NSString *string) {
@@ -128,6 +143,15 @@
             }
             
         }];
+        
+        [self.selectView setDismissPickerViewCallBack:^(id obj) {
+            weakself.selectView.beginDatePicker.hidden = YES;
+            weakself.selectView.pickView.hidden = YES;
+            weakself.selectView.pickerView.hidden = YES;
+            weakself.selectView.closeImagePickerButton.hidden = YES;
+            weakself.selectView.cancelButton.hidden = YES;
+        }];
+        
     }
     return self;
 }
@@ -156,12 +180,24 @@
     __block __weak TopAndInquiryView *weakself = self;
     if (weakself.selectView.hidden == NO) {
         weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-        weakself.selectView.hidden = YES;
-        weakself.grayView.hidden = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.selectView.alpha = 0;
+            weakself.grayView.alpha = 0;
+        } completion:^(BOOL finished) {
+            weakself.selectView.hidden = YES;
+            weakself.grayView.hidden = YES;
+        }];
     }else{
+        weakself.topView.showButton.transform = CGAffineTransformIdentity;
         weakself.selectView.hidden = NO;
         weakself.grayView.hidden = NO;
-        weakself.topView.showButton.transform = CGAffineTransformIdentity;
+        weakself.selectView.alpha = 0;
+        weakself.grayView.alpha = 0;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.selectView.alpha = 1;
+            weakself.grayView.alpha = 0.5;
+        } completion:^(BOOL finished) {
+        }];
     }
 }
 

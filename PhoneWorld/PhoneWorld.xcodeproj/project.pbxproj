@@ -121,7 +121,6 @@
 		8A96D2E81DC084E90052C46C /* ChannelPartnersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2E71DC084E90052C46C /* ChannelPartnersCell.m */; };
 		8A96D2EB1DC08EC70052C46C /* ChannelOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2EA1DC08EC70052C46C /* ChannelOrderCell.m */; };
 		8A96D2EE1DC0A0BC0052C46C /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2ED1DC0A0BC0052C46C /* ScreenView.m */; };
-		8A96D2F11DC0A4A80052C46C /* ScreenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A96D2F01DC0A4A80052C46C /* ScreenCell.m */; };
 		8AAA8A401DBB441800368395 /* OrderMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA8A3F1DBB441800368395 /* OrderMainView.m */; };
 		8AABF8831DADC6A80088DD82 /* HomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8821DADC6A80088DD82 /* HomeView.m */; };
 		8AABF8861DADFB750088DD82 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8851DADFB750088DD82 /* Utils.m */; };
@@ -134,6 +133,7 @@
 		8AABF8A31DAE68980088DD82 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A21DAE68980088DD82 /* UIView+Toast.m */; };
 		8AABF8A61DAE6BE00088DD82 /* TopCallMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */; };
 		8AABF8A91DAE6C310088DD82 /* TopCallMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */; };
+		8AAD6A181DC1F9AA00FC7E4A /* BaseWebUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAD6A171DC1F9AA00FC7E4A /* BaseWebUtils.m */; };
 		8AB87EA81DB1C37B0045CB90 /* PersonalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EA71DB1C37B0045CB90 /* PersonalInfoView.m */; };
 		8AB87EAE1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EAD1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.m */; };
 		8AB87EB11DB1DCDC0045CB90 /* AlterLoginPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB87EB01DB1DCDC0045CB90 /* AlterLoginPasswordView.m */; };
@@ -399,8 +399,6 @@
 		8A96D2EA1DC08EC70052C46C /* ChannelOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelOrderCell.m; sourceTree = "<group>"; };
 		8A96D2EC1DC0A0BC0052C46C /* ScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenView.h; sourceTree = "<group>"; };
 		8A96D2ED1DC0A0BC0052C46C /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
-		8A96D2EF1DC0A4A80052C46C /* ScreenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCell.h; sourceTree = "<group>"; };
-		8A96D2F01DC0A4A80052C46C /* ScreenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCell.m; sourceTree = "<group>"; };
 		8AAA8A3E1DBB441800368395 /* OrderMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMainView.h; sourceTree = "<group>"; };
 		8AAA8A3F1DBB441800368395 /* OrderMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMainView.m; sourceTree = "<group>"; };
 		8AABF8811DADC6A80088DD82 /* HomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeView.h; sourceTree = "<group>"; };
@@ -425,6 +423,8 @@
 		8AABF8A51DAE6BE00088DD82 /* TopCallMoneyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCallMoneyViewController.m; sourceTree = "<group>"; };
 		8AABF8A71DAE6C310088DD82 /* TopCallMoneyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCallMoneyView.h; sourceTree = "<group>"; };
 		8AABF8A81DAE6C310088DD82 /* TopCallMoneyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCallMoneyView.m; sourceTree = "<group>"; };
+		8AAD6A161DC1F9AA00FC7E4A /* BaseWebUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseWebUtils.h; sourceTree = "<group>"; };
+		8AAD6A171DC1F9AA00FC7E4A /* BaseWebUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseWebUtils.m; sourceTree = "<group>"; };
 		8AB87EA61DB1C37B0045CB90 /* PersonalInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoView.h; sourceTree = "<group>"; };
 		8AB87EA71DB1C37B0045CB90 /* PersonalInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoView.m; sourceTree = "<group>"; };
 		8AB87EAC1DB1DCBF0045CB90 /* AlterLoginPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlterLoginPasswordViewController.h; sourceTree = "<group>"; };
@@ -780,6 +780,8 @@
 				8A49D8701DACCB4600A1D650 /* AppDelegate.m */,
 				8AABF8841DADFB750088DD82 /* Utils.h */,
 				8AABF8851DADFB750088DD82 /* Utils.m */,
+				8AAD6A161DC1F9AA00FC7E4A /* BaseWebUtils.h */,
+				8AAD6A171DC1F9AA00FC7E4A /* BaseWebUtils.m */,
 				8A90E8E11DB5BD10004ECA62 /* UIView+ORGetController.h */,
 				8A90E8E21DB5BD10004ECA62 /* UIView+ORGetController.m */,
 				8AABF8A11DAE68980088DD82 /* UIView+Toast.h */,
@@ -1317,8 +1319,6 @@
 				8A96D2E41DC05EAE0052C46C /* ChannelPartnersManageView.m */,
 				8A96D2EC1DC0A0BC0052C46C /* ScreenView.h */,
 				8A96D2ED1DC0A0BC0052C46C /* ScreenView.m */,
-				8A96D2EF1DC0A4A80052C46C /* ScreenCell.h */,
-				8A96D2F01DC0A4A80052C46C /* ScreenCell.m */,
 				8A96D2E61DC084E90052C46C /* ChannelPartnersCell.h */,
 				8A96D2E71DC084E90052C46C /* ChannelPartnersCell.m */,
 				8A96D2E91DC08EC70052C46C /* ChannelOrderCell.h */,
@@ -1713,6 +1713,7 @@
 				8A6CBF541DB0B4F9002625E8 /* CommisionCountViewController.m in Sources */,
 				8AB87EC31DB203AF0045CB90 /* FilterView.m in Sources */,
 				8AB992CF1DB4CCA000D75492 /* PhoneCashCheckTVCell.m in Sources */,
+				8AAD6A181DC1F9AA00FC7E4A /* BaseWebUtils.m in Sources */,
 				8A70DB701DB8CAB6005E76C2 /* UIFont+Extend.m in Sources */,
 				8A9698AA1DB755DA000841BA /* ReadCardAndChoosePackageViewController.m in Sources */,
 				8A70DAED1DB8C38B005E76C2 /* ChooseImageView.m in Sources */,
@@ -1722,7 +1723,6 @@
 				8A90E8E91DB5FB47004ECA62 /* CardManageView.m in Sources */,
 				8AD96E791DAD0A1E0080CC8C /* TopUpViewController.m in Sources */,
 				8A96989B1DB70FE9000841BA /* SettlementDetailView.m in Sources */,
-				8A96D2F11DC0A4A80052C46C /* ScreenCell.m in Sources */,
 				8AB992C91DB4C10600D75492 /* RepairCardDetailViewController.m in Sources */,
 				8AD96E3F1DACCF860080CC8C /* AccountViewController.m in Sources */,
 				8A70DB781DB8CAB6005E76C2 /* UIWindow+Launch.m in Sources */,

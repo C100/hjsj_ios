@@ -40,15 +40,27 @@
         __block __weak WhiteCardView *weakself = self;
 
         [self.topView setWhiteCardTopCallBack:^(id obj) {
-            [UIView animateWithDuration:0.5 animations:^{
-                if (weakself.selectView.hidden == NO) {
-                    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-                }else{
-                    weakself.topView.showButton.transform = CGAffineTransformIdentity;
-                }
-                weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-                weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
-            }];
+            if (weakself.selectView.hidden == NO) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 0;
+                    weakself.grayView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    weakself.selectView.hidden = YES;
+                    weakself.grayView.hidden = YES;
+                }];
+            }else{
+                weakself.topView.showButton.transform = CGAffineTransformIdentity;
+                weakself.selectView.hidden = NO;
+                weakself.grayView.hidden = NO;
+                weakself.selectView.alpha = 0;
+                weakself.grayView.alpha = 0;
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 1;
+                    weakself.grayView.alpha = 0.5;
+                } completion:^(BOOL finished) {
+                }];
+            }
         }];
         
         [self.selectView setWhiteCardFilterCallBack:^(NSArray *array) {
@@ -219,12 +231,28 @@
 }
 
 - (void)tapGrayAction:(UITapGestureRecognizer *)tap{
-    self.grayView.hidden = YES;
-    self.selectView.hidden = YES;
     __block __weak WhiteCardView *weakself = self;
-    [UIView animateWithDuration:0.3 animations:^{
+    if (weakself.selectView.hidden == NO) {
         weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-    }];
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.selectView.alpha = 0;
+            weakself.grayView.alpha = 0;
+        } completion:^(BOOL finished) {
+            weakself.selectView.hidden = YES;
+            weakself.grayView.hidden = YES;
+        }];
+    }else{
+        weakself.topView.showButton.transform = CGAffineTransformIdentity;
+        weakself.selectView.hidden = NO;
+        weakself.grayView.hidden = NO;
+        weakself.selectView.alpha = 0;
+        weakself.grayView.alpha = 0;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.selectView.alpha = 1;
+            weakself.grayView.alpha = 0.5;
+        } completion:^(BOOL finished) {
+        }];
+    }
 }
 
 @end

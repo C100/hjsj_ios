@@ -11,6 +11,7 @@
 @interface WhiteCardFilterView : UIView <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) void(^WhiteCardFilterCallBack)(NSArray *array);
+
 @property (nonatomic) UITableView *filterTableView;
 @property (nonatomic) UIView *pickView;
 @property (nonatomic) UIPickerView *pickerView;

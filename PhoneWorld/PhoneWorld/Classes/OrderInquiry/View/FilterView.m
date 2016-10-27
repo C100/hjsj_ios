@@ -7,12 +7,14 @@
 //
 
 #import "FilterView.h"
+#import "InputView.h"
 
 #define leftDistance (screenWidth - 210)/2.0
 
 @interface FilterView ()
 
 @property (nonatomic) UITableViewCell *currentCell;
+@property (nonatomic) InputView *phoneInputView;
 
 @end
 
@@ -43,7 +45,8 @@
         [_pickView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.bottom.mas_equalTo(0);
         }];
-        _pickView.backgroundColor = [UIColor clearColor];
+        _pickView.backgroundColor = [UIColor blackColor];
+        _pickView.alpha = 0.5;
         _pickView.hidden = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPickViewAction:)];
         [_pickView addGestureRecognizer:tap];
@@ -71,6 +74,7 @@
         // 设置UIDatePicker的显示模式
         [_beginDatePicker setDatePickerMode:UIDatePickerModeDate];
         _beginDatePicker.hidden = YES;
+        [_beginDatePicker setValue:[UIColor blackColor] forKey:@"textColor"];
         
         UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - 60, 64+80+240, 60, 30)];
         closeButton.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -185,6 +189,16 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
+    if ([self.titles[indexPath.row] isEqualToString:@"手机号码"]) {
+        self.phoneInputView = [[InputView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 40)];
+        self.phoneInputView.textField.placeholder = @"请输入手机号码";
+        self.phoneInputView.leftLabel.text = @"手机号码";
+        [cell.contentView addSubview:self.phoneInputView];
+        cell.separatorInset = UIEdgeInsetsZero;
+        cell.layoutMargins = UIEdgeInsetsZero;
+        cell.preservesSuperviewLayoutMargins = NO;
+        return cell;
+    }
     cell.textLabel.text = self.titles[indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
@@ -192,9 +206,6 @@
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.textLabel.textColor = [Utils colorRGB:@"#666666"];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.preservesSuperviewLayoutMargins = NO;
     return cell;
 }
 
@@ -211,6 +222,7 @@
         self.pickView.hidden = NO;
         self.closeImagePickerButton.hidden = NO;
         self.cancelButton.hidden = NO;
+        [self endEditing:YES];
     }
     
     if (indexPath.row == 2) {
@@ -219,27 +231,7 @@
         self.closeImagePickerButton.hidden = NO;
         self.cancelButton.hidden = NO;
         self.pickerView.hidden = NO;
-    }
-    
-    if (indexPath.row == 3) {
-        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"请输入手机号码" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [ac addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            
-        }];
-        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if ([Utils isMobile:ac.textFields.firstObject.text]) {
-                self.currentCell.detailTextLabel.text = ac.textFields.firstObject.text;
-                self.currentCell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-            }else{
-                [Utils toastview:@"手机号格式不正确，请重新输入"];
-            }
-        }];
-        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }];
-        [ac addAction:action1];
-        [ac addAction:action2];
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
+        [self endEditing:YES];
     }
 }
 
@@ -256,8 +248,24 @@
     return 30;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return self.orderStates[row];
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    NSAttributedString *astring = [[NSAttributedString alloc] initWithString:self.orderStates[row] attributes:@{NSForegroundColorAttributeName:[Utils colorRGB:@"#666666"],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
+    return astring;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel *myView = nil;
+    
+    if (component == 0) {
+        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100, 30)];
+        myView.textAlignment = NSTextAlignmentCenter;
+        myView.text = self.orderStates[row];
+        myView.font = [UIFont systemFontOfSize:16];         //用label来设置字体大小
+        myView.backgroundColor = [UIColor clearColor];
+        myView.textColor = [Utils colorRGB:@"#666666"];
+    }
+    
+    return myView;
 }
 
 #pragma mark - Method
@@ -268,12 +276,26 @@
         {
             NSMutableArray *conditions = [NSMutableArray array];
             for (int i = 0; i < self.titles.count; i ++) {
-                NSIndexPath *indexP = [NSIndexPath indexPathForRow:i inSection:0];
-                UITableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:indexP];
-                if ([cell.detailTextLabel.text isEqualToString:@"请选择"] || [cell.detailTextLabel.text isEqualToString:@"请输入手机号码"]) {
-                    [conditions addObject:@"无"];
+                NSString *title = self.titles[i];
+                if ([title isEqualToString:@"手机号码"]) {
+                    if ([self.phoneInputView.textField.text isEqualToString:@""]) {
+                        [conditions addObject:@"无"];
+                    }else{
+                        if ([Utils isMobile:self.phoneInputView.textField.text]) {
+                            [conditions addObject:self.phoneInputView.textField.text];
+                        }else{
+                            [Utils toastview:@"请输入正确格式手机号"];
+                            return;
+                        }
+                    }
                 }else{
-                    [conditions addObject:cell.detailTextLabel.text];
+                    NSIndexPath *indexP = [NSIndexPath indexPathForRow:i inSection:0];
+                    UITableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:indexP];
+                    if ([cell.detailTextLabel.text isEqualToString:@"请选择"]) {
+                        [conditions addObject:@"无"];
+                    }else{
+                        [conditions addObject:cell.detailTextLabel.text];
+                    }
                 }
             }
 
@@ -315,7 +337,7 @@
 }
 
 - (void)tapPickViewAction:(UITapGestureRecognizer *)tap{
-    [Utils toastview:@"请确认..."];
+    _DismissPickerViewCallBack(tap);
 }
 
 @end

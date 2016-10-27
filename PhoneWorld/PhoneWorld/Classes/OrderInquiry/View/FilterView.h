@@ -11,6 +11,7 @@
 @interface FilterView : UIView <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) void(^FilterCallBack)(NSArray *array,NSString *string);
+@property (nonatomic) void(^DismissPickerViewCallBack) (id obj);
 
 @property (nonatomic) UITableView *filterTableView;
 @property (nonatomic) NSArray *orderStates;//订单状态
@@ -23,6 +24,7 @@
 
 @property (nonatomic) UIView *pickView;
 @property (nonatomic) UIDatePicker *beginDatePicker;
+
 @property (nonatomic) UIButton *closeImagePickerButton;//确定
 @property (nonatomic) UIButton *cancelButton;
 
