@@ -12,4 +12,5 @@
 - (instancetype)initWithFrame:(CGRect)frame andType:(NSInteger)type;
 @property (nonatomic) void(^AlterPasswordCallBack) (id obj);
 @property (nonatomic) UIButton *saveButton;
+@property (nonatomic) NSMutableArray *inputViews;
 @end

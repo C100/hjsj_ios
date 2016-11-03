@@ -8,7 +8,8 @@
 
 #import "TopCallMoneyView.h"
 #import "InputView.h"
-#import "ForgetPasswordViewController.h"
+//#import "ForgetPasswordViewController.h"
+#import "TopResultViewController.h"
 
 #define btnWidth (screenWidth - 46)/3.0
 #define hw 70/113.0
@@ -40,7 +41,7 @@
         self.inputViews = [NSMutableArray array];
         self.leftTitles = @[@"当前余额",@"手机号码"];
         for (int i = 0; i < 2; i ++) {
-            InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 40*i, screenWidth, 40)];
+            InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 50*i, screenWidth, 40)];
             [self addSubview:inputV];
             inputV.leftLabel.text = self.leftTitles[i];
             if (i == 0) {
@@ -219,7 +220,7 @@
                 self.grayView.backgroundColor = [UIColor blackColor];
                 self.grayView.alpha = 0;
                 [self addSubview:self.grayView];
-                self.payView = [[PayView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, 550)];
+                self.payView = [[PayView alloc] initWithFrame:CGRectMake(0, screenHeight, screenWidth, 450)];
                 [self addSubview:self.payView];
                 
                 __block __weak TopCallMoneyView *weakself = self;
@@ -227,7 +228,7 @@
                 [self.payView.textField becomeFirstResponder];
                 [UIView animateWithDuration:0.3 animations:^{
                     CGRect frame = self.payView.frame;
-                    frame.origin.y = screenHeight - 550;
+                    frame.origin.y = screenHeight - 450;
                     self.payView.frame = frame;
                     weakself.grayView.alpha = 0.4;
                 }];
@@ -244,6 +245,9 @@
                         weakself.grayView.alpha = 0;
                     } completion:^(BOOL finished) {
                         [weakself.grayView removeFromSuperview];
+                        
+                        [[weakself viewController].navigationController pushViewController:[TopResultViewController new] animated:YES];
+                        
                     }];
                 }];
                 
@@ -258,13 +262,6 @@
                         [weakself.grayView removeFromSuperview];
                     }];
                 }];
-                
-                [self.payView setForgetPasswordCallBack:^(id obj) {
-                    [weakself endEditing:YES];
-                    UIViewController *viewController = [weakself viewController];
-                    [viewController.navigationController pushViewController:[ForgetPasswordViewController new] animated:YES];
-                }];
-                
                 _topCallMoneyCallBack(self.money, phoneView.textField.text);
             }
         }

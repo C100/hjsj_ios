@@ -10,6 +10,7 @@
 
 @interface FinishCardView : UIView <UITextFieldDelegate>
 
+@property (nonatomic) void(^FinishCardCallBack)(NSString *tel,NSString *puk);
 @property (nonatomic) UIButton *nextButton;
 
 @end

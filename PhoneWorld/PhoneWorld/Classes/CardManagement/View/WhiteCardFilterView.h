@@ -18,4 +18,8 @@
 @property (nonatomic) UIButton *sureButton;
 @property (nonatomic) UIButton *cancelButton;
 
+//白卡开户筛选条件
+@property (nonatomic) NSArray *numberPoolArray;//号码池数组
+@property (nonatomic) NSArray *numberTypeArray;//靓号规则
+
 @end

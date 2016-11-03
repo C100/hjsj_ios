@@ -14,4 +14,8 @@
 + (OpenAccomplishCardViewController *)sharedOpenAccomplishCardViewController;
 @property (nonatomic) OrderView *orderView;
 
+//查询条件
+@property (nonatomic) NSString *inquiryTitleString;
+@property (nonatomic) NSArray *inquiryConditionArray;
+
 @end

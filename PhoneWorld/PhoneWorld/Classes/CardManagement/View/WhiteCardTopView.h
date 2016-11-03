@@ -13,4 +13,5 @@
 @property (nonatomic) NSMutableArray *resultArr;//结果Label
 @property (nonatomic) UIButton *showButton;
 @property (nonatomic) UIView *resultView;
+
 @end

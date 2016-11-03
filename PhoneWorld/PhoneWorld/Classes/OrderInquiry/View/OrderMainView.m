@@ -7,9 +7,6 @@
 //
 
 #import "OrderMainView.h"
-#import "FilterView.h"
-#import "TopView.h"
-#import "ContentView.h"
 
 #import "OpenAccomplishCardViewController.h"
 #import "OpenWhiteCardViewController.h"
@@ -19,15 +16,9 @@
 
 @interface OrderMainView ()
 
-@property (nonatomic) TopView *topView;//标题栏
-@property (nonatomic) FilterView *selectView;//筛选new
-@property (nonatomic) ContentView *contentScrollView;
-
 @property (nonatomic) UIView *grayView;//灰色
 @property (nonatomic) UITapGestureRecognizer *tapGrayGR;
-
 @property (nonatomic) NSArray *arrTitles;
-
 @property (nonatomic) UIView *yellowLineView;
 
 @end
@@ -54,7 +45,7 @@
         [self.contentScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(0);
             make.left.right.mas_equalTo(0);
-            make.bottom.mas_equalTo(-20);
+            make.bottom.mas_equalTo(0);
         }];
         self.contentScrollView.delegate = self;
         self.contentScrollView.scrollEnabled = NO;
@@ -121,13 +112,32 @@
                 } completion:^(BOOL finished) {
                 }];
             }
-//            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-//            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
         }];
         
         //点击筛选框查询按钮操作
         [self.selectView setFilterCallBack:^(NSArray *array,NSString *string) {
             NSLog(@"-----%@------",array);
+            
+            NSString *inquiryTitleString = weakself.topView.currentButton.currentTitle;
+            
+            
+            if ([inquiryTitleString isEqualToString:@"成卡开户"]) {
+                [OpenAccomplishCardViewController sharedOpenAccomplishCardViewController].inquiryConditionArray = array;
+                [OpenAccomplishCardViewController sharedOpenAccomplishCardViewController].inquiryTitleString = inquiryTitleString;
+                [[OpenAccomplishCardViewController sharedOpenAccomplishCardViewController].orderView.orderTableView triggerPullToRefresh];
+            }
+            if ([inquiryTitleString isEqualToString:@"白卡开户"]) {
+                
+            }
+            if ([inquiryTitleString isEqualToString:@"过户"]) {
+                
+            }
+            if ([inquiryTitleString isEqualToString:@"补卡"]) {
+                
+            }
+            if ([inquiryTitleString isEqualToString:@"话费充值"]) {
+                
+            }
             
             for (int i = 0; i < array.count; i++) {
                 UILabel *lb = weakself.topView.resultArr[i];
@@ -144,36 +154,36 @@
             
             [[OpenAccomplishCardViewController sharedOpenAccomplishCardViewController].orderView.orderTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
                 make.width.mas_equalTo(screenWidth);
             }];
             
             [[OpenWhiteCardViewController sharedOpenWhiteCardViewController].orderView.orderTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
                 make.width.mas_equalTo(screenWidth);
             }];
             
             [[TransferViewController sharedTransferViewController].orderView.orderTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 );
                 make.width.mas_equalTo(screenWidth);
             }];
             
             [[RepairCardViewController sharedRepairCardViewController].orderView.orderTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
                 make.width.mas_equalTo(screenWidth);
             }];
             
             [[TopUpViewController sharedTopUpViewController].orderTwoView.orderTwoTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
-                make.height.mas_equalTo(screenHeight - 130 - 64 - 44 - 20);
+                make.height.mas_equalTo(screenHeight - 130 - 64 - 44);
                 make.width.mas_equalTo(screenWidth);
             }];
             
-            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
             if ([string isEqualToString:@"查询"]) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
                 weakself.selectView.hidden = YES;
                 weakself.grayView.hidden = YES;
             }
@@ -181,11 +191,19 @@
         }];
         
         [self.selectView setDismissPickerViewCallBack:^(id obj) {
-            weakself.selectView.beginDatePicker.hidden = YES;
-            weakself.selectView.pickView.hidden = YES;
-            weakself.selectView.pickerView.hidden = YES;
-            weakself.selectView.closeImagePickerButton.hidden = YES;
-            weakself.selectView.cancelButton.hidden = YES;
+            [UIView animateWithDuration:0.5 animations:^{
+                weakself.selectView.beginDatePicker.alpha = 0;
+                weakself.selectView.pickView.alpha = 0;
+                weakself.selectView.pickerView.alpha = 0;
+                weakself.selectView.closeImagePickerButton.alpha = 0;
+                weakself.selectView.cancelButton.alpha = 0;
+            } completion:^(BOOL finished) {
+                weakself.selectView.beginDatePicker.hidden = YES;
+                weakself.selectView.pickView.hidden = YES;
+                weakself.selectView.pickerView.hidden = YES;
+                weakself.selectView.closeImagePickerButton.hidden = YES;
+                weakself.selectView.cancelButton.hidden = YES;
+            }];
         }];
         
         [self yellowLineView];

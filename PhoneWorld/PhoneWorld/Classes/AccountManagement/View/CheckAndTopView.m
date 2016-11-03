@@ -33,7 +33,7 @@
         self.inputViews = [NSMutableArray array];
         
         for (int i = 0; i<2; i++) {
-            InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 40*i, screenWidth, 40)];
+            InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 50*i, screenWidth, 40)];
             [self addSubview:inputV];
             inputV.leftLabel.text = self.leftTitles[i];
             if (i == 0) {
@@ -77,6 +77,9 @@
         UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(choosePayWay:)];
         UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(choosePayWay:)];
 
+        NSArray *textArr = @[@"微信支付",@"支付宝支付"];
+        NSArray *textColorArr = @[@"#64ab23",@"#00a9f2"];
+        
         for (int i = 0; i<2; i++) {
             UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 26 + 65*i, screenWidth, 64)];
             if (i == 0) {
@@ -99,6 +102,11 @@
             pay.layer.cornerRadius = 5;
             pay.layer.masksToBounds = YES;
             pay.tag = 100+i;
+            if(i == 0){
+                pay.backgroundColor = [UIColor whiteColor];
+                pay.layer.borderColor = [Utils colorRGB:@"#0081eb"].CGColor;
+                pay.layer.borderWidth = 3;
+            }
             [self.buttons addObject:pay];
             
             UIImageView *imageV = [[UIImageView alloc] init];
@@ -116,7 +124,15 @@
                 make.centerY.mas_equalTo(0);
                 make.left.mas_equalTo(imageV.mas_right).mas_equalTo(10);
             }];
+            lb.text = textArr[i];
+            lb.textColor = [Utils colorRGB:textColorArr[i]];
+            lb.font = [UIFont systemFontOfSize:14];
         }
+        
+        UIView *lineV = [[UIView alloc] initWithFrame:CGRectMake(15, 190, screenWidth - 15, 1)];
+        lineV.backgroundColor = COLOR_BACKGROUND;
+        [self addSubview:lineV];
+        
     }
     return _payWay;
 }

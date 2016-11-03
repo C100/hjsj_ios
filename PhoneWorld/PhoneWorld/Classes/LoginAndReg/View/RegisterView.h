@@ -10,6 +10,7 @@
 
 @interface RegisterView : UIScrollView <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
+@property (nonatomic) void(^registerCallBack) (id obj);
 @property (nonatomic) UIButton *nextButton;
 
 @end

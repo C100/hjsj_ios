@@ -9,7 +9,9 @@
 #import "RegisterView.h"
 #import "InputView.h"
 #import "ChooseImageView.h"
-#import "FailedView.h"
+//#import "FailedView.h"
+#import "LoginViewController.h"
+#import "RegisterModel.h"
 
 @interface RegisterView ()
 
@@ -18,7 +20,8 @@
 @property (nonatomic) NSArray *channelType;
 @property (nonatomic) NSMutableArray *inputViews;
 @property (nonatomic) ChooseImageView *chooseImageView;
-@property (nonatomic) FailedView *resultView;
+//@property (nonatomic) FailedView *resultView;
+@property (nonatomic) InputView *channelNameInputView;
 
 @end
 
@@ -71,7 +74,7 @@
             }
             
             if ([self.leftTitles[i] isEqualToString:@"＊渠道类型"]) {
-                inputView.textField.userInteractionEnabled = NO;
+                inputView.textField.enabled = NO;
                 UIButton *rightButton = [[UIButton alloc] init];
                 [inputView addSubview:rightButton];
                 [rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -91,6 +94,13 @@
                     make.left.mas_equalTo(inputView.leftLabel.mas_right).mas_equalTo(10);
                     make.height.mas_equalTo(30);
                 }];
+            }
+            
+            if ([self.leftTitles[i] isEqualToString:@"＊渠道名称"]) {
+                self.channelNameInputView = inputView;
+                inputView.textField.enabled = NO;
+                UITapGestureRecognizer *tapChannelNameInputView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapChannelNameInputViewAction:)];
+                [self.channelNameInputView addGestureRecognizer:tapChannelNameInputView];
             }
         }
         [self chooseImageView];
@@ -140,6 +150,7 @@
     for (int i = 0; i < self.channelType.count; i++) {
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:self.channelType[i] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             inputView.textField.text = self.channelType[i];
+            self.channelNameInputView.textField.enabled = YES;
         }];
         [ac addAction:action1];
     }
@@ -147,7 +158,8 @@
         
     }];
     [ac addAction:action2];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
+    UIViewController *viewController = [self viewController];
+    [viewController presentViewController:ac animated:YES completion:nil];
 }
 
 - (void)buttonClickAction:(UIButton *)button{
@@ -203,10 +215,41 @@
             }
         }
         
+        for (int i = 0; i < 3; i++) {
+            UIImageView *imageV = self.chooseImageView.imageViews[i];
+            if (imageV.hidden == YES || !imageV.image) {
+                [Utils toastview:@"请选择图片"];
+                return;
+            }
+        }
+        
+        
+        NSMutableArray *regArr = [NSMutableArray array];
+        for (int i = 0; i < self.inputViews.count; i ++) {
+            InputView *inputV = self.inputViews[i];
+            if ([inputV.textField.text isEqualToString:@""]) {
+                [regArr addObject:@"无"];
+            }else{
+                [regArr addObject:inputV.textField.text];
+            }
+        }
+        
+        for (int i = 0; i < 2; i++) {
+            UIImageView *regImageV = self.chooseImageView.imageViews[i];
+            
+            [regArr addObject:[Utils imagechange:regImageV.image]];
+            
+//            [regArr addObject:[Utils imageToNSStringWithImage:regImageV.image]];
+//            [regArr addObject:@"image"];
+        }
+        
+        RegisterModel *regModel = [[RegisterModel alloc] initWithArray:regArr];
+
+        [self endEditing:YES];
+        
         //注册操作
-        self.resultView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"注册成功" andDetail:@"请耐心等待1-2个审核日" andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.resultView];
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(dismissResultViewAction) userInfo:nil repeats:NO];
+        _registerCallBack(regModel);
+        
         
     }else{
         //获取验证码
@@ -220,12 +263,10 @@
     }
 }
 
-- (void)dismissResultViewAction{
-    [UIView animateWithDuration:0.5 animations:^{
-        self.resultView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self.resultView removeFromSuperview];
-    }];
+- (void)tapChannelNameInputViewAction:(UITapGestureRecognizer *)tap{
+    if (self.channelNameInputView.textField.enabled == NO) {
+        [Utils toastview:@"请选择渠道类型"];
+    }
 }
 
 @end

@@ -10,13 +10,17 @@
 #import "MessageViewController.h"
 #import "PersonalHomeViewController.h"
 #import "OrderMainView.h"
+#import <AFNetworkReachabilityManager.h>
 
 #define selectV 220/375.0
 
 static OrderViewController *_orderViewController;
 
 @interface OrderViewController ()<UIScrollViewDelegate>
+
 @property (nonatomic) OrderMainView *orderMainView;
+@property (nonatomic) AFNetworkReachabilityManager *manager;
+
 @end
 
 @implementation OrderViewController
@@ -27,6 +31,40 @@ static OrderViewController *_orderViewController;
     self.navigationController.navigationBar.barTintColor = MainColor;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.manager = [AFNetworkReachabilityManager manager];
+    [self.manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch ((int)status) {
+            case AFNetworkReachabilityStatusUnknown:
+            {
+                //无识别网络
+                NSLog(@"无识别网络");
+            }
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+            {
+                //无网络
+                NSLog(@"无网络");
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            {
+                //流量
+                NSLog(@"流量环境");
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+            {
+                //wifi下
+                NSLog(@"使用Wi-Fi情况下");
+            }
+                break;
+        }
+    }];
+    [self.manager startMonitoring];//开始监测
 }
 
 + (OrderViewController *)shareOrderViewController{

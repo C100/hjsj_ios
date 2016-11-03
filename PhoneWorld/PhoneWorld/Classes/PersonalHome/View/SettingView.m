@@ -50,14 +50,16 @@
     if (indexPath.row == 1) {
         //计算缓存
         [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.3fMB",totalSize/1024.0/1024.0];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2fMB",totalSize/1024.0/1024.0];
             cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         }];
     }
     
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.preservesSuperviewLayoutMargins = NO;
+    if (indexPath.row == self.titles.count - 1) {
+        cell.separatorInset = UIEdgeInsetsZero;
+        cell.layoutMargins = UIEdgeInsetsZero;
+        cell.preservesSuperviewLayoutMargins = NO;
+    }
     return cell;
 }
 

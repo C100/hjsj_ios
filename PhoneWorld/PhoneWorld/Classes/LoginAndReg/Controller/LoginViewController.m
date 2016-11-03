@@ -55,9 +55,37 @@
                 /*
                  登录操作
                  */
-                MainTabBarController *vc = [MainTabBarController new];
-                [UIApplication sharedApplication].keyWindow.rootViewController = vc;
-                [weakself.view endEditing:YES];
+                NSString *username = weakself.loginView.usernameTF.text;
+                NSString *password = weakself.loginView.passwordTF.text;
+                if ([username isEqualToString:@""]) {
+                    [Utils toastview:@"请输入用户名"];
+                    return ;
+                }
+                if ([password isEqualToString:@""]) {
+                    [Utils toastview:@"请输入密码"];
+                    return ;
+                }
+                [WebUtils requestLoginResultWithUserName:username andPassword:password andWebUtilsCallBack:^(id obj) {
+                    if (obj) {
+                        if ([obj[@"code"] isEqualToString:@"10000"]) {
+                            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+                            [ud setObject:username forKey:@"username"];
+                            [ud setObject:password forKey:@"password"];
+                            [ud setObject:obj[@"data"][@"session_token"] forKey:@"session_token"];
+                            [ud setObject:obj[@"data"][@"grade"] forKey:@"grade"];
+                            [ud synchronize];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                MainTabBarController *vc = [MainTabBarController new];
+                                [UIApplication sharedApplication].keyWindow.rootViewController = vc;
+                                [weakself.view endEditing:YES];
+                            });
+                        }else{
+                            NSLog(@"14123123123");
+                            [Utils toastview:@"用户名或密码错误，请重新输入"];
+                        }
+                    }
+                    
+                }];
             }
                 break;
         }

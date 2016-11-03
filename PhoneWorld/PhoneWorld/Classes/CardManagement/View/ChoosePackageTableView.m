@@ -41,9 +41,6 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.preservesSuperviewLayoutMargins = NO;
     
     if (indexPath.row == 2) {
         self.inputView = [[InputView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 40)];
@@ -58,6 +55,9 @@
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+    }
+    if (indexPath.row == 2) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }

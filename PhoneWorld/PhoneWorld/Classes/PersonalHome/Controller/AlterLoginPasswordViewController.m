@@ -9,9 +9,12 @@
 #import "AlterLoginPasswordViewController.h"
 #import "AlterLoginPasswordView.h"
 #import "PhoneNumberCheckViewController.h"
+#import "FailedView.h"
+#import "InputView.h"
 
 @interface AlterLoginPasswordViewController ()
 @property (nonatomic) AlterLoginPasswordView *alterView;
+@property (nonatomic) FailedView *succeedView;
 @end
 
 @implementation AlterLoginPasswordViewController
@@ -25,9 +28,46 @@
     [self.view addSubview:self.alterView];
     __block __weak AlterLoginPasswordViewController *weakself = self;
     [self.alterView setAlterPasswordCallBack:^(id obj) {
-        //手机号验证
-//        PhoneNumberCheckViewController *vc = [[PhoneNumberCheckViewController alloc] init];
-//        [weakself.navigationController pushViewController:vc animated:YES];
+        InputView *oldV = weakself.alterView.inputViews.firstObject;
+        InputView *newV = weakself.alterView.inputViews.lastObject;
+        
+        [WebUtils requestAlterPasswordWithOldPassword:oldV.textField.text andNewPassword:newV.textField.text andCallBack:^(id obj) {
+            if (obj) {
+                if ([obj[@"code"] isEqualToString:@"10000"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //操作
+                        weakself.succeedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"修改成功" andDetail:@"正在跳转..." andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
+                        [[UIApplication sharedApplication].keyWindow addSubview:weakself.succeedView];
+                        [NSTimer scheduledTimerWithTimeInterval:1.0 target:weakself selector:@selector(dismissResultViewAction) userInfo:nil repeats:NO];
+                    });
+                }else{
+                    //操作
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                    weakself.succeedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"修改失败" andDetail:@"请重新修改!" andImageName:@"icon_cry" andTextColorHex:@"#0081eb"];
+                    [[UIApplication sharedApplication].keyWindow addSubview:weakself.succeedView];
+                    [NSTimer scheduledTimerWithTimeInterval:1.0 target:weakself selector:@selector(dismissOnlyAction) userInfo:nil repeats:NO];
+                    });
+
+                }
+            }
+        }];
+    }];
+}
+
+- (void)dismissResultViewAction{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.succeedView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.succeedView removeFromSuperview];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+}
+
+- (void)dismissOnlyAction{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.succeedView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.succeedView removeFromSuperview];
     }];
 }
 

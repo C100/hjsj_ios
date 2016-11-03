@@ -11,20 +11,35 @@
 #import "FailedView.h"
 
 @interface PersonalInfoView ()
-@property (nonatomic) NSArray *leftTitles;
-@property (nonatomic) NSMutableArray *inputViews;
+@property (nonatomic) NSMutableArray *leftTitles;
 @property (nonatomic) FailedView *resultView;
+@property (nonatomic) NSInteger ivNumber;
 @end
 
 @implementation PersonalInfoView
 
-- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableArray *)userinfos
-{
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.userinfos = userinfos;
-        self.leftTitles = @[@"用户名",@"联系人",@"联系号码",@"电子邮箱",@"渠道名称",@"上级名称",@"上级电话",@"上级推荐码",@"本人推荐码"];
+        
+        self.leftTitles = [@[@"用户名",@"姓名",@"手机号码",@"电子邮箱",@"渠道名称",@"上级名称",@"上级电话"] mutableCopy];
+        
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        NSString *grade = [ud objectForKey:@"grade"];
+        
+        NSLog(@"-----------%@------------",grade);
+        
+        if ([grade isEqualToString:@"lev3"]) {
+            [self.leftTitles addObject:@"上级推荐码"];
+        }
+        if ([grade isEqualToString:@"lev2"]) {
+            [self.leftTitles addObjectsFromArray:@[@"本人推荐码",@"上级推荐码"]];
+        }
+        if ([grade isEqualToString:@"lev1"]) {
+            [self.leftTitles addObject:@"本人推荐码"];
+        }
+        
         self.inputViews = [NSMutableArray array];
         self.bounces = NO;
         for (int i = 0; i < self.leftTitles.count; i ++) {
@@ -32,7 +47,8 @@
             InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
             [self addSubview:view];
             view.leftLabel.text = self.leftTitles[i];
-            view.textField.text = self.leftTitles[i];
+            view.textField.text = @"";
+            view.textField.placeholder = self.leftTitles[i];
             [view addGestureRecognizer:tap];
             view.tag = 100+i;
             [self.inputViews addObject:view];
@@ -45,16 +61,57 @@
             }
         }
         [self saveButton];
+        
+        UIView *leftV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 40*self.leftTitles.count)];
+        leftV.backgroundColor = [UIColor whiteColor];
+        [self addSubview:leftV];
     }
     return self;
+}
+
+- (void)setPersonModel:(PersonalInfoModel *)personModel{
+    for (InputView *inputV in self.inputViews) {
+        
+        //@"用户名",@"姓名",@"手机号码",@"电子邮箱",@"渠道名称",@"上级名称",@"上级电话",@"上级推荐码",@"本人推荐码"
+        
+        if ([inputV.leftLabel.text isEqualToString:@"用户名"]) {
+            inputV.textField.text = personModel.username;
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"姓名"]) {
+            inputV.textField.text = personModel.contact;
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"手机号码"]) {
+            inputV.textField.text = personModel.tel;
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"电子邮箱"]) {
+            inputV.textField.text = personModel.email;
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"渠道名称"]) {
+            inputV.textField.text = personModel.channelName;
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"上级名称"]) {
+            inputV.textField.text = personModel.supUserName;
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"上级电话"]) {
+            inputV.textField.text = personModel.supTel;
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"上级推荐码"]) {
+            inputV.textField.text = personModel.supRecomdCode;
+        }
+        if ([inputV.leftLabel.text isEqualToString:@"本人推荐码"]) {
+            inputV.textField.text = personModel.recomdCode;
+        }
+        
+    }
 }
 
 - (UIButton *)saveButton{
     if (_saveButton == nil) {
         _saveButton = [Utils returnBextButtonWithTitle:@"保存"];
         [self addSubview:_saveButton];
+        InputView *inputV = self.inputViews.lastObject;
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(400);
+            make.top.mas_equalTo(inputV.mas_bottom).mas_equalTo(40);
             make.centerX.mas_equalTo(0);
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);

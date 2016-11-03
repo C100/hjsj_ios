@@ -24,7 +24,7 @@ static OpenWhiteCardViewController *_openWhiteCardViewController;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80 - 20)];
+    self.orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80)];
     [self.view addSubview:self.orderView];
     
 //    __block __weak OpenWhiteCardViewController *weakself = self;
@@ -34,6 +34,18 @@ static OpenWhiteCardViewController *_openWhiteCardViewController;
         vc.hidesBottomBarWhenPushed = YES;
         [[OrderViewController shareOrderViewController].navigationController pushViewController:vc animated:YES];
     }];
+    
+    [self.orderView.orderTableView addPullToRefreshWithActionHandler:^{
+        //下拉刷新
+    }];
+    
+    [self.orderView.orderTableView addInfiniteScrollingWithActionHandler:^{
+        //上拉加载
+    }];
+    
+    [self.orderView.orderTableView.pullToRefreshView stopAnimating];
+    [self.orderView.orderTableView.infiniteScrollingView stopAnimating];
+    
 }
 
 @end

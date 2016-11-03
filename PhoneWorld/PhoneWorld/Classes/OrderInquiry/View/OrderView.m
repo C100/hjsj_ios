@@ -25,7 +25,7 @@
         }];
         self.orderTableView.delegate = self;
         self.orderTableView.dataSource = self;
-        self.orderTableView.bounces = NO;
+//        self.orderTableView.bounces = NO;
         [self.orderTableView registerClass:[OrderTableViewCell class] forCellReuseIdentifier:@"cell"];
         self.orderTableView.tableHeaderView = self.resultNumLB;
         self.orderTableView.separatorStyle = UITextBorderStyleNone;

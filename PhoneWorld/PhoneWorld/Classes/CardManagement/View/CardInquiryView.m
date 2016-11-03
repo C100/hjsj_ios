@@ -35,24 +35,83 @@
         self.arrTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
         [self yellowLineView];
         __block __weak CardInquiryView *weakself = self;
+//        [self.topView setCallback:^(NSInteger tag) {
+//            /*---按钮点击事件---*/
+//            NSInteger i = tag - 10;
+//            [UIView animateWithDuration:0.5 animations:^{
+//                CGRect frame = weakself.yellowLineView.frame;
+//                frame.origin.x = i*screenWidth/4;
+//                weakself.yellowLineView.frame = frame;
+//            }];
+//        }];
+//        
+//        [self.topView setTopCallBack:^(id obj) {
+//            if (weakself.selectView.hidden == NO) {
+//                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+//            }else{
+//                weakself.topView.showButton.transform = CGAffineTransformIdentity;
+//            }
+//            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
+//            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
+//        }];
+        
+        
         [self.topView setCallback:^(NSInteger tag) {
             /*---按钮点击事件---*/
             NSInteger i = tag - 10;
+            
+//            [UIView animateWithDuration:0.5 animations:^{
+//                CGRect frame = weakself.yellowLineView.frame;
+//                frame.origin.x = i*screenWidth/4;
+//                weakself.yellowLineView.frame = frame;
+//            }];
+
+            
+            UIButton *button = weakself.topView.titlesButton[i];
             [UIView animateWithDuration:0.5 animations:^{
                 CGRect frame = weakself.yellowLineView.frame;
                 frame.origin.x = i*screenWidth/4;
+                frame.size.width = button.size.width;
                 weakself.yellowLineView.frame = frame;
+                [weakself layoutIfNeeded];
             }];
+            
+            if (weakself.selectView.hidden == NO) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 0;
+                    weakself.grayView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    weakself.selectView.hidden = YES;
+                    weakself.grayView.hidden = YES;
+                }];
+            }
+            
         }];
         
         [self.topView setTopCallBack:^(id obj) {
+            // 点击筛选栏时的操作
             if (weakself.selectView.hidden == NO) {
                 weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 0;
+                    weakself.grayView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    weakself.selectView.hidden = YES;
+                    weakself.grayView.hidden = YES;
+                }];
             }else{
                 weakself.topView.showButton.transform = CGAffineTransformIdentity;
+                weakself.selectView.hidden = NO;
+                weakself.grayView.hidden = NO;
+                weakself.selectView.alpha = 0;
+                weakself.grayView.alpha = 0;
+                [UIView animateWithDuration:0.3 animations:^{
+                    weakself.selectView.alpha = 1;
+                    weakself.grayView.alpha = 0.5;
+                } completion:^(BOOL finished) {
+                }];
             }
-            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
         }];
         
         [self grayView];
@@ -87,11 +146,20 @@
         }];
         
         [self.selectView setDismissPickerViewCallBack:^(id obj) {
-            weakself.selectView.beginDatePicker.hidden = YES;
-            weakself.selectView.pickView.hidden = YES;
-            weakself.selectView.pickerView.hidden = YES;
-            weakself.selectView.closeImagePickerButton.hidden = YES;
-            weakself.selectView.cancelButton.hidden = YES;
+            
+            [UIView animateWithDuration:0.5 animations:^{
+                weakself.selectView.beginDatePicker.alpha = 0;
+                weakself.selectView.pickView.alpha = 0;
+                weakself.selectView.pickerView.alpha = 0;
+                weakself.selectView.closeImagePickerButton.alpha = 0;
+                weakself.selectView.cancelButton.alpha = 0;
+            } completion:^(BOOL finished) {
+                weakself.selectView.beginDatePicker.hidden = YES;
+                weakself.selectView.pickView.hidden = YES;
+                weakself.selectView.pickerView.hidden = YES;
+                weakself.selectView.closeImagePickerButton.hidden = YES;
+                weakself.selectView.cancelButton.hidden = YES;
+            }];
         }];
         
     }
@@ -172,10 +240,33 @@
     [self endEditing:YES];
     __block __weak CardInquiryView *weakself = self;
     
+    
+    if (weakself.selectView.hidden == NO) {
+        weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.selectView.alpha = 0;
+            weakself.grayView.alpha = 0;
+        } completion:^(BOOL finished) {
+            weakself.selectView.hidden = YES;
+            weakself.grayView.hidden = YES;
+        }];
+    }else{
+        weakself.topView.showButton.transform = CGAffineTransformIdentity;
+        weakself.selectView.hidden = NO;
+        weakself.grayView.hidden = NO;
+        weakself.selectView.alpha = 0;
+        weakself.grayView.alpha = 0;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakself.selectView.alpha = 1;
+            weakself.grayView.alpha = 0.5;
+        } completion:^(BOOL finished) {
+        }];
+    }
+    
     //    [UIView animateWithDuration:0.3 animations:^{
-    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-    weakself.selectView.hidden = YES;
-    weakself.grayView.hidden = YES;
+//    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+//    weakself.selectView.hidden = YES;
+//    weakself.grayView.hidden = YES;
     //    }];
 }
 

@@ -10,14 +10,24 @@
 
 @implementation AccountTVCell
 
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self imageV];
+        [self titleLB];
+    }
+    return self;
+}
+
 - (UIImageView *)imageV{
     if (_imageV == nil) {
         _imageV = [[UIImageView alloc] init];
         [self addSubview:_imageV];
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
-            make.left.mas_equalTo(10);
-            make.height.width.mas_equalTo(40);
+            make.left.mas_equalTo(15);
+            make.height.width.mas_equalTo(30);
         }];
         _imageV.contentMode = UIViewContentModeScaleAspectFit;
     }
@@ -29,7 +39,7 @@
         _titleLB = [[UILabel alloc] init];
         [self addSubview:_titleLB];
         [_titleLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.imageV.mas_right).mas_equalTo(10);
+            make.left.mas_equalTo(self.imageV.mas_right).mas_equalTo(8);
             make.centerY.mas_equalTo(0);
         }];
         _titleLB.font = [UIFont systemFontOfSize:18];

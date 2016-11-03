@@ -8,6 +8,7 @@
 
 #import "ForgetPasswordViewController.h"
 #import "ForgetPasswordView.h"
+#import "ResetPasswordViewController.h"
 
 @interface ForgetPasswordViewController ()
 @property (nonatomic) ForgetPasswordView *forgetView;
@@ -21,11 +22,17 @@
     self.view.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
     self.forgetView = [[ForgetPasswordView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.forgetView];
-    
-//    __block __weak ForgetPasswordViewController *weakself = self;
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
+
+    __block __weak ForgetPasswordViewController *weakself = self;
     [self.forgetView setForgetCallBack:^(NSInteger tag, NSString *phoneNumber, NSString *codeString) {
         if (tag == 1103) {
             NSLog(@"------------号码验证下一步");
+            //验证成功
+            
+            ResetPasswordViewController *vc = [[ResetPasswordViewController alloc] init];
+            [weakself.navigationController pushViewController:vc animated:YES];
+            
         }
         if(tag == 1104){
             NSLog(@"------------发送验证码");

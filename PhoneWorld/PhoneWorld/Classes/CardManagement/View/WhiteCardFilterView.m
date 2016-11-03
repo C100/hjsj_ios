@@ -16,6 +16,8 @@
 @property (nonatomic) UIButton *findBtn;
 @property (nonatomic) UIButton *resetBtn;
 @property (nonatomic) UITableViewCell *currentCell;
+@property (nonatomic) int currentPickerType;
+@property (nonatomic) NSString *currentPoolId;
 
 @end
 
@@ -26,6 +28,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.titles = @[@"号码池",@"靓号规则"];
+        self.currentPickerType = 0;
         self.backgroundColor = [UIColor whiteColor];
         [self filterTableView];
         [self findBtn];
@@ -160,7 +163,13 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return 10;
+    if (self.currentPickerType == 0) {
+        //号码池
+        return self.numberPoolArray.count;
+    }else{
+        //靓号规则
+        return self.numberTypeArray.count;
+    }
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
@@ -168,7 +177,15 @@
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return @"标题没有";
+    if (self.currentPickerType == 0) {
+        //号码池
+        NSDictionary *dic = self.numberPoolArray[row];
+        return dic[@"name"];
+    }else{
+        //靓号规则
+        return self.numberTypeArray[row];
+    }
+    return @"无";
 }
 
 #pragma mark - UITableView Delegate
@@ -201,10 +218,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.currentPickerType = (int)indexPath.row;
     self.pickerView.hidden = NO;
     self.pickView.hidden = NO;
     self.sureButton.hidden = NO;
     self.cancelButton.hidden = NO;
+    self.pickerView.alpha = 0;
+    self.pickView.alpha = 0;
+    self.sureButton.alpha = 0;
+    self.cancelButton.alpha = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.pickerView.alpha = 1;
+        self.pickView.alpha = 0.5;
+        self.sureButton.alpha = 1;
+        self.cancelButton.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    [self.pickerView reloadAllComponents];
     self.currentCell = [tableView cellForRowAtIndexPath:indexPath];
 }
 
@@ -220,7 +251,11 @@
                 if ([cell.detailTextLabel.text isEqualToString:@"请选择"]) {
                     [conditions addObject:@"无"];
                 }else{
-                    [conditions addObject:cell.detailTextLabel.text];
+                    if (i == 0) {
+                        [conditions addObject:self.currentPoolId];
+                    }else{
+                        [conditions addObject:cell.detailTextLabel.text];
+                    }
                 }
             }
             _WhiteCardFilterCallBack(conditions);
@@ -241,26 +276,54 @@
 - (void)surePickerAction:(UIButton *)button{
     NSLog(@"确定");
     NSInteger row = [self.pickerView selectedRowInComponent:0];
-    self.currentCell.detailTextLabel.text = [NSString stringWithFormat:@"没有数据%ld",row];
-    self.pickerView.hidden = YES;
-    self.pickView.hidden = YES;
-    self.sureButton.hidden = YES;
-    self.cancelButton.hidden = YES;
+    if (self.currentPickerType == 0) {
+        NSDictionary *dic = self.numberPoolArray[row];
+        self.currentCell.detailTextLabel.text = dic[@"name"];
+        self.currentPoolId = [NSString stringWithFormat:@"%@",dic[@"id"]];
+    }else{
+        self.currentCell.detailTextLabel.text = self.numberTypeArray[row];
+    }
+    [UIView animateWithDuration:0.5 animations:^{
+        self.pickerView.alpha = 0;
+        self.pickView.alpha = 0;
+        self.sureButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.pickerView.hidden = YES;
+        self.pickView.hidden = YES;
+        self.sureButton.hidden = YES;
+        self.cancelButton.hidden = YES;
+    }];
 }
 
 - (void)cancelPickerAction:(UIButton *)button{
     NSLog(@"取消");
-    self.pickerView.hidden = YES;
-    self.pickView.hidden = YES;
-    self.sureButton.hidden = YES;
-    self.cancelButton.hidden = YES;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.pickerView.alpha = 0;
+        self.pickView.alpha = 0;
+        self.sureButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.pickerView.hidden = YES;
+        self.pickView.hidden = YES;
+        self.sureButton.hidden = YES;
+        self.cancelButton.hidden = YES;
+    }];
 }
 
 - (void)dismissAction:(UITapGestureRecognizer *)tap{
-    self.pickerView.hidden = YES;
-    self.pickView.hidden = YES;
-    self.sureButton.hidden = YES;
-    self.cancelButton.hidden = YES;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.pickerView.alpha = 0;
+        self.pickView.alpha = 0;
+        self.sureButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.pickerView.hidden = YES;
+        self.pickView.hidden = YES;
+        self.sureButton.hidden = YES;
+        self.cancelButton.hidden = YES;
+    }];
 }
 
 @end

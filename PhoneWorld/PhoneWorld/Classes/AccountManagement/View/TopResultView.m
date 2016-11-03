@@ -7,6 +7,7 @@
 //
 
 #import "TopResultView.h"
+#import "MainTabBarController.h"
 
 @implementation TopResultView
 
@@ -125,7 +126,12 @@
     if ([button.currentTitle isEqualToString:@"继续充值"]) {
         [controller.navigationController popViewControllerAnimated:YES];
     }else{
-        [controller.navigationController popToRootViewControllerAnimated:YES];
+        MainTabBarController *mainTab = (MainTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;        
+        [UIView animateWithDuration:0.5 animations:^{
+            [controller.navigationController popToRootViewControllerAnimated:YES];
+        } completion:^(BOOL finished) {
+            mainTab.selectedViewController = mainTab.viewControllers.firstObject;
+        }];
     }
 }
 

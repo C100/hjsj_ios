@@ -145,11 +145,19 @@
         }];
         
         [self.selectView setDismissPickerViewCallBack:^(id obj) {
-            weakself.selectView.beginDatePicker.hidden = YES;
-            weakself.selectView.pickView.hidden = YES;
-            weakself.selectView.pickerView.hidden = YES;
-            weakself.selectView.closeImagePickerButton.hidden = YES;
-            weakself.selectView.cancelButton.hidden = YES;
+            [UIView animateWithDuration:0.5 animations:^{
+                weakself.selectView.beginDatePicker.alpha = 0;
+                weakself.selectView.pickView.alpha = 0;
+                weakself.selectView.pickerView.alpha = 0;
+                weakself.selectView.closeImagePickerButton.alpha = 0;
+                weakself.selectView.cancelButton.alpha = 0;
+            } completion:^(BOOL finished) {
+                weakself.selectView.beginDatePicker.hidden = YES;
+                weakself.selectView.pickView.hidden = YES;
+                weakself.selectView.pickerView.hidden = YES;
+                weakself.selectView.closeImagePickerButton.hidden = YES;
+                weakself.selectView.cancelButton.hidden = YES;
+            }];
         }];
         
     }

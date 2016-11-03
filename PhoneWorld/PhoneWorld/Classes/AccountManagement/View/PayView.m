@@ -10,7 +10,7 @@
 
 #define kDotSize CGSizeMake (10, 10) //密码点的大小
 #define kDotCount 6  //密码个数
-#define K_Field_Height 45  //每一个输入框的高度
+#define K_Field_Height (screenWidth - 32)/6  //每一个输入框的高度
 
 @interface PayView ()
 
@@ -31,7 +31,7 @@
         [lb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(0);
             make.centerX.mas_equalTo(0);
-            make.height.mas_equalTo(40);
+            make.height.mas_equalTo(50);
         }];
         lb.text = @"输入密码";
         lb.font = [UIFont systemFontOfSize:18];
@@ -47,7 +47,7 @@
         [self addSubview:self.textField];
 
         [self initPwdTextField];
-        [self forgetPasswodButton];
+//        [self forgetPasswodButton];
     }
     return self;
 }
@@ -113,24 +113,6 @@
     }
 }
 
-- (UIButton *)forgetPasswodButton{
-    if (_forgetPasswodButton == nil) {
-        _forgetPasswodButton = [[UIButton alloc] init];
-        [self addSubview:_forgetPasswodButton];
-        [_forgetPasswodButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-16);
-            make.top.mas_equalTo(self.textField.mas_bottom).mas_equalTo(10);
-            make.width.mas_equalTo(100);
-            make.height.mas_equalTo(18);
-        }];
-        [_forgetPasswodButton setTitle:@"忘记密码？" forState:UIControlStateNormal];
-        [_forgetPasswodButton setTitleColor:[Utils colorRGB:@"#0081eb"] forState:UIControlStateNormal];
-        _forgetPasswodButton.titleLabel.font = [UIFont systemFontOfSize:16];
-        [_forgetPasswodButton addTarget:self action:@selector(forgetPasswordAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _forgetPasswodButton;
-}
-
 #pragma mark - UITextField Delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -175,10 +157,6 @@
 
 - (void)closeAction:(UIButton *)button{
     _ClosePayCallBack(button);
-}
-
-- (void)forgetPasswordAction:(UIButton *)button{
-    _ForgetPasswordCallBack(button);
 }
 
 @end

@@ -12,9 +12,13 @@
 
 @interface WhiteCardView : UIScrollView <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
+@property (nonatomic) void(^WhiteCardSelectCallBack)(NSString *numberpool,NSString *numberType);
+
 @property (nonatomic) UIView *siftView;
 @property (nonatomic) WhiteCardTopView *topView;
 @property (nonatomic) WhiteCardFilterView *selectView;
 @property (nonatomic) UICollectionView *contentView;
+
+@property (nonatomic) NSArray *randomPhoneNumbers;
 
 @end

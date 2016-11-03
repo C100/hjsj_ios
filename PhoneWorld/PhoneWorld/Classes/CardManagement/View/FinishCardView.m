@@ -29,12 +29,16 @@
         self.leftTitles = @[@"手机号码",@"PUK码"];
         self.inputViews = [NSMutableArray array];
         for (int i = 0; i < self.leftTitles.count; i++) {
-            InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(0, 41*i, screenWidth, 40)];
+            InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(0, 40*i, screenWidth, 40)];
             [self addSubview:inputView];
             inputView.leftLabel.text = self.leftTitles[i];
             inputView.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
             [self.inputViews addObject:inputView];
         }
+        
+        UIView *whiteV = [[UIView alloc] initWithFrame:CGRectMake(15, 39, screenWidth, 1)];
+        whiteV.backgroundColor = COLOR_BACKGROUND;
+        [self addSubview:whiteV];
         
         [self nextButton];
     }
@@ -65,18 +69,19 @@
     InputView *puk = self.inputViews.lastObject;
     if ([Utils isMobile:phone.textField.text] && [Utils isNumber:puk.textField.text]) {
         //检测
-        //成功
-        ChoosePackageViewController *vc = [ChoosePackageViewController new];
-        vc.userinfosDic = [@{@"phoneNumber":phone.textField.text,@"phoneAddress":@"浙江省杭州市",@"phoneState":@"已激活",@"networkType":@"话机通信"} mutableCopy];
-        UIViewController *viewController = [self viewController];
-        [viewController.navigationController pushViewController:vc animated:YES];
-        
+        _FinishCardCallBack(phone.textField.text,puk.textField.text);
         //失败
         self.failedView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"验证失败" andDetail:@"手机号码或PUK码错误" andImageName:@"attention" andTextColorHex:@"#333333"];
         
         [[UIApplication sharedApplication].keyWindow addSubview:self.failedView];
         
         [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(removeGrayView) userInfo:nil repeats:NO];
+        //成功
+        ChoosePackageViewController *vc = [ChoosePackageViewController new];
+        vc.userinfosDic = [@{@"phoneNumber":phone.textField.text,@"phoneAddress":@"浙江省杭州市",@"phoneState":@"已激活",@"networkType":@"话机通信"} mutableCopy];
+        UIViewController *viewController = [self viewController];
+        [viewController.navigationController pushViewController:vc animated:YES];
+        
     }else{
         if (![Utils isMobile:phone.textField.text]) {
             [Utils toastview:@"请输入正确格式手机号"];

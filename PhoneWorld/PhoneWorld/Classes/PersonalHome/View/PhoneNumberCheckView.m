@@ -7,13 +7,10 @@
 //
 
 #import "PhoneNumberCheckView.h"
-#import "InputView.h"
 
 @interface PhoneNumberCheckView ()
 
-@property (nonatomic) InputView *inputView;
 @property (nonatomic) UIView *verivicationCodeView;
-@property (nonatomic) UITextField *codeTF;
 
 @end
 
@@ -104,6 +101,7 @@
 - (void)sendVericicationCodeAction:(UIButton *)button{
     //发送验证码
     if ([Utils isMobile:self.inputView.textField.text]) {
+        _sendCaptchaCallBack(button);
         NSLog(@"--------------发送验证码");
     }else{
         [Utils toastview:@"请输入正确格式的手机号"];
@@ -123,6 +121,7 @@
         [Utils toastview:@"请输入验证码"];
         return;
     }
+    _nextStepCallBack(button);
     NSLog(@"------------下一步");
 }
 

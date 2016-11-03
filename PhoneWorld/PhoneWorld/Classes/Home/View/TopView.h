@@ -18,4 +18,6 @@
 @property (nonatomic) NSMutableArray *titlesButton;
 @property (nonatomic) NSMutableArray *resultArr;//结果Label
 
+@property (nonatomic) UIButton *currentButton;
+
 @end

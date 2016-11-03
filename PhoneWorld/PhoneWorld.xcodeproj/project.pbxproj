@@ -172,6 +172,19 @@
 		8AEEF9931DAF66E300D3D6AD /* TransferCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF9921DAF66E300D3D6AD /* TransferCardView.m */; };
 		8AEEF99C1DAF802A00D3D6AD /* RepairCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF99B1DAF802A00D3D6AD /* RepairCardView.m */; };
 		8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEF9A31DAF839700D3D6AD /* CardRepairViewController.m */; };
+		8AF374231DC86312009962ED /* HomeScrollModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF374221DC86312009962ED /* HomeScrollModel.m */; };
+		8AFC21BC1DC6E99E00D73AFE /* WebUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC21BB1DC6E99E00D73AFE /* WebUtils.m */; };
+		8AFC21BF1DC6F1DC00D73AFE /* RegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC21BE1DC6F1DC00D73AFE /* RegisterModel.m */; };
+		8AFC21C81DC73C0B00D73AFE /* PersonalInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC21C71DC73C0B00D73AFE /* PersonalInfoModel.m */; };
+		8AFC48B21DC99A4E00E6C982 /* WhitePhoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48B11DC99A4E00E6C982 /* WhitePhoneModel.m */; };
+		8AFC48B51DC9B19700E6C982 /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48B41DC9B19700E6C982 /* MessageView.m */; };
+		8AFC48BB1DC9B31300E6C982 /* MessageTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48BA1DC9B31300E6C982 /* MessageTCell.m */; };
+		8AFC48BE1DC9B45A00E6C982 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48BD1DC9B45A00E6C982 /* UIImage+Extension.m */; };
+		8AFC48C11DC9BE2E00E6C982 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48C01DC9BE2E00E6C982 /* MessageModel.m */; };
+		8AFC48CA1DC9E82100E6C982 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48C91DC9E82100E6C982 /* OrderListModel.m */; };
+		8AFC48CD1DC9ED5900E6C982 /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48CC1DC9ED5900E6C982 /* MessageDetailViewController.m */; };
+		8AFC48D01DC9ED6A00E6C982 /* MessageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48CF1DC9ED6A00E6C982 /* MessageDetailView.m */; };
+		8AFC48D61DC9EF4D00E6C982 /* MessageDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC48D51DC9EF4D00E6C982 /* MessageDetailModel.m */; };
 		EE79FCC9EBCAAA8F6CEA2ECA /* libPods-PhoneWorld.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC23F93AE94DD6F67AAD0F2 /* libPods-PhoneWorld.a */; };
 /* End PBXBuildFile section */
 
@@ -501,6 +514,32 @@
 		8AEEF99D1DAF828600D3D6AD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8AEEF9A21DAF839700D3D6AD /* CardRepairViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardRepairViewController.h; sourceTree = "<group>"; };
 		8AEEF9A31DAF839700D3D6AD /* CardRepairViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardRepairViewController.m; sourceTree = "<group>"; };
+		8AF374211DC86312009962ED /* HomeScrollModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScrollModel.h; sourceTree = "<group>"; };
+		8AF374221DC86312009962ED /* HomeScrollModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScrollModel.m; sourceTree = "<group>"; };
+		8AFC21BA1DC6E99E00D73AFE /* WebUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebUtils.h; sourceTree = "<group>"; };
+		8AFC21BB1DC6E99E00D73AFE /* WebUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebUtils.m; sourceTree = "<group>"; };
+		8AFC21BD1DC6F1DC00D73AFE /* RegisterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterModel.h; sourceTree = "<group>"; };
+		8AFC21BE1DC6F1DC00D73AFE /* RegisterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterModel.m; sourceTree = "<group>"; };
+		8AFC21C61DC73C0B00D73AFE /* PersonalInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoModel.h; sourceTree = "<group>"; };
+		8AFC21C71DC73C0B00D73AFE /* PersonalInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoModel.m; sourceTree = "<group>"; };
+		8AFC48B01DC99A4E00E6C982 /* WhitePhoneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhitePhoneModel.h; sourceTree = "<group>"; };
+		8AFC48B11DC99A4E00E6C982 /* WhitePhoneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhitePhoneModel.m; sourceTree = "<group>"; };
+		8AFC48B31DC9B19700E6C982 /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageView.h; sourceTree = "<group>"; };
+		8AFC48B41DC9B19700E6C982 /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageView.m; sourceTree = "<group>"; };
+		8AFC48B91DC9B31300E6C982 /* MessageTCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTCell.h; sourceTree = "<group>"; };
+		8AFC48BA1DC9B31300E6C982 /* MessageTCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTCell.m; sourceTree = "<group>"; };
+		8AFC48BC1DC9B45A00E6C982 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
+		8AFC48BD1DC9B45A00E6C982 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
+		8AFC48BF1DC9BE2E00E6C982 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
+		8AFC48C01DC9BE2E00E6C982 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
+		8AFC48C81DC9E82100E6C982 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
+		8AFC48C91DC9E82100E6C982 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
+		8AFC48CB1DC9ED5900E6C982 /* MessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
+		8AFC48CC1DC9ED5900E6C982 /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
+		8AFC48CE1DC9ED6A00E6C982 /* MessageDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailView.h; sourceTree = "<group>"; };
+		8AFC48CF1DC9ED6A00E6C982 /* MessageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailView.m; sourceTree = "<group>"; };
+		8AFC48D41DC9EF4D00E6C982 /* MessageDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDetailModel.h; sourceTree = "<group>"; };
+		8AFC48D51DC9EF4D00E6C982 /* MessageDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDetailModel.m; sourceTree = "<group>"; };
 		A8BD6A81DD23512D9C216ADE /* Pods-PhoneWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneWorld.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhoneWorld/Pods-PhoneWorld.debug.xcconfig"; sourceTree = "<group>"; };
 		D3185A9261F048735B2A06F2 /* Pods-PhoneWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneWorld.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhoneWorld/Pods-PhoneWorld.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -689,6 +728,8 @@
 		8A49D88A1DACCB9900A1D650 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AFC48B01DC99A4E00E6C982 /* WhitePhoneModel.h */,
+				8AFC48B11DC99A4E00E6C982 /* WhitePhoneModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -751,6 +792,8 @@
 				8AD96E381DACCF3E0080CC8C /* HomeViewController.m */,
 				8AD96E461DACD7A50080CC8C /* MessageViewController.h */,
 				8AD96E471DACD7A50080CC8C /* MessageViewController.m */,
+				8AFC48CB1DC9ED5900E6C982 /* MessageDetailViewController.h */,
+				8AFC48CC1DC9ED5900E6C982 /* MessageDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -758,6 +801,12 @@
 		8A49D88E1DACCB9900A1D650 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AF374211DC86312009962ED /* HomeScrollModel.h */,
+				8AF374221DC86312009962ED /* HomeScrollModel.m */,
+				8AFC48BF1DC9BE2E00E6C982 /* MessageModel.h */,
+				8AFC48C01DC9BE2E00E6C982 /* MessageModel.m */,
+				8AFC48D41DC9EF4D00E6C982 /* MessageDetailModel.h */,
+				8AFC48D51DC9EF4D00E6C982 /* MessageDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -769,6 +818,12 @@
 				8AD96E641DACEA570080CC8C /* HomeCell.m */,
 				8AABF8811DADC6A80088DD82 /* HomeView.h */,
 				8AABF8821DADC6A80088DD82 /* HomeView.m */,
+				8AFC48B31DC9B19700E6C982 /* MessageView.h */,
+				8AFC48B41DC9B19700E6C982 /* MessageView.m */,
+				8AFC48B91DC9B31300E6C982 /* MessageTCell.h */,
+				8AFC48BA1DC9B31300E6C982 /* MessageTCell.m */,
+				8AFC48CE1DC9ED6A00E6C982 /* MessageDetailView.h */,
+				8AFC48CF1DC9ED6A00E6C982 /* MessageDetailView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -782,10 +837,14 @@
 				8AABF8851DADFB750088DD82 /* Utils.m */,
 				8AAD6A161DC1F9AA00FC7E4A /* BaseWebUtils.h */,
 				8AAD6A171DC1F9AA00FC7E4A /* BaseWebUtils.m */,
+				8AFC21BA1DC6E99E00D73AFE /* WebUtils.h */,
+				8AFC21BB1DC6E99E00D73AFE /* WebUtils.m */,
 				8A90E8E11DB5BD10004ECA62 /* UIView+ORGetController.h */,
 				8A90E8E21DB5BD10004ECA62 /* UIView+ORGetController.m */,
 				8AABF8A11DAE68980088DD82 /* UIView+Toast.h */,
 				8AABF8A21DAE68980088DD82 /* UIView+Toast.m */,
+				8AFC48BC1DC9B45A00E6C982 /* UIImage+Extension.h */,
+				8AFC48BD1DC9B45A00E6C982 /* UIImage+Extension.m */,
 				8A49D8911DACCB9900A1D650 /* Controller */,
 				8A49D8921DACCB9900A1D650 /* Model */,
 				8A49D8931DACCB9900A1D650 /* View */,
@@ -858,6 +917,8 @@
 		8A49D8961DACCB9900A1D650 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AFC48C81DC9E82100E6C982 /* OrderListModel.h */,
+				8AFC48C91DC9E82100E6C982 /* OrderListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1373,6 +1434,8 @@
 		8AD96E4F1DACD9340080CC8C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AFC21BD1DC6F1DC00D73AFE /* RegisterModel.h */,
+				8AFC21BE1DC6F1DC00D73AFE /* RegisterModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1432,6 +1495,8 @@
 		8AD96E531DACD9380080CC8C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8AFC21C61DC73C0B00D73AFE /* PersonalInfoModel.h */,
+				8AFC21C71DC73C0B00D73AFE /* PersonalInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1608,6 +1673,7 @@
 			files = (
 				8A9698A41DB74233000841BA /* WhiteCardCell.m in Sources */,
 				8AEEF9901DAF66CF00D3D6AD /* TransferCardViewController.m in Sources */,
+				8AFC48BB1DC9B31300E6C982 /* MessageTCell.m in Sources */,
 				8A96D2EE1DC0A0BC0052C46C /* ScreenView.m in Sources */,
 				8A96D2E81DC084E90052C46C /* ChannelPartnersCell.m in Sources */,
 				8AEEF9A41DAF839700D3D6AD /* CardRepairViewController.m in Sources */,
@@ -1620,6 +1686,7 @@
 				8AEEF99C1DAF802A00D3D6AD /* RepairCardView.m in Sources */,
 				8AABF8A01DAE5BB90088DD82 /* CheckAndTopView.m in Sources */,
 				8A6CBF131DB0867E002625E8 /* ForgetPasswordViewController.m in Sources */,
+				8AFC48BE1DC9B45A00E6C982 /* UIImage+Extension.m in Sources */,
 				8A2142731DB9F65700116F62 /* CountView.m in Sources */,
 				8A70DB761DB8CAB6005E76C2 /* UITableViewCell+Extend.m in Sources */,
 				8A6CBF261DB09171002625E8 /* AboutUsView.m in Sources */,
@@ -1630,11 +1697,13 @@
 				8A9698B01DB75CDB000841BA /* ChoosePackageTableView.m in Sources */,
 				8A90E8E61DB5D326004ECA62 /* PayView.m in Sources */,
 				8AABF8A31DAE68980088DD82 /* UIView+Toast.m in Sources */,
+				8AFC21BC1DC6E99E00D73AFE /* WebUtils.m in Sources */,
 				8A70DB721DB8CAB6005E76C2 /* UIImage+Cut.m in Sources */,
 				8A6CBF0A1DB07D47002625E8 /* LoginViewController.m in Sources */,
 				8A90E8E01DB5B552004ECA62 /* TopResultView.m in Sources */,
 				8A70DAE41DB86EB2005E76C2 /* CardInquiryViewController.m in Sources */,
 				8A70DB851DB8CAB6005E76C2 /* PhotoBroswerVC.m in Sources */,
+				8AFC48CA1DC9E82100E6C982 /* OrderListModel.m in Sources */,
 				8AD96E421DACCF900080CC8C /* CardViewController.m in Sources */,
 				8A70DB681DB8CAB6005E76C2 /* CALayer+Transition.m in Sources */,
 				8A70DB7C1DB8CAB6005E76C2 /* PhotoModel.m in Sources */,
@@ -1650,6 +1719,8 @@
 				8A6CBF571DB0B510002625E8 /* SettingViewController.m in Sources */,
 				8AB87EE91DB226DB0045CB90 /* NaviViewController.m in Sources */,
 				8AD96E481DACD7A50080CC8C /* MessageViewController.m in Sources */,
+				8AFC48C11DC9BE2E00E6C982 /* MessageModel.m in Sources */,
+				8AFC21C81DC73C0B00D73AFE /* PersonalInfoModel.m in Sources */,
 				8A6CBF2C1DB0A5C5002625E8 /* ProposeView.m in Sources */,
 				8A6CBF2F1DB0AB1E002625E8 /* PersonalHomeView.m in Sources */,
 				8A70DB7A1DB8CAB6005E76C2 /* PBConst.m in Sources */,
@@ -1664,6 +1735,7 @@
 				8A6CBF691DB0FEE6002625E8 /* NormalOrderDetailViewController.m in Sources */,
 				8A9698AD1DB755F1000841BA /* ReadCardAndChoosePackageView.m in Sources */,
 				8A6CBF661DB0C939002625E8 /* OrderTwoView.m in Sources */,
+				8AFC21BF1DC6F1DC00D73AFE /* RegisterModel.m in Sources */,
 				8AB87EB41DB1DF650045CB90 /* CreatePayPasswordViewController.m in Sources */,
 				8A90E8EF1DB61747004ECA62 /* ChoosePackageView.m in Sources */,
 				8A6CBF481DB0B13A002625E8 /* PasswordManageView.m in Sources */,
@@ -1674,6 +1746,7 @@
 				8A6CBF5D1DB0C1C4002625E8 /* OrderTableViewCell.m in Sources */,
 				8A90E8EC1DB6109B004ECA62 /* FailedView.m in Sources */,
 				8A70DB801DB8CAB6005E76C2 /* PBSaveBtn.m in Sources */,
+				8AFC48CD1DC9ED5900E6C982 /* MessageDetailViewController.m in Sources */,
 				8A70DB661DB8CAB6005E76C2 /* CoreArchive.m in Sources */,
 				8A6CBF161DB086C8002625E8 /* ForgetPasswordView.m in Sources */,
 				8A70DB6C1DB8CAB6005E76C2 /* NSString+Extend.m in Sources */,
@@ -1696,6 +1769,7 @@
 				8A70DB771DB8CAB6005E76C2 /* UIView+Extend.m in Sources */,
 				8A70DB7E1DB8CAB6005E76C2 /* PBBlurImageView.m in Sources */,
 				8A70DB671DB8CAB6005E76C2 /* CALayer+Anim.m in Sources */,
+				8AFC48B51DC9B19700E6C982 /* MessageView.m in Sources */,
 				8AD96E731DAD09F10080CC8C /* TransferViewController.m in Sources */,
 				8A70DB821DB8CAB6005E76C2 /* PhotoImageView.m in Sources */,
 				8AD96E361DACCF220080CC8C /* MainNavigationController.m in Sources */,
@@ -1705,8 +1779,10 @@
 				8AABF89D1DAE5AF20088DD82 /* CheckAndTopViewController.m in Sources */,
 				8AEEF98D1DAF60E100D3D6AD /* FinishCardView.m in Sources */,
 				8AD96E3C1DACCF790080CC8C /* OrderViewController.m in Sources */,
+				8AFC48D61DC9EF4D00E6C982 /* MessageDetailModel.m in Sources */,
 				8AB87EB71DB1DF810045CB90 /* CreatePayPasswordView.m in Sources */,
 				8A9698A11DB727E9000841BA /* WhiteCardView.m in Sources */,
+				8AF374231DC86312009962ED /* HomeScrollModel.m in Sources */,
 				8A6CBF451DB0B12C002625E8 /* PasswordManageViewController.m in Sources */,
 				8A9698981DB70FC1000841BA /* SettlementDetailViewController.m in Sources */,
 				8A6CBF631DB0C489002625E8 /* OrderTwoTableViewCell.m in Sources */,
@@ -1718,6 +1794,7 @@
 				8A9698AA1DB755DA000841BA /* ReadCardAndChoosePackageViewController.m in Sources */,
 				8A70DAED1DB8C38B005E76C2 /* ChooseImageView.m in Sources */,
 				8A2142701DB9F4B700116F62 /* CommisionCountView.m in Sources */,
+				8AFC48B21DC99A4E00E6C982 /* WhitePhoneModel.m in Sources */,
 				8A5E30E51DBDC14C005D309A /* WhiteCardFilterView.m in Sources */,
 				8A70DB751DB8CAB6005E76C2 /* UIImage+Water.m in Sources */,
 				8A90E8E91DB5FB47004ECA62 /* CardManageView.m in Sources */,
@@ -1751,6 +1828,7 @@
 				8A70DB8F1DB8CAB6005E76C2 /* SVProgressHUD.m in Sources */,
 				8AD96E391DACCF3E0080CC8C /* HomeViewController.m in Sources */,
 				8A70DB8A1DB8CAB6005E76C2 /* UIImageView+SD.m in Sources */,
+				8AFC48D01DC9ED6A00E6C982 /* MessageDetailView.m in Sources */,
 				8A90E8E31DB5BD10004ECA62 /* UIView+ORGetController.m in Sources */,
 				8AC3A28B1DB48708007D432A /* AccountView.m in Sources */,
 				8A6CBF601DB0C3F2002625E8 /* OrderView.m in Sources */,
@@ -1880,7 +1958,7 @@
 				INFOPLIST_FILE = PhoneWorld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcy.ZhihuDaily;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcy.WeChat1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1895,7 +1973,7 @@
 				INFOPLIST_FILE = PhoneWorld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcy.ZhihuDaily;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcy.WeChat1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

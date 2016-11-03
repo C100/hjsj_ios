@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PersonalInfoModel.h"
 
 @interface PersonalInfoView : UIScrollView
 
-- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableArray *)userinfos;
-
-@property (nonatomic) NSMutableArray *userinfos;
+- (instancetype)initWithFrame:(CGRect)frame;
 
 @property (nonatomic) UIButton *saveButton;
+@property (nonatomic) NSMutableArray *inputViews;
+@property (nonatomic) PersonalInfoModel *personModel;
 
 @end

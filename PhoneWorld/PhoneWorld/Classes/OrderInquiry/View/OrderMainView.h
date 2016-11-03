@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FilterView.h" //筛选框
+#import "TopView.h"  //头部筛选栏
+#import "ContentView.h"  //内容
 
 @interface OrderMainView : UIView <UIScrollViewDelegate>
-
+@property (nonatomic) TopView *topView;//标题栏
+@property (nonatomic) FilterView *selectView;//筛选new
+@property (nonatomic) ContentView *contentScrollView;
 @end

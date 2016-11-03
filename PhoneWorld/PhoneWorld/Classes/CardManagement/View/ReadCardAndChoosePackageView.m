@@ -109,7 +109,7 @@
         //下一步        
         UIViewController *viewController = [self viewController];
         InformationCollectionViewController *vc = [InformationCollectionViewController new];
-        vc.userinfosDic = [@{@"phoneNumber":self.infos[0],@"phoneAddress":@"浙江省杭州市",@"phoneState":@"已激活",@"networkType":@"话机通信"} mutableCopy];
+        vc.userinfosDic = [@{@"phoneNumber":self.infos[0],@"phoneAddress":@"浙江省杭州市",@"phoneState":@"已激活",@"networkType":@"话机通信",@"prestoreMoney":self.chooseTableView.inputView.textField.text} mutableCopy];
         [viewController.navigationController pushViewController:vc animated:YES];
     }
 }

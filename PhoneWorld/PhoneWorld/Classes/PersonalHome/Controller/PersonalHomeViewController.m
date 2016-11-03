@@ -72,12 +72,30 @@
             }
                 break;
             case 111:{//登出
-                NaviViewController *vc = [[NaviViewController alloc] initWithRootViewController:[LoginViewController new]];
-                [weakself presentViewController:vc animated:YES completion:nil];
+                
+                [WebUtils requestLogoutResultWithCallBack:^(id obj) {
+                    if (obj) {
+                        if ([obj[@"code"] isEqualToString:@"10000"]) {
+                            
+                            [Utils clearAllUserDefaultsData];
+                            
+                            NaviViewController *vc = [[NaviViewController alloc] initWithRootViewController:[LoginViewController new]];
+                            [weakself presentViewController:vc animated:YES completion:nil];
+                        }else{
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [Utils toastview:@"注销失败"];
+                            });
+                        }
+                    }
+                }];
             }
                 break;
         }
     }];
+}
+
+- (void)logoutRequest{
+    
 }
 
 @end

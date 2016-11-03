@@ -10,4 +10,8 @@
 
 @interface PhoneNumberCheckViewController : UIViewController
 
+@property (nonatomic) NSString *oldPass;
+@property (nonatomic) NSString *newsPass;
+@property (nonatomic) int type;
+
 @end

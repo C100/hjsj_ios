@@ -41,6 +41,9 @@
         //查询操作
         weakself.phoneCashCheckView.userinfos = @[@"账户余额：99元",@"资费信息",@"套餐：",@"活动包：",@"起止日期：",@"客户信息",@"姓名：",@"手机号码：",@"身份证号码："];
         [weakself.phoneCashCheckView resultTableView];
+        
+        //如果查询失败弹出框：无法查询，请去网络供应商查询
+        
     }];
     
 }

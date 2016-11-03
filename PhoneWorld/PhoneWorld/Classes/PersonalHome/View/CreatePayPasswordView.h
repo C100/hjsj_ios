@@ -12,5 +12,6 @@
 
 @property (nonatomic) void(^CreatePayPasswordCallBack) (id obj);
 @property (nonatomic) UIButton *saveButton;
+@property (nonatomic) NSMutableArray *inputViews;
 
 @end

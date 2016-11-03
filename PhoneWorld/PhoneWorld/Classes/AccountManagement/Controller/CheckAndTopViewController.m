@@ -26,12 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"余额查询与充值";
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
-    backButton.title = @"返回";
-    [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
-    self.navigationItem.backBarButtonItem = backButton;
-    
     self.checkAndTopView = [[CheckAndTopView alloc] init];
     [self.view addSubview:self.checkAndTopView];
     [self.checkAndTopView mas_makeConstraints:^(MASConstraintMaker *make) {

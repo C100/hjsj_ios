@@ -24,8 +24,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
     
-    LoginViewController *vc = [[LoginViewController alloc] init];
-    self.window.rootViewController = [[NaviViewController alloc] initWithRootViewController:vc];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSLog(@"---username:%@  ----sessiontoken:%@",[ud objectForKey:@"username"],[ud objectForKey:@"session_token"]);
+    
+    if ([ud objectForKey:@"username"] && [ud objectForKey:@"session_token"]) {
+        [self gotoHomeVC];
+    }else{
+        LoginViewController *vc = [[LoginViewController alloc] init];
+        self.window.rootViewController = [[NaviViewController alloc] initWithRootViewController:vc];
+    }
     
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable = YES;//控制整个功能是否启用

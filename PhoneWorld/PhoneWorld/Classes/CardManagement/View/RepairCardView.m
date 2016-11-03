@@ -33,7 +33,7 @@
         self.backgroundColor = COLOR_BACKGROUND;
         self.inputViews = [NSMutableArray array];
         self.choices = @[@"顺丰到付",@"充值一百免邮费"];
-        self.leftTitles = @[@"补卡号码",@"补卡人姓名",@"证件号码",@"联系电话",@"近期联系号码",@"邮寄地址",@"收件人姓名",@"收件人电话",@"邮寄选项"];
+        self.leftTitles = @[@"补卡号码",@"补卡人姓名",@"证件号码",@"证件地址",@"联系电话",@"近期联系号码",@"邮寄地址",@"收件人姓名",@"收件人电话",@"邮寄选项"];
         
         for (int i = 0; i < self.leftTitles.count; i++) {
             InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
@@ -116,7 +116,7 @@
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     [ac addAction:action2];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:ac animated:YES completion:nil];
+    [[self viewController] presentViewController:ac animated:YES completion:nil];
 }
 
 - (void)buttonClickAction:(UIButton *)button{

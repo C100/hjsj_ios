@@ -72,7 +72,7 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        [_submitButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_submitButton setTitle:@"提交" forState:UIControlStateNormal];
         [_submitButton setTitleColor:MainColor forState:UIControlStateNormal];
         _submitButton.layer.cornerRadius = 20;
         _submitButton.layer.borderColor = MainColor.CGColor;
@@ -96,20 +96,20 @@
     }else{
         [self endEditing:YES];
         _ProposeCallBack(self.proposeTV.text);
-        self.resultView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"多谢配合" andDetail:@"您的建议意见已收到，会尽快处理！" andImageName:@"icon_smile" andTextColorHex:@"#ec6c00"];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.resultView];
-        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(dismissResultView) userInfo:nil repeats:NO];
+//        self.resultView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"多谢配合" andDetail:@"您的建议意见已收到，会尽快处理！" andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
+//        [[UIApplication sharedApplication].keyWindow addSubview:self.resultView];
+//        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(dismissResultView) userInfo:nil repeats:NO];
     }
 }
 
-- (void)dismissResultView{
-    [UIView animateWithDuration:1.0 animations:^{
-        self.resultView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self.resultView removeFromSuperview];
-        UIViewController *viewController = [self viewController];
-        [viewController.navigationController popViewControllerAnimated:YES];
-    }];
-}
+//- (void)dismissResultView{
+//    [UIView animateWithDuration:1.0 animations:^{
+//        self.resultView.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        [self.resultView removeFromSuperview];
+//        UIViewController *viewController = [self viewController];
+//        [viewController.navigationController popViewControllerAnimated:YES];
+//    }];
+//}
 
 @end

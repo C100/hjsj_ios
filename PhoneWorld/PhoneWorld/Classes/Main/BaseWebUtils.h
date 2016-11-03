@@ -12,8 +12,12 @@ typedef void(^BaseWebUtilsCallBack)(id obj);
 
 @interface BaseWebUtils : NSObject
 
-+ (void)GET:(NSString *)path andParams:(NSDictionary *)params andCallBack:(BaseWebUtilsCallBack)callBack;
++ (void)POST:(NSString *)path andParams:(NSString *)params andCallBack:(BaseWebUtilsCallBack)callBack;
 
-+ (void)POST:(NSString *)path andParams:(NSDictionary *)params andCallBack:(BaseWebUtilsCallBack)callBack;
++ (void)POSTWithPath:(NSString *)path andParams:(NSString *)params andCallBack:(BaseWebUtilsCallBack)callBack;
+
++ (void)postSynRequestWithURL:(NSString *)urlStr
+                    paramters:(NSDictionary  *)paramtersDic
+                 finshedBlock:(WebUtilsCallBack1)block;
 
 @end

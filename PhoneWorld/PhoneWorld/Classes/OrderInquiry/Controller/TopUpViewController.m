@@ -22,8 +22,20 @@ static TopUpViewController *_topUpViewController;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.orderTwoView = [[OrderTwoView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80 - 20)];
+    self.orderTwoView = [[OrderTwoView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80)];
     [self.view addSubview:self.orderTwoView];
+    
+    [self.orderTwoView.orderTwoTableView addPullToRefreshWithActionHandler:^{
+        //下拉刷新
+    }];
+    
+    [self.orderTwoView.orderTwoTableView addInfiniteScrollingWithActionHandler:^{
+        //上拉加载
+    }];
+    
+    [self.orderTwoView.orderTwoTableView.pullToRefreshView stopAnimating];
+    [self.orderTwoView.orderTwoTableView.infiniteScrollingView stopAnimating];
+    
 }
 
 @end

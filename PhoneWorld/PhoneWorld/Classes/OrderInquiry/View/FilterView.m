@@ -7,14 +7,12 @@
 //
 
 #import "FilterView.h"
-#import "InputView.h"
 
 #define leftDistance (screenWidth - 210)/2.0
 
 @interface FilterView ()
 
 @property (nonatomic) UITableViewCell *currentCell;
-@property (nonatomic) InputView *phoneInputView;
 
 @end
 
@@ -36,6 +34,22 @@
         [self beginDatePicker];
     }
     return self;
+}
+
+- (UITableView *)filterTableView{
+    if (_filterTableView == nil) {
+        _filterTableView = [[UITableView alloc] init];
+        [self addSubview:_filterTableView];
+        [_filterTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(41*self.titles.count);
+        }];
+        _filterTableView.delegate = self;
+        _filterTableView.dataSource = self;
+        _filterTableView.bounces = NO;
+        _filterTableView.tableFooterView = [UIView new];
+    }
+    return _filterTableView;
 }
 
 - (UIView *)pickView{
@@ -112,22 +126,6 @@
         _pickerView.backgroundColor = [UIColor whiteColor];
     }
     return _pickerView;
-}
-
-- (UITableView *)filterTableView{
-    if (_filterTableView == nil) {
-        _filterTableView = [[UITableView alloc] init];
-        [self addSubview:_filterTableView];
-        [_filterTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.mas_equalTo(0);
-            make.height.mas_equalTo(41*self.titles.count);
-        }];
-        _filterTableView.delegate = self;
-        _filterTableView.dataSource = self;
-        _filterTableView.bounces = NO;
-        _filterTableView.tableFooterView = [UIView new];
-    }
-    return _filterTableView;
 }
 
 /*----查询按钮--------*/
@@ -217,20 +215,46 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.currentCell = [tableView cellForRowAtIndexPath:indexPath];
     
-    if (indexPath.row == 0 || indexPath.row == 1) {
+    if (indexPath.row == 0 || indexPath.row == 1) {//起始时间或截止时间
         self.beginDatePicker.hidden = NO;
         self.pickView.hidden = NO;
         self.closeImagePickerButton.hidden = NO;
         self.cancelButton.hidden = NO;
+        self.beginDatePicker.alpha = 0;
+        self.pickView.alpha = 0;
+        self.closeImagePickerButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            self.beginDatePicker.alpha = 1;
+            self.pickView.alpha = 0.5;
+            self.closeImagePickerButton.alpha = 1;
+            self.cancelButton.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
+
         [self endEditing:YES];
     }
     
     if (indexPath.row == 2) {
         [self.pickerView reloadAllComponents];
+        
+        self.pickerView.hidden = NO;
         self.pickView.hidden = NO;
         self.closeImagePickerButton.hidden = NO;
         self.cancelButton.hidden = NO;
-        self.pickerView.hidden = NO;
+        self.pickerView.alpha = 0;
+        self.pickView.alpha = 0;
+        self.closeImagePickerButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            self.pickerView.alpha = 1;
+            self.pickView.alpha = 0.5;
+            self.closeImagePickerButton.alpha = 1;
+            self.cancelButton.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
         [self endEditing:YES];
     }
 }
@@ -298,13 +322,22 @@
                     }
                 }
             }
-
-            _FilterCallBack(conditions,@"查询");
-            NSLog(@"万事俱备，就要查询啦！！！！！！！！");
-            self.pickView.hidden = YES;
-            self.beginDatePicker.hidden = YES;
-            self.closeImagePickerButton.hidden = YES;
-            self.cancelButton.hidden = YES;
+            
+            [UIView animateWithDuration:0.5 animations:^{
+                self.beginDatePicker.alpha = 0;
+                self.pickView.alpha = 0;
+                self.closeImagePickerButton.alpha = 0;
+                self.cancelButton.alpha = 0;
+                self.pickerView.alpha = 0;
+            } completion:^(BOOL finished) {
+                self.beginDatePicker.hidden = YES;
+                self.pickView.hidden = YES;
+                self.closeImagePickerButton.hidden = YES;
+                self.cancelButton.hidden = YES;
+                self.pickerView.hidden = YES;
+                _FilterCallBack(conditions,@"查询");
+                NSLog(@"万事俱备，就要查询啦！！！！！！！！");
+            }];
         }
             break;
         case 71:
@@ -329,11 +362,22 @@
             self.currentCell.detailTextLabel.text = self.orderStates[row];
         }
     }
-    self.beginDatePicker.hidden = YES;
-    self.pickView.hidden = YES;
-    self.closeImagePickerButton.hidden = YES;
-    self.cancelButton.hidden = YES;
-    self.pickerView.hidden = YES;
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.beginDatePicker.alpha = 0;
+        self.pickView.alpha = 0;
+        self.closeImagePickerButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+        self.pickerView.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.beginDatePicker.hidden = YES;
+        self.pickView.hidden = YES;
+        self.closeImagePickerButton.hidden = YES;
+        self.cancelButton.hidden = YES;
+        self.pickerView.hidden = YES;
+    }];
+    
 }
 
 - (void)tapPickViewAction:(UITapGestureRecognizer *)tap{

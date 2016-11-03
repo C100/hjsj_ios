@@ -63,6 +63,7 @@
         CGFloat distance = (screenWidth - self.allWidth - 20)/(self.titles.count - 1);
         self.leftDistance = 10;
         for (int i = 0; i < self.titles.count; i ++) {
+            
             NSString *str = self.titles[i];
             UIButton *btn = [[UIButton alloc] init];
             btn.tag = 10 + i;
@@ -90,6 +91,11 @@
 
                 self.leftDistance += (btnWidth + distance);
             }
+            
+            if (i == 0) {
+                self.currentButton = btn;
+            }
+            
         }
     }
     return _titlesView;
@@ -178,6 +184,7 @@
         //选中出现筛选框按钮（按钮太小所以给试图也加了一个点击操作）
         _TopCallBack(button);
     }else{
+        self.currentButton = button;
         for (UIButton *btn in self.titlesButton) {
             btn.selected = NO;
         }

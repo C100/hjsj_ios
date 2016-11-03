@@ -26,6 +26,7 @@
         }];
         self.orderTwoTableView.bounces = NO;
         self.orderTwoTableView.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
+        self.orderTwoTableView.allowsSelection = NO;
         self.orderTwoTableView.separatorStyle = UITextBorderStyleNone;
         [self.orderTwoTableView registerClass:[OrderTwoTableViewCell class] forCellReuseIdentifier:@"cell"];
         self.orderTwoTableView.tableHeaderView = self.resultNumLB;

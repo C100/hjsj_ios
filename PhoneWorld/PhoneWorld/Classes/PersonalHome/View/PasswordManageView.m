@@ -46,9 +46,11 @@
     cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
     cell.textLabel.font = [UIFont systemFontOfSize:16];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.preservesSuperviewLayoutMargins = NO;
+    if (indexPath.row == self.titles.count - 1) {
+        cell.separatorInset = UIEdgeInsetsZero;
+        cell.layoutMargins = UIEdgeInsetsZero;
+        cell.preservesSuperviewLayoutMargins = NO;
+    }
     return cell;
 }
 

@@ -13,14 +13,8 @@
 
 @interface ScreenView ()
 
-@property (nonatomic) NSDictionary *contentDic;
-@property (nonatomic) NSArray *leftTitles;
-@property (nonatomic) NSArray *rightDetails;
-@property (nonatomic) UITableView *screenTableView;
 @property (nonatomic) InputView *phoneInputView;//手机号码
-
 @property (nonatomic) NSArray *currentPickerArray;
-
 @property (nonatomic) UITableViewCell *currentCell;
 
 @end
@@ -197,10 +191,18 @@
         NSLog(@"是数组啊");
         self.currentPickerArray = self.contentDic[title];
         [self.pickerView reloadAllComponents];
+        
         self.backPickView.hidden = NO;
         self.pickerView.hidden = NO;
         self.sureButton.hidden = NO;
         self.cancelButton.hidden = NO;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.backPickView.alpha = 0.5;
+            self.pickerView.alpha = 1;
+            self.sureButton.alpha = 1;
+            self.cancelButton.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
     }else{
         if ([self.contentDic[title] isEqualToString:@"timePicker"]) {
             NSLog(@"选时间了");
@@ -208,6 +210,13 @@
             self.datePickerView.hidden = NO;
             self.sureButton.hidden = NO;
             self.cancelButton.hidden = NO;
+            [UIView animateWithDuration:0.5 animations:^{
+                self.backPickView.alpha = 0.5;
+                self.datePickerView.alpha = 1;
+                self.sureButton.alpha = 1;
+                self.cancelButton.alpha = 1;
+            } completion:^(BOOL finished) {
+            }];
         }
         if ([self.contentDic[title] isEqualToString:@"phoneNumber"]) {
             NSLog(@"手机号码");
@@ -228,11 +237,6 @@
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
     return 30;
 }
-
-//- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component{
-//    NSAttributedString *astring = [[NSAttributedString alloc] initWithString:self.currentPickerArray[row] attributes:@{NSForegroundColorAttributeName:[Utils colorRGB:@"#666666"],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
-//    return astring;
-//}
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel *myView = nil;
@@ -281,19 +285,36 @@
         NSArray *array = self.contentDic[self.currentCell.textLabel.text];
         self.currentCell.detailTextLabel.text = array[row];
     }
-    self.backPickView.hidden = YES;
-    self.datePickerView.hidden = YES;
-    self.pickerView.hidden = YES;
-    self.sureButton.hidden = YES;
-    self.cancelButton.hidden = YES;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.backPickView.alpha = 0;
+        self.datePickerView.alpha = 0;
+        self.pickerView.alpha = 0;
+        self.sureButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.backPickView.hidden = YES;
+        self.datePickerView.hidden = YES;
+        self.pickerView.hidden = YES;
+        self.sureButton.hidden = YES;
+        self.cancelButton.hidden = YES;
+    }];
 }
 
 - (void)closePickerAction:(UIButton *)button{
-    self.backPickView.hidden = YES;
-    self.datePickerView.hidden = YES;
-    self.pickerView.hidden = YES;
-    self.sureButton.hidden = YES;
-    self.cancelButton.hidden = YES;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.backPickView.alpha = 0;
+        self.datePickerView.alpha = 0;
+        self.pickerView.alpha = 0;
+        self.sureButton.alpha = 0;
+        self.cancelButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.backPickView.hidden = YES;
+        self.datePickerView.hidden = YES;
+        self.pickerView.hidden = YES;
+        self.sureButton.hidden = YES;
+        self.cancelButton.hidden = YES;
+    }];
 }
 
 - (void)tapBackPickViewAction:(UITapGestureRecognizer *)tap{

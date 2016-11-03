@@ -9,6 +9,7 @@
 #import "WhiteCardView.h"
 #import "WhiteCardCell.h"
 #import "ReadCardAndChoosePackageViewController.h"
+#import "WhitePhoneModel.h"
 
 @interface WhiteCardView ()
 
@@ -64,9 +65,21 @@
         }];
         
         [self.selectView setWhiteCardFilterCallBack:^(NSArray *array) {
-            NSLog(@"-----%@----",array);
-            weakself.selectView.hidden = YES;
-            weakself.grayView.hidden = YES;
+            
+            for (NSString *string in array) {
+                if ([string isEqualToString:@"无"]) {
+                    [Utils toastview:@"筛选条件不完整"];
+                    return ;
+                }
+            }
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                weakself.selectView.alpha = 0;
+                weakself.grayView.alpha = 0;
+            } completion:^(BOOL finished) {
+                weakself.selectView.hidden = YES;
+                weakself.grayView.hidden = YES;
+            }];
             
             for (int i = 0; i < weakself.topView.resultArr.count; i ++) {
                 UILabel *lb = weakself.topView.resultArr[i];
@@ -77,7 +90,22 @@
                 make.width.mas_equalTo(screenWidth);
                 make.height.mas_equalTo(80);
             }];
+            
+            [weakself.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.mas_equalTo(0);
+                make.width.mas_equalTo(screenWidth);
+                make.top.mas_equalTo(weakself.topView.mas_bottom).mas_equalTo(10);
+                make.height.mas_equalTo(screenHeight - 128 - 100 - 40);
+            }];
+            
+            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+
             weakself.topView.resultView.hidden = NO;
+            
+            NSString *s1 = array.firstObject;
+            NSString *s2 = array.lastObject;
+                        
+            weakself.WhiteCardSelectCallBack(s1,s2);
         }];
     }
     return self;
@@ -88,7 +116,7 @@
         _topView = [[WhiteCardTopView alloc] initWithFrame:CGRectZero];
         [self addSubview:_topView];
         [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
+            make.top.mas_equalTo(1);
             make.left.right.mas_equalTo(0);
             make.width.mas_equalTo(screenWidth);
             make.height.mas_equalTo(40);
@@ -121,7 +149,7 @@
         [_contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.width.mas_equalTo(screenWidth);
-            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(0);
+            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(10);
             make.height.mas_equalTo(screenHeight - 128 - 100);
         }];
         _contentView.delegate = self;
@@ -170,12 +198,13 @@
 #pragma mark - UICollectionView Delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 20;
+    return self.randomPhoneNumbers.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    WhitePhoneModel *pModel = self.randomPhoneNumbers[indexPath.row];
     WhiteCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    cell.phoneLB.text = self.phoneNumbers[indexPath.row%3];
+    cell.phoneLB.text = pModel.num;
     if ([self.grayArrs containsObject:@(indexPath.row)]) {
         cell.backgroundColor = [Utils colorRGB:@"#f3f4f5"];
     }else{

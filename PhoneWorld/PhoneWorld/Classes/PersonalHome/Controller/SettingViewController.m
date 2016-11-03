@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.title = @"设置";
     self.settingView = [[SettingView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    self.navigationItem.backBarButtonItem = [Utils returnBackButton];
     [self.view addSubview:self.settingView];
     __block __weak SettingViewController *weakself = self;
     [self.settingView setSettingCallBack:^(NSInteger number) {

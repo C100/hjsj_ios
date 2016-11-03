@@ -27,4 +27,9 @@
 @property (nonatomic) UIButton *sureButton;
 @property (nonatomic) UIButton *cancelButton;
 
+@property (nonatomic) NSDictionary *contentDic;
+@property (nonatomic) NSArray *leftTitles;
+@property (nonatomic) NSArray *rightDetails;//修改时刷新screentableview
+@property (nonatomic) UITableView *screenTableView;
+
 @end

@@ -42,5 +42,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "WebUtils.h"
+#import "UIImage+Extension.h"
 
 #endif /* PrefixHeader_pch */

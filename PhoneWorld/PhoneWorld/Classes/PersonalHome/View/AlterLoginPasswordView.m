@@ -12,7 +12,6 @@
 
 @interface AlterLoginPasswordView ()
 @property (nonatomic) NSArray *leftTitles;
-@property (nonatomic) NSMutableArray *inputViews;
 @property (nonatomic) FailedView *failedView;
 @end
 
@@ -57,13 +56,18 @@
         }
         
         [self saveButton];
+        
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 120)];
+        v.backgroundColor = [UIColor whiteColor];
+        [self addSubview:v];
+        
     }
     return self;
 }
 
 - (UIButton *)saveButton{
     if (_saveButton == nil) {
-        _saveButton = [Utils returnBextButtonWithTitle:@"保存"];
+        _saveButton = [Utils returnBextButtonWithTitle:@"确定"];
         [self addSubview:_saveButton];
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(160);
@@ -89,7 +93,14 @@
     //判断愿密码是否正确
     //判断新密码输入是否一致
     if ([iv1.textField.text isEqualToString:iv2.textField.text] && ![iv0.textField.text isEqualToString:@""]) {
-        _AlterPasswordCallBack(button);
+        
+        if ([iv0.textField.text isEqualToString:iv1.textField.text]) {
+            [Utils toastview:@"原密码不能与新密码一致"];
+        }else{
+            [self endEditing:YES];
+            _AlterPasswordCallBack(button);
+        }
+        
     }else{
         [Utils toastview:@"两次密码输入不一致"];
     }

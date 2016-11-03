@@ -46,9 +46,10 @@
 
 #pragma mark - LazyLoading
 - (SDCycleScrollView *)imageScrollView{
-    if (_imageScrollView == nil) {
-        _imageScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero imageNamesGroup:@[@"banner",@"banner",@"banner"]];
-        _imageScrollView.delegate = self;
+    if (_imageScrollView == nil) {        
+        _imageScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"banner"]];
+        _imageScrollView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageScrollView.backgroundColor = COLOR_BACKGROUND;
         [self addSubview:_imageScrollView];
         _imageScrollView.currentPageDotColor = MainColor;
         [_imageScrollView mas_makeConstraints:^(MASConstraintMaker *make) {

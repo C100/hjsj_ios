@@ -8,11 +8,11 @@
 
 #import "CreatePayPasswordView.h"
 #import "InputView.h"
+#import "PersonalHomeViewController.h"
 
 @interface CreatePayPasswordView ()
 
 @property (nonatomic) NSArray *leftTitles;
-@property (nonatomic) NSMutableArray *inputViews;
 
 @end
 
@@ -43,7 +43,7 @@
 
 - (UIButton *)saveButton{
     if (_saveButton == nil) {
-        _saveButton = [Utils returnBextButtonWithTitle:@"保存"];
+        _saveButton = [Utils returnBextButtonWithTitle:@"确定"];
         [self addSubview:_saveButton];
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(120);
@@ -66,6 +66,7 @@
     InputView *iv0 = self.inputViews[0];
     InputView *iv1 = self.inputViews[1];
     if ([iv0.textField.text isEqualToString:iv1.textField.text] && ![iv0.textField.text isEqualToString:@""]) {
+        [self endEditing:YES];
         _CreatePayPasswordCallBack(button);
     }else{
         [Utils toastview:@"两次密码输入不一致"];

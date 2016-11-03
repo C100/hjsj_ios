@@ -33,6 +33,15 @@
     [self.finishCardView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.mas_equalTo(0);
     }];
+    
+    [self.finishCardView setFinishCardCallBack:^(NSString *tel, NSString *puk) {
+        [WebUtils requestFinishedCardWithTel:tel andPUK:puk andCallBack:^(id obj) {
+            if (obj) {
+                
+            }
+        }];
+    }];
+    
 }
 
 @end

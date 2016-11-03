@@ -7,6 +7,7 @@
 //
 
 #import "PersonalHomeView.h"
+#import "AccountTVCell.h"
 
 @interface PersonalHomeView ()
 
@@ -29,6 +30,13 @@
         self.personalTableView.backgroundColor = COLOR_BACKGROUND;
         self.personalTableView.bounces = NO;
         [self addSubview:self.personalTableView];
+        
+        [self.personalTableView registerClass:[AccountTVCell class] forCellReuseIdentifier:@"acell"];
+        
+//        UIView *leftV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 198)];
+//        leftV.backgroundColor = [UIColor whiteColor];
+//        [self addSubview:leftV];
+        
     }
     return self;
 }
@@ -51,17 +59,23 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
     if (indexPath.section == 0) {
-        cell.imageView.image = [UIImage imageNamed:self.imageNames[indexPath.row]];
-        cell.textLabel.text = self.titles[indexPath.row];
-        cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
-        cell.textLabel.font = [UIFont systemFontOfSize:16];
+        AccountTVCell *cell = [tableView dequeueReusableCellWithIdentifier:@"acell" forIndexPath:indexPath];
+        cell.imageV.image = [UIImage imageNamed:self.imageNames[indexPath.row]];
+        cell.titleLB.text = self.titles[indexPath.row];
+        cell.titleLB.font = [UIFont systemFontOfSize:16];
+        [cell.imageV mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(0);
+            make.left.mas_equalTo(15);
+            make.width.height.mas_equalTo(24);
+        }];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
     }else{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        }
         UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 44)];
         lb.text = @"退出登录";
         lb.textColor = MainColor;
@@ -69,11 +83,11 @@
         lb.font = [UIFont systemFontOfSize:18];
         
         [cell.contentView addSubview:lb];
+        return cell;
     }
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.preservesSuperviewLayoutMargins = NO;
-    return cell;
+//    cell.separatorInset = UIEdgeInsetsZero;
+//    cell.layoutMargins = UIEdgeInsetsZero;
+//    cell.preservesSuperviewLayoutMargins = NO;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
