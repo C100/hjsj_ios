@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CardRepairDetailModel.h"
+#import "CardTransferListModel.h"
 
 @interface RepairCardDetailView : UIScrollView
+
+@property (nonatomic) CardRepairDetailModel *detailModel;
+
+@property (nonatomic) CardTransferListModel *listModel;
 
 @end

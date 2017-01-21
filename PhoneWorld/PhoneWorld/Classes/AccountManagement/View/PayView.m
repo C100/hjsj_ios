@@ -34,7 +34,7 @@
             make.height.mas_equalTo(50);
         }];
         lb.text = @"输入密码";
-        lb.font = [UIFont systemFontOfSize:18];
+        lb.font = [UIFont systemFontOfSize:textfont18];
         UIView *lineV = [[UIView alloc] init];
         [self addSubview:lineV];
         [lineV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -47,7 +47,6 @@
         [self addSubview:self.textField];
 
         [self initPwdTextField];
-//        [self forgetPasswodButton];
     }
     return self;
 }
@@ -116,7 +115,6 @@
 #pragma mark - UITextField Delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-//    NSLog(@"变化%@", string);
     if([string isEqualToString:@"\n"]) {
         //按回车关闭键盘
         [textField resignFirstResponder];
@@ -127,7 +125,7 @@
     }
     else if(textField.text.length >= kDotCount) {
         //输入的字符个数大于6，则无法继续输入，返回NO表示禁止输入
-        NSLog(@"输入的字符个数大于6，忽略输入");
+//        NSLog(@"输入的字符个数大于6，忽略输入");
         return NO;
     } else {
         return YES;
@@ -139,9 +137,6 @@
  */
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    
-    NSLog(@"%@    %ld", textField.text,textField.text.length);
-    
     for (UIView *dotView in self.dotArray) {
         dotView.hidden = YES;
     }

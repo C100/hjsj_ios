@@ -12,4 +12,7 @@
 @interface OrderTwoView : UIView <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic) UITableView *orderTwoTableView;
 @property (nonatomic) UILabel *resultNumLB;
+
+@property (nonatomic) NSMutableArray *orderListArray;
+
 @end

@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface TransferCardView : UIScrollView <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+@property (nonatomic) void(^NextCallBack) (NSDictionary *dic);
+
 @property (nonatomic) UIButton *nextButton;
+
+@property (nonatomic) BOOL isHJSJNumber;
+
 @end

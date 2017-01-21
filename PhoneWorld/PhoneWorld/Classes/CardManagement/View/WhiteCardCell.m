@@ -22,6 +22,13 @@
     return self;
 }
 
+- (void)setWhitePhoneModel:(WhitePhoneModel *)whitePhoneModel{
+    _whitePhoneModel = whitePhoneModel;
+    
+    self.phoneLB.text = whitePhoneModel.num;
+    
+}
+
 - (UIButton *)leftButton{
     if (_leftButton == nil) {
         _leftButton = [[UIButton alloc] init];
@@ -47,9 +54,9 @@
         [_rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-15);
             make.centerY.mas_equalTo(0);
-            make.width.height.mas_equalTo(18);
+            make.width.height.mas_equalTo(30);
         }];
-        [_rightButton setBackgroundImage:[UIImage imageNamed:@"detail"] forState:UIControlStateNormal];
+        [_rightButton setImage:[UIImage imageNamed:@"detail"] forState:UIControlStateNormal];
         [_rightButton addTarget:self action:@selector(detailAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _rightButton;
@@ -64,7 +71,7 @@
             make.left.mas_equalTo(self.leftButton.mas_right).mas_equalTo(5);
             make.right.mas_equalTo(self.rightButton.mas_right).mas_equalTo(-10);
         }];
-        _phoneLB.font = [UIFont systemFontOfSize:14];
+        _phoneLB.font = [UIFont systemFontOfSize:textfont14];
         _phoneLB.textColor = [Utils colorRGB:@"#666666"];
     }
     return _phoneLB;
@@ -72,7 +79,9 @@
 
 #pragma mark - Method
 - (void)detailAction:(UIButton *)button{
-    PhoneDetailView *detailView = [[PhoneDetailView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andPhoneInfo:@[@"AAA",@"300元",@"79.9元套餐起周期12月"]];
+    NSString *money = [self.whitePhoneModel.infos componentsSeparatedByString:@","].firstObject;
+    NSString *moneyNumber = [money componentsSeparatedByString:@"存"].lastObject;
+    PhoneDetailView *detailView = [[PhoneDetailView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andPhoneInfo:@[self.whitePhoneModel.rules,moneyNumber,self.whitePhoneModel.infos]];
     [[UIApplication sharedApplication].keyWindow addSubview:detailView];
 }
 

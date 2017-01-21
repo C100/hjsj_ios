@@ -30,7 +30,11 @@
             InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
             [self addSubview:view];
             view.leftLabel.text = self.leftTitles[i];
-            view.textField.placeholder = [NSString stringWithFormat:@"请输入密码"];
+            if (i == 0) {
+                view.textField.placeholder = [NSString stringWithFormat:@"请输入6位数字密码"];
+            }else{
+                view.textField.placeholder = [NSString stringWithFormat:@"请再次输入密码"];
+            }
             [view addGestureRecognizer:tap];
             view.tag = 100+i;
             [self.inputViews addObject:view];
@@ -43,7 +47,7 @@
 
 - (UIButton *)saveButton{
     if (_saveButton == nil) {
-        _saveButton = [Utils returnBextButtonWithTitle:@"确定"];
+        _saveButton = [Utils returnNextButtonWithTitle:@"确定"];
         [self addSubview:_saveButton];
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(120);

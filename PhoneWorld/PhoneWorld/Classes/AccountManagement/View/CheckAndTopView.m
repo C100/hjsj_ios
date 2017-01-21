@@ -7,7 +7,6 @@
 //
 
 #import "CheckAndTopView.h"
-#import "InputView.h"
 
 #define imageWidth (screenWidth - 10*2 - 15)/2
 #define hw 42/170.0  //图片宽高比
@@ -27,7 +26,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.imageNames = @[@"weixin1",@"alipay1"];
+        self.imageNames = @[@"alipay1",@"weixin1"];
         self.buttons = [NSMutableArray array];
         self.leftTitles = @[@"当前余额",@"充值金额"];
         self.inputViews = [NSMutableArray array];
@@ -37,6 +36,7 @@
             [self addSubview:inputV];
             inputV.leftLabel.text = self.leftTitles[i];
             if (i == 0) {
+                self.accountMoneyInputView = inputV;
                 inputV.textField.text = @"99元";
                 inputV.textField.userInteractionEnabled = NO;
             }else{
@@ -54,11 +54,20 @@
     if (_payWay == nil) {
         _payWay = [[UIView alloc] init];
         [self addSubview:_payWay];
+        
+//        NSArray *textArr = @[@"支付宝支付",@"微信支付"];
+//        NSArray *textColorArr = @[@"#00a9f2",@"#64ab23"];
+        
+        NSArray *textArr = @[@"支付宝支付"];
+        NSArray *textColorArr = @[@"#00a9f2"];
+        
+        CGFloat height = textArr.count * 65 + 26;
+        
         InputView *inputV = self.inputViews.lastObject;
         [_payWay mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(inputV.mas_bottom).mas_equalTo(10);
             make.left.right.mas_equalTo(0);
-            make.height.mas_equalTo(151);
+            make.height.mas_equalTo(height);
         }];
         _payWay.backgroundColor = [UIColor whiteColor];
         
@@ -67,20 +76,18 @@
         [leftLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.top.mas_equalTo(10);
-            make.width.mas_equalTo(90);
+            make.width.mas_equalTo(screenWidth - 30);
             make.height.mas_equalTo(16);
         }];
         leftLB.text = @"选择支付方式";
-        leftLB.textColor = [Utils colorRGB:@"#666666"];
-        leftLB.font = [UIFont systemFontOfSize:14];
+        leftLB.textColor = [UIColor blackColor];
+        leftLB.font = [UIFont systemFontOfSize:textfont16];
         
         UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(choosePayWay:)];
         UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(choosePayWay:)];
 
-        NSArray *textArr = @[@"微信支付",@"支付宝支付"];
-        NSArray *textColorArr = @[@"#64ab23",@"#00a9f2"];
         
-        for (int i = 0; i<2; i++) {
+        for (int i = 0; i<textArr.count; i++) {
             UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 26 + 65*i, screenWidth, 64)];
             if (i == 0) {
                 [v addGestureRecognizer:tap1];
@@ -126,7 +133,7 @@
             }];
             lb.text = textArr[i];
             lb.textColor = [Utils colorRGB:textColorArr[i]];
-            lb.font = [UIFont systemFontOfSize:14];
+            lb.font = [UIFont systemFontOfSize:textfont16];
         }
         
         UIView *lineV = [[UIView alloc] initWithFrame:CGRectMake(15, 190, screenWidth - 15, 1)];
@@ -139,7 +146,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [Utils returnBextButtonWithTitle:@"下一步"];
+        _nextButton = [Utils returnNextButtonWithTitle:@"下一步"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.payWay.mas_bottom).mas_equalTo(40);
@@ -158,7 +165,7 @@
     if ([Utils isNumber:inputV.textField.text]) {
         _checkAndTopCallBack(inputV.textField.text, self.payway);
     }else{
-        [Utils toastview:@"请输入数字"];
+        [Utils toastview:@"请输入整数"];
     }
 }
 
@@ -174,9 +181,9 @@
     btn.layer.borderColor = [Utils colorRGB:@"#0081eb"].CGColor;
     btn.layer.borderWidth = 3;
     if (t == 100) {
-        self.payway = weixinPay;
-    }else{
         self.payway = aliPay;
+    }else{
+        self.payway = weixinPay;
     }
 }
 

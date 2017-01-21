@@ -14,6 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.orderListArray = [NSMutableArray array];
         self.orderTwoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 108 - 80) style:UITableViewStyleGrouped];
         self.orderTwoTableView.delegate = self;
         self.orderTwoTableView.dataSource = self;
@@ -24,7 +25,6 @@
             make.width.mas_equalTo(screenWidth);
             make.bottom.mas_equalTo(0);
         }];
-        self.orderTwoTableView.bounces = NO;
         self.orderTwoTableView.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
         self.orderTwoTableView.allowsSelection = NO;
         self.orderTwoTableView.separatorStyle = UITextBorderStyleNone;
@@ -38,9 +38,9 @@
 - (UILabel *)resultNumLB{
     if (_resultNumLB == nil) {
         _resultNumLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth - 20, 26)];
-        _resultNumLB.text = @"共10条";
+        _resultNumLB.text = [NSString stringWithFormat:@"共%ld条",self.orderListArray.count];
         _resultNumLB.textColor = [Utils colorRGB:@"#999999"];
-        _resultNumLB.font = [UIFont systemFontOfSize:8];
+        _resultNumLB.font = [UIFont systemFontOfSize:textfont8];
         _resultNumLB.textAlignment = NSTextAlignmentCenter;
     }
     return _resultNumLB;
@@ -49,7 +49,7 @@
 #pragma mark - UITableView Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 10;
+    return self.orderListArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -58,11 +58,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderTwoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    RechargeListModel *rm = self.orderListArray[indexPath.section];
+    cell.rechargeModel = rm;
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 91;
+    return 90;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

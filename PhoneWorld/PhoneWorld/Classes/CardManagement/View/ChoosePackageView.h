@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "ChoosePackageTableView.h"
+#import "PhoneDetailModel.h"
 
 @interface ChoosePackageView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos;
+- (instancetype)initWithFrame:(CGRect)frame;
 
 @property (nonatomic) ChoosePackageTableView *tableView;
 @property (nonatomic) UIButton *nextButton;
+
+@property (nonatomic) PhoneDetailModel *detailModel;
 
 @end

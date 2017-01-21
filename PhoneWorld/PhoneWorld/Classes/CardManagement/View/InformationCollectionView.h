@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InputView.h"
+#import "ChooseImageView.h"
 
 @interface InformationCollectionView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos;
+@property (nonatomic) void(^nextCallBack)(NSDictionary *dic);
 @property (nonatomic) UIButton *nextButton;
-@property (nonatomic) NSMutableDictionary *userinfosDic;
+@property (nonatomic) NSMutableArray *inputViews;
+@property (nonatomic) ChooseImageView *chooseImageView;
+
+- (instancetype)initWithFrame:(CGRect)frame andIsFinished:(BOOL)isFinished;
 
 @end

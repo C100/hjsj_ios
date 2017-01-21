@@ -12,4 +12,9 @@
 @interface TransferViewController : UIViewController
 + (TransferViewController *)sharedTransferViewController;
 @property (nonatomic) OrderView *orderView;
+@property (nonatomic) NSMutableArray *orderModelArr;
+
+//查询条件
+@property (nonatomic) NSArray *inquiryConditionArray;
+
 @end

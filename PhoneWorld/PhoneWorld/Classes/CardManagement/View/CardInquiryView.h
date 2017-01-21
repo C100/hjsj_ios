@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderView.h"
 
 @interface CardInquiryView : UIView
+
+@property (nonatomic) OrderView *contentView;
 
 @end

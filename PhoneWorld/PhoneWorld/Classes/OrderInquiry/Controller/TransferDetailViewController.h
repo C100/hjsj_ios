@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CardTransferListModel.h"
 
 @interface TransferDetailViewController : UIViewController
+
+@property (nonatomic) CardTransferListModel *listModel;
+
+@property (nonatomic) NSString *modelId;
 
 @end

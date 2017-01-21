@@ -16,6 +16,18 @@
 @property (nonatomic) NSArray *firstTitles;
 @property (nonatomic) NSArray *secondTitles;
 @property (nonatomic) NSArray *thirdTitles;
+@property (nonatomic) NSMutableArray *firstContents;
+@property (nonatomic) NSMutableArray *secondContents;
+@property (nonatomic) NSMutableArray *thirdContents;
+
+@property (nonatomic) NSMutableArray<UILabel *> *firstLabelArray;
+@property (nonatomic) NSMutableArray<UILabel *> *secondLabelArray;
+@property (nonatomic) NSMutableArray<UILabel *> *thirdLabelArray;
+
+@property (nonatomic) UIImageView *imageView1;
+@property (nonatomic) UIImageView *imageView2;
+
+@property (nonatomic) UIView *allImagesView;//放图片的view
 
 @end
 
@@ -27,18 +39,132 @@
     if (self) {
         self.titles = @[@"订单信息",@"资费信息",@"客户信息"];
         self.firstTitles = @[@"    订单编号：",@"    订单时间：",@"    订单类型：",@"    订单状态：",@"    审核时间：",@"    审核结果：",@"    开户号码："];
-        self.secondTitles = @[@"    预存金额：",@"    活动包：",@"    靓号规则：",@"    套餐选择：",@"    起止日期："];
-        self.thirdTitles = @[@"    姓名：",@"    身份证号码：",@"    身份证地址：浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市浙江省杭州市"];
+        self.secondTitles = @[@"    预存金额：",@"    活动包：",@"    靓号规则："];
+        self.thirdTitles = @[@"    姓名：",@"    身份证号码：",@"    身份证地址："];
+        
+        self.firstContents = [NSMutableArray array];
+        self.secondContents = [NSMutableArray array];
+        self.thirdContents = [NSMutableArray array];
+        
+        self.firstLabelArray = [NSMutableArray array];
+        self.secondLabelArray = [NSMutableArray array];
+        self.thirdLabelArray = [NSMutableArray array];
+        
         self.titleButtons = [NSMutableArray array];
         self.backgroundColor = [Utils colorRGB:@"#f9f9f9"];
         [self headView];
         [self moveView];
         [self contentView];
-        [self firstView];
-        [self secondView];
-        [self thirdView];
+
     }
     return self;
+}
+
+- (void)setDetailModel:(OrderDetailModel *)detailModel{
+    _detailModel = detailModel;
+    
+    
+    [self.firstContents addObject:detailModel.orderNo];
+    NSString *dateString = [[NSString  stringWithFormat:@"%@",detailModel.createDate] componentsSeparatedByString:@" "].firstObject;
+    [self.firstContents addObject:dateString];
+    NSString *cardTypeString = @"成卡开户";
+    if ([detailModel.cardType isEqualToString:@"ESIM"]) {
+        cardTypeString = @"白卡开户";
+    }
+    [self.firstContents addObject:cardTypeString];
+    NSString *orderStateString = @"无";
+    if ([detailModel.orderStatus isEqualToString:@"PENDING"] || [detailModel.orderStatus isEqualToString:@"已提交"]) {
+        orderStateString = @"已提交";
+    }
+    if ([detailModel.orderStatus isEqualToString:@"WAITING"] || [detailModel.orderStatus isEqualToString:@"等待中"]) {
+        orderStateString = @"等待中";
+    }
+    if ([detailModel.orderStatus isEqualToString:@"SUCCESS"] || [detailModel.orderStatus isEqualToString:@"成功"]) {
+        orderStateString = @"成功";
+    }
+    if ([detailModel.orderStatus isEqualToString:@"FAIL"] || [detailModel.orderStatus isEqualToString:@"失败"]) {
+        orderStateString = @"失败";
+    }
+    if ([detailModel.orderStatus isEqualToString:@"CANCEL"] || [detailModel.orderStatus isEqualToString:@"已取消"]) {
+        orderStateString = @"已取消";
+    }
+
+    [self.firstContents addObject:orderStateString];
+    if (detailModel.updateDate) {
+        NSString *dateString = [[NSString  stringWithFormat:@"%@",detailModel.updateDate] componentsSeparatedByString:@" "].firstObject;
+        [self.firstContents addObject:dateString];
+    }else{
+        [self.firstContents addObject:@"无"];
+
+    }
+    if (!detailModel.startTime) {
+        [self.firstContents addObject:@"无"];
+    }else{
+        [self.firstContents addObject:detailModel.startTime];
+    }
+    
+    [self.firstContents addObject:detailModel.number];
+
+    
+    
+    [self.secondContents addObject:detailModel.prestore];
+    [self.secondContents addObject:detailModel.promotion];
+    [self.secondContents addObject:detailModel.isLiang];
+
+    
+    
+    [self.thirdContents addObject:detailModel.customerName];
+    [self.thirdContents addObject:detailModel.certificatesNo];
+    [self.thirdContents addObject:detailModel.address];
+
+    
+    
+    [self firstView];
+    [self secondView];
+    [self thirdView];
+    
+    
+    
+    MBProgressHUD *progressHUD1 = [[MBProgressHUD alloc] init];
+    [self.allImagesView addSubview:progressHUD1];
+    [progressHUD1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.centerY.mas_equalTo(self.imageView1.mas_centerY);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(100);
+    }];
+    [progressHUD1 showAnimated:YES];
+    progressHUD1.removeFromSuperViewOnHide = YES;
+    progressHUD1.mode = MBProgressHUDModeAnnularDeterminate;
+    
+    
+    [self.imageView1 sd_setImageWithURL:detailModel.photoFront placeholderImage:[UIImage imageNamed:@"identifyCard2"] options:SDWebImageContinueInBackground progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        float receive = receivedSize;
+        float expect = expectedSize;
+        progressHUD1.progress = (receive/expect);
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [progressHUD1 removeFromSuperview];
+    }];
+    
+    MBProgressHUD *progressHUD2 = [[MBProgressHUD alloc] init];
+    [self.allImagesView addSubview:progressHUD2];
+    [progressHUD2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.centerY.mas_equalTo(self.imageView2.mas_centerY);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(100);
+    }];
+    [progressHUD2 showAnimated:YES];
+    progressHUD2.removeFromSuperViewOnHide = YES;
+    progressHUD2.mode = MBProgressHUDModeAnnularDeterminate;
+    
+    [self.imageView2 sd_setImageWithURL:detailModel.photoBack placeholderImage:[UIImage imageNamed:@"identifyCard1"] options:SDWebImageContinueInBackground progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        float receive = receivedSize;
+        float expect = expectedSize;
+        progressHUD2.progress = (receive/expect);
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [progressHUD2 removeFromSuperview];
+    }];
 }
 
 - (UIView *)headView{
@@ -57,7 +183,7 @@
             [button setTitleColor:[Utils colorRGB:@"#333333"] forState:UIControlStateNormal];
             [button setTitleColor:MainColor forState:UIControlStateSelected];
             button.tag = 1130+i;
-            button.titleLabel.font = [UIFont systemFontOfSize:14];
+            button.titleLabel.font = [UIFont systemFontOfSize:textfont14];
             [button addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
             if (i == 0) {
                 button.selected = YES;
@@ -98,17 +224,24 @@
 
 - (UIView *)firstView{
     if (_firstView == nil) {
+        CGFloat y = 0;
+
         _firstView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 104)];
         [self.contentView addSubview:_firstView];
         _firstView.backgroundColor = COLOR_BACKGROUND;
         
         for (int i = 0; i < self.firstTitles.count; i++) {
-            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, (14+16)*i, screenWidth, 30)];
+            NSString *str = [NSString stringWithFormat:@"%@%@",self.firstTitles[i],self.firstContents[i]];
+            CGSize size = [Utils sizeWithFont:[UIFont systemFontOfSize:textfont14] andMaxSize:CGSizeMake(screenWidth, 0) andStr:str];
+            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, y, screenWidth, size.height + 14)];
             lb.backgroundColor = [UIColor whiteColor];
             [_firstView addSubview:lb];
-            lb.text = self.firstTitles[i];
-            lb.font = [UIFont systemFontOfSize:14];
+            lb.text = str;
+            lb.font = [UIFont systemFontOfSize:textfont14];
             lb.textColor = [Utils colorRGB:@"#999999"];
+            [self.firstLabelArray addObject:lb];
+            y = lb.origin.y + lb.size.height;
+
         }
         
     }
@@ -117,17 +250,23 @@
 
 - (UIView *)secondView{
     if (_secondView == nil) {
+        CGFloat y = 0;
         _secondView = [[UIView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, screenHeight - 104)];
         [self.contentView addSubview:_secondView];
         _secondView.backgroundColor = COLOR_BACKGROUND;
         
         for (int i = 0; i < self.secondTitles.count; i++) {
-            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, (14+16)*i, screenWidth, 30)];
+            NSString *str = [NSString stringWithFormat:@"%@%@",self.secondTitles[i],self.secondContents[i]];
+            CGSize size = [Utils sizeWithFont:[UIFont systemFontOfSize:textfont14] andMaxSize:CGSizeMake(screenWidth, 0) andStr:str];
+            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, y, screenWidth, size.height + 14)];
             lb.backgroundColor = [UIColor whiteColor];
             [_secondView addSubview:lb];
-            lb.text = self.secondTitles[i];
-            lb.font = [UIFont systemFontOfSize:14];
+            lb.text = str;
+            lb.font = [UIFont systemFontOfSize:textfont14];
             lb.textColor = [Utils colorRGB:@"#999999"];
+            [self.secondLabelArray addObject:lb];
+            y = lb.origin.y + lb.size.height;
+
         }
     }
     return _secondView;
@@ -140,17 +279,23 @@
         _thirdView.backgroundColor = COLOR_BACKGROUND;
         _thirdView.bounces = NO;
         
+        CGFloat y = 0;
+        
         UILabel *lastLb = nil;
         for (int i = 0; i < self.thirdTitles.count; i++) {
-            CGSize size = [Utils sizeWithFont:[UIFont systemFontOfSize:14] andMaxSize:CGSizeMake(screenWidth, 0) andStr:self.thirdTitles[i]];
-            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, (14+16)*i, screenWidth, size.height+14)];
+            NSString *str = [NSString stringWithFormat:@"%@%@",self.thirdTitles[i],self.thirdContents[i]];
+            CGSize size = [Utils sizeWithFont:[UIFont systemFontOfSize:textfont14] andMaxSize:CGSizeMake(screenWidth, 0) andStr:str];
+            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(0, y, screenWidth, size.height+14)];
             lb.backgroundColor = [UIColor whiteColor];
             [_thirdView addSubview:lb];
-            lb.text = self.thirdTitles[i];
-            lb.font = [UIFont systemFontOfSize:14];
+            lb.text = str;
+            lb.font = [UIFont systemFontOfSize:textfont14];
             lb.textColor = [Utils colorRGB:@"#999999"];
             lb.numberOfLines = 0;
             lastLb = lb;
+            [self.thirdLabelArray addObject:lb];
+            y = lb.origin.y + lb.size.height;
+
         }
         
         UIView *v = [[UIView alloc] init];
@@ -170,17 +315,19 @@
         
         UIImageView *imageV1 = [[UIImageView alloc] initWithFrame:CGRectMake(15, 10, screenWidth - 30, (screenWidth - 30)/(354/225.0))];
         imageV1.image = [UIImage imageNamed:@"identifyCard2"];
-//        [imageV1 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"identifyCard2"]];
         [v addSubview:imageV1];
         [imageV1 addGestureRecognizer:tap1];
         imageV1.userInteractionEnabled = YES;
+        self.imageView1 = imageV1;
         
         UIImageView *imageV2 = [[UIImageView alloc] initWithFrame:CGRectMake(15, 20+(screenWidth - 30)/(354/225.0), screenWidth - 30, (screenWidth - 30)/(354/225.0))];
         imageV2.image = [UIImage imageNamed:@"identifyCard1"];
-//        [imageV2 sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"identifyCard2"]];
         [v addSubview:imageV2];
         [imageV2 addGestureRecognizer:tap2];
         imageV2.userInteractionEnabled = YES;
+        self.imageView2 = imageV2;
+        
+        self.allImagesView = v;
     }
     return _thirdView;
 }

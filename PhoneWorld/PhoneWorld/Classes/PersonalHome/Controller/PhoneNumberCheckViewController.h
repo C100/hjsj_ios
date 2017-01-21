@@ -10,8 +10,6 @@
 
 @interface PhoneNumberCheckViewController : UIViewController
 
-@property (nonatomic) NSString *oldPass;
-@property (nonatomic) NSString *newsPass;
-@property (nonatomic) int type;
+@property (nonatomic) int type;  //type 4 支付密码修改
 
 @end

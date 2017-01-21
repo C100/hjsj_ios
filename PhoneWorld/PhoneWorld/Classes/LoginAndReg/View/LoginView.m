@@ -8,73 +8,60 @@
 
 #import "LoginView.h"
 
-#define leftDistance (screenWidth - 170)/2
-
 @implementation LoginView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 80)];
-        backView.backgroundColor = [UIColor whiteColor];
-        [self addSubview:backView];
+        [self headImageView];
         [self usernameTF];
         [self passwordTF];
         [self forgetPassword];
         [self submitButton];
-        [self lineView];
     }
     return self;
 }
 
+- (UIImageView *)headImageView{
+    if (_headImageView == nil) {
+        _headImageView = [[UIImageView alloc] init];
+        _headImageView.image = [UIImage imageNamed:@"logo1"];
+        [self addSubview:_headImageView];
+        [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            make.width.height.mas_equalTo(150);
+        }];
+    }
+    return _headImageView;
+}
+
 - (UITextField *)usernameTF{
     if (_usernameTF == nil) {
-        _usernameTF = [[UITextField alloc] init];
+        _usernameTF = [Utils returnTextFieldWithImageName:@"user" andPlaceholder:@"请输入用户名／手机号码"];
         [self addSubview:_usernameTF];
         [_usernameTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-            make.left.mas_equalTo(5);
+            make.top.mas_equalTo(self.headImageView.mas_bottom).mas_equalTo(20);
+            make.left.mas_equalTo(0);
             make.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
         }];
-        _usernameTF.placeholder = @"请输入用户名／手机号码";
-        _usernameTF.textColor = [Utils colorRGB:@"#333333"];
-        _usernameTF.font = [UIFont systemFontOfSize:textfont14];
-        _usernameTF.borderStyle = UITextBorderStyleNone;
-        _usernameTF.backgroundColor = [UIColor whiteColor];
-        
-        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
-        imageV.contentMode = UIViewContentModeScaleAspectFit;
-        imageV.image = [UIImage imageNamed:@"user"];
-        _usernameTF.leftView = imageV;
-        _usernameTF.leftViewMode = UITextFieldViewModeAlways;
     }
     return _usernameTF;
 }
 
 - (UITextField *)passwordTF{
     if (_passwordTF == nil) {
-        _passwordTF = [[UITextField alloc] init];
+        _passwordTF = [Utils returnTextFieldWithImageName:@"lock" andPlaceholder:@"请输入密码"];
         [self addSubview:_passwordTF];
         [_passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.usernameTF.mas_bottom).mas_equalTo(0);
-            make.left.mas_equalTo(5);
+            make.top.mas_equalTo(self.usernameTF.mas_bottom).mas_equalTo(1);
+            make.left.mas_equalTo(0);
             make.right.mas_equalTo(0);
             make.height.mas_equalTo(40);
         }];
-        _passwordTF.placeholder = @"请输入密码";
         _passwordTF.secureTextEntry = YES;
-        _passwordTF.textColor = [Utils colorRGB:@"#333333"];
-        _passwordTF.font = [UIFont systemFontOfSize:textfont14];
-        _passwordTF.borderStyle = UITextBorderStyleNone;
-        _passwordTF.backgroundColor = [UIColor whiteColor];
-        
-        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
-        imageV.contentMode = UIViewContentModeScaleAspectFit;
-        imageV.image = [UIImage imageNamed:@"lock"];
-        _passwordTF.leftView = imageV;
-        _passwordTF.leftViewMode = UITextFieldViewModeAlways;
     }
     return _passwordTF;
 }
@@ -86,7 +73,7 @@
         [_forgetPassword mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.passwordTF.mas_bottom).mas_equalTo(6);
             make.right.mas_equalTo(-10);
-            make.width.mas_equalTo(70);
+            make.width.mas_equalTo(90);
             make.height.mas_equalTo(14);
         }];
         [_forgetPassword setTitle:@"忘记密码？" forState:UIControlStateNormal];
@@ -100,32 +87,27 @@
 
 - (UIButton *)submitButton{
     if (_submitButton == nil) {
-        _submitButton = [Utils returnBextButtonWithTitle:@"登录"];
+        _submitButton = [Utils returnNextButtonWithTitle:@"登录"];
         [self addSubview:_submitButton];
         [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(leftDistance);
-            make.right.mas_equalTo(-leftDistance);
+            make.centerX.mas_equalTo(0);
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(170);
             make.top.mas_equalTo(self.forgetPassword.mas_bottom).mas_equalTo(20);
         }];
         _submitButton.tag = 1102;
+        [_submitButton setTitle:@"确认" forState:UIControlStateSelected];
         [_submitButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;
 }
 
-- (UIView *)lineView{
-    if (_lineView == nil) {
-        _lineView = [[UIView alloc] initWithFrame:CGRectMake(15, 39, screenWidth - 15, 1)];
-        _lineView.backgroundColor = COLOR_BACKGROUND;
-        [self addSubview:_lineView];
-    }
-    return _lineView;
-}
-
 #pragma mark - Method
 - (void)buttonClickAction:(UIButton *)button{
+    if (button.tag == 1102) {
+        self.submitButton.userInteractionEnabled = NO;
+    }
+    //1101忘记密码   1102登录
     _LoginCallBack(button.tag);
 }
 

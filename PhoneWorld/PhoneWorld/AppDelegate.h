@@ -14,5 +14,9 @@
 
 - (void)gotoHomeVC;
 
+//返回支付宝支付结果是否成功
+@property (nonatomic) BOOL payResult;
+@property (nonatomic) void(^AppCallBack) (BOOL result);
+
 @end
 

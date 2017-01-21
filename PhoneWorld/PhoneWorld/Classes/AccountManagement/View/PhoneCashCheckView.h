@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InputView.h"
 
-@interface PhoneCashCheckView : UIView <UITableViewDelegate, UITableViewDataSource>
+@interface PhoneCashCheckView : UIView
+
 
 @property (nonatomic) void(^orderCallBack)(NSString *phoneNumber);
 
 @property (nonatomic) UIButton *findButton;
-@property (nonatomic) NSArray *userinfos;//传入查询结果
-@property (nonatomic) UITableView *resultTableView;//显示查询结果
+
+@property (nonatomic) UIView *resultView;
+@property (nonatomic) UILabel *resultLabel;
+
+@property (nonatomic) InputView *inputView;
 
 @end

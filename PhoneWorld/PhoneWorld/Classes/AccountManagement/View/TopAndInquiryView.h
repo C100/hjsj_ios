@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderTwoView.h"
 
 @interface TopAndInquiryView : UIView
-
+@property (nonatomic) OrderTwoView *contentView;
 @end

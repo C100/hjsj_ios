@@ -98,7 +98,7 @@
     NSString *result= [PhotoModel check:photoModels type:type];
     
     if(result !=nil){
-        NSLog(@"%@",result);
+//        NSLog(@"%@",result);
         return;
     }
     
@@ -107,7 +107,7 @@
     PhotoBroswerVC *pbVC = [[self alloc] init];
     
     if(index >= photoModels.count){
-        NSLog(@"错误：index越界！");
+//        NSLog(@"错误：index越界！");
         return;
     }
     
@@ -189,7 +189,7 @@
     
     if(window == nil){
         
-        NSLog(@"错误：窗口为空！");
+//        NSLog(@"错误：窗口为空！");
         return;
     }
     
@@ -301,7 +301,7 @@
         photoItemView = [PhotoItemView viewFromXIB];
     }
     
-    NSLog(@"%p",&photoItemView);
+//    NSLog(@"%p",&photoItemView);
     
     //数据覆盖
     photoItemView.ItemViewSingleTapBlock = ^(){
@@ -685,7 +685,7 @@
     
     if(isInScreen){
         
-        NSLog(@"currentItemView:%@",self.currentItemView);
+//        NSLog(@"currentItemView:%@",self.currentItemView);
         
         [self.currentItemView zoomDismiss:^{
             

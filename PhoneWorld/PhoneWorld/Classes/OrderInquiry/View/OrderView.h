@@ -14,4 +14,7 @@
 @property (nonatomic) UITableView *orderTableView;
 @property (nonatomic) UILabel *resultNumLB;
 @property (nonatomic) NSArray *titles;
+
+@property (nonatomic) NSMutableArray *orderListArray;
+
 @end

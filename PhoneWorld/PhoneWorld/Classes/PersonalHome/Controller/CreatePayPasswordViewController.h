@@ -10,4 +10,6 @@
 
 @interface CreatePayPasswordViewController : UIViewController
 
+@property (nonatomic) int type;
+
 @end

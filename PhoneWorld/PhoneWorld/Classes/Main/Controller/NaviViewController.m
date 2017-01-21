@@ -20,6 +20,8 @@
     self.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
     self.navigationBar.translucent = NO;
+    UIImageView *lineImageView = [Utils findHairlineImageViewUnder:self.navigationBar];
+    lineImageView.hidden = YES;
 }
 
 @end

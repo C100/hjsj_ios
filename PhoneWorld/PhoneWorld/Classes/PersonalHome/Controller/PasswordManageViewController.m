@@ -12,6 +12,8 @@
 #import "CreatePayPasswordViewController.h"
 #import "AlterPayPasswordViewController.h"
 
+#import "PhoneNumberCheckViewController.h"
+
 @interface PasswordManageViewController ()
 @property (nonatomic) PasswordManageView *passwordManageView;
 @end
@@ -51,8 +53,12 @@
                 break;
             case 2:
             {
-                AlterPayPasswordViewController *vc = [AlterPayPasswordViewController new];
-                [weakself.navigationController pushViewController:vc animated:YES];
+                
+                //先手机验证再修改支付密码
+                
+                PhoneNumberCheckViewController *phoneCheckViewController = [[PhoneNumberCheckViewController alloc] init];
+                phoneCheckViewController.type = 4;
+                [weakself.navigationController pushViewController:phoneCheckViewController animated:YES];
             }
                 break;
         }

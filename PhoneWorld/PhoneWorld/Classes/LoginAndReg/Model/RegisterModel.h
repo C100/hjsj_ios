@@ -22,6 +22,12 @@
 @property (nonatomic) NSString *photoOne;//营业执照照片
 @property (nonatomic) NSString *photoTwo;//本人照片
 
+@property (nonatomic) NSString *captcha;//验证码
+
+@property (nonatomic) NSString *provinceCode;//省份编码
+@property (nonatomic) NSString *cityCode;//城市编码
+@property (nonatomic) NSString *orgAddress;//渠道地址
+
 @property (nonatomic) NSMutableDictionary *regDic;
 
 - (instancetype)initWithArray:(NSArray *)array;

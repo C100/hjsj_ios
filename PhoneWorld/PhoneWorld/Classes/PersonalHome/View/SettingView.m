@@ -7,6 +7,7 @@
 //
 
 #import "SettingView.h"
+#import "SettingTableViewCell.h"
 
 @interface SettingView ()
 
@@ -27,6 +28,7 @@
         self.settingTableView.tableFooterView = [UIView new];
         self.settingTableView.bounces = NO;
         self.settingTableView.backgroundColor = COLOR_BACKGROUND;
+        [self.settingTableView registerClass:[SettingTableViewCell class] forCellReuseIdentifier:@"cell"];
         [self addSubview:self.settingTableView];
     }
     return self;
@@ -38,23 +40,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    cell.textLabel.text = self.titles[indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:textfont16];
-    cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
+    SettingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    cell.titleLabel.text = self.titles[indexPath.row];
+ 
     if (indexPath.row == 1) {
         //计算缓存
         [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2fMB",totalSize/1024.0/1024.0];
-            cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+            cell.detailLabel.text = [NSString stringWithFormat:@"%.2fMB",totalSize/1024.0/1024.0];
         }];
     }
-    
+
     if (indexPath.row == self.titles.count - 1) {
         cell.separatorInset = UIEdgeInsetsZero;
         cell.layoutMargins = UIEdgeInsetsZero;

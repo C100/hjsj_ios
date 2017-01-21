@@ -121,7 +121,7 @@
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     
     //字体大小
-    [SVProgressHUD setFont:[UIFont systemFontOfSize:18.0f]];
+    [SVProgressHUD setFont:[UIFont systemFontOfSize:18]];
 }
 
 

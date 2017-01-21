@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhoneDetailModel.h"
 
 @interface SettlementDetailView : UIView
-- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos;
+
+@property (nonatomic) void(^SubmitCallBack) (id obj);
+
 @property (nonatomic) UIButton *nextButton;
+
+@property (nonatomic) NSMutableArray *leftLabelsArray;
+
 @end

@@ -7,15 +7,11 @@
 //
 
 #import "WhiteCardView.h"
-#import "WhiteCardCell.h"
-#import "ReadCardAndChoosePackageViewController.h"
-#import "WhitePhoneModel.h"
 
 @interface WhiteCardView ()
 
 @property (nonatomic) NSArray *phoneNumbers;
 @property (nonatomic) NSArray *grayArrs;
-@property (nonatomic) WhiteCardCell *currentCell;
 @property (nonatomic) UIView *grayView;
 @property (nonatomic) NSArray *topViewTitles;
 
@@ -30,7 +26,6 @@
         self.backgroundColor = COLOR_BACKGROUND;
         self.contentSize = CGSizeMake(screenWidth, 474);
         self.grayArrs = @[@0,@3,@4,@7,@8,@11,@12,@15,@16,@19,@20];
-        self.phoneNumbers = @[@"18754369021",@"13234543564",@"15732535555"];
         self.topViewTitles = @[@"号码池：",@"靓号规则："];
         [self topView];
         [self contentView];
@@ -64,10 +59,18 @@
             }
         }];
         
-        [self.selectView setWhiteCardFilterCallBack:^(NSArray *array) {
+        //查询
+        [self.selectView setWhiteCardFilterCallBack:^(NSArray *array,NSString *string) {
             
-            for (NSString *string in array) {
-                if ([string isEqualToString:@"无"]) {
+//            if ([string isEqualToString:@"查询"]) {
+//                
+//            }else{
+//                
+//            }
+            
+            
+            for (NSString *str in array) {
+                if ([str isEqualToString:@"无"]) {
                     [Utils toastview:@"筛选条件不完整"];
                     return ;
                 }
@@ -81,10 +84,13 @@
                 weakself.grayView.hidden = YES;
             }];
             
+            //显示筛选条件到topView上
             for (int i = 0; i < weakself.topView.resultArr.count; i ++) {
                 UILabel *lb = weakself.topView.resultArr[i];
                 lb.text = [NSString stringWithFormat:@"%@%@",weakself.topViewTitles[i],array[i]];
+                lb.font = [UIFont systemFontOfSize:14*screenWidth/414.0];
             }
+            
             [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.top.left.right.mas_equalTo(0);
                 make.width.mas_equalTo(screenWidth);
@@ -102,8 +108,8 @@
 
             weakself.topView.resultView.hidden = NO;
             
-            NSString *s1 = array.firstObject;
-            NSString *s2 = array.lastObject;
+            NSString *s1 = weakself.selectView.currentPoolId;
+            NSString *s2 = weakself.selectView.currentType;
                         
             weakself.WhiteCardSelectCallBack(s1,s2);
         }];
@@ -130,7 +136,7 @@
         _selectView = [[WhiteCardFilterView alloc] init];
         [self addSubview:_selectView];
         [_selectView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(1);
+            make.top.mas_equalTo(self.topView.mas_top).mas_equalTo(40);
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(160);
             make.width.mas_equalTo(screenWidth);
@@ -185,7 +191,7 @@
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10 + (10+(screenWidth-30)/2.0)*i, screenHeight - 140, (screenWidth-30)/2.0, 40)];
         [button setTitle:arr[i] forState:UIControlStateNormal];
         [button setTitleColor:MainColor forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
+        button.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [button addTarget:self action:@selector(nextAction:) forControlEvents:UIControlEventTouchUpInside];
         button.layer.cornerRadius = 20;
         button.layer.masksToBounds = YES;
@@ -202,9 +208,10 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     WhitePhoneModel *pModel = self.randomPhoneNumbers[indexPath.row];
     WhiteCardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    cell.phoneLB.text = pModel.num;
+    cell.whitePhoneModel = pModel;
     if ([self.grayArrs containsObject:@(indexPath.row)]) {
         cell.backgroundColor = [Utils colorRGB:@"#f3f4f5"];
     }else{
@@ -214,7 +221,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(screenWidth/2, 50);
+    return CGSizeMake(screenWidth/2, 60);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
@@ -246,16 +253,15 @@
 #pragma mark - Method
 - (void)nextAction:(UIButton *)button{
     if ([button.currentTitle isEqualToString:@"下一步"]) {
+        
         if (self.currentCell) {
-            ReadCardAndChoosePackageViewController *vc = [[ReadCardAndChoosePackageViewController alloc] init];
-            vc.infos = @[self.currentCell.phoneLB.text,@"浙江省杭州市",@"已激活",@"话机通信",@""];
-            UIViewController *viewController = [self viewController];
-            [viewController.navigationController pushViewController:vc animated:YES];
+            _NextCallBack(button);
         }else{
             [Utils toastview:@"请选择手机号"];
         }
     }else{
         //换一批
+        _ChangeCallBack(button);
     }
 }
 

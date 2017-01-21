@@ -10,11 +10,11 @@
 
 @interface PersonalInfoModel : JSONModel
 
-@property (nonatomic) NSString *username;
-@property (nonatomic) NSString *contact;
-@property (nonatomic) NSString *tel;
-@property (nonatomic) NSString *email;
-@property (nonatomic) NSString *channelName;
+@property (nonatomic) NSString<Optional> *username;
+@property (nonatomic) NSString<Optional> *contact;
+@property (nonatomic) NSString<Optional> *tel;
+@property (nonatomic) NSString<Optional> *email;
+@property (nonatomic) NSString<Optional> *channelName;
 @property (nonatomic) NSString<Optional> *supUserName;
 @property (nonatomic) NSString<Optional> *supTel;
 @property (nonatomic) NSString<Optional> *supRecomdCode;

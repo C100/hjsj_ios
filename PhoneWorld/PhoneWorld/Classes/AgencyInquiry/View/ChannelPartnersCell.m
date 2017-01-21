@@ -15,18 +15,25 @@
     if (self) {
         [self numberLB];
         [self nameLB];
-        [self dateLB];
+        [self channelNameLB];
     }
     return self;
+}
+
+- (void)setChannelModel:(ChannelModel *)channelModel{
+    _channelModel = channelModel;
+    self.numberLB.text = [NSString stringWithFormat:@"工号：%@",channelModel.orgCode];
+    self.channelNameLB.text = [NSString stringWithFormat:@"渠道名称：%@",channelModel.name];
+    self.nameLB.text = [NSString stringWithFormat:@"姓名：%@",channelModel.contact];
 }
 
 - (UILabel *)nameLB{
     if (_nameLB == nil) {
         _nameLB = [[UILabel alloc] init];
         [self addSubview:_nameLB];
-        _nameLB.font = [UIFont systemFontOfSize:13];
+        _nameLB.font = [UIFont systemFontOfSize:textfont12];
         _nameLB.textColor = [Utils colorRGB:@"#666666"];
-        _nameLB.text = @"姓名：话机世界";
+        _nameLB.text = @"渠道名称：";
         [_nameLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(10);
             make.left.mas_equalTo(15);
@@ -42,9 +49,9 @@
     if (_numberLB == nil) {
         _numberLB = [[UILabel alloc] init];
         [self addSubview:_numberLB];
-        _numberLB.font = [UIFont systemFontOfSize:13];
+        _numberLB.font = [UIFont systemFontOfSize:textfont12];
         _numberLB.textColor = [Utils colorRGB:@"#666666"];
-        _numberLB.text = @"号码：18812341234";
+        _numberLB.text = @"工号：";
         [_numberLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(10);
             make.height.mas_equalTo(16);
@@ -55,14 +62,14 @@
     return _numberLB;
 }
 
-- (UILabel *)dateLB{
-    if (_dateLB == nil) {
-        _dateLB = [[UILabel alloc] init];
-        [self addSubview:_dateLB];
-        _dateLB.font = [UIFont systemFontOfSize:13];
-        _dateLB.textColor = [Utils colorRGB:@"#666666"];
-        _dateLB.text = @"渠道名称：高度需计算";
-        [_dateLB mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UILabel *)channelNameLB{
+    if (_channelNameLB == nil) {
+        _channelNameLB = [[UILabel alloc] init];
+        [self addSubview:_channelNameLB];
+        _channelNameLB.font = [UIFont systemFontOfSize:textfont12];
+        _channelNameLB.textColor = [Utils colorRGB:@"#666666"];
+        _channelNameLB.text = @"姓名：";
+        [_channelNameLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.nameLB.mas_bottom).mas_equalTo(10);
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
@@ -70,18 +77,7 @@
             make.width.mas_equalTo(screenWidth-30);
         }];
     }
-    return _dateLB;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    return _channelNameLB;
 }
 
 @end

@@ -6,6 +6,9 @@
 //  Copyright © 2016年 lcy. All rights reserved.
 //
 
+/** 设置圆形图片 */
+
+
 #import <UIKit/UIKit.h>
 
 @interface UIImage (Extension)

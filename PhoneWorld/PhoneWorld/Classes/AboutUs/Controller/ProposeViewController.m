@@ -27,8 +27,6 @@
 
     [self.proposeView setProposeCallBack:^(NSString *propose) {
         
-        NSLog(@"----------上传建议意见：%@--------",propose);
-        
         [WebUtils requestSuggestWithContent:propose andCallBack:^(id obj) {
             if(obj){
                 if ([obj[@"code"] isEqualToString:@"10000"]) {
@@ -40,7 +38,7 @@
                     });
                 }else{
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [Utils toastview:@"上传失败"];
+                        [Utils toastview:@"提交失败"];
                     });
                 }
                 

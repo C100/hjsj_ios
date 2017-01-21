@@ -10,7 +10,10 @@
 
 @interface RepairCardView : UIScrollView
 
-//@property (nonatomic) UIView *emailChoiceView;
 @property (nonatomic) UIButton *nextButton;
+
+@property (nonatomic) void(^CardRepairCallBack)(NSMutableDictionary *dic);
+
+@property (nonatomic) BOOL isHJSJNumber;
 
 @end

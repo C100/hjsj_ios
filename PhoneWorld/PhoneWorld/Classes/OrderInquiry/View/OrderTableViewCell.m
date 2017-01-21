@@ -13,81 +13,76 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self numberLB];
-        [self nameLB];
-        [self dateLB];
-        [self phoneLB];
+        [self nameLabel];
+        [self phoneLabel];
+        [self dateLabel];
+        [self stateLabel];
     }
     return self;
 }
 
-- (UILabel *)numberLB{
-    if (_numberLB == nil) {
-        _numberLB = [[UILabel alloc] init];
-        [self addSubview:_numberLB];
-        _numberLB.font = [UIFont systemFontOfSize:13];
-        _numberLB.textColor = [Utils colorRGB:@"#666666"];
-        _numberLB.text = @"编号：";
-        [_numberLB mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UILabel *)nameLabel{
+    if (_nameLabel == nil) {
+        _nameLabel = [[UILabel alloc] init];
+        [self addSubview:_nameLabel];
+        _nameLabel.font = [UIFont systemFontOfSize:textfont12];
+        _nameLabel.textColor = [Utils colorRGB:@"#666666"];
+        _nameLabel.text = @"姓名：";
+        [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.mas_equalTo(10);
             make.height.mas_equalTo(16);
             make.right.mas_equalTo(-screenWidth/2);
         }];
     }
-    return _numberLB;
+    return _nameLabel;
 }
 
-- (UILabel *)nameLB{
-    if (_nameLB == nil) {
-        _nameLB = [[UILabel alloc] init];
-        [self addSubview:_nameLB];
-        _nameLB.font = [UIFont systemFontOfSize:13];
-        _nameLB.textColor = [Utils colorRGB:@"#666666"];
-        _nameLB.text = @"姓名：";
-        [_nameLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.numberLB.mas_bottom).mas_equalTo(13);
+- (UILabel *)phoneLabel{
+    if (_phoneLabel == nil) {
+        _phoneLabel = [[UILabel alloc] init];
+        [self addSubview:_phoneLabel];
+        _phoneLabel.font = [UIFont systemFontOfSize:textfont12];
+        _phoneLabel.textColor = [Utils colorRGB:@"#666666"];
+        _phoneLabel.text = @"号码：";
+        [_phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.nameLabel.mas_bottom).mas_equalTo(13);
             make.left.mas_equalTo(10);
             make.right.mas_equalTo(screenWidth/2);
         }];
     }
-    return _nameLB;
+    return _phoneLabel;
 }
 
-- (UILabel *)dateLB{
-    if (_dateLB == nil) {
-        _dateLB = [[UILabel alloc] init];
-        [self addSubview:_dateLB];
-        _dateLB.font = [UIFont systemFontOfSize:13];
-        _dateLB.textColor = [Utils colorRGB:@"#666666"];
-        _dateLB.text = @"日期：";
-        [_dateLB mas_makeConstraints:^(MASConstraintMaker *make) {
+- (UILabel *)dateLabel{
+    if (_dateLabel == nil) {
+        _dateLabel = [[UILabel alloc] init];
+        [self addSubview:_dateLabel];
+        _dateLabel.font = [UIFont systemFontOfSize:textfont12];
+        _dateLabel.textColor = [Utils colorRGB:@"#666666"];
+        _dateLabel.text = @"日期：";
+        [_dateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(10);
             make.right.mas_equalTo(-10);
             make.left.mas_equalTo(screenWidth/2);
         }];
     }
-    return _dateLB;
+    return _dateLabel;
 }
 
-- (UILabel *)phoneLB{
-    if (_phoneLB == nil) {
-        _phoneLB = [[UILabel alloc] init];
-        [self addSubview:_phoneLB];
-        _phoneLB.font = [UIFont systemFontOfSize:13];
-        _phoneLB.textColor = [Utils colorRGB:@"#666666"];
-        _phoneLB.text = @"手机号码：00000000000";
-        [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.dateLB.mas_bottom).mas_equalTo(13);
+- (UILabel *)stateLabel{
+    if (_stateLabel == nil) {
+        _stateLabel = [[UILabel alloc] init];
+        [self addSubview:_stateLabel];
+        _stateLabel.font = [UIFont systemFontOfSize:textfont12];
+        _stateLabel.textColor = [Utils colorRGB:@"#666666"];
+        _stateLabel.text = @"状态：";
+        [_stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.dateLabel.mas_bottom).mas_equalTo(13);
             make.left.mas_equalTo(screenWidth/2);
             make.right.mas_equalTo(-10);
         }];
     }
-    return _phoneLB;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+    return _stateLabel;
 }
 
 @end

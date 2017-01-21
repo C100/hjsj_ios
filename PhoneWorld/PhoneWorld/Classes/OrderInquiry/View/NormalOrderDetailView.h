@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderDetailModel.h"
+
+#import "OrderListModel.h"
 
 @interface NormalOrderDetailView : UIView<UIScrollViewDelegate>
 
@@ -18,5 +21,9 @@
 @property (nonatomic) UIScrollView *thirdView;
 
 @property (nonatomic) NSMutableArray *titleButtons;
+
+@property (nonatomic) OrderDetailModel *detailModel;
+
+@property (nonatomic) OrderListModel *orderModel;
 
 @end

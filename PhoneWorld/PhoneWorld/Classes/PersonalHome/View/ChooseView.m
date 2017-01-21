@@ -50,11 +50,11 @@
         [self addSubview:_titleLB];
         [_titleLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
-            make.width.mas_equalTo(30);
+            make.width.mas_equalTo(60);
             make.height.mas_equalTo(16);
             make.left.mas_equalTo(self.leftView.mas_right).mas_equalTo(6);
         }];
-        _titleLB.font = [UIFont systemFontOfSize:14];
+        _titleLB.font = [UIFont systemFontOfSize:textfont14];
         _titleLB.textColor = [Utils colorRGB:@"#666666"];
         _titleLB.text = self.title;
     }

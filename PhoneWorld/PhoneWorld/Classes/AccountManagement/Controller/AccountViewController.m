@@ -7,12 +7,12 @@
 //
 
 #import "AccountViewController.h"
+
 #import "PhoneCashCheckViewController.h"
 #import "CheckAndTopViewController.h"
 #import "TopCallMoneyViewController.h"
 #import "TopAndInquiryViewController.h"
-#import "MessageViewController.h"
-#import "PersonalHomeViewController.h"
+
 #import "AccountView.h"
 
 @interface AccountViewController ()
@@ -34,31 +34,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
-    
+
     self.navigationItem.backBarButtonItem = [Utils returnBackButton];
     
     self.accountView = [[AccountView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.accountView];
     __block __weak AccountViewController *weakself = self;
     [self.accountView setAccountCallBack:^(NSInteger row) {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         switch (row) {
             case 0:
             {
+                NSInteger i0 = [ud integerForKey:@"phoneBanlance"];
+                i0 = i0 + 1;
+                [ud setInteger:i0 forKey:@"phoneBanlance"];
+                [ud synchronize];
                 PhoneCashCheckViewController *vc = [PhoneCashCheckViewController new];
                 vc.hidesBottomBarWhenPushed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 1:{
+                NSInteger i1 = [ud integerForKey:@"accountRecord"];
+                i1 = i1 + 1;
+                [ud setInteger:i1 forKey:@"accountRecord"];
+                [ud synchronize];
                 CheckAndTopViewController *vc = [CheckAndTopViewController new];
                 vc.hidesBottomBarWhenPushed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 2:{
+                NSInteger i2 = [ud integerForKey:@"phoneRecharge"];
+                i2 = i2 + 1;
+                [ud setInteger:i2 forKey:@"phoneRecharge"];
+                [ud synchronize];
                 TopCallMoneyViewController *vc = [TopCallMoneyViewController new];
                 vc.hidesBottomBarWhenPushed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
@@ -66,26 +76,17 @@
                 break;
             case 3:
             {
-                TopAndInquiryViewController *vc = [TopAndInquiryViewController new];
+                NSInteger i3 = [ud integerForKey:@"accountRecord"];
+                i3 = i3 + 1;
+                [ud setInteger:i3 forKey:@"accountRecord"];
+                [ud synchronize];
+                TopAndInquiryViewController *vc = [TopAndInquiryViewController sharedTopAndInquiryViewController];
                 vc.hidesBottomBarWhenPushed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
         }
     }];
-}
-
-#pragma mark - Method
-- (void)gotoMessagesVC{
-    MessageViewController *messageVC = [MessageViewController new];
-    messageVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:messageVC animated:YES];
-}
-
-- (void)gotoPersonalHomeVC{
-    PersonalHomeViewController *vc = [PersonalHomeViewController new];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

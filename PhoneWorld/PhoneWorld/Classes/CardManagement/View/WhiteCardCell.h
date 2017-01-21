@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WhitePhoneModel.h"
 
 @interface WhiteCardCell : UICollectionViewCell
 
@@ -15,5 +16,7 @@
 @property (nonatomic) UIButton *rightButton;
 
 @property (nonatomic) UILabel *phoneLB;
+
+@property (nonatomic) WhitePhoneModel *whitePhoneModel;
 
 @end

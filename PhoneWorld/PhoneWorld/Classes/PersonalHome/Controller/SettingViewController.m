@@ -36,7 +36,7 @@
             {//清除缓存
                 [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
                     //开线程执行
-                    NSString *message = [NSString stringWithFormat:@"您确认清除%.3fMB缓存",totalSize/1024.0/1024.0];
+                    NSString *message = [NSString stringWithFormat:@"您确认清除%.2fMB缓存",totalSize/1024.0/1024.0];
                     
                     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
                     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -44,6 +44,11 @@
                         [[SDImageCache sharedImageCache] clearMemory];
                         //清除磁盘缓存
                         [[SDImageCache sharedImageCache] clearDisk];
+                        
+                        [SDCycleScrollView clearImagesCache];
+                        
+                        [weakself.settingView.settingTableView reloadData];
+                        
                     }];
                     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                         

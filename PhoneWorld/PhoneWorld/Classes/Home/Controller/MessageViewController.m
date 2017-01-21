@@ -10,6 +10,11 @@
 #import "MessageView.h"
 #import "MessageModel.h"
 
+typedef enum : NSUInteger {
+    refreshing,
+    loading
+} requestType;
+
 @interface MessageViewController ()
 
 @property (nonatomic) NSInteger linage;
@@ -35,7 +40,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"消息中心";
     self.navigationItem.backBarButtonItem = [Utils returnBackButton];
-    self.linage = (screenHeight-64)/60;
+    self.linage = (screenHeight-64)/40;
     self.page = 1;
     
     self.messageView = [[MessageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
@@ -43,99 +48,89 @@
     
     __block __weak MessageViewController *weakself = self;
     
-    [self.messageView.messageTableView addPullToRefreshWithActionHandler:^{
-        [weakself requestMessageList];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"readNotification" object:nil];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setBool:YES forKey:@"isClickedNewsCenter"];
+    [ud synchronize];
+    
+    self.messageView.messageTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakself requestWithType:refreshing];
     }];
     
-    [self.messageView.messageTableView addInfiniteScrollingWithActionHandler:^{
-        [weakself requestMessageListMore];
+    self.messageView.messageTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakself requestWithType:loading];
     }];
     
-    [self.messageView.messageTableView triggerPullToRefresh];
+    [self.messageView.messageTableView.mj_header beginRefreshing];
 }
 
-- (void)requestMessageList{
+- (void)requestWithType:(requestType)type{
     __block __weak MessageViewController *weakself = self;
-    self.page = 1;
-    self.messageArray = [NSMutableArray array];
-    NSLog(@"------linage = %ld-----page = %ld",self.linage,self.page);
+    NSString *requestString = @"没有数据";
+    if (type == refreshing) {
+        self.page = 1;
+        self.messageArray = [NSMutableArray array];
+    }else{
+        self.page ++;
+        requestString = @"已经是最后一页了";
+    }
+    
     NSString *linageStr = [NSString stringWithFormat:@"%ld",self.linage];
     NSString *pageStr = [NSString stringWithFormat:@"%ld",self.page];
+    
+    if([[AFNetworkReachabilityManager sharedManager] isReachable] == NO){
+        if (type == loading) {
+            [self.messageView.messageTableView.mj_footer endRefreshing];
+        }else{
+            [self.messageView.messageTableView.mj_header endRefreshing];
+        }
+    }
+    
     [WebUtils requestMessageListWithLinage:linageStr andPage:pageStr andCallBack:^(id obj) {
         NSString *code = [NSString stringWithFormat:@"%@",obj[@"code"]];
         if(obj){
             if([code isEqualToString:@"10000"]){
                 //正确
-                NSArray *messageArr = obj[@"data"][@"notice"];
-                for (NSDictionary *dic in messageArr) {
-                    MessageModel *mm = [[MessageModel alloc] initWithDictionary:dic error:nil];
-                    [weakself.messageArray addObject:mm];
-                }
-                weakself.messageView.messagesArray = weakself.messageArray;
+                int count = [obj[@"data"][@"count"] intValue];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakself.messageView.messageTableView reloadData];
+                if (count == 0) {
+                    if (type == loading) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [Utils toastview:requestString];
+                        });
+                    }
+                }else{
                     
-                    [weakself.messageView.messageTableView.pullToRefreshView stopAnimating];
-                });
-                
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        NSArray *messageArr = obj[@"data"][@"notice"];
+                        for (NSDictionary *dic in messageArr) {
+                            MessageModel *mm = [[MessageModel alloc] initWithDictionary:dic error:nil];
+                            [weakself.messageArray addObject:mm];
+                        }
+                        weakself.messageView.messagesArray = weakself.messageArray;
+                        
+                        [weakself.messageView.messageTableView reloadData];
+                    });
+                }
             }else{
                 //查询错误
+                NSString *mes = [NSString stringWithFormat:@"%@",obj[@"mes"]];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [weakself.messageView.messageTableView.pullToRefreshView stopAnimating];
+                    [Utils toastview:mes];
                 });
-
             }
         }
-    }];
-}
-
-//上拉加载
-- (void)requestMessageListMore{
-    __block __weak MessageViewController *weakself = self;
-    self.page ++;
-    NSLog(@"------linage = %ld-----page = %ld",self.linage,self.page);
-    NSString *linageStr = [NSString stringWithFormat:@"%ld",self.linage];
-    NSString *pageStr = [NSString stringWithFormat:@"%ld",self.page];
-    [WebUtils requestMessageListWithLinage:linageStr andPage:pageStr andCallBack:^(id obj) {
-        NSString *count = [NSString stringWithFormat:@"%@",obj[@"data"][@"count"]];
-        NSString *code = [NSString stringWithFormat:@"%@",obj[@"code"]];
-        if(obj){
-            if([count isEqualToString:@"0"]){
-                //页码到头
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [Utils toastview:@"已经是最后一页"];
-                    [weakself.messageView.messageTableView.infiniteScrollingView stopAnimating];
-                });
-                
-            }else if([code isEqualToString:@"10000"] && ![count isEqualToString:@"0"]){
-                //正确
-                NSArray *messageArr = obj[@"data"][@"notice"];
-                for (NSDictionary *dic in messageArr) {
-                    MessageModel *mm = [[MessageModel alloc] initWithDictionary:dic error:nil];
-                    [weakself.messageArray addObject:mm];
-                }
-                weakself.messageView.messagesArray = weakself.messageArray;
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakself.messageView.messageTableView reloadData];
-                    
-                    [weakself.messageView.messageTableView.infiniteScrollingView stopAnimating];
-                });
-                
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (type == refreshing) {
+                [weakself.messageView.messageTableView.mj_header endRefreshing];
             }else{
-                //查询错误
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [weakself.messageView.messageTableView.infiniteScrollingView stopAnimating];
-                });
-                
+                [weakself.messageView.messageTableView.mj_footer endRefreshing];
             }
-        }
+        });
     }];
 }
-
 
 @end

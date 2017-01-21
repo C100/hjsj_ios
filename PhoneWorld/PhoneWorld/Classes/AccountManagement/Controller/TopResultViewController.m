@@ -16,6 +16,8 @@
 @implementation TopResultViewController
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [Utils colorRGB:@"#999999"];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:MainColor};
@@ -29,6 +31,7 @@
 
     self.topResultView = [[TopResultView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andIsSucceed:self.isSucceed];
     [self.view addSubview:self.topResultView];
+    self.topResultView.allResults = self.allResults;
 }
 
 @end

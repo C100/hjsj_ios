@@ -7,18 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CountView.h"
 
 //筛选view
 @interface HomeView : UIScrollView<SDCycleScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic) UIView *container;//所有内容加到这个view中
+@property (nonatomic) void(^HomeHeadScrollCallBack)(NSInteger number);
 
 @property (nonatomic) SDCycleScrollView *imageScrollView;//首页轮播图
 
 @property (nonatomic) UILabel *fastRoadLB;//快速通道
 @property (nonatomic) UIView *lineView;//黄色分割线
 
-@property (nonatomic) UICollectionView *fastCollectionView;
+@property (nonatomic) UICollectionView *fastCollectionView;//快速通道
 @property (nonatomic) UICollectionViewFlowLayout *flowLayout;
+
+
+//代理商开户量界面
+@property (nonatomic) CountView *countView;
+
+
+
 
 @end

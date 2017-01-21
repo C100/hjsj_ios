@@ -42,7 +42,7 @@
         }];
         for (int i = 0; i < 2; i++) {
             UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15+i*(screenWidth-30)/2, 10, (screenWidth-30)/2, 14)];
-            lb.font = [UIFont systemFontOfSize:12];
+            lb.font = [UIFont systemFontOfSize:textfont12];
             lb.textColor = [Utils colorRGB:@"#999999"];
             lb.text = self.titlesArr[i];
             [_resultView addSubview:lb];
@@ -70,10 +70,10 @@
         leftV.backgroundColor = [Utils colorRGB:@"#008bd5"];
         [_headView addSubview:leftV];
         
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 50, 15)];
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 100, 15)];
         lb.text = @"筛选条件";
         lb.textColor = [Utils colorRGB:@"#008bd5"];
-        lb.font = [UIFont systemFontOfSize:12];
+        lb.font = [UIFont systemFontOfSize:textfont12];
         lb.textAlignment = NSTextAlignmentLeft;
         [_headView addSubview:lb];
         

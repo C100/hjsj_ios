@@ -21,11 +21,19 @@
     return self;
 }
 
+- (void)setOrderCountModel:(OrderCountModel *)orderCountModel{
+    _orderCountModel = orderCountModel;
+    self.nameLB.text = [NSString stringWithFormat:@"姓名：%@",orderCountModel.contact];
+    self.phoneLB.text = [NSString stringWithFormat:@"工号：%@",orderCountModel.orgCode];
+    self.numberLB.text = [NSString stringWithFormat:@"开户量：%d",orderCountModel.openCount];
+    self.wayLB.text = [NSString stringWithFormat:@"渠道名称：%@",orderCountModel.name];
+}
+
 - (UILabel *)nameLB{
     if (_nameLB == nil) {
         _nameLB = [[UILabel alloc] init];
         [self addSubview:_nameLB];
-        _nameLB.font = [UIFont systemFontOfSize:13];
+        _nameLB.font = [UIFont systemFontOfSize:textfont12];
         _nameLB.textColor = [Utils colorRGB:@"#666666"];
         _nameLB.text = @"姓名：话机世界";
         [_nameLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -42,9 +50,9 @@
     if (_phoneLB == nil) {
         _phoneLB = [[UILabel alloc] init];
         [self addSubview:_phoneLB];
-        _phoneLB.font = [UIFont systemFontOfSize:13];
+        _phoneLB.font = [UIFont systemFontOfSize:textfont12];
         _phoneLB.textColor = [Utils colorRGB:@"#666666"];
-        _phoneLB.text = @"号码：";
+        _phoneLB.text = @"工号：";
         [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(10);
             make.right.mas_equalTo(-15);
@@ -59,7 +67,7 @@
     if (_numberLB == nil) {
         _numberLB = [[UILabel alloc] init];
         [self addSubview:_numberLB];
-        _numberLB.font = [UIFont systemFontOfSize:13];
+        _numberLB.font = [UIFont systemFontOfSize:textfont12];
         _numberLB.textColor = [Utils colorRGB:@"#666666"];
         _numberLB.text = @"开户总量：10000";
         [_numberLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,7 +84,7 @@
     if (_wayLB == nil) {
         _wayLB = [[UILabel alloc] init];
         [self addSubview:_wayLB];
-        _wayLB.font = [UIFont systemFontOfSize:13];
+        _wayLB.font = [UIFont systemFontOfSize:textfont12];
         _wayLB.textColor = [Utils colorRGB:@"#666666"];
         _wayLB.text = @"渠道名称：高度需计算";
         [_wayLB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -88,17 +96,6 @@
         }];
     }
     return _wayLB;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

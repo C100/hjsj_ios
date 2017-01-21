@@ -15,4 +15,8 @@
 @property (nonatomic) TopView *topView;//标题栏
 @property (nonatomic) FilterView *selectView;//筛选new
 @property (nonatomic) ContentView *contentScrollView;
+
+
+@property (nonatomic) NSInteger selectedIndex;
+
 @end

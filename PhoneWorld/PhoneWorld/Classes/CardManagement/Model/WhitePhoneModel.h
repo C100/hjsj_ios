@@ -10,8 +10,11 @@
 
 @interface WhitePhoneModel : JSONModel
 
+//手机号信息白卡开户得到
 @property (nonatomic) NSString *num;
-@property (nonatomic) NSString *Itype;
-@property (nonatomic) NSString *infos;
+@property (nonatomic) NSString *ltype;//类型
+@property (nonatomic) NSString *infos;//说明
+@property (nonatomic) NSString<Optional> *rules;//靓号规则
+@property (nonatomic) NSString<Optional> *pool;//号码池
 
 @end

@@ -28,6 +28,7 @@
         self.imageViews = [NSMutableArray array];
         self.imageButtons = [NSMutableArray array];
         self.removeButtons = [NSMutableArray array];
+        self.titleLabelsArray = [NSMutableArray array];
         self.title = title;
         self.details = details;
         self.count = count;
@@ -41,15 +42,15 @@
     if (_titleLB == nil) {
         _titleLB = [[UILabel alloc] init];
         _titleLB.text = self.title;
-        _titleLB.textColor = [Utils colorRGB:@"#666666"];
-        _titleLB.font = [UIFont systemFontOfSize:14];
+        _titleLB.textColor = [UIColor blackColor];
+        _titleLB.font = [UIFont systemFontOfSize:textfont16];
         NSRange range = [_titleLB.text rangeOfString:@"（点击图片可放大）"];
-        _titleLB.attributedText = [Utils setTextColor:_titleLB.text FontNumber:[UIFont systemFontOfSize:10] AndRange:range AndColor:[Utils colorRGB:@"#cccccc"]];
+        _titleLB.attributedText = [Utils setTextColor:_titleLB.text FontNumber:[UIFont systemFontOfSize:12] AndRange:range AndColor:[Utils colorRGB:@"#000000"]];
         [self addSubview:_titleLB];
         [_titleLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(10);
             make.left.mas_equalTo(15);
-            make.width.mas_equalTo(135);
+            make.width.mas_equalTo(200);
             make.height.mas_equalTo(16);
         }];
     }
@@ -58,7 +59,7 @@
 
 - (void)addContent{
     for (int i = 0; i < self.count; i++) {
-        UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(17 + 80*i, 40, 60, 60)];
+        UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(17 + 120*i, 40, 100, 100)];
         [self addSubview:imageButton];
         imageButton.layer.cornerRadius = 3;
         imageButton.layer.masksToBounds = YES;
@@ -66,12 +67,12 @@
         imageButton.layer.borderWidth = 1;
         [imageButton setTitle:@"+" forState:UIControlStateNormal];
         [imageButton setTitleColor:[Utils colorRGB:@"#cccccc"] forState:UIControlStateNormal];
-        imageButton.titleLabel.font = [UIFont systemFontOfSize:30];
+        imageButton.titleLabel.font = [UIFont systemFontOfSize:textfont30];
         imageButton.tag = 1000 + i;
         [imageButton addTarget:self action:@selector(chooseImageAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.imageButtons addObject:imageButton];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(17 + 80*i, 40, 60, 60)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(17 + 120*i, 40, 100, 100)];
         imageView.layer.cornerRadius = 3;
         imageView.layer.masksToBounds = YES;
         [self addSubview:imageView];
@@ -83,31 +84,33 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
         [imageView addGestureRecognizer:tap];
         
-        UIButton *removeButton = [[UIButton alloc] initWithFrame:CGRectMake(69+80*i, 32, 16, 16)];
+        UIButton *removeButton = [[UIButton alloc] initWithFrame:CGRectMake(109+120*i, 32, 16, 16)];
         removeButton.backgroundColor = [UIColor redColor];
         removeButton.layer.cornerRadius = 8;
         removeButton.layer.masksToBounds = YES;
         [removeButton setTitle:@"X" forState:UIControlStateNormal];
         [removeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        removeButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        removeButton.titleLabel.font = [UIFont systemFontOfSize:textfont12];
         removeButton.hidden = YES;
         removeButton.tag = 1100+i;
         [removeButton addTarget:self action:@selector(removeAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:removeButton];
         [self.removeButtons addObject:removeButton];
         
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(7 + 80 *i, 104, 80, 10)];
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(7 + 120 *i, 144, 120, 40)];
         lb.textAlignment = NSTextAlignmentCenter;
+        lb.numberOfLines = 0;
         [self addSubview:lb];
         lb.text = self.details[i];
-        lb.textColor = [Utils colorRGB:@"#cccccc"];
-        lb.font = [UIFont systemFontOfSize:8];
+        lb.textColor = [UIColor blackColor];
+        lb.font = [UIFont systemFontOfSize:textfontImage];
+        [self.titleLabelsArray addObject:lb];
     }
 }
 
 #pragma mark - UIImagePickerViewController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    UIImage *image = info[UIImagePickerControllerEditedImage];
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
     NSInteger i = self.currentImageButton.tag - 1000;
     UIImageView *imageV = self.imageViews[i];
     imageV.hidden = NO;
@@ -130,14 +133,16 @@
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = weakself;
-        imagePicker.allowsEditing = YES;
+//        imagePicker.allowsEditing = YES;
+        
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
         [viewController presentViewController:imagePicker animated:YES completion:nil];
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIImagePickerController *imagePicker2 = [[UIImagePickerController alloc] init];
         imagePicker2.delegate = weakself;
-        imagePicker2.allowsEditing = YES;
+//        imagePicker2.allowsEditing = YES;
         imagePicker2.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
         [viewController presentViewController:imagePicker2 animated:YES completion:nil];

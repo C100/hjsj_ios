@@ -9,16 +9,18 @@
 #import "CardInquiryView.h"
 #import "TopView.h"
 #import "FilterView.h"
-#import "OrderView.h"
+
+#import "CardInquiryViewController.h"
 
 @interface CardInquiryView ()
 
 @property (nonatomic) TopView *topView;
 @property (nonatomic) FilterView *selectView;
 @property (nonatomic) UIView *grayView;
-@property (nonatomic) OrderView *contentView;
 @property (nonatomic) NSArray *arrTitles;
 @property (nonatomic) UIView *yellowLineView;
+
+@property (nonatomic) NSArray *topTitleArray;
 
 @end
 
@@ -29,43 +31,33 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
+        self.arrTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
+        self.topTitleArray = @[@"全部",@"待审核",@"审核通过",@"审核不通过"];
         [self topView];
         [self contentView];
         [self selectView];
-        self.arrTitles = @[@"起始时间：",@"截止时间：",@"订单状态：",@"手机号码："];
+
         [self yellowLineView];
         __block __weak CardInquiryView *weakself = self;
-//        [self.topView setCallback:^(NSInteger tag) {
-//            /*---按钮点击事件---*/
-//            NSInteger i = tag - 10;
-//            [UIView animateWithDuration:0.5 animations:^{
-//                CGRect frame = weakself.yellowLineView.frame;
-//                frame.origin.x = i*screenWidth/4;
-//                weakself.yellowLineView.frame = frame;
-//            }];
-//        }];
-//        
-//        [self.topView setTopCallBack:^(id obj) {
-//            if (weakself.selectView.hidden == NO) {
-//                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-//            }else{
-//                weakself.topView.showButton.transform = CGAffineTransformIdentity;
-//            }
-//            weakself.selectView.hidden = weakself.selectView.hidden == YES ? NO:YES;
-//            weakself.grayView.hidden = weakself.grayView.hidden == YES ? NO:YES;
-//        }];
         
         
         [self.topView setCallback:^(NSInteger tag) {
             /*---按钮点击事件---*/
             NSInteger i = tag - 10;
             
-//            [UIView animateWithDuration:0.5 animations:^{
-//                CGRect frame = weakself.yellowLineView.frame;
-//                frame.origin.x = i*screenWidth/4;
-//                weakself.yellowLineView.frame = frame;
-//            }];
-
+            /*
+             实现点击当前的上边栏时把当前要显示界面的筛选条件都置为空
+             */
+            [CardInquiryViewController sharedCardInquiryViewController].inquiryConditionArray = nil;
+            
+            [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.mas_equalTo(0);
+                make.top.mas_equalTo(0);
+                make.height.mas_equalTo(80);
+            }];
+            
+            [CardInquiryViewController sharedCardInquiryViewController].stateCode = weakself.topTitleArray[i];
+            [[CardInquiryViewController sharedCardInquiryViewController].inquiryView.contentView.orderTableView.mj_header beginRefreshing];
             
             UIButton *button = weakself.topView.titlesButton[i];
             [UIView animateWithDuration:0.5 animations:^{
@@ -90,6 +82,7 @@
         }];
         
         [self.topView setTopCallBack:^(id obj) {
+            [weakself endEditing:YES];
             // 点击筛选栏时的操作
             if (weakself.selectView.hidden == NO) {
                 weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
@@ -115,31 +108,62 @@
         }];
         
         [self grayView];
-        [self.contentView setOrderViewCallBack:^(NSInteger section) {
-            //什么都不做
-        }];
         
         [self.selectView setFilterCallBack:^(NSArray *array,NSString *string) {
+            
+            int k = 0;
             for (int i = 0; i < array.count; i++) {
-                UILabel *lb = weakself.topView.resultArr[i];
-                if (array[i]) {
-                    lb.text = [NSString stringWithFormat:@"%@%@",weakself.arrTitles[i],array[i]];
-                    if (i == array.count - 1) {
-                        if ([weakself.selectView.titles.lastObject isEqualToString:@"请选择"]) {
-                            lb.text = [NSString stringWithFormat:@"充值类型：%@",array[i]];
-                        }
-                    }
+                if ([array[i] isEqualToString:@"无"]) {
+                    k ++;
                 }
             }
             
-            [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.mas_equalTo(0);
-                make.top.mas_equalTo(0);
-                make.height.mas_equalTo(130);
-            }];
-            weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            if (k == array.count) {
+                //说明没有查询条件
+                [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.mas_equalTo(0);
+                    make.top.mas_equalTo(0);
+                    make.height.mas_equalTo(80);
+                }];
+                
+            }else{
+                
+                if ([string isEqualToString:@"查询"]) {
+                    [weakself endEditing:YES];
+                    //筛选操作
+                    if ([string isEqualToString:@"查询"]) {
+                        [CardInquiryViewController sharedCardInquiryViewController].inquiryConditionArray = array;
+                        [[CardInquiryViewController sharedCardInquiryViewController].inquiryView.contentView.orderTableView.mj_header beginRefreshing];
+                    }
+                }
+                
+                
+                for (int i = 0; i < array.count; i++) {
+                    UILabel *lb = weakself.topView.resultArr[i];
+                    if (array[i]) {
+                        lb.text = [NSString stringWithFormat:@"%@%@",weakself.arrTitles[i],array[i]];
+                        if (i == array.count - 1) {
+                            if ([weakself.selectView.titles.lastObject isEqualToString:@"请选择"]) {
+                                lb.text = [NSString stringWithFormat:@"充值类型：%@",array[i]];
+                            }
+                        }
+                    }
+                    lb.font = [UIFont systemFontOfSize:14*screenWidth/414.0];
+                    
+                }
+                
+                [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.mas_equalTo(0);
+                    make.top.mas_equalTo(0);
+                    make.height.mas_equalTo(130);
+                }];
+                
+            }
+            
+            
             
             if ([string isEqualToString:@"查询"]) {
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
                 weakself.selectView.hidden = YES;
                 weakself.grayView.hidden = YES;
             }
@@ -147,19 +171,11 @@
         
         [self.selectView setDismissPickerViewCallBack:^(id obj) {
             
-            [UIView animateWithDuration:0.5 animations:^{
-                weakself.selectView.beginDatePicker.alpha = 0;
-                weakself.selectView.pickView.alpha = 0;
-                weakself.selectView.pickerView.alpha = 0;
-                weakself.selectView.closeImagePickerButton.alpha = 0;
-                weakself.selectView.cancelButton.alpha = 0;
-            } completion:^(BOOL finished) {
-                weakself.selectView.beginDatePicker.hidden = YES;
-                weakself.selectView.pickView.hidden = YES;
-                weakself.selectView.pickerView.hidden = YES;
-                weakself.selectView.closeImagePickerButton.hidden = YES;
-                weakself.selectView.cancelButton.hidden = YES;
-            }];
+            weakself.selectView.beginDatePicker.hidden = YES;
+            weakself.selectView.pickView.hidden = YES;
+            weakself.selectView.pickerView.hidden = YES;
+            weakself.selectView.closeImagePickerButton.hidden = YES;
+            weakself.selectView.cancelButton.hidden = YES;
         }];
         
     }
@@ -177,7 +193,7 @@
 
 - (TopView *)topView{
     if (_topView == nil) {
-        _topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 130) andTitles:@[@"全部",@"待审核",@"通过",@"未通过"]];
+        _topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 130) andTitles:@[@"全部",@"待审核",@"通过",@"未通过"] andResultTitles:self.arrTitles];
         [self addSubview:_topView];
         [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
@@ -191,12 +207,13 @@
 - (FilterView *)selectView{
     if (_selectView == nil) {
         /*-----筛选框new--------*/
-        _selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 81, screenWidth, 240)];
+        _selectView = [[FilterView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, 240)];
         _selectView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_selectView];
         _selectView.hidden = YES;
-        self.selectView.titles = @[@"起始时间",@"截止时间",@"订单类型",@"手机号码"];
-        _selectView.orderStates = @[@"全部",@"补卡",@"过户"];
+        self.selectView.titles = @[@"起始时间",@"截止时间",@"业务类型",@" 手机号码"];
+        self.selectView.details = @[@"请选择",@"请选择",@"过户",@"请输入手机号码"];
+        _selectView.orderStates = @[@"补卡",@"过户"];
         [_selectView.filterTableView reloadData];
     }
     return _selectView;
@@ -262,12 +279,6 @@
         } completion:^(BOOL finished) {
         }];
     }
-    
-    //    [UIView animateWithDuration:0.3 animations:^{
-//    weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
-//    weakself.selectView.hidden = YES;
-//    weakself.grayView.hidden = YES;
-    //    }];
 }
 
 @end

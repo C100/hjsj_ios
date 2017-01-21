@@ -8,7 +8,6 @@
 
 #import "CreatePayPasswordViewController.h"
 #import "CreatePayPasswordView.h"
-#import "PhoneNumberCheckViewController.h"
 #import "FailedView.h"
 #import "InputView.h"
 
@@ -28,9 +27,29 @@
     [self.view addSubview:self.createView];
     __block __weak CreatePayPasswordViewController *weakself = self;
     [self.createView setCreatePayPasswordCallBack:^(id obj) {
+        
         InputView *passV = weakself.createView.inputViews.firstObject;
+        
+        if (![Utils checkPayPassword:passV.textField.text]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [Utils toastview:@"请输入六位数字支付密码"];
+            });
+            return ;
+        }
+        
+        weakself.createView.saveButton.userInteractionEnabled = NO;
+        
+        if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            weakself.createView.userInteractionEnabled = YES;
+        }
+        
         [WebUtils requestCreatePayPasswordWithPassword:passV.textField.text andCallBack:^(id obj) {
             if (obj) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakself.createView.saveButton.userInteractionEnabled = YES;
+                });
+                
                 if ([obj[@"code"] isEqualToString:@"10000"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         //操作
@@ -61,7 +80,11 @@
         self.succeedView.alpha = 0;
     } completion:^(BOOL finished) {
         [self.succeedView removeFromSuperview];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        if (self.type == 1) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     }];
 }
 

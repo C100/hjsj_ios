@@ -12,4 +12,9 @@
 @interface OpenWhiteCardViewController : UIViewController
 + (OpenWhiteCardViewController *)sharedOpenWhiteCardViewController;
 @property (nonatomic) OrderView *orderView;
+@property (nonatomic) NSMutableArray *orderModelsArr;
+
+//查询条件
+@property (nonatomic) NSArray *inquiryConditionArray;
+
 @end

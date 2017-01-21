@@ -12,4 +12,9 @@
 @interface RepairCardViewController : UIViewController
 + (RepairCardViewController *)sharedRepairCardViewController;
 @property (nonatomic) OrderView *orderView;
+@property (nonatomic) NSMutableArray *cardRepairList;
+
+//查询条件
+@property (nonatomic) NSArray *inquiryConditionArray;
+
 @end

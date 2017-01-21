@@ -12,5 +12,6 @@
 
 @property (nonatomic) NSString *message_id;
 @property (nonatomic) NSString *title;
+@property (nonatomic) NSString *updateDate;
 
 @end

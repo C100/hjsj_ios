@@ -10,7 +10,10 @@
 
 @interface RegisterView : UIScrollView <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic) void(^registerCallBack) (id obj);
+@property (nonatomic) void(^registerCallBack) (id obj,NSString *phoneNumberString,NSString *captchaString);
 @property (nonatomic) UIButton *nextButton;
+
+@property (nonatomic) CityModel *currentCityModel;
+@property (nonatomic) ProvinceModel *currentProvinceModel;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation UIImage (Extension)
 
-/** 设置圆形图片(放到分类中使用) */
+/** 设置圆形图片 */
 - (UIImage *)cutCircleImage {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0.0);
     // 获取上下文

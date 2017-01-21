@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InputView.h"
+#import "CountView.h"
 
 @interface CommisionCountView : UIScrollView
-
+@property (nonatomic) CountView *countView;//金额
+@property (nonatomic) CountView *countView2;//开户量
+@property (nonatomic) InputView *inputView;//总金额label
 @end

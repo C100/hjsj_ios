@@ -25,12 +25,32 @@
         self.backgroundColor = COLOR_BACKGROUND;
         self.inputViews = [NSMutableArray array];
         
+        NSString *detailString = @"请输入6位数字新密码";
+        //type1:修改登录密码
+        if (type == 1) {
+            detailString = @"请输入6-12位数字和字母新密码";
+        }
+        
+        
         for (int i = 0; i < self.leftTitles.count; i ++) {
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
             InputView *view = [[InputView alloc] initWithFrame:CGRectMake(0, 1 + 41*i, screenWidth, 40)];
             [self addSubview:view];
             view.leftLabel.text = self.leftTitles[i];
             view.textField.placeholder = [NSString stringWithFormat:@"请输入%@",self.leftTitles[i]];
+            if(i == 1){
+                
+                [view.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.right.mas_equalTo(-15);
+                    make.centerY.mas_equalTo(0);
+                    make.height.mas_equalTo(30);
+                }];
+                
+                view.textField.placeholder = [NSString stringWithFormat:@"%@",detailString];
+            }else if(i == 2){
+                view.textField.placeholder = [NSString stringWithFormat:@"请再次输入新密码"];
+            }
+            
             [view addGestureRecognizer:tap];
             view.tag = 100+i;
             [self.inputViews addObject:view];
@@ -48,7 +68,7 @@
                 lb.textAlignment = NSTextAlignmentCenter;
                 lb.text = @"忘记密码？";
                 lb.textColor = MainColor;
-                lb.font = [UIFont systemFontOfSize:12];
+                lb.font = [UIFont systemFontOfSize:textfont12];
                 lb.userInteractionEnabled = YES;
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgetPasswordAction:)];
                 [lb addGestureRecognizer:tap];
@@ -67,7 +87,7 @@
 
 - (UIButton *)saveButton{
     if (_saveButton == nil) {
-        _saveButton = [Utils returnBextButtonWithTitle:@"确定"];
+        _saveButton = [Utils returnNextButtonWithTitle:@"确定"];
         [self addSubview:_saveButton];
         [_saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(160);
@@ -75,7 +95,30 @@
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(171);
         }];
-        [_saveButton addTarget:self action:@selector(saveAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [[_saveButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            InputView *iv0 = self.inputViews[0];//原密码
+            InputView *iv1 = self.inputViews[1];//新密码
+            InputView *iv2 = self.inputViews[2];//新密码
+            //判断愿密码是否正确
+            //判断新密码输入是否一致
+            if ([iv1.textField.text isEqualToString:iv2.textField.text] && ![iv0.textField.text isEqualToString:@""]) {
+                
+                if ([iv0.textField.text isEqualToString:iv1.textField.text]) {
+                    [Utils toastview:@"原密码不能与新密码一致"];
+                    return ;
+                }else if([Utils checkPassword:iv1.textField.text] == NO){
+                    [Utils toastview:@"请输入6-12位数字和字母新密码"];
+                    return ;
+                }else{
+                    [self endEditing:YES];
+                    _AlterPasswordCallBack(self.saveButton);
+                }
+                
+            }else{
+                [Utils toastview:@"两次密码输入不一致"];
+            }
+        }];
     }
     return _saveButton;
 }
@@ -84,26 +127,6 @@
 - (void)tapAction:(UITapGestureRecognizer *)tap{
     InputView *view = (InputView *)tap.view;
     [view.textField becomeFirstResponder];
-}
-
-- (void)saveAction:(UIButton *)button{
-    InputView *iv0 = self.inputViews[0];//原密码
-    InputView *iv1 = self.inputViews[1];//新密码
-    InputView *iv2 = self.inputViews[2];//新密码
-    //判断愿密码是否正确
-    //判断新密码输入是否一致
-    if ([iv1.textField.text isEqualToString:iv2.textField.text] && ![iv0.textField.text isEqualToString:@""]) {
-        
-        if ([iv0.textField.text isEqualToString:iv1.textField.text]) {
-            [Utils toastview:@"原密码不能与新密码一致"];
-        }else{
-            [self endEditing:YES];
-            _AlterPasswordCallBack(button);
-        }
-        
-    }else{
-        [Utils toastview:@"两次密码输入不一致"];
-    }
 }
 
 - (void)forgetPasswordAction:(UITapGestureRecognizer *)tap{

@@ -21,11 +21,12 @@
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
     backButton.title = @"返回";
-    [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
+    [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:textfont14]} forState:UIControlStateNormal];
     self.navigationItem.backBarButtonItem = backButton;
     
-    self.chooseView = [[ChoosePackageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64) andUserinfos:self.userinfosDic];
+    self.chooseView = [[ChoosePackageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
     [self.view addSubview:self.chooseView];
+    self.chooseView.detailModel = self.detailModel;
 }
 
 @end

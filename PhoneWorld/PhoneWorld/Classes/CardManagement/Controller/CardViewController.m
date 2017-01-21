@@ -8,17 +8,20 @@
 
 #import "CardViewController.h"
 #import "CardManageView.h"
+
 #import "FinishCardViewController.h"
 #import "TransferCardViewController.h"
 #import "CardRepairViewController.h"
 #import "WhiteCardViewController.h"
+#import "CardInquiryViewController.h"
 
 #import "MessageViewController.h"
 #import "PersonalHomeViewController.h"
-#import "CardInquiryViewController.h"
 
 @interface CardViewController ()
+
 @property (nonatomic) CardManageView *cardView;
+
 @end
 
 @implementation CardViewController
@@ -33,10 +36,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
-
     self.navigationItem.backBarButtonItem = [Utils returnBackButton];
     
     self.cardView = [[CardManageView alloc] init];
@@ -48,57 +47,61 @@
     }];
     __block __weak CardViewController *weakself = self;
     [self.cardView setMyCallBack:^(NSInteger row) {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
         switch (row) {
             case 0:
             {
+                NSInteger i0 = [ud integerForKey:@"renewOpen"];
+                i0 = i0 + 1;
+                [ud setInteger:i0 forKey:@"renewOpen"];
+                [ud synchronize];
                 FinishCardViewController *vc = [FinishCardViewController new];
                 vc.hidesBottomBarWhenPushed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
+//            case 1:
+//            {
+//                WhiteCardViewController *vc = [WhiteCardViewController new];
+//                vc.hidesBottomBarWhenPushed = YES;
+//                [weakself.navigationController pushViewController:vc animated:YES];
+//            }
+//                break;
             case 1:
             {
-                WhiteCardViewController *vc = [WhiteCardViewController new];
+                NSInteger i1 = [ud integerForKey:@"transform"];
+                i1 = i1 + 1;
+                [ud setInteger:i1 forKey:@"transform"];
+                [ud synchronize];
+                TransferCardViewController *vc = [TransferCardViewController new];
                 vc.hidesBottomBarWhenPushed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 2:
             {
-                TransferCardViewController *vc = [TransferCardViewController new];
+                NSInteger i2 = [ud integerForKey:@"replace"];
+                i2 = i2 + 1;
+                [ud setInteger:i2 forKey:@"replace"];
+                [ud synchronize];
+                CardRepairViewController *vc = [CardRepairViewController new];
                 vc.hidesBottomBarWhenPushed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
             case 3:
             {
-                CardRepairViewController *vc = [CardRepairViewController new];
-                vc.hidesBottomBarWhenPushed = YES;
-                [weakself.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 4:
-            {
-                CardInquiryViewController *vc = [CardInquiryViewController new];
+                NSInteger i3 = [ud integerForKey:@"cardQuery"];
+                i3 = i3 + 1;
+                [ud setInteger:i3 forKey:@"cardQuery"];
+                [ud synchronize];
+                CardInquiryViewController *vc = [CardInquiryViewController sharedCardInquiryViewController];
                 vc.hidesBottomBarWhenPushed = YES;
                 [weakself.navigationController pushViewController:vc animated:YES];
             }
                 break;
         }
     }];
-}
-
-#pragma mark - Method
-- (void)gotoMessagesVC{
-    MessageViewController *messageVC = [MessageViewController new];
-    messageVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:messageVC animated:YES];
-}
-
-- (void)gotoPersonalHomeVC{
-    PersonalHomeViewController *vc = [PersonalHomeViewController new];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

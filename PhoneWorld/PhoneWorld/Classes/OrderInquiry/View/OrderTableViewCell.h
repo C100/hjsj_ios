@@ -10,9 +10,9 @@
 
 @interface OrderTableViewCell : UITableViewCell
 
-@property (nonatomic) UILabel *numberLB;
-@property (nonatomic) UILabel *dateLB;
-@property (nonatomic) UILabel *nameLB;
-@property (nonatomic) UILabel *phoneLB;
+@property (nonatomic) UILabel *nameLabel;
+@property (nonatomic) UILabel *dateLabel;
+@property (nonatomic) UILabel *phoneLabel;
+@property (nonatomic) UILabel *stateLabel;
 
 @end

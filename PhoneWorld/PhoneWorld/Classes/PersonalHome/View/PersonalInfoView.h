@@ -13,7 +13,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame;
 
-@property (nonatomic) UIButton *saveButton;
+//@property (nonatomic) UIButton *saveButton;
 @property (nonatomic) NSMutableArray *inputViews;
 @property (nonatomic) PersonalInfoModel *personModel;
 

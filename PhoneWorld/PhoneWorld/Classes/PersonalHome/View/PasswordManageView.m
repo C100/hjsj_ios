@@ -7,6 +7,7 @@
 //
 
 #import "PasswordManageView.h"
+#import "SettingTableViewCell.h"
 
 @interface PasswordManageView ()
 
@@ -27,6 +28,8 @@
         self.passwordManageTableView.bounces = NO;
         self.passwordManageTableView.tableFooterView = [UIView new];
         self.passwordManageTableView.backgroundColor = COLOR_BACKGROUND;
+        [self.passwordManageTableView registerClass:[SettingTableViewCell class] forCellReuseIdentifier:@"cell"
+         ];
         [self addSubview:self.passwordManageTableView];
     }
     return self;
@@ -38,15 +41,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    cell.textLabel.text = self.titles[indexPath.row];
-    cell.textLabel.textColor = [Utils colorRGB:@"#333333"];
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    SettingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.titleLabel.text = self.titles[indexPath.row];
     if (indexPath.row == self.titles.count - 1) {
+        
         cell.separatorInset = UIEdgeInsetsZero;
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = NO;

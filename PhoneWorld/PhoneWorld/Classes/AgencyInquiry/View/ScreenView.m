@@ -8,6 +8,7 @@
 
 #import "ScreenView.h"
 #import "InputView.h"
+#import "NormalTableViewCell.h"
 
 #define leftDistance (screenWidth - 210)/2.0
 
@@ -15,7 +16,7 @@
 
 @property (nonatomic) InputView *phoneInputView;//手机号码
 @property (nonatomic) NSArray *currentPickerArray;
-@property (nonatomic) UITableViewCell *currentCell;
+@property (nonatomic) NormalTableViewCell *currentCell;
 
 @end
 
@@ -39,7 +40,7 @@
             button.layer.masksToBounds = YES;
             [button setTitle:buttonTitleArr[i] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:12];
+            button.titleLabel.font = [UIFont systemFontOfSize:textfont12];
             [self addSubview:button];
             [button addTarget:self action:@selector(buttonClickedAction:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -58,7 +59,9 @@
         _screenTableView.delegate = self;
         _screenTableView.dataSource = self;
         _screenTableView.bounces = NO;
-        [_screenTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+        [_screenTableView registerClass:[NormalTableViewCell class] forCellReuseIdentifier:@"cell"];
+        [_screenTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell1"];
+
         [self addSubview:_screenTableView];
     }
     return _screenTableView;
@@ -114,7 +117,7 @@
         CGFloat height = screenHeight - 64 - self.contentDic.count * 40 -70 - 80;
         _sureButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - 60, screenHeight - height, 60, 30)];
         [[UIApplication sharedApplication].keyWindow addSubview:_sureButton];
-        _sureButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _sureButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [_sureButton setTitle:@"确定" forState:UIControlStateNormal];
         [_sureButton setTitleColor:[Utils colorRGB:@"#008bd5"] forState:UIControlStateNormal];
         [_sureButton addTarget:self action:@selector(choosePickerAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -128,7 +131,7 @@
         CGFloat height = screenHeight - 64 - self.contentDic.count * 40 -70 - 80;
         _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, screenHeight - height, 60, 30)];
         [[UIApplication sharedApplication].keyWindow addSubview:_cancelButton];
-        _cancelButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _cancelButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelButton setTitleColor:[Utils colorRGB:@"#008bd5"] forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(closePickerAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -145,11 +148,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *title = self.leftTitles[indexPath.row];
     NSString *detail = self.rightDetails[indexPath.row];
-    if ([title containsString:@"手机"]) {
+    if ([title containsString:@"手机"] || [title containsString:@"工号"]) {
         UITableViewCell *cell = [[UITableViewCell alloc] init];
         self.phoneInputView = [[InputView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 40)];
         self.phoneInputView.leftLabel.text = title;
         self.phoneInputView.textField.placeholder = detail;
+
         if (indexPath.row == self.contentDic.count - 1) {
             cell.separatorInset = UIEdgeInsetsZero;
             cell.layoutMargins = UIEdgeInsetsZero;
@@ -158,25 +162,17 @@
         [cell.contentView addSubview:self.phoneInputView];
         return cell;
     }else{
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-        cell.textLabel.text = title;
-        cell.detailTextLabel.text = detail;
         
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.textLabel.textColor = [Utils colorRGB:@"#666666"];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-        cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
+        NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.titleLabel.text = title;
+        cell.detailLabel.text = detail;
         if (indexPath.row == self.contentDic.count - 1) {
             cell.separatorInset = UIEdgeInsetsZero;
             cell.layoutMargins = UIEdgeInsetsZero;
             cell.preservesSuperviewLayoutMargins = NO;
         }
-        [cell layoutSubviews];
         return cell;
     }
-    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -187,8 +183,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.currentCell = [self.screenTableView cellForRowAtIndexPath:indexPath];
     NSString *title = self.leftTitles[indexPath.row];
+    title = [title componentsSeparatedByString:@" "].lastObject;
     if([self.contentDic[title] isKindOfClass:[NSArray class]]){
-        NSLog(@"是数组啊");
+        [self endEditing:YES];
         self.currentPickerArray = self.contentDic[title];
         [self.pickerView reloadAllComponents];
         
@@ -196,30 +193,43 @@
         self.pickerView.hidden = NO;
         self.sureButton.hidden = NO;
         self.cancelButton.hidden = NO;
-        [UIView animateWithDuration:0.5 animations:^{
-            self.backPickView.alpha = 0.5;
-            self.pickerView.alpha = 1;
-            self.sureButton.alpha = 1;
-            self.cancelButton.alpha = 1;
-        } completion:^(BOOL finished) {
-        }];
+        
+        self.backPickView.alpha = 0.5;
+        self.pickerView.alpha = 1;
+        self.sureButton.alpha = 1;
+        self.cancelButton.alpha = 1;
+        
+//        [UIView animateWithDuration:0.6 animations:^{
+//            self.backPickView.alpha = 0.5;
+//            self.pickerView.alpha = 1;
+//            self.sureButton.alpha = 1;
+//            self.cancelButton.alpha = 1;
+//
+//        } completion:^(BOOL finished) {
+//        }];
     }else{
         if ([self.contentDic[title] isEqualToString:@"timePicker"]) {
-            NSLog(@"选时间了");
             self.backPickView.hidden = NO;
             self.datePickerView.hidden = NO;
             self.sureButton.hidden = NO;
             self.cancelButton.hidden = NO;
-            [UIView animateWithDuration:0.5 animations:^{
-                self.backPickView.alpha = 0.5;
-                self.datePickerView.alpha = 1;
-                self.sureButton.alpha = 1;
-                self.cancelButton.alpha = 1;
-            } completion:^(BOOL finished) {
-            }];
+            
+            self.backPickView.alpha = 0.5;
+            self.datePickerView.alpha = 1;
+            self.sureButton.alpha = 1;
+            self.cancelButton.alpha = 1;
+
+//            [UIView animateWithDuration:0.6 animations:^{
+//                self.backPickView.alpha = 0.5;
+//                self.datePickerView.alpha = 1;
+//                self.sureButton.alpha = 1;
+//                self.cancelButton.alpha = 1;
+//
+//            } completion:^(BOOL finished) {
+//            }];
         }
         if ([self.contentDic[title] isEqualToString:@"phoneNumber"]) {
-            NSLog(@"手机号码");
+            [self.phoneInputView.textField becomeFirstResponder];
         }
     }
 
@@ -239,15 +249,14 @@
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    UILabel *myView = nil;
+    UILabel *myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100, 30)];
     
     if (component == 0) {
-        myView = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 100, 30)];
         myView.textAlignment = NSTextAlignmentCenter;
         myView.text = self.currentPickerArray[row];
-        myView.font = [UIFont systemFontOfSize:16];         //用label来设置字体大小
+        myView.font = [UIFont systemFontOfSize:20];//用label来设置字体大小
         myView.backgroundColor = [UIColor clearColor];
-        myView.textColor = [Utils colorRGB:@"#666666"];
+        myView.textColor = [UIColor blackColor];
     }
     
     return myView;
@@ -255,66 +264,87 @@
 
 #pragma mark - Method
 - (void)buttonClickedAction:(UIButton *)button{
+    
+    //不论查询还是重置，如果没有数据就不传
+    
     NSMutableDictionary *conditions = [NSMutableDictionary dictionary];
     if ([button.currentTitle isEqualToString:@"查询"]) {
         for (int i = 0; i<self.leftTitles.count ;i ++) {
             NSString *title = self.leftTitles[i];
-            if ([title isEqualToString:@"手机号码"]) {
-                [conditions setObject:self.phoneInputView.textField.text forKey:@"手机号码"];
+            if ([title containsString:@"手机号码"] || [title containsString:@"工号"]) {
+                if (![self.phoneInputView.textField.text isEqualToString:@""]) {
+                    [conditions setObject:self.phoneInputView.textField.text forKey:title];
+                }else{
+                    [conditions setObject:@"无" forKey:title];
+                }
             }else{
                 NSIndexPath *indexP = [NSIndexPath indexPathForRow:i inSection:0];
-                UITableViewCell *cell = [self.screenTableView cellForRowAtIndexPath:indexP];
-                [conditions setObject:cell.detailTextLabel.text forKey:title];
+                NormalTableViewCell *cell = [self.screenTableView cellForRowAtIndexPath:indexP];
+                if (![cell.detailLabel.text isEqualToString:@"请选择"]) {
+                    [conditions setObject:cell.detailLabel.text forKey:title];
+                }else{
+                    [conditions setObject:@"无" forKey:title];
+                }
             }
         }
     }else{
         [self.screenTableView reloadData];
-        for (NSString *title in self.leftTitles) {
-            [conditions setObject:@"" forKey:title];
-        }
     }
     _ScreenCallBack(conditions,button.currentTitle);
 }
 
 - (void)choosePickerAction:(UIButton *)button{
-    if ([self.currentCell.textLabel.text isEqualToString:@"起始时间"] || [self.currentCell.textLabel.text isEqualToString:@"截止时间"]) {
+    if ([self.currentCell.titleLabel.text isEqualToString:@"起始时间"] || [self.currentCell.titleLabel.text isEqualToString:@"截止时间"]) {
         NSString *dateString = [[NSString stringWithFormat:@"%@",self.datePickerView.date] componentsSeparatedByString:@" "].firstObject;
-        self.currentCell.detailTextLabel.text = dateString;
+        self.currentCell.detailLabel.text = dateString;
     }else{
         NSInteger row = [self.pickerView selectedRowInComponent:0];
-        NSArray *array = self.contentDic[self.currentCell.textLabel.text];
-        self.currentCell.detailTextLabel.text = array[row];
+        NSArray *array = self.contentDic[self.currentCell.titleLabel.text];
+        self.currentCell.detailLabel.text = array[row];
     }
-    [UIView animateWithDuration:0.5 animations:^{
-        self.backPickView.alpha = 0;
-        self.datePickerView.alpha = 0;
-        self.pickerView.alpha = 0;
-        self.sureButton.alpha = 0;
-        self.cancelButton.alpha = 0;
-    } completion:^(BOOL finished) {
-        self.backPickView.hidden = YES;
-        self.datePickerView.hidden = YES;
-        self.pickerView.hidden = YES;
-        self.sureButton.hidden = YES;
-        self.cancelButton.hidden = YES;
-    }];
+    
+    self.backPickView.hidden = YES;
+    self.datePickerView.hidden = YES;
+    self.pickerView.hidden = YES;
+    self.sureButton.hidden = YES;
+    self.cancelButton.hidden = YES;
+    
+//    [UIView animateWithDuration:0.6 animations:^{
+//        self.backPickView.alpha = 0;
+//        self.datePickerView.alpha = 0;
+//        self.pickerView.alpha = 0;
+//        self.sureButton.alpha = 0;
+//        self.cancelButton.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        self.backPickView.hidden = YES;
+//        self.datePickerView.hidden = YES;
+//        self.pickerView.hidden = YES;
+//        self.sureButton.hidden = YES;
+//        self.cancelButton.hidden = YES;
+//    }];
 }
 
 - (void)closePickerAction:(UIButton *)button{
     
-    [UIView animateWithDuration:0.5 animations:^{
-        self.backPickView.alpha = 0;
-        self.datePickerView.alpha = 0;
-        self.pickerView.alpha = 0;
-        self.sureButton.alpha = 0;
-        self.cancelButton.alpha = 0;
-    } completion:^(BOOL finished) {
-        self.backPickView.hidden = YES;
-        self.datePickerView.hidden = YES;
-        self.pickerView.hidden = YES;
-        self.sureButton.hidden = YES;
-        self.cancelButton.hidden = YES;
-    }];
+    self.backPickView.hidden = YES;
+    self.datePickerView.hidden = YES;
+    self.pickerView.hidden = YES;
+    self.sureButton.hidden = YES;
+    self.cancelButton.hidden = YES;
+    
+//    [UIView animateWithDuration:0.6 animations:^{
+//        self.backPickView.alpha = 0;
+//        self.datePickerView.alpha = 0;
+//        self.pickerView.alpha = 0;
+//        self.sureButton.alpha = 0;
+//        self.cancelButton.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        self.backPickView.hidden = YES;
+//        self.datePickerView.hidden = YES;
+//        self.pickerView.hidden = YES;
+//        self.sureButton.hidden = YES;
+//        self.cancelButton.hidden = YES;
+//    }];
 }
 
 - (void)tapBackPickViewAction:(UITapGestureRecognizer *)tap{

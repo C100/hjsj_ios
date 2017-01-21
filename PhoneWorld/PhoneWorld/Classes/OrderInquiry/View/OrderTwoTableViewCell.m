@@ -15,9 +15,8 @@
     if (self) {
         [self numberLB];
         [self dateLB];
-        [self typeLB];
-        [self moneyLB];
         [self phoneLB];
+        [self moneyLB];
         [self stateLB];
     }
     return self;
@@ -32,42 +31,28 @@
         _numberLB.text = @"编号：";
         [_numberLB mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.mas_equalTo(10);
-            make.right.mas_equalTo(-screenWidth/2);
+            make.right.mas_equalTo(-10);
+            make.height.mas_equalTo(18);
         }];
     }
     return _numberLB;
 }
 
-- (UILabel *)dateLB{
-    if (_dateLB == nil) {
-        _dateLB = [[UILabel alloc] init];
-        [self addSubview:_dateLB];
-        _dateLB.font = [UIFont systemFontOfSize:textfont12];
-        _dateLB.textColor = [Utils colorRGB:@"#666666"];
-        _dateLB.text = @"日期：";
-        [_dateLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
-            make.left.mas_equalTo(screenWidth/2);
-        }];
-    }
-    return _dateLB;
-}
-
-- (UILabel *)typeLB{
-    if (_typeLB == nil) {
-        _typeLB = [[UILabel alloc] init];
-        [self addSubview:_typeLB];
-        _typeLB.font = [UIFont systemFontOfSize:textfont12];
-        _typeLB.textColor = [Utils colorRGB:@"#666666"];
-        _typeLB.text = @"类型：话费充值";
-        [_typeLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.numberLB.mas_bottom).mas_equalTo(13);
+- (UILabel *)phoneLB{
+    if (_phoneLB == nil) {
+        _phoneLB = [[UILabel alloc] init];
+        [self addSubview:_phoneLB];
+        _phoneLB.font = [UIFont systemFontOfSize:textfont12];
+        _phoneLB.textColor = [Utils colorRGB:@"#666666"];
+        _phoneLB.text = @"号码：";
+        [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.numberLB.mas_bottom).mas_equalTo(10);
             make.left.mas_equalTo(10);
-            make.right.mas_equalTo(screenWidth/2);
+            make.width.mas_equalTo(screenWidth/2 - 10);
+            make.height.mas_equalTo(18);
         }];
     }
-    return _typeLB;
+    return _phoneLB;
 }
 
 - (UILabel *)moneyLB{
@@ -78,28 +63,30 @@
         _moneyLB.textColor = [Utils colorRGB:@"#666666"];
         _moneyLB.text = @"金额：";
         [_moneyLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.dateLB.mas_bottom).mas_equalTo(13);
+            make.top.mas_equalTo(self.numberLB.mas_bottom).mas_equalTo(10);
+            make.width.mas_equalTo((screenWidth-20)/2);
             make.right.mas_equalTo(-10);
-            make.left.mas_equalTo(screenWidth/2);
+            make.height.mas_equalTo(18);
         }];
     }
     return _moneyLB;
 }
 
-- (UILabel *)phoneLB{
-    if (_phoneLB == nil) {
-        _phoneLB = [[UILabel alloc] init];
-        [self addSubview:_phoneLB];
-        _phoneLB.font = [UIFont systemFontOfSize:12];
-        _phoneLB.textColor = [Utils colorRGB:@"#666666"];
-        _phoneLB.text = @"号码：00000000000";
-        [_phoneLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.typeLB.mas_bottom).mas_equalTo(13);
+- (UILabel *)dateLB{
+    if (_dateLB == nil) {
+        _dateLB = [[UILabel alloc] init];
+        [self addSubview:_dateLB];
+        _dateLB.font = [UIFont systemFontOfSize:textfont12];
+        _dateLB.textColor = [Utils colorRGB:@"#666666"];
+        _dateLB.text = @"日期：";
+        [_dateLB mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.phoneLB.mas_bottom).mas_equalTo(10);
+            make.width.mas_equalTo(screenWidth/2 - 10);
+            make.height.mas_equalTo(18);
             make.left.mas_equalTo(10);
-            make.right.mas_equalTo(screenWidth/2);
         }];
     }
-    return _phoneLB;
+    return _dateLB;
 }
 
 - (UILabel *)stateLB{
@@ -110,23 +97,27 @@
         _stateLB.textColor = [Utils colorRGB:@"#666666"];
         _stateLB.text = @"状态：";
         [_stateLB mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.moneyLB.mas_bottom).mas_equalTo(13);
+            make.top.mas_equalTo(self.moneyLB.mas_bottom).mas_equalTo(10);
             make.right.mas_equalTo(-10);
-            make.left.mas_equalTo(screenWidth/2);
+            make.width.mas_equalTo((screenWidth - 20)/2);
+            make.height.mas_equalTo(18);
         }];
     }
     return _stateLB;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
+- (void)setRechargeModel:(RechargeListModel *)rechargeModel{
+    _rechargeModel = rechargeModel;
+    
+    self.numberLB.text = [NSString stringWithFormat:@"编号：%@",rechargeModel.orderNo];
+    
+    NSString *dateString = [rechargeModel.rechargeDate componentsSeparatedByString:@" "].firstObject;
+    self.dateLB.text = [NSString stringWithFormat:@"日期：%@",dateString];
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    self.moneyLB.text = [NSString stringWithFormat:@"金额：%@",rechargeModel.payAmount];
+    self.phoneLB.text = [NSString stringWithFormat:@"号码：%@",rechargeModel.number];
+    self.stateLB.text = [NSString stringWithFormat:@"状态：%@",rechargeModel.startName];
+    
 }
 
 @end

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhoneDetailModel.h"
 
 @interface ChoosePackageViewController : UIViewController
 
-@property (nonatomic) NSMutableDictionary *userinfosDic;
+@property (nonatomic) PhoneDetailModel *detailModel;
 
 @end

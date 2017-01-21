@@ -1,0 +1,6 @@
+framework module AddressPick {
+  umbrella header "AddressPick.h"
+
+  export *
+  module * { export * }
+}

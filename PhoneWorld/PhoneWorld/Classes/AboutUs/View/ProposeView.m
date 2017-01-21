@@ -38,7 +38,7 @@
         }];
         _placeholderLB.text = @"请输入您的意见与建议";
         _placeholderLB.textColor = [Utils colorRGB:@"#cccccc"];
-        _placeholderLB.font = [UIFont systemFontOfSize:14];
+        _placeholderLB.font = [UIFont systemFontOfSize:textfont14];
         _placeholderLB.hidden = NO;
     }
     return _placeholderLB;
@@ -54,7 +54,7 @@
             make.height.mas_equalTo(125);
         }];
         _proposeTV.delegate = self;
-        _proposeTV.font = [UIFont systemFontOfSize:14];
+        _proposeTV.font = [UIFont systemFontOfSize:textfont14];
         _proposeTV.textColor = [Utils colorRGB:@"#666666"];
         _proposeTV.layer.cornerRadius = 6;
         _proposeTV.layer.masksToBounds = YES;
@@ -78,7 +78,7 @@
         _submitButton.layer.borderColor = MainColor.CGColor;
         _submitButton.layer.borderWidth = 1;
         _submitButton.layer.masksToBounds = YES;
-        _submitButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _submitButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [_submitButton addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;
@@ -96,20 +96,8 @@
     }else{
         [self endEditing:YES];
         _ProposeCallBack(self.proposeTV.text);
-//        self.resultView = [[FailedView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) andTitle:@"多谢配合" andDetail:@"您的建议意见已收到，会尽快处理！" andImageName:@"icon_smile" andTextColorHex:@"#eb000c"];
-//        [[UIApplication sharedApplication].keyWindow addSubview:self.resultView];
-//        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(dismissResultView) userInfo:nil repeats:NO];
     }
 }
 
-//- (void)dismissResultView{
-//    [UIView animateWithDuration:1.0 animations:^{
-//        self.resultView.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        [self.resultView removeFromSuperview];
-//        UIViewController *viewController = [self viewController];
-//        [viewController.navigationController popViewControllerAnimated:YES];
-//    }];
-//}
 
 @end

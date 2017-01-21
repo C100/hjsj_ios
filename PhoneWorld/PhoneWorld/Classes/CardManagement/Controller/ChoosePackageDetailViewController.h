@@ -15,5 +15,7 @@
 @property (nonatomic) ChoosePackageDetailView *detailView;
 @property (nonatomic) ChoosePackageTableView *packageTableView;
 
+@property (nonatomic) NSArray *packagesDic;
+@property (nonatomic) NSString *currentID;
 
 @end

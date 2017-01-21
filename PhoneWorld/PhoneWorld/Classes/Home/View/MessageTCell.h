@@ -12,7 +12,6 @@
 @interface MessageTCell : UITableViewCell
 
 @property (nonatomic) MessageModel *messageModel;
-@property (nonatomic) UIImageView *headIV;
 @property (nonatomic) UILabel *nameLB;
 @property (nonatomic) UILabel *detailLB;
 

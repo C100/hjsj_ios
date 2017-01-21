@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RechargeListModel.h"
 
 @interface OrderTwoTableViewCell : UITableViewCell
+
 @property (nonatomic) UILabel *numberLB;
 @property (nonatomic) UILabel *dateLB;
-@property (nonatomic) UILabel *typeLB;
 @property (nonatomic) UILabel *moneyLB;
 @property (nonatomic) UILabel *phoneLB;
 @property (nonatomic) UILabel *stateLB;
+@property (nonatomic) RechargeListModel *rechargeModel;
+
 @end

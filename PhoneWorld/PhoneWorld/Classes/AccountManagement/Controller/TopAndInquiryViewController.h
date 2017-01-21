@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TopAndInquiryView.h"
 
 @interface TopAndInquiryViewController : UIViewController
+
+@property (nonatomic) TopAndInquiryView *inquiryView;
+
++ (TopAndInquiryViewController *)sharedTopAndInquiryViewController;
+
+//查询条件
+@property (nonatomic) NSArray *inquiryConditionArray;
 
 @end

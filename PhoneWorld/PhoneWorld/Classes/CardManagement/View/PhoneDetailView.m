@@ -60,7 +60,7 @@
             make.top.mas_equalTo(11);
         }];
         lb.textColor = [Utils colorRGB:@"#333333"];
-        lb.font = [UIFont systemFontOfSize:12];
+        lb.font = [UIFont systemFontOfSize:textfont12];
         lb.text = self.titles[i];
         
         UILabel *lb2 = [[UILabel alloc] init];
@@ -74,7 +74,7 @@
         lb2.numberOfLines = 0;
         lb2.textAlignment = NSTextAlignmentCenter;
         lb2.textColor = [Utils colorRGB:@"#333333"];
-        lb2.font = [UIFont systemFontOfSize:12];
+        lb2.font = [UIFont systemFontOfSize:textfont12];
         lb2.text = self.phoneInfo[i];
         
     }

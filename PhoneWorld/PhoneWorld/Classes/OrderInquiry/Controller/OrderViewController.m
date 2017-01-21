@@ -10,16 +10,23 @@
 #import "MessageViewController.h"
 #import "PersonalHomeViewController.h"
 #import "OrderMainView.h"
-#import <AFNetworkReachabilityManager.h>
+
+#import "RightItemView.h"
+
+#import "OpenAccomplishCardViewController.h"
+#import "OpenWhiteCardViewController.h"
+#import "TransferViewController.h"
+#import "RepairCardViewController.h"
+#import "TopUpViewController.h"
+
 
 #define selectV 220/375.0
 
-static OrderViewController *_orderViewController;
+//static OrderViewController *_orderViewController;
 
 @interface OrderViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic) OrderMainView *orderMainView;
-@property (nonatomic) AFNetworkReachabilityManager *manager;
 
 @end
 
@@ -35,36 +42,51 @@ static OrderViewController *_orderViewController;
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.manager = [AFNetworkReachabilityManager manager];
-    [self.manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        switch ((int)status) {
-            case AFNetworkReachabilityStatusUnknown:
+    
+    if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        
+        switch (self.orderMainView.selectedIndex - 10) {
+            case 0:
             {
-                //无识别网络
-                NSLog(@"无识别网络");
+                [OpenAccomplishCardViewController sharedOpenAccomplishCardViewController].orderModelsArr = [NSMutableArray array];
+                [[OpenAccomplishCardViewController sharedOpenAccomplishCardViewController].orderView.orderTableView reloadData];
+                [[OpenAccomplishCardViewController sharedOpenAccomplishCardViewController].orderView.orderTableView.mj_header beginRefreshing];
+
             }
                 break;
-            case AFNetworkReachabilityStatusNotReachable:
+            case 1:
             {
-                //无网络
-                NSLog(@"无网络");
+                [OpenWhiteCardViewController sharedOpenWhiteCardViewController].orderModelsArr = [NSMutableArray array];
+                [[OpenWhiteCardViewController sharedOpenWhiteCardViewController].orderView.orderTableView reloadData];
+                [[OpenWhiteCardViewController sharedOpenWhiteCardViewController].orderView.orderTableView.mj_header beginRefreshing];
+
             }
                 break;
-            case AFNetworkReachabilityStatusReachableViaWWAN:
+            case 2:
             {
-                //流量
-                NSLog(@"流量环境");
+                [TransferViewController sharedTransferViewController].orderModelArr = [NSMutableArray array];
+                [[TransferViewController sharedTransferViewController].orderView.orderTableView reloadData];
+                [[TransferViewController sharedTransferViewController].orderView.orderTableView.mj_header beginRefreshing];
             }
                 break;
-            case AFNetworkReachabilityStatusReachableViaWiFi:
+            case 3:
             {
-                //wifi下
-                NSLog(@"使用Wi-Fi情况下");
+                [RepairCardViewController sharedRepairCardViewController].cardRepairList = [NSMutableArray array];
+                [[RepairCardViewController sharedRepairCardViewController].orderView.orderTableView reloadData];
+                [[RepairCardViewController sharedRepairCardViewController].orderView.orderTableView.mj_header beginRefreshing];
+            }
+                break;
+            case 4:
+            {
+                [TopUpViewController sharedTopUpViewController].rechargeListArray = [NSMutableArray array];
+                [[TopUpViewController sharedTopUpViewController].orderTwoView.orderTwoTableView reloadData];
+                [[TopUpViewController sharedTopUpViewController].orderTwoView.orderTwoTableView.mj_header beginRefreshing];
             }
                 break;
         }
-    }];
-    [self.manager startMonitoring];//开始监测
+        
+        //如果有网刷新成卡开户的，别的界面点击的时候再刷新
+    }
 }
 
 + (OrderViewController *)shareOrderViewController{
@@ -79,27 +101,12 @@ static OrderViewController *_orderViewController;
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = YES;
     self.navigationItem.backBarButtonItem = [Utils returnBackButton];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"individualCenter"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoPersonalHomeVC)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"news_white"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoMessagesVC)];
     
     self.orderMainView = [[OrderMainView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.orderMainView];
     [self.orderMainView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.mas_equalTo(0);
     }];
-}
-
-#pragma mark - Method
-- (void)gotoMessagesVC{
-    MessageViewController *messageVC = [MessageViewController new];
-    messageVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:messageVC animated:YES];
-}
-
-- (void)gotoPersonalHomeVC{
-    PersonalHomeViewController *vc = [PersonalHomeViewController new];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

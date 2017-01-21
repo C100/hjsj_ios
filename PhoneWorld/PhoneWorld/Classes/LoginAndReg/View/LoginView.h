@@ -12,10 +12,10 @@
 
 @property (nonatomic) void(^LoginCallBack)(NSInteger tag);
 
+@property (nonatomic) UIImageView *headImageView;
 @property (nonatomic) UITextField *usernameTF;
 @property (nonatomic) UITextField *passwordTF;
 @property (nonatomic) UIButton *forgetPassword;
 @property (nonatomic) UIButton *submitButton;
-@property (nonatomic) UIView *lineView;
 
 @end

@@ -8,10 +8,8 @@
 
 #import "PhoneCashCheckView.h"
 #import "PhoneCashCheckTVCell.h"
-#import "InputView.h"
 
 @interface PhoneCashCheckView ()
-@property (nonatomic) InputView *inputView;
 @end
 
 @implementation PhoneCashCheckView
@@ -42,22 +40,35 @@
     return _inputView;
 }
 
-- (UITableView *)resultTableView{
-    if (_resultTableView == nil) {
-        _resultTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, 300) style:UITableViewStylePlain];
-        [self addSubview:_resultTableView];
-        _resultTableView.delegate = self;
-        _resultTableView.dataSource = self;
-        _resultTableView.bounces = NO;
-        _resultTableView.userInteractionEnabled = NO;
-        [_resultTableView registerClass:[PhoneCashCheckTVCell class] forCellReuseIdentifier:@"cell2"];
+- (UIView *)resultView{
+    if (_resultView == nil) {
+        _resultView = [[UIView alloc] init];
+        [self addSubview:_resultView];
+        [_resultView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(self.inputView.mas_bottom).mas_equalTo(10);
+            make.height.mas_equalTo(40);
+        }];
+        _resultView.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *label = [[UILabel alloc] init];
+        [_resultView addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.right.mas_equalTo(-15);
+            make.centerY.mas_equalTo(0);
+            make.height.mas_equalTo(20);
+        }];
+        label.textColor = [Utils colorRGB:@"#999999"];
+        label.font = [UIFont systemFontOfSize:textfont14];
+        self.resultLabel = label;
     }
-    return _resultTableView;
+    return _resultView;
 }
 
 - (UIButton *)findButton{
     if (_findButton == nil) {
-        _findButton = [Utils returnBextButtonWithTitle:@"查询"];
+        _findButton = [Utils returnNextButtonWithTitle:@"查询"];
         [self addSubview:_findButton];
         [_findButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(0);
@@ -68,54 +79,6 @@
         [_findButton addTarget:self action:@selector(findAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _findButton;
-}
-
-#pragma mark - UITableView Delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    switch (indexPath.row) {
-        case 0:
-        {
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-            }
-            cell.textLabel.text = self.userinfos.firstObject;
-            cell.textLabel.font = [UIFont systemFontOfSize:14];
-            [cell.textLabel setTextColor:[Utils colorRGB:@"#999999"]];
-            return cell;
-        }
-            break;
-        case 1:
-        {
-            PhoneCashCheckTVCell *cell = [[PhoneCashCheckTVCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell2"];
-            cell.userinfos = [self.userinfos subarrayWithRange:NSMakeRange(1, 4)];
-            return cell;
-        }
-        case 2:
-        {
-            PhoneCashCheckTVCell *cell = [[PhoneCashCheckTVCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell2"];
-            cell.userinfos = [self.userinfos subarrayWithRange:NSMakeRange(5, 4)];
-            return cell;
-        }
-            break;
-    }
-    return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    switch (indexPath.row) {
-        case 0:
-            return 40;
-            break;
-            
-        default:
-            return 129;
-            break;
-    }
 }
 
 #pragma mark - Method

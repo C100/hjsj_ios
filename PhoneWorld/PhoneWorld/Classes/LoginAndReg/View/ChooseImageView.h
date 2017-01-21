@@ -13,4 +13,8 @@
 @property (nonatomic) NSMutableArray *imageButtons;
 @property (nonatomic) NSMutableArray *removeButtons;
 @property (nonatomic) NSMutableArray *imageViews;
+    
+@property (nonatomic) NSMutableArray<UILabel *> *titleLabelsArray;
+
+    
 @end

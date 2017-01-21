@@ -8,27 +8,33 @@
 
 #import "InformationCollectionView.h"
 #import "SettlementDetailViewController.h"
-#import "ChooseImageView.h"
-#import "InputView.h"
 
 @interface InformationCollectionView ()
 @property (nonatomic) NSArray *leftTitles;
 @property (nonatomic) NSArray *detailTitles;
-@property (nonatomic) ChooseImageView *chooseImageView;
-@property (nonatomic) NSMutableArray *inputViews;
+
+@property (nonatomic) BOOL isFinished;
+
 @end
 
 @implementation InformationCollectionView
 
-- (instancetype)initWithFrame:(CGRect)frame andUserinfos:(NSMutableDictionary *)userinfos
+- (instancetype)initWithFrame:(CGRect)frame andIsFinished:(BOOL)isFinished
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.leftTitles = @[@"开户人姓名",@"证件号码",@"证件地址",@"备注"];
-        self.detailTitles = @[@"请输入开户人姓名",@"请输入证件号码",@"请输入证件地址",@"请输入备注信息"];
-        self.userinfosDic = userinfos;
+        
         self.inputViews = [NSMutableArray array];
+                
+        self.detailTitles = @[@"请输入开户人姓名",@"请输入证件号码",@"请输入证件地址",@"请输入备注信息"];
+        self.isFinished = isFinished;
+        if (isFinished == YES) {
+            self.leftTitles = @[@"开户人姓名",@"证件号码",@"证件地址",@"备注"];
+        }else{
+            self.leftTitles = @[@"开户人姓名",@"证件号码",@"证件地址"];
+        }
+        
         for (int i = 0; i < self.leftTitles.count; i ++) {
             InputView *inputView = [[InputView alloc] initWithFrame:CGRectMake(0, 41*i, screenWidth, 40)];
             [self addSubview:inputView];
@@ -36,6 +42,7 @@
             inputView.textField.placeholder = self.detailTitles[i];
             [self.inputViews addObject:inputView];
         }
+        
         [self chooseImageView];
         [self nextButton];
     }
@@ -51,7 +58,7 @@
             make.left.right.mas_equalTo(0);
             make.top.mas_equalTo(inputV.mas_bottom).mas_equalTo(10);
             make.width.mas_equalTo(screenWidth);
-            make.height.mas_equalTo(130);
+            make.height.mas_equalTo(185);
         }];
     }
     return _chooseImageView;
@@ -59,7 +66,7 @@
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [Utils returnBextButtonWithTitle:@"下一步"];
+        _nextButton = [Utils returnNextButtonWithTitle:@"下一步"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.chooseImageView.mas_bottom).mas_equalTo(40);
@@ -74,10 +81,51 @@
 
 #pragma mark - Method
 - (void)buttonClickAction:(UIButton *)button{
-    UIViewController *vc = [self viewController];
-    SettlementDetailViewController *svc = [SettlementDetailViewController new];
-    svc.userinfosDic = self.userinfosDic;
-    [vc.navigationController pushViewController:svc animated:YES];
+    
+    for (int i = 0; i < self.leftTitles.count; i ++) {
+        InputView *inputV = self.inputViews[i];
+        if (i != self.leftTitles.count - 1) {
+            if ([inputV.textField.text isEqualToString:@""]) {
+                [Utils toastview:@"请输入完整"];
+                return;
+            }
+        }
+    }
+    
+    for (int i = 0; i < 2; i++) {
+        UIImageView *imageV = self.chooseImageView.imageViews[i];
+        if (imageV.hidden == YES || !imageV.image) {
+            [Utils toastview:@"请选择图片"];
+            return;
+        }
+    }
+    
+    //@"开户人姓名",@"证件号码",@"证件地址",@"备注"
+    NSMutableDictionary *infosDictionary = [NSMutableDictionary dictionary];
+    NSArray *keysArray = @[@"customerName",@"certificatesNo",@"address",@"description"];//备注不一定有
+    for (int i = 0; i < self.leftTitles.count; i ++) {
+        InputView *inputV = self.inputViews[i];
+        
+        if (![inputV.textField.text isEqualToString:@""]) {
+            [infosDictionary setObject:inputV.textField.text forKey:keysArray[i]];
+        }
+        
+    }
+    
+    NSArray *photoKeysArray = @[@"photoFront",@"photoBack"];
+    for (int i = 0; i < 2; i++) {
+        UIImageView *imageV = self.chooseImageView.imageViews[i];
+        [infosDictionary setObject:[Utils imagechange:imageV.image] forKey:photoKeysArray[i]];
+    }
+    
+    [infosDictionary setObject:@"Idcode" forKey:@"certificatesType"];
+    
+    if (_isFinished == YES) {
+        [infosDictionary setObject:@"SIM" forKey:@"cardType"];
+    }else{
+        [infosDictionary setObject:@"ESIM" forKey:@"cardType"];
+    }
+    _nextCallBack(infosDictionary);
 }
 
 @end

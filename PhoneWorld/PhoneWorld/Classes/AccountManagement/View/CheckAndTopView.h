@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InputView.h"
 
 typedef enum : NSUInteger {
-    weixinPay,
     aliPay,
+    weixinPay,
 } payWay;
 
 @interface CheckAndTopView : UIView <UITextFieldDelegate>
@@ -20,5 +21,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) UIView *payWay;
 @property (nonatomic) NSMutableArray *buttons;
 @property (nonatomic) UIButton *nextButton;
+
+@property (nonatomic) InputView *accountMoneyInputView;
 
 @end

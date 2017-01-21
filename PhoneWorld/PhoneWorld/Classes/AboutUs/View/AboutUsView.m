@@ -30,8 +30,8 @@
             make.right.mas_equalTo(0);
             make.height.mas_equalTo(200);
         }];
-        _aboutUsTV.text = @"关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们关于我们";
-        _aboutUsTV.font = [UIFont systemFontOfSize:14];
+        _aboutUsTV.text = @"关于我们";
+        _aboutUsTV.font = [UIFont systemFontOfSize:textfont14];
         _aboutUsTV.textColor = [Utils colorRGB:@"#666666"];
         _aboutUsTV.userInteractionEnabled = NO;
     }

@@ -9,8 +9,8 @@
 #import <JSONModel/JSONModel.h>
 
 @interface MessageDetailModel : JSONModel
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSString *content;
+@property (nonatomic) NSString<Optional> *title;
+@property (nonatomic) NSString<Optional> *content;
 @property (nonatomic) NSString<Optional> *message_description;
 @property (nonatomic) NSString<Optional> *time;
 @end

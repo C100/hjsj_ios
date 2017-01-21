@@ -9,20 +9,13 @@
 #import "CountView.h"  
 #import "ChooseView.h"
 
-#define wh 375/312.0  //宽高比
 #define chooseViewWidth 66
 #define chooseViewHeight 30
-#define widthSix (screenWidth - 58*2 - 30)/5  //6个月时间距
-#define widthTwelve (screenWidth - 58*2 - 30)/11  //12个月间距
+#define hw 312.0/375.0
 
 @interface CountView ()
-
-@property (nonatomic) UIView *yearView;
 @property (nonatomic) NSMutableArray *chooseViews;
-@property (nonatomic) NSMutableArray *monthesArr;
-@property (nonatomic) NSMutableArray *viewArr;
-@property (nonatomic) NSInteger currentMonthes;
-
+@property (nonatomic) NSString *title;
 @end
 
 @implementation CountView
@@ -33,15 +26,11 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         self.chooseViews = [NSMutableArray array];
-        self.monthesArr = [NSMutableArray array];
-        self.viewArr = [NSMutableArray array];
-        NSArray *titles = @[@"半年",@"一年"];
-        self.currentMonthes = 6;
+        NSArray *titles = @[@"六个月",@"六年"];
+        self.title = title;
         
-        self.accountsOpenedArr = @[@23,@54,@76,@87,@12,@89,@11,@54,@76,@87,@12,@89];
-
         for (int i = 0; i < 2; i ++) {
-            ChooseView *cv = [[ChooseView alloc] initWithFrame:CGRectMake((screenWidth-chooseViewWidth*2-50)/2.0 + (chooseViewWidth+50)*i, 10, chooseViewWidth, chooseViewHeight) andTitle:titles[i]];
+            ChooseView *cv = [[ChooseView alloc] initWithFrame:CGRectMake((screenWidth-chooseViewWidth*2-50)/2.0 + (chooseViewWidth+50)*i, 10, 120, chooseViewHeight) andTitle:titles[i]];
             cv.tag = 100+i;
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
             [cv addGestureRecognizer:tap];
@@ -53,23 +42,32 @@
             [self.chooseViews addObject:cv];
             [self addSubview:cv];
         }
-        
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, 40, 14)];
+        //金额／开户量label
+        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(34, 40, 60, 14)];
         lb.text = title;
         lb.textColor = [Utils colorRGB:@"#666666"];
-        lb.font = [UIFont systemFontOfSize:12];
+        lb.font = [UIFont systemFontOfSize:textfont12];
+        lb.textAlignment = NSTextAlignmentCenter;
         [self addSubview:lb];
         
-        for (int i = 0; i < 4; i ++) {
-            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(33, 227-50*i, 23, 16)];
-            lb.textAlignment = NSTextAlignmentRight;
-            lb.textColor = [Utils colorRGB:@"#999999"];
-            lb.font = [UIFont systemFontOfSize:10];
-            lb.text = [NSString stringWithFormat:@"%d",25*(i+1)];
-            [self addSubview:lb];
-        }
+        [self lineChart];
     }
     return self;
+}
+
+- (PNLineChart *)lineChart{
+    if (_lineChart == nil) {
+        int height = (int)((screenWidth - 27*2)*hw);
+        _lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(27, 58, screenWidth - 27*2, height)];
+        [_lineChart setXLabels:@[@"",@"",@"",@"",@"",@""]];
+        [_lineChart setShowCoordinateAxis:YES];
+        [_lineChart setAxisColor:[Utils colorRGB:@"#cccccc"]];
+        [_lineChart setXLabelColor:[Utils colorRGB:@"#999999"]];
+        [_lineChart setYLabelColor:[Utils colorRGB:@"#999999"]];
+        [self addSubview:_lineChart];
+        [_lineChart strokeChart];
+    }
+    return _lineChart;
 }
 
 - (void)tapAction:(UITapGestureRecognizer *)tap{
@@ -83,94 +81,11 @@
     cv.leftView.layer.borderWidth = 3;
     cv.titleLB.textColor = [Utils colorRGB:@"#0081eb"];
     
-    if (tap.view.tag == 100) {
-        self.currentMonthes = 6;
-        //半年
-        [self setNeedsDisplay];
-    }else{
-        self.currentMonthes = 12;
-        //一年
-        [self setNeedsDisplay];
+    if (tap.view.tag == 100) {//六个月
+        [Utils drawChartLineWithLineChart:self.lineChart andXArray:self.accountsOpenedMonthArr andYArray:self.accountsOpenedArr andMax:self.max andAverage:self.average andTitle:self.title];
+    }else{//六年
+        [Utils drawChartLineWithLineChart:self.lineChart andXArray:self.accountsOpenedYearArr andYArray:self.accountsOpendCountYearArr andMax:self.max2 andAverage:self.average2 andTitle:self.title];
     }
-}
-
-- (void)drawRect:(CGRect)rect {
-    UIBezierPath *bezierPath = [[UIBezierPath alloc] init];
-    NSInteger monthWidth = self.currentMonthes == 6?widthSix:widthTwelve;
-    for (UILabel *lb in self.monthesArr) {
-        [lb removeFromSuperview];
-    }
-    for (UIView *v in self.viewArr) {
-        [v removeFromSuperview];
-    }
-    
-    for (int i = 0; i < self.currentMonthes; i++) {
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(58+i * monthWidth - monthWidth/10, 290, monthWidth, 30)];
-        lb.textColor = [Utils colorRGB:@"#999999"];
-        lb.numberOfLines = 0;
-        lb.font = [UIFont systemFontOfSize:10];
-        lb.text = [NSString stringWithFormat:@"%d月",i+1];
-        [self addSubview:lb];
-        lb.textAlignment = NSTextAlignmentCenter;
-        [self.monthesArr addObject:lb];
-        [bezierPath moveToPoint:CGPointMake(58 + i*monthWidth, 285)];
-        [bezierPath addLineToPoint:CGPointMake(58+ i*monthWidth, 282)];
-    }
-    
-    for (int i = 0; i < self.currentMonthes; i ++) {
-        NSInteger integ = [self.accountsOpenedArr[i] integerValue];
-        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(58-4 + monthWidth*i, 85+(100 - integ)*2 - 4, 8, 8)];
-        v.backgroundColor = [UIColor whiteColor];
-        v.layer.cornerRadius = 4;
-        v.layer.borderColor = [Utils colorRGB:@"#eb000c"].CGColor;
-        v.layer.borderWidth = 1;
-        [self addSubview:v];
-        [self.viewArr addObject:v];
-        
-        UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(58-10 + monthWidth*i, 85+(100 - integ)*2 - 16, 20, 12)];
-        lb.text = [NSString stringWithFormat:@"%d",integ];
-        lb.textAlignment = NSTextAlignmentCenter;
-        lb.font = [UIFont systemFontOfSize:10];
-        lb.textColor = [Utils colorRGB:@"#666666"];
-        [self addSubview:lb];
-        [self.monthesArr addObject:lb];
-    }
-    UIBezierPath *bezierPath2 = [[UIBezierPath alloc] init];
-    
-    for (int i = 0; i < self.currentMonthes - 1; i++) {
-        NSInteger integ1 = [self.accountsOpenedArr[i] integerValue];
-        NSInteger integ2 = [self.accountsOpenedArr[i+1] integerValue];
-        [bezierPath2 moveToPoint:CGPointMake(58 + monthWidth*i, 85+(100 - integ1)*2)];
-        [bezierPath2 addLineToPoint:CGPointMake(58 + monthWidth*(i+1), 85+(100 - integ2)*2)];
-    }
-    
-    [[Utils colorRGB:@"#eb000c"] setStroke];
-    bezierPath2.lineWidth = 1;
-    [bezierPath2 stroke];
-    
-    //58 60
-    [bezierPath moveToPoint:CGPointMake(58, 60)];
-    //58 285
-    [bezierPath addLineToPoint:CGPointMake(58, 285)];
-    //screenWidth-40 285
-    [bezierPath addLineToPoint:CGPointMake(screenWidth - 40, 285)];
-    
-    [bezierPath moveToPoint:CGPointMake(53, 65)];
-    [bezierPath addLineToPoint:CGPointMake(58, 60)];
-    [bezierPath addLineToPoint:CGPointMake(63, 65)];
-    
-    [bezierPath moveToPoint:CGPointMake(screenWidth-45, 280)];
-    [bezierPath addLineToPoint:CGPointMake(screenWidth-40, 285)];
-    [bezierPath addLineToPoint:CGPointMake(screenWidth-45, 290)];
-    
-    for (int i = 0; i < 4; i ++) {
-        [bezierPath moveToPoint:CGPointMake(58, 235-50*i)];
-        [bezierPath addLineToPoint:CGPointMake(60, 235-50*i)];
-    }
-    
-    [[Utils colorRGB:@"#cccccc"] setStroke];
-    bezierPath.lineWidth = 1;
-    [bezierPath stroke];
 }
 
 @end

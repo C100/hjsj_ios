@@ -1,0 +1,6 @@
+framework module STIDCardReader {
+  umbrella header "STIDCardReader.h"
+
+  export *
+  module * { export * }
+}

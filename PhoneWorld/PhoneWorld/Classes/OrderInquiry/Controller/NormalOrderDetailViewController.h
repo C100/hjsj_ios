@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderListModel.h"
 
 @interface NormalOrderDetailViewController : UIViewController
+
+@property (nonatomic) OrderListModel *orderModel;
+
+@property (nonatomic) NSString *orderNo;//开户订单号
 
 @end

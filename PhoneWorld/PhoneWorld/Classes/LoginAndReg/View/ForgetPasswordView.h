@@ -16,4 +16,6 @@
 @property (nonatomic) UITextField *identifyingCodeTF;
 @property (nonatomic) UIButton *nextButton;
 
+@property (nonatomic) BOOL isChecked;
+
 @end

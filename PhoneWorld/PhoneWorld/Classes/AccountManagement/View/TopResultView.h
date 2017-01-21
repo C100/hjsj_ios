@@ -19,4 +19,6 @@
 @property (nonatomic) UIButton *nextButton;
 @property (nonatomic) UIButton *backToHomeButton;
 
+@property (nonatomic) NSArray *allResults;//得到充值结果数组
+
 @end

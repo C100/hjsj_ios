@@ -11,10 +11,10 @@
 #import "PersonalInfoViewController.h"
 #import "PasswordManageViewController.h"
 #import "SettingViewController.h"
-#import "LoginViewController.h"
 #import "MessageViewController.h"
-#import "NaviViewController.h"
 #import "CommisionCountViewController.h"
+#import "LoginNaviViewController.h"
+#import "LoginNewViewController.h"
 
 @interface PersonalHomeViewController ()
 @property (nonatomic) PersonalHomeView *personalHomeView;
@@ -33,7 +33,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"个人中心";
-    
     self.navigationItem.backBarButtonItem = [Utils returnBackButton];
     
     self.personalHomeView = [[PersonalHomeView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight - 64)];
@@ -77,14 +76,16 @@
                     if (obj) {
                         if ([obj[@"code"] isEqualToString:@"10000"]) {
                             
-                            [Utils clearAllUserDefaultsData];
-                            
-                            NaviViewController *vc = [[NaviViewController alloc] initWithRootViewController:[LoginViewController new]];
-                            [weakself presentViewController:vc animated:YES completion:nil];
-                        }else{
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [Utils toastview:@"注销失败"];
-                            });
+                            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+//                            [ud removeObjectForKey:@"username"];
+//                            [ud removeObjectForKey:@"password"];
+                            [ud removeObjectForKey:@"session_token"];
+                            [ud removeObjectForKey:@"grade"];
+                            [ud removeObjectForKey:@"hasPayPassword"];
+                            [ud synchronize];
+
+                            [weakself presentViewController:[[LoginNaviViewController alloc] initWithRootViewController:[LoginNewViewController new]] animated:YES completion:^{
+                            }];
                         }
                     }
                 }];
@@ -92,10 +93,6 @@
                 break;
         }
     }];
-}
-
-- (void)logoutRequest{
-    
 }
 
 @end

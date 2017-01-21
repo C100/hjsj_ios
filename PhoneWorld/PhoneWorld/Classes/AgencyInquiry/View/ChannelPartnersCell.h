@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChannelModel.h"
 
 @interface ChannelPartnersCell : UITableViewCell
 @property (nonatomic) UILabel *numberLB;
-@property (nonatomic) UILabel *dateLB;
+@property (nonatomic) UILabel *channelNameLB;
 @property (nonatomic) UILabel *nameLB;
+@property (nonatomic) ChannelModel *channelModel;
 @end

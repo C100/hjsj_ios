@@ -7,6 +7,7 @@
 //
 
 #import "WhiteCardFilterView.h"
+#import "NormalTableViewCell.h"
 
 #define leftDistance (screenWidth - 210)/2.0
 
@@ -15,9 +16,8 @@
 @property (nonatomic) NSArray *titles;
 @property (nonatomic) UIButton *findBtn;
 @property (nonatomic) UIButton *resetBtn;
-@property (nonatomic) UITableViewCell *currentCell;
+@property (nonatomic) NormalTableViewCell *currentCell;
 @property (nonatomic) int currentPickerType;
-@property (nonatomic) NSString *currentPoolId;
 
 @end
 
@@ -35,6 +35,7 @@
         [self resetBtn];
         [self pickView];
         [self pickerView];
+        
     }
     return self;
 }
@@ -51,6 +52,7 @@
         _filterTableView.bounces = NO;
         _filterTableView.delegate = self;
         _filterTableView.dataSource = self;
+        [_filterTableView registerClass:[NormalTableViewCell class] forCellReuseIdentifier:@"cell"];
     }
     return _filterTableView;
 }
@@ -65,7 +67,7 @@
         
         [_findBtn setTitle:@"查询" forState:UIControlStateNormal];
         [_findBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _findBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        _findBtn.titleLabel.font = [UIFont systemFontOfSize:textfont12];
         _findBtn.tag = 10;
         [self addSubview:_findBtn];
         [_findBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,7 +92,7 @@
         
         [_resetBtn setTitle:@"重置" forState:UIControlStateNormal];
         [_resetBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _resetBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        _resetBtn.titleLabel.font = [UIFont systemFontOfSize:textfont12];
         _resetBtn.tag = 20;
         [self addSubview:_resetBtn];
         [_resetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -112,7 +114,7 @@
             make.left.right.top.bottom.mas_equalTo(0);
         }];
         _pickView.backgroundColor = [UIColor blackColor];
-        _pickView.alpha = 0.5;
+        _pickView.alpha = 0.6;
         _pickView.hidden = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissAction:)];
         [_pickView addGestureRecognizer:tap];
@@ -136,7 +138,7 @@
         _pickerView.hidden = YES;
         
         UIButton *sureButton = [[UIButton alloc] initWithFrame:CGRectMake(screenWidth - 60, 270, 60, 30)];
-        sureButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        sureButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [[UIApplication sharedApplication].keyWindow addSubview:sureButton];
         [sureButton setTitle:@"确定" forState:UIControlStateNormal];
         [sureButton setTitleColor:[Utils colorRGB:@"#008bd5"] forState:UIControlStateNormal];
@@ -145,7 +147,7 @@
         self.sureButton = sureButton;
         
         UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 270, 60, 30)];
-        cancelButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        cancelButton.titleLabel.font = [UIFont systemFontOfSize:textfont14];
         [[UIApplication sharedApplication].keyWindow addSubview:cancelButton];
         [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [cancelButton setTitleColor:[Utils colorRGB:@"#008bd5"] forState:UIControlStateNormal];
@@ -195,20 +197,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     
-    cell.textLabel.text = self.titles[indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.textLabel.textColor = [Utils colorRGB:@"#666666"];
+    NormalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.titleLabel.text = self.titles[indexPath.row];
     
-    cell.detailTextLabel.text = @"请选择";
-    cell.detailTextLabel.textColor = [Utils colorRGB:@"#666666"];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+    if (indexPath.row == self.titles.count - 1) {
+        cell.separatorInset = UIEdgeInsetsZero;
+        cell.layoutMargins = UIEdgeInsetsZero;
+        cell.preservesSuperviewLayoutMargins = NO;
+    }
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.preservesSuperviewLayoutMargins = NO;
     return cell;
 }
 
@@ -227,11 +225,14 @@
     self.pickView.alpha = 0;
     self.sureButton.alpha = 0;
     self.cancelButton.alpha = 0;
-    [UIView animateWithDuration:0.5 animations:^{
+    
+    [UIView animateWithDuration:0.6 animations:^{
         self.pickerView.alpha = 1;
         self.pickView.alpha = 0.5;
         self.sureButton.alpha = 1;
         self.cancelButton.alpha = 1;
+        
+        
     } completion:^(BOOL finished) {
         
     }];
@@ -241,88 +242,95 @@
 
 #pragma mark - Method
 - (void)buttonClickedAction:(UIButton *)button{
+    NSMutableArray *conditions = [NSMutableArray array];
+    NSString *string = @"查询";
     switch (button.tag) {
         case 10://查询
         {
-            NSMutableArray *conditions = [NSMutableArray array];
             for (int i = 0; i < 2; i ++) {
                 NSIndexPath *indexP = [NSIndexPath indexPathForRow:i inSection:0];
-                UITableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:indexP];
-                if ([cell.detailTextLabel.text isEqualToString:@"请选择"]) {
+                NormalTableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:indexP];
+                if ([cell.detailLabel.text isEqualToString:@"请选择"]) {
                     [conditions addObject:@"无"];
                 }else{
-                    if (i == 0) {
-                        [conditions addObject:self.currentPoolId];
-                    }else{
-                        [conditions addObject:cell.detailTextLabel.text];
-                    }
+                    [conditions addObject:cell.detailLabel.text];
                 }
             }
-            _WhiteCardFilterCallBack(conditions);
         }
             break;
         case 20://重置
         {
+            string = @"重置";
             for (int i = 0; i < 2; i ++) {
                 NSIndexPath *indexP = [NSIndexPath indexPathForRow:i inSection:0];
-                UITableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:indexP];
-                cell.detailTextLabel.text = @"请选择";
+                NormalTableViewCell *cell = [self.filterTableView cellForRowAtIndexPath:indexP];
+                cell.detailLabel.text = @"请选择";
+                [conditions addObject:@"无"];
             }
         }
             break;
     }
+    
+    _WhiteCardFilterCallBack(conditions,string);
+
 }
 
 - (void)surePickerAction:(UIButton *)button{
-    NSLog(@"确定");
+//    NSLog(@"确定");
     NSInteger row = [self.pickerView selectedRowInComponent:0];
     if (self.currentPickerType == 0) {
         NSDictionary *dic = self.numberPoolArray[row];
-        self.currentCell.detailTextLabel.text = dic[@"name"];
+        self.currentCell.detailLabel.text = dic[@"name"];
         self.currentPoolId = [NSString stringWithFormat:@"%@",dic[@"id"]];
     }else{
-        self.currentCell.detailTextLabel.text = self.numberTypeArray[row];
+        self.currentCell.detailLabel.text = self.numberTypeArray[row];
+        self.currentType = self.numberTypeArray[row];
     }
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.6 animations:^{
         self.pickerView.alpha = 0;
         self.pickView.alpha = 0;
         self.sureButton.alpha = 0;
         self.cancelButton.alpha = 0;
+        
     } completion:^(BOOL finished) {
         self.pickerView.hidden = YES;
         self.pickView.hidden = YES;
         self.sureButton.hidden = YES;
         self.cancelButton.hidden = YES;
+
     }];
 }
 
 - (void)cancelPickerAction:(UIButton *)button{
-    NSLog(@"取消");
-    [UIView animateWithDuration:0.5 animations:^{
+//    NSLog(@"取消");
+    [UIView animateWithDuration:0.6 animations:^{
         self.pickerView.alpha = 0;
         self.pickView.alpha = 0;
         self.sureButton.alpha = 0;
         self.cancelButton.alpha = 0;
+
     } completion:^(BOOL finished) {
         self.pickerView.hidden = YES;
         self.pickView.hidden = YES;
         self.sureButton.hidden = YES;
         self.cancelButton.hidden = YES;
+
     }];
 }
 
 - (void)dismissAction:(UITapGestureRecognizer *)tap{
     
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.6 animations:^{
         self.pickerView.alpha = 0;
         self.pickView.alpha = 0;
         self.sureButton.alpha = 0;
         self.cancelButton.alpha = 0;
+
     } completion:^(BOOL finished) {
         self.pickerView.hidden = YES;
         self.pickView.hidden = YES;
         self.sureButton.hidden = YES;
-        self.cancelButton.hidden = YES;
+        self.cancelButton.hidden = YES;        
     }];
 }
 

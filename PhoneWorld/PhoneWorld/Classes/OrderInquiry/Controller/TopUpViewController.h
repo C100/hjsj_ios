@@ -12,4 +12,9 @@
 @interface TopUpViewController : UIViewController
 + (TopUpViewController *)sharedTopUpViewController;
 @property (nonatomic) OrderTwoView *orderTwoView;
+@property (nonatomic) NSMutableArray *rechargeListArray;
+
+//查询条件
+@property (nonatomic) NSArray *inquiryConditionArray;
+
 @end

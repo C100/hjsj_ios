@@ -8,7 +8,6 @@
 
 #import "AlterLoginPasswordViewController.h"
 #import "AlterLoginPasswordView.h"
-#import "PhoneNumberCheckViewController.h"
 #import "FailedView.h"
 #import "InputView.h"
 
@@ -31,8 +30,19 @@
         InputView *oldV = weakself.alterView.inputViews.firstObject;
         InputView *newV = weakself.alterView.inputViews.lastObject;
         
+        weakself.alterView.saveButton.userInteractionEnabled = NO;
+        
+        if([[AFNetworkReachabilityManager sharedManager] isReachable] == NO){
+            weakself.alterView.saveButton.userInteractionEnabled = YES;
+        }
+        
         [WebUtils requestAlterPasswordWithOldPassword:oldV.textField.text andNewPassword:newV.textField.text andCallBack:^(id obj) {
             if (obj) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakself.alterView.saveButton.userInteractionEnabled = YES;
+                });
+                
                 if ([obj[@"code"] isEqualToString:@"10000"]) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         //操作

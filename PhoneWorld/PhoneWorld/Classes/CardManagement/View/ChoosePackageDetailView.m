@@ -15,11 +15,9 @@
 @interface ChoosePackageDetailView ()
 
 @property (nonatomic) UIView *topView;
-@property (nonatomic) NSArray *buttonTitlesArr;
 @property (nonatomic) NSMutableArray *buttonsArr;
 
 @property (nonatomic) UIView *contentView;
-@property (nonatomic) NSMutableArray *labelsArr;
 
 @property (nonatomic) UIButton *nextButton;
 
@@ -27,14 +25,13 @@
 
 @implementation ChoosePackageDetailView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame andPackages:(NSArray *)packages
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.buttonTitlesArr = @[@"39.9元套餐",@"59.9元套餐",@"79.9元套餐",@"199.9元套餐",@"299.9元套餐",@"399.9元套餐"];
+        self.packagesDic = packages;
         self.buttonsArr = [NSMutableArray array];
-        self.labelsArr = [NSMutableArray array];
         [self topView];
         [self contentView];
         [self nextButton];
@@ -46,10 +43,18 @@
     if (_topView == nil) {
         _topView = [[UIView alloc] init];
         [self addSubview:_topView];
+        
+        int height = 0;
+        if (self.packagesDic.count % 3 != 0) {
+            height = (int)self.packagesDic.count/3 + 1;
+        }else{
+            height = (int)self.packagesDic.count/3;
+        }
+        
         [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.mas_equalTo(0);
             make.width.mas_equalTo(screenWidth);
-            make.height.mas_equalTo(60 + btnHeight*2);
+            make.height.mas_equalTo(60 + btnHeight*height);
         }];
         _topView.backgroundColor = [UIColor whiteColor];
         
@@ -63,16 +68,19 @@
         }];
         lb.text = @"选择套餐";
         lb.textColor = [Utils colorRGB:@"#666666"];
-        lb.font = [UIFont systemFontOfSize:14];
+        lb.font = [UIFont systemFontOfSize:textfont14];
         
-        for (int i = 0; i < 6; i ++) {
+        for (int i = 0; i < self.packagesDic.count; i ++) {
+            NSDictionary *dic = self.packagesDic[i];
             CGFloat line = i/3;
             CGFloat queue = i%3;
             UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(15 + (btnWidth+8)*queue, 36 + (btnHeight+8)*line, btnWidth, btnHeight)];
             [_topView addSubview:button];
-            [button setTitle:self.buttonTitlesArr[i] forState:UIControlStateNormal];
+            [button setTitle:dic[@"name"] forState:UIControlStateNormal];
+            button.tag = 100+i;
             [button setTitleColor:[Utils colorRGB:@"#0081eb"] forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:14];
+            button.titleLabel.font = [UIFont systemFontOfSize:textfont14];
+            button.titleLabel.numberOfLines = 0;
             button.layer.cornerRadius = 4;
             button.layer.borderColor = [Utils colorRGB:@"#0081eb"].CGColor;
             button.layer.borderWidth = 1;
@@ -92,7 +100,6 @@
             make.left.right.mas_equalTo(0);
             make.width.mas_equalTo(screenWidth);
             make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(10);
-            make.height.mas_equalTo(100);
         }];
         _contentView.backgroundColor = [UIColor whiteColor];
         
@@ -106,23 +113,30 @@
         }];
         lb.text = @"套餐详情";
         lb.textColor = [Utils colorRGB:@"#666666"];
-        lb.font = [UIFont systemFontOfSize:14];
+        lb.font = [UIFont systemFontOfSize:textfont14];
         
-        for (int i = 0; i < 3; i ++) {
-            UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15, 36+20*i, screenWidth - 30, 16)];
-            lb.text = @"套餐详情";
-            lb.font = [UIFont systemFontOfSize:14];
-            lb.textColor = [Utils colorRGB:@"#cccccc"];
-            [_contentView addSubview:lb];
-            [self.labelsArr addObject:lb];
-        }
+        
+        self.detailLabel = [[UILabel alloc] init];
+        self.detailLabel.text = @"套餐详情";
+        self.detailLabel.font = [UIFont systemFontOfSize:textfont14];
+        self.detailLabel.textColor = [Utils colorRGB:@"#cccccc"];
+        self.detailLabel.numberOfLines = 0;
+        [_contentView addSubview:self.detailLabel];
+        [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.right.mas_equalTo(-15);
+            make.top.mas_equalTo(lb.mas_bottom).mas_equalTo(10);
+            make.width.mas_equalTo(screenWidth - 30);
+            make.bottom.mas_equalTo(-10);
+        }];
+        
     }
     return _contentView;
 }
 
 - (UIButton *)nextButton{
     if (_nextButton == nil) {
-        _nextButton = [Utils returnBextButtonWithTitle:@"确定"];
+        _nextButton = [Utils returnNextButtonWithTitle:@"确定"];
         [self addSubview:_nextButton];
         [_nextButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.contentView.mas_bottom).mas_equalTo(40);
@@ -137,19 +151,50 @@
 
 #pragma mark - Method
 - (void)buttonClickedAction:(UIButton *)button{
+    
     for (UIButton *button in self.buttonsArr) {
         [button setTitleColor:[Utils colorRGB:@"#0081eb"] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor whiteColor];
     }
     button.backgroundColor = [Utils colorRGB:@"#0081eb"];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.currentButton = button;
+    
+    self.currentDic = self.packagesDic[button.tag - 100];
+    
+    
+    CGSize size = [Utils sizeWithFont:[UIFont systemFontOfSize:textfont14] andMaxSize:CGSizeMake(screenWidth - 30, 0) andStr:self.currentDic[@"productDetails"]];
+    
+    self.detailLabel.text = self.currentDic[@"productDetails"];
+    
+    [self.detailLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.top.mas_equalTo(self.contentView.mas_bottom).mas_equalTo(36);
+        make.width.mas_equalTo(screenWidth - 30);
+        make.height.mas_equalTo(size.height + 10);
+        make.bottom.mas_equalTo(-10);
+    }];
+    
+    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.width.mas_equalTo(screenWidth);
+        make.height.mas_equalTo(size.height + 10 + 46);
+        make.top.mas_equalTo(self.topView.mas_bottom).mas_equalTo(10);
+    }];
+    
+    [self.nextButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.contentView.mas_bottom).mas_equalTo(40);
+        make.centerX.mas_equalTo(0);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(171);
+    }];
+    
 }
 
 - (void)buttonClickAction:(UIButton *)button{
     //下一步
     if ([_delegate respondsToSelector:@selector(getPackage:)]) {
-        [_delegate getPackage:self.currentButton.currentTitle];
+        [_delegate getPackage:self.currentDic];
     }
     UIViewController *viewController = [self viewController];
     [viewController.navigationController popViewControllerAnimated:YES];

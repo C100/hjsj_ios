@@ -16,7 +16,7 @@
     for (int i = 0; i < 4; i++) {
         UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(15, 15 + 30*i, screenWidth - 30, 16)];
         [self addSubview:lb];
-        lb.font = [UIFont systemFontOfSize:14];
+        lb.font = [UIFont systemFontOfSize:textfont14];
         lb.textColor = [Utils colorRGB:@"#666666"];
         lb.text = self.userinfos[i];
         if (i == 0) {

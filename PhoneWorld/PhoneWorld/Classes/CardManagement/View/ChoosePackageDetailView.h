@@ -10,14 +10,20 @@
 
 @protocol ChoosePackageDetailViewDelegate <NSObject>
 
-- (void)getPackage:(NSString *)package;
+- (void)getPackage:(NSDictionary *)package;
 
 @end
 
 @interface ChoosePackageDetailView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame andPackages:(NSArray *)packages;
+
 @property (nonatomic) id<ChoosePackageDetailViewDelegate> delegate;
 
-@property (nonatomic) UIButton *currentButton;
+@property (nonatomic) NSArray *packagesDic;//套餐包
+
+@property (nonatomic) NSDictionary *currentDic;//当前套餐包
+
+@property (nonatomic) UILabel *detailLabel;//套餐详情
 
 @end

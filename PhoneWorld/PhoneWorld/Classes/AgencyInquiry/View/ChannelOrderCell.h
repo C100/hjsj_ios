@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderCountModel.h"
 
 @interface ChannelOrderCell : UITableViewCell
 @property (nonatomic) UILabel *nameLB;
 @property (nonatomic) UILabel *phoneLB;
 @property (nonatomic) UILabel *numberLB;
 @property (nonatomic) UILabel *wayLB;
+@property (nonatomic) OrderCountModel *orderCountModel;
 @end

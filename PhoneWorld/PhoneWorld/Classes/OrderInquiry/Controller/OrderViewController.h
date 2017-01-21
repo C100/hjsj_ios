@@ -11,3 +11,5 @@
 @interface OrderViewController : UIViewController
 + (OrderViewController *)shareOrderViewController;
 @end
+
+static OrderViewController *_orderViewController;

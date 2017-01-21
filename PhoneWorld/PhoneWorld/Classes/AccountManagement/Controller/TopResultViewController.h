@@ -11,5 +11,6 @@
 @interface TopResultViewController : UIViewController
 
 @property (nonatomic) BOOL isSucceed;
+@property (nonatomic) NSArray *allResults;
 
 @end

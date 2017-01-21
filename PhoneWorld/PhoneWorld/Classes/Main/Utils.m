@@ -8,7 +8,219 @@
 
 #import "Utils.h"
 
+#import "LoginNaviViewController.h"
+#import "LoginNewViewController.h"
+
+@interface Utils ()
+
+@end
+
 @implementation Utils
+
++ (NSString *)getRightICCIDWithString:(NSString *)iccidString{
+    NSString *string = [iccidString substringWithRange:NSMakeRange(0, 20)];
+    
+    NSMutableArray *JArray = [NSMutableArray array];
+    for (int i = 0; i < string.length; i ++) {
+        [JArray addObject:[string substringWithRange:NSMakeRange(i, 1)]];
+    }
+    
+    for (int i = 0; i < string.length; i ++) {
+        if (i % 2 == 0) {
+            [JArray exchangeObjectAtIndex:i withObjectAtIndex:i+1];
+        }
+    }
+    
+    NSString *newString = @"";
+    for (int i = 0; i < JArray.count; i ++) {
+        newString = [NSString stringWithFormat:@"%@%@",newString,JArray[i]];
+    }
+    return newString;
+}
+
++ (NSString *)getRightIMSIWithString:(NSString *)imsiString{
+    NSString *string = [NSString stringWithFormat:@"809%@",imsiString];
+    NSMutableArray *JArray = [NSMutableArray array];
+    for (int i = 0; i < string.length; i ++) {
+        [JArray addObject:[string substringWithRange:NSMakeRange(i, 1)]];
+    }
+    
+    for (int i = 0; i < string.length; i ++) {
+        if (i % 2 == 0) {
+            [JArray exchangeObjectAtIndex:i withObjectAtIndex:i+1];
+        }
+    }
+    
+    NSString *newString = @"A0F4000012";
+    for (int i = 0; i < JArray.count; i ++) {
+        newString = [NSString stringWithFormat:@"%@%@",newString,JArray[i]];
+    }
+    
+    for (int i = 0; i < JArray.count; i ++) {
+        newString = [NSString stringWithFormat:@"%@%@",newString,JArray[i]];
+    }
+    
+    return newString;
+}
+
++ (NSString *)getSwapSmscent:(NSString *)smscent{
+    smscent = [smscent componentsSeparatedByString:@"+86"].lastObject;
+    NSString *string = [NSString stringWithFormat:@"%@F",smscent];
+    NSMutableArray *JArray = [NSMutableArray array];
+    for (int i = 0; i < string.length; i ++) {
+        [JArray addObject:[string substringWithRange:NSMakeRange(i, 1)]];
+    }
+    
+    for (int i = 0; i < string.length; i ++) {
+        if (i % 2 == 0) {
+            [JArray exchangeObjectAtIndex:i withObjectAtIndex:i+1];
+        }
+    }
+    
+    NSString *newString = @"089168";
+    for (int i = 0; i < JArray.count; i ++) {
+        newString = [NSString stringWithFormat:@"%@%@",newString,JArray[i]];
+    }
+    
+    return newString;
+}
+
++ (BOOL)isRightString:(NSString *)string{//只能输入中文数字下划线
+    NSString *content = @"^[a-zA-Z_0-9\u4e00-\u9fa5]*$";
+    NSPredicate *regextest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", content];
+    if ([regextest evaluateWithObject:string]) {
+        return YES;
+    }
+    return NO;
+}
+
++ (int)compareDateWithNewDate:(NSString *)newDate andOldDate:(NSString *)oldDate{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateNew = [dateFormatter dateFromString:newDate];
+    NSDate *dateOld = [dateFormatter dateFromString:oldDate];
+    NSComparisonResult result = [dateNew compare:dateOld];
+    if (result == NSOrderedDescending) {
+        return 1;//递减new大
+    }
+    else if (result ==NSOrderedAscending){
+        return -1;//递增old大
+    }
+    return 0;//一样
+}
+
++ (int)compareFilterDateWithNewDate:(NSString *)newDate andOldDate:(NSString *)oldDate{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dateNew = [dateFormatter dateFromString:newDate];
+    NSDate *dateOld = [dateFormatter dateFromString:oldDate];
+    NSComparisonResult result = [dateNew compare:dateOld];
+    if (result == NSOrderedDescending) {
+        return 1;//递减new大
+    }
+    else if (result ==NSOrderedAscending){
+        return -1;//递增old大
+    }
+    return 0;//一样
+}
+
++ (UITextField *)returnTextFieldWithImageName:(NSString *)imageName andPlaceholder:(NSString *)placeholder{
+    UITextField *textField = [[UITextField alloc] init];
+    textField.placeholder = placeholder;
+    textField.textColor = [Utils colorRGB:@"#333333"];
+    textField.font = [UIFont systemFontOfSize:textfont16];
+    [textField setValue:[UIFont systemFontOfSize:textfont14] forKeyPath:@"_placeholderLabel.font"];
+    [textField setValue:[UIColor darkGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
+
+    textField.borderStyle = UITextBorderStyleNone;
+    textField.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 20)];
+    imageV.contentMode = UIViewContentModeScaleAspectFit;
+    imageV.image = [UIImage imageNamed:imageName];
+    textField.leftView = imageV;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    return textField;
+}
+
++ (void)drawChartLineWithLineChart:(PNLineChart *)lineChart andXArray:(NSArray *)xArray andYArray:(NSArray *)YArray andMax:(CGFloat)max andAverage:(CGFloat)average andTitle:(NSString *)title{
+    
+    if (xArray != nil && YArray != nil) {
+        [lineChart setXLabels:xArray];
+        
+        PNLineChartData *chartData1 = [[PNLineChartData alloc] init];
+        chartData1.color = [UIColor redColor];
+        chartData1.lineWidth = 1.0;
+        chartData1.inflexionPointWidth = 5.0;
+        chartData1.itemCount = lineChart.xLabels.count;
+        chartData1.getData = ^(NSUInteger index){
+            CGFloat yValue = [YArray[index] floatValue];
+            return [PNLineChartDataItem dataItemWithY:yValue];
+        };
+        chartData1.inflexionPointStyle = PNLineChartPointStyleCircle;
+        chartData1.dataTitle = title;
+        [lineChart setYFixedValueMax:max];
+        lineChart.chartData = @[chartData1];
+        [lineChart strokeChart];
+    }
+}
+
++ (NSString *)getLastMonth{
+    NSDate *mydate = [[NSDate alloc] init];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    
+    NSDateComponents *adcomps = [[NSDateComponents alloc] init];
+    
+    [adcomps setYear:0];
+    
+    [adcomps setMonth:-1];
+    
+    [adcomps setDay:0];
+    
+    NSDate *newdate = [calendar dateByAddingComponents:adcomps toDate:mydate options:0];
+    return [NSString stringWithFormat:@"%@",newdate];
+}
+
++ (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
+    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) {
+        return (UIImageView *)view;
+    }
+    for (UIView *subview in view.subviews) {
+        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
+        if (imageView) {
+            return imageView;
+        }
+    }
+    return nil;
+}
+
++ (BOOL)logoutAction:(NSString *)message{
+    if ([message isEqualToString:@"39999"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [Utils toastview:@"登录信息失效，请重新登录！"];
+        });
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        [ud removeObjectForKey:@"username"];
+        [ud removeObjectForKey:@"password"];
+        [ud removeObjectForKey:@"session_token"];
+        [ud removeObjectForKey:@"grade"];
+        [ud removeObjectForKey:@"hasPayPassword"];
+        [ud synchronize];
+        
+        LoginNaviViewController *naviVC = [[LoginNaviViewController alloc] initWithRootViewController:[[LoginNewViewController alloc] init]];
+        
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:naviVC animated:YES completion:^{
+        }];
+        return NO;
+    }
+    return YES;
+}
+
++ (NSString *)getSessionToken{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSString *sessionToken = [NSString stringWithFormat:@"%@",[ud objectForKey:@"session_token"]];
+    return sessionToken;
+}
 
 + (NSString *)md5String:(NSString *)inputText{
     const char *original_str = [inputText UTF8String];
@@ -23,25 +235,16 @@
 
 + (NSString*)imagechange:(UIImage *)image
 {
-    NSData *imgData=UIImageJPEGRepresentation(image, 0.1);
+    NSData *imgData=UIImageJPEGRepresentation(image, 0.4);
     NSString *base64Str=[imgData base64EncodedStringWithOptions:0];
     imgData=UIImageJPEGRepresentation(image, 102400.0/base64Str.length);
     base64Str=[imgData base64EncodedStringWithOptions:0];
     
-    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)base64Str,NULL,CFSTR(":/?#[]@!$&’()*+,;="),kCFStringEncodingUTF8);
-    return baseString;
+    //把编码中的特殊字符转换一下
+//    NSString *baseString = (__bridge NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,(CFStringRef)base64Str,NULL,CFSTR(":/?#[]@!$&’()*+,;="),kCFStringEncodingUTF8);
+    
+    return base64Str;
 }
-
-+ (NSString *)imageToNSStringWithImage:(UIImage *)image{
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
-    NSString *encodeImageString = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    return encodeImageString;
-}
-
-//    UIImage *imageDe = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:encodeImageString options:NSDataBase64DecodingIgnoreUnknownCharacters]];
-//    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-//    imageV.image = imageDe;
-//    [[UIApplication sharedApplication].keyWindow addSubview:imageV];
 
 + (UIImage *)stringToUIImageWithString:(NSString *)string{
     NSData *decodeImageData = [[NSData alloc] initWithBase64EncodedString:string options:NSDataBase64DecodingIgnoreUnknownCharacters];
@@ -59,7 +262,7 @@
 + (NSString *)MydictionaryToJSON:(NSDictionary *)dic{
     NSString *jsonStr = @"{";
     
-    NSArray * keys = [dic allKeys];
+    NSArray *keys = [dic allKeys];
     
     for (NSString * key in keys) {
         
@@ -78,18 +281,6 @@
     return string;
 }
 
-//-----------------------------------------
-
-+ (BOOL)isSIMInstalled{
-    CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *carrier = [networkInfo subscriberCellularProvider];
-    
-    if (!carrier.isoCountryCode) {
-        NSLog(@"No sim present Or No cellular coverage or phone is on airplane mode.");
-        return NO;
-    }
-    return YES;
-}
 
 + (UIColor *)colorRGB:(NSString *)color{
     // 转换成标准16进制数
@@ -106,7 +297,7 @@
 #pragma mark - 正则表达式
 + (BOOL)isMobile:(NSString *)mobileNumbel{
     //1开头 且是11位
-    NSString *string = @"^1([0-9][0-1])\\d{8}$";
+    NSString *string = @"^1\\d{10}$";
     NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", string];
     if ([regextestct evaluateWithObject:mobileNumbel]) {
         return YES;
@@ -114,46 +305,24 @@
     return NO;
 }
 
-+ (BOOL) isNormalMobile:(NSString *)mobileNumbel{
-    /**
-          * 手机号码
-          * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-          * 联通：130,131,132,152,155,156,185,186
-          * 电信：133,1349,153,180,189,181(增加)
-          */
-    NSString * MOBIL = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
-    /**
-          10         * 中国移动：China Mobile
-          11         * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
-          12         */
-    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[2378])\\d)\\d{7}$";
-    /**
-          15         * 中国联通：China Unicom
-          16         * 130,131,132,152,155,156,185,186
-          17         */
-    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
-    /**
-          20         * 中国电信：China Telecom
-          21         * 133,1349,153,180,189,181(增加)
-          22         */
-    NSString * CT = @"^1((33|53|8[019])[0-9]|349)\\d{7}$";
-    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBIL];
-    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
-    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
-    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
-    if (([regextestmobile evaluateWithObject:mobileNumbel]
-         || [regextestcm evaluateWithObject:mobileNumbel]
-         || [regextestct evaluateWithObject:mobileNumbel]
-         || [regextestcu evaluateWithObject:mobileNumbel])) {
-        return YES;
-    }
-    return NO;
-}
 
 + (BOOL)isNumber:(NSString *)number{
     NSString *numberZ = @"^[0-9]*$";
     NSPredicate *regextestNumber = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberZ];
     if ([regextestNumber evaluateWithObject:number]) {
+        return YES;
+    }
+    return NO;
+}
+
++ (BOOL)isZeroWithNumber:(NSString *)number{
+    NSString *numberZ = @"^[0]*$";
+    NSString *numberZZ = @"^[0]+(.[0])*$";
+    NSString *numberZZZ = @"^[0]+(.[0])*$";
+    NSPredicate *regextestNumber = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberZ];
+    NSPredicate *regextestNumberZZ = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberZZ];
+    NSPredicate *regextestNumberZZZ = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberZZZ];
+    if ([regextestNumber evaluateWithObject:number] || [regextestNumberZZ evaluateWithObject:number] || [regextestNumberZZZ evaluateWithObject:number]) {
         return YES;
     }
     return NO;
@@ -176,9 +345,16 @@
 }
 
 + (BOOL)checkPassword:(NSString*) password{
-    NSString*pattern=@"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{6,18}";
+    NSString*pattern=@"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{6,12}";
     NSPredicate *pred=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",pattern];
     BOOL isMatch=[pred evaluateWithObject:password];
+    return isMatch;
+}
+
++ (BOOL)checkPayPassword:(NSString *)payPassword;{
+    NSString*pattern=@"^\\d{6}$";
+    NSPredicate *pred=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",pattern];
+    BOOL isMatch=[pred evaluateWithObject:payPassword];
     return isMatch;
 }
 
@@ -196,7 +372,7 @@
 + (UIBarButtonItem *)returnBackButton{
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
     backButton.title = @"返回";
-    [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} forState:UIControlStateNormal];
+    [backButton setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:textfont14]} forState:UIControlStateNormal];
     return backButton;
 }
 
@@ -210,7 +386,7 @@
     return str;
 }
 
-+ (UIButton *)returnBextButtonWithTitle:(NSString *)title{
++ (UIButton *)returnNextButtonWithTitle:(NSString *)title{
     UIButton *button = [[UIButton alloc] init];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:MainColor forState:UIControlStateNormal];
@@ -218,7 +394,7 @@
     button.layer.borderColor = MainColor.CGColor;
     button.layer.borderWidth = 1;
     button.layer.masksToBounds = YES;
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    button.titleLabel.font = [UIFont systemFontOfSize:textfont14];
     return button;
 }
 

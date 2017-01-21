@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CardTransferListModel.h"
 
 @interface RepairCardDetailViewController : UIViewController
+
+@property (nonatomic) CardTransferListModel *cardModel;
 
 @end

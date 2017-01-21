@@ -12,6 +12,8 @@
 #import "ChannelOrderCell.h"
 #import "ScreenView.h"
 
+#import "ChannelPartnersManageViewController.h"
+
 @interface ChannelPartnersManageView ()
 
 @property (nonatomic) TopView *topView;
@@ -33,9 +35,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = COLOR_BACKGROUND;
-        self.leftTitles = @[@"时间",@"手机号码"];
+        self.leftTitles = @[@"时间",@"工号"];
         self.isInquiried = NO;
-
+        
+        self.orderArray = [NSMutableArray array];
+        self.channelArray = [NSMutableArray array];
+        
         [self topView];
         [self lineView];
         
@@ -48,7 +53,14 @@
                 CGRect frame = CGRectMake(i*screenWidth/2, 39, screenWidth/2, 1);
                 weakself.lineView.frame = frame;
             }];
+            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             if (i == 1) {
+                NSInteger i1 = [ud integerForKey:@"qdsOrderList"];
+                i1 = i1 + 1;
+                [ud setInteger:i1 forKey:@"qdsOrderList"];
+                [ud synchronize];
+                [weakself.orderTableView.mj_header beginRefreshing];
+                
                 CGFloat height = 80;
                 if (weakself.isInquiried == YES) {
                     height = 108;
@@ -60,6 +72,12 @@
                 weakself.channelPartnersTableView.hidden = YES;
                 weakself.orderTableView.hidden = NO;
             }else{
+                NSInteger i0 = [ud integerForKey:@"qdsList"];
+                i0 = i0 + 1;
+                [ud setInteger:i0 forKey:@"qdsList"];
+                [ud synchronize];
+                [weakself.channelPartnersTableView.mj_header beginRefreshing];
+
                 CGRect frame = weakself.topView.frame;
                 frame.size.height = 40;
                 weakself.topView.frame = frame;
@@ -77,6 +95,8 @@
         }];
         
         [self.topView setTopCallBack:^(id obj) {
+            [weakself endEditing:YES];
+
             if (weakself.screenView.hidden == NO) {
                 weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
                 [UIView animateWithDuration:0.3 animations:^{
@@ -106,34 +126,82 @@
         
         //筛选框block回调  返回数组查询
         [self.screenView setScreenCallBack:^(NSDictionary *conditions, NSString *string) {
-            weakself.isInquiried = YES;
-            for (int i = 0; i < weakself.topView.resultArr.count; i ++) {
-                UILabel *lb = weakself.topView.resultArr[i];
-                if (i < conditions.count) {
-                    NSString *conStr = conditions[weakself.leftTitles[i]];
-                    lb.text = [NSString stringWithFormat:@"%@：%@",weakself.leftTitles[i],conStr];
-                }else{
-                    lb.text = [NSString stringWithFormat:@""];
-                }
+            /*
+             conditions查询条件
+             */
+            [weakself endEditing:YES];
+            
+            if (conditions.count != 0) {
+                [ChannelPartnersManageViewController sharedChannelPartnersManageViewController].conditions = conditions;
+                [[ChannelPartnersManageViewController sharedChannelPartnersManageViewController].channelView.orderTableView.mj_header beginRefreshing];
             }
             
-            [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.mas_equalTo(0);
-                make.top.mas_equalTo(0);
-                make.height.mas_equalTo(108);
-            }];
+            weakself.isInquiried = YES;
+            
+            if (conditions.count == 0) {
+                
+            }else{
+                for (int i = 0; i < 2; i ++) {
+                    UILabel *lb = weakself.topView.resultArr[i];
+                    
+                    NSString *leftTitleString = weakself.leftTitles[i];
+                    
+                    if (conditions[leftTitleString]) {
+                        lb.text = [NSString stringWithFormat:@"%@：%@",weakself.leftTitles[i],conditions[leftTitleString]];
+                    }else{
+                        lb.text = [NSString stringWithFormat:@"%@：无",weakself.leftTitles[i]];
+                    }
+                    
+                    lb.font = [UIFont systemFontOfSize:14*screenWidth/414.0];
+                }
+                
+                [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.mas_equalTo(0);
+                    make.top.mas_equalTo(0);
+                    make.height.mas_equalTo(108);
+                }];
+            }
+            
             if ([string isEqualToString:@"查询"]) {
                 weakself.screenView.hidden = YES;
                 weakself.grayView.hidden = YES;
+                weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
+            }else{
+                //重置
+                [weakself.topView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.mas_equalTo(0);
+                    make.top.mas_equalTo(0);
+                    make.height.mas_equalTo(80);
+                }];
             }
         }];
         
+        
+        
+        
         [self.screenView setScreenDismissCallBack:^(id obj) {
+            
             weakself.screenView.datePickerView.hidden = YES;
             weakself.screenView.pickerView.hidden = YES;
             weakself.screenView.backPickView.hidden = YES;
             weakself.screenView.cancelButton.hidden = YES;
             weakself.screenView.sureButton.hidden = YES;
+            
+//            [UIView animateWithDuration:0.5 animations:^{
+//                weakself.screenView.datePickerView.alpha = 0;
+//                weakself.screenView.pickerView.alpha = 0;
+//                weakself.screenView.backPickView.alpha = 0;
+//                weakself.screenView.cancelButton.alpha = 0;
+//                weakself.screenView.sureButton.alpha = 0;
+//                
+//            } completion:^(BOOL finished) {
+//                weakself.screenView.datePickerView.hidden = YES;
+//                weakself.screenView.pickerView.hidden = YES;
+//                weakself.screenView.backPickView.hidden = YES;
+//                weakself.screenView.cancelButton.hidden = YES;
+//                weakself.screenView.sureButton.hidden = YES;
+//            }];
+//            
         }];
         
         [self grayView];
@@ -145,7 +213,7 @@
 
 - (TopView *)topView{
     if (_topView == nil) {
-        _topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 40) andTitles:@[@"渠道商列表",@"订单记录"]];
+        _topView = [[TopView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 40) andTitles:@[@"渠道商列表",@"渠道商开户量"] andResultTitles:@[@"时间：",@"工号："]];
         [self addSubview:_topView];
     }
     return _topView;
@@ -164,8 +232,8 @@
     if (_channelNumberLB == nil) {
         _channelNumberLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 26)];
         [self addSubview:_channelNumberLB];
-        _channelNumberLB.font = [UIFont systemFontOfSize:8];
-        _channelNumberLB.text = @"共8条";
+        _channelNumberLB.font = [UIFont systemFontOfSize:textfont8];
+        _channelNumberLB.text = @"共0条";
         _channelNumberLB.textColor = [Utils colorRGB:@"#999999"];
         _channelNumberLB.textAlignment = NSTextAlignmentCenter;
         _channelNumberLB.backgroundColor = COLOR_BACKGROUND;
@@ -177,8 +245,8 @@
     if (_orderNumberLB == nil) {
         _orderNumberLB = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 26)];
         [self addSubview:_orderNumberLB];
-        _orderNumberLB.font = [UIFont systemFontOfSize:8];
-        _orderNumberLB.text = @"共8条";
+        _orderNumberLB.font = [UIFont systemFontOfSize:textfont8];
+        _orderNumberLB.text = @"共0条";
         _orderNumberLB.textColor = [Utils colorRGB:@"#999999"];
         _orderNumberLB.textAlignment = NSTextAlignmentCenter;
         _orderNumberLB.backgroundColor = COLOR_BACKGROUND;
@@ -199,7 +267,6 @@
         _channelPartnersTableView.tag = 100;
         _channelPartnersTableView.delegate = self;
         _channelPartnersTableView.dataSource = self;
-        _channelPartnersTableView.bounces = NO;
         _channelPartnersTableView.allowsSelection = NO;
         _channelPartnersTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _channelPartnersTableView.tableHeaderView = self.channelNumberLB;
@@ -221,7 +288,6 @@
         _orderTableView.tag = 200;
         _orderTableView.delegate = self;
         _orderTableView.dataSource = self;
-        _orderTableView.bounces = NO;
         _orderTableView.allowsSelection = NO;
         _orderTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _orderTableView.tableHeaderView = self.orderNumberLB;
@@ -233,8 +299,8 @@
 
 - (ScreenView *)screenView{
     if (_screenView == nil) {
-        self.contentDic = @{@"时间":@[@"一个月",@"两个月",@"三个月"],@"手机号码":@"phoneNumber"};
-        _screenView = [[ScreenView alloc] initWithFrame:CGRectMake(0, 81, screenWidth, 150) andContent:self.contentDic andLeftTitles:self.leftTitles andRightDetails:@[@"请选择",@"请输入手机号码"]];
+        self.contentDic = @{@"时间":@[@"一个月",@"两个月",@"三个月",@"四个月",@"五个月",@"六个月"],@"手机号码":@"phoneNumber"};
+        _screenView = [[ScreenView alloc] initWithFrame:CGRectMake(0, 81, screenWidth, 150) andContent:self.contentDic andLeftTitles:self.leftTitles andRightDetails:@[@"请选择",@"请输入工号"]];
         [self addSubview:_screenView];
         _screenView.hidden = YES;
     }
@@ -262,7 +328,12 @@
 #pragma mark - UITableView Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 8;
+    if (tableView.tag == 100) {
+        return self.channelArray.count;
+    }else if(tableView.tag == 200){
+        return self.orderArray.count;
+    }
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -272,13 +343,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView.tag == 100) {//渠道商列表
         ChannelPartnersCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelPartnersCell" forIndexPath:indexPath];
+        cell.channelModel = self.channelArray[indexPath.section];
         return cell;
     }
-    if (tableView.tag == 200) {//订单记录
-        ChannelOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelOrderCell" forIndexPath:indexPath];
-        return cell;
-    }
-    return nil;
+    //订单记录
+    ChannelOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChannelOrderCell" forIndexPath:indexPath];
+    cell.orderCountModel = self.orderArray[indexPath.section];
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -301,7 +372,7 @@
 
 - (void)dismissScreenViewAction:(UITapGestureRecognizer *)tap{
     __block __weak ChannelPartnersManageView *weakself = self;
-
+    [self endEditing:YES];
     if (weakself.screenView.hidden == NO) {
         weakself.topView.showButton.transform = CGAffineTransformMakeRotation(M_PI_2*2);
         [UIView animateWithDuration:0.3 animations:^{

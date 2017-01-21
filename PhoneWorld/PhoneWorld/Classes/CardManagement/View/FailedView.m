@@ -53,12 +53,16 @@
     _stateView.layer.cornerRadius = 10;
     _stateView.layer.masksToBounds = YES;
     
-    if ([self.detailStr isEqualToString:@""]) {
+    if ([self.detailStr isEqualToString:@""] || self.detailStr == nil) {
+        
+        CGSize textSize = [Utils sizeWithFont:[UIFont systemFontOfSize:textfont16] andMaxSize:CGSizeMake(0, 18) andStr:self.titleStr];
+        
+        CGFloat leftDictance = (270.0 - 24.0 - textSize.width)/2.0;
         
         UIImageView *imageV = [[UIImageView alloc] init];
         [_stateView addSubview:imageV];
         [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(85);
+            make.left.mas_equalTo(leftDictance);
             make.centerY.mas_equalTo(0);
             make.width.height.mas_equalTo(24);
         }];
@@ -67,17 +71,19 @@
         
         UILabel *lb = [[UILabel alloc] init];
         lb.text = self.titleStr;
+        
         [_stateView addSubview:lb];
         [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(imageV.mas_right).mas_equalTo(5);
+            make.left.mas_equalTo(imageV.mas_right).mas_equalTo(0);
             make.centerY.mas_equalTo(0);
-            make.width.mas_equalTo(100);
+            make.width.mas_equalTo(textSize.width+1);
             make.height.mas_equalTo(18);
         }];
-        lb.font = [UIFont systemFontOfSize:16];
+        lb.font = [UIFont systemFontOfSize:textfont16];
         lb.textColor = [Utils colorRGB:self.color];
 
     }else{
+        
         UIImageView *imageV = [[UIImageView alloc] init];
         [_stateView addSubview:imageV];
         [imageV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -97,19 +103,32 @@
             make.width.mas_equalTo(100);
             make.height.mas_equalTo(18);
         }];
-        lb.font = [UIFont systemFontOfSize:16];
+        lb.font = [UIFont systemFontOfSize:textfont16];
         lb.textColor = [Utils colorRGB:self.color];
+    
         
         UILabel *lb2 = [[UILabel alloc] init];
         lb2.text = self.detailStr;
         [_stateView addSubview:lb2];
-        [lb2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(0);
-            make.bottom.mas_equalTo(-23);
-            make.height.mas_equalTo(14);
-        }];
-        lb2.font = [UIFont systemFontOfSize:12];
+        CGSize detailSize = [Utils sizeWithFont:[UIFont systemFontOfSize:textfont12] andMaxSize:CGSizeMake(0, 14) andStr:self.detailStr];
+        if (detailSize.width > 260.0) {
+            [lb2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_equalTo(0);
+                make.bottom.mas_equalTo(-5);
+                make.width.mas_equalTo(260);
+                make.height.mas_equalTo(40);
+            }];
+        }else{
+            [lb2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_equalTo(0);
+                make.bottom.mas_equalTo(-23);
+                make.height.mas_equalTo(14);
+            }];
+        }
+        lb2.font = [UIFont systemFontOfSize:textfont12];
         lb2.textColor = [Utils colorRGB:@"#333333"];
+        lb2.numberOfLines = 0;
+        lb2.textAlignment = NSTextAlignmentCenter;
     }
     
     return _stateView;

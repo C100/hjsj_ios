@@ -35,6 +35,7 @@
         [self addSubview:_messageTableView];
         _messageTableView.delegate = self;
         _messageTableView.dataSource = self;
+        _messageTableView.backgroundColor = COLOR_BACKGROUND;
         [_messageTableView registerClass:[MessageTCell class] forCellReuseIdentifier:@"cell"];
         _messageTableView.tableFooterView = [UIView new];
     }
@@ -48,17 +49,25 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     MessageTCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     MessageModel *mm = self.messagesArray[indexPath.row];
-    
     cell.messageModel = mm;
+    
+    cell.preservesSuperviewLayoutMargins = YES;//防止复用
+
+    if (indexPath.row == self.messagesArray.count - 1) {
+        cell.separatorInset = UIEdgeInsetsZero;
+        cell.layoutMargins = UIEdgeInsetsZero;
+        cell.preservesSuperviewLayoutMargins = NO;
+    }
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 40;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -70,7 +79,6 @@
     detailVC.message_id = mm.message_id;
     UIViewController *viewController = [self viewController];
     [viewController.navigationController pushViewController:detailVC animated:YES];
-    
 }
 
 @end

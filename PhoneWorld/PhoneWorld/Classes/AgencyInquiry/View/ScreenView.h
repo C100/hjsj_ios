@@ -18,12 +18,13 @@
 
 @property (nonatomic) void(^ScreenCallBack) (NSDictionary *conditions, NSString *string);//点击查询或者重置按钮
 
-@property (nonatomic) void(^ScreenDismissCallBack) (id obj);
+@property (nonatomic) void(^ScreenDismissCallBack) (id obj);//点击灰色背景时的操作
 
 - (instancetype)initWithFrame:(CGRect)frame andContent:(NSDictionary *)content andLeftTitles:(NSArray *)titles andRightDetails:(NSArray *)details;
-@property (nonatomic) UIView *backPickView;
-@property (nonatomic) UIPickerView *pickerView;
-@property (nonatomic) UIDatePicker *datePickerView;
+
+@property (nonatomic) UIView *backPickView;//灰色半透明背景
+@property (nonatomic) UIPickerView *pickerView;//状态选取
+@property (nonatomic) UIDatePicker *datePickerView;//日期选取
 @property (nonatomic) UIButton *sureButton;
 @property (nonatomic) UIButton *cancelButton;
 

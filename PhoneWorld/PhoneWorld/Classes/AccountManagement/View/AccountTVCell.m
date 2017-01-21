@@ -42,23 +42,10 @@
             make.left.mas_equalTo(self.imageV.mas_right).mas_equalTo(8);
             make.centerY.mas_equalTo(0);
         }];
-        _titleLB.font = [UIFont systemFontOfSize:18];
+        _titleLB.font = [UIFont systemFontOfSize:textfont18];
         _titleLB.textColor = [Utils colorRGB:@"#333333"];
     }
     return _titleLB;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    [self imageV];
-    [self titleLB];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

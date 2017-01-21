@@ -23,7 +23,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self imageNames];
-        self.titles = @[@"成卡开户",@"白卡开户",@"过户",@"补卡",@"过户、补卡进度查询"];
+        self.titles = @[@"成卡开户",@"过户",@"补卡",@"过户、补卡进度查询"];
+        //隐藏白卡
+//        self.titles = @[@"成卡开户",@"白卡开户",@"过户",@"补卡",@"过户、补卡进度查询"];
         [self cardTableView];
     }
     return self;
@@ -48,7 +50,9 @@
 
 - (NSArray *)imageNames{
     if (_imageNames == nil) {
-        _imageNames = @[@"41",@"42",@"43",@"44",@"45"];
+        _imageNames = @[@"41",@"43",@"44",@"45"];
+        //白卡隐藏
+//        _imageNames = @[@"41",@"42",@"43",@"44",@"45"];
     }
     return _imageNames;
 }

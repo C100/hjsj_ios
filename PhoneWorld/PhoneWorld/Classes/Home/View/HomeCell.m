@@ -42,7 +42,7 @@
         _titleLb = [[UILabel alloc] init];
         [self addSubview:_titleLb];
         _titleLb.textAlignment = NSTextAlignmentCenter;
-        _titleLb.font = [UIFont systemFontOfSize:14];
+        _titleLb.font = [UIFont systemFontOfSize:textfont16];
         _titleLb.textColor = [Utils colorRGB:@"#666666"];
         [_titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.left.equalTo(self);
@@ -53,8 +53,5 @@
     return _titleLb;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
 
 @end

@@ -10,4 +10,7 @@
 
 @interface ResetPasswordViewController : UIViewController
 
+@property (nonatomic) NSString *telString;
+@property (nonatomic) NSString *captchaString;
+
 @end
